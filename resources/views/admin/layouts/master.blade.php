@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tefal ADMIN | Dashboard</title>
+    <title>Elequip ADMIN | Dashboard</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset(asset_path('assets/frontend/images/favicon/cropped-favicon-192x192.png')) }}">
 

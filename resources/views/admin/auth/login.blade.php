@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="{{ asset(asset_path('assets/frontend/images/favicon/cropped-favicon-192x192.png')) }}">
-    <title>Tefal Admin | Log in</title>
+    <title>Elequip Admin | Log in</title>
     <!-- <link rel="icon" type="image/x-icon" href="/favicon.png"> -->
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
