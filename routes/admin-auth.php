@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\Auth\ChangePasswordController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Master\LeadCategoryController;
+
 
 Route::prefix('admin')->name('admin.')->middleware('guest:admin')->group(function () {
     // Route::get('register', [RegisteredUserController::class, 'create'])
@@ -74,4 +76,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+
+
+    //==============================> Surajit Route <==============================//
+    
+   //Route::get('/lead-category', [LeadCategoryController::class, 'index'])->name('lead.category');
+   Route::resource('lead-category', LeadCategoryController::class);
+
+
 });
