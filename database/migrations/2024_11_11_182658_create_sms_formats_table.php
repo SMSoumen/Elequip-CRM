@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('template_name')->unique();
             $table->string('template_id');
             $table->longText('template_format');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

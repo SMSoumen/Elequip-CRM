@@ -16,7 +16,7 @@ class LeadCategoryController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('role_or_permission:Lead Category access|Lead create|Lead edit|Lead delete', only: ['index', 'treeView']),
+            new Middleware('role_or_permission:Lead Category access|Lead Category create|Lead Category edit|Lead Category delete', only: ['index', 'treeView']),
             new Middleware('role_or_permission:Lead Category create', only: ['create', 'store']),
             new Middleware('role_or_permission:Lead Category edit', only: ['edit', 'update']),
             new Middleware('role_or_permission:Lead Category delete', only: ['destroy']),
@@ -28,7 +28,7 @@ class LeadCategoryController extends Controller implements HasMiddleware
         try {
             if ($request->ajax()) {
                 return DataTables::eloquent(LeadCategory::query())->addColumn('status', function ($data) {
-                    return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-success">Inactive</span>';
+                    return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })->addColumn('action', function ($data) {

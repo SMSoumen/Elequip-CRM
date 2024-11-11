@@ -16,6 +16,11 @@ use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Master\LeadCategoryController;
+use App\Http\Controllers\Master\LeadSourcesController;
+use App\Http\Controllers\Master\LeadStageController;
+use App\Http\Controllers\Master\BrandController;
+use App\Http\Controllers\Master\MeasuringUnitController;
+use App\Http\Controllers\Master\SMSFormatController;
 
 
 Route::prefix('admin')->name('admin.')->middleware('guest:admin')->group(function () {
@@ -79,9 +84,13 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
 
 
     //==============================> Surajit Route <==============================//
-    
-   //Route::get('/lead-category', [LeadCategoryController::class, 'index'])->name('lead.category');
+
    Route::resource('lead-category', LeadCategoryController::class);
+   Route::resource('lead-sources', LeadSourcesController::class);
+   Route::resource('lead-stage', LeadStageController::class);
+   Route::resource('measuring-unit', MeasuringUnitController::class);
+   Route::resource('brand', BrandController::class);
+   Route::resource('sms-format', SMSFormatController::class);
 
 
 });

@@ -10,10 +10,10 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h3 class="card-title">DataTable with Lead Category</h3>
+                                <h3 class="card-title">DataTable with Brand</h3>
                                 @can('Category create')
                                     <a href="{{ route('admin.lead-category.create') }}" class="btn btn-sm btn-success">Add
-                                        Category</a>
+                                        Brand</a>
                                 @endcan
                             </div>
                         </div>
@@ -23,7 +23,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sl No</th>
-                                        <th>Category</th>
+                                        <th>Brand</th>
                                         <th>Created Date</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -85,7 +85,7 @@
                 "responsive": true,
                 "lengthChange": true,
 
-                ajax: "{{ route('admin.lead-category.index') }}",
+                ajax: "{{ route('admin.brand.index') }}",
                 lengthMenu: [
                     [10, 25, 50, 200, 500, 1000, -1],
                     [10, 25, 50, 200, 500, 1000, "All"]
@@ -98,8 +98,8 @@
                         searchable: false
                     },
                     {
-                        data: 'category_name',
-                        name: 'category_name'
+                        data: 'brand_name',
+                        name: 'brand_name'
                     },
                     {
                         data: 'created_date',
