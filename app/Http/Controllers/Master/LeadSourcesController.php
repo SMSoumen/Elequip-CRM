@@ -9,6 +9,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use App\Models\leadSources;
 use DataTables;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class LeadSourcesController extends Controller implements HasMiddleware
 {
@@ -26,7 +27,7 @@ class LeadSourcesController extends Controller implements HasMiddleware
     public function index(Request $request){
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(leadSources::query())->addColumn('status', function ($data) {
+                return DataTables::eloquent(leadSources::query()->orderBy('id','desc'))->addColumn('status', function ($data) {
                     return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
@@ -43,6 +44,26 @@ class LeadSourcesController extends Controller implements HasMiddleware
             dd($e->getMessage());
             return redirect()->route('admin.dashboard')->with('error', $e->getMessage());
         }
+    }
+
+    public function store(Request $request){
+        $validated =  $request->validate([
+            'source_name' => 'required|string|unique:lead_sources,source_name',
+        ]);
+
+        $validated['source_slug'] = Str::slug($validated['source_name']);
+        $source = leadSources::create($validated);
+        if($source){
+            return redirect()->back()->withSuccess('Lead source added successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while adding lead source!!!');
+        }
+    }
+
+    public function destroy(leadSources $leadSources)
+    {
+        $leadSources->delete();
+        return redirect()->back()->withSuccess('Lead source deleted !!!');
     }
 
 

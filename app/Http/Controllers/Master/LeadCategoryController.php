@@ -9,6 +9,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use App\Models\LeadCategory;
 use DataTables;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class LeadCategoryController extends Controller implements HasMiddleware
 {
@@ -27,7 +28,7 @@ class LeadCategoryController extends Controller implements HasMiddleware
     public function index(Request $request){
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(LeadCategory::query())->addColumn('status', function ($data) {
+                return DataTables::eloquent(LeadCategory::query()->orderBy('id','desc'))->addColumn('status', function ($data) {
                     return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
@@ -46,9 +47,21 @@ class LeadCategoryController extends Controller implements HasMiddleware
         }
     }
 
+    public function store(Request $request){
+        $validated =  $request->validate([
+            'category_name' => 'required|string|unique:lead_categories,category_name',
+        ]);
+
+        $validated['category_slug'] = Str::slug($validated['category_name']);
+        $category = LeadCategory::create($validated);
+        if($category){
+            return redirect()->back()->withSuccess('Category added successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while adding category!!!');
+        }
+    }
+
     public function create(Request $request){
-
-
     }
 
     public function edit(LeadCategory $LeadCategory): View
@@ -58,5 +71,9 @@ class LeadCategoryController extends Controller implements HasMiddleware
 
     public function destroy(LeadCategory $LeadCategory)
     {
+        $LeadCategory->delete();
+        return redirect()->back()->withSuccess('Category deleted !!!');
     }
+
+
 }

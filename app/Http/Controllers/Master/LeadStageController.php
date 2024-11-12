@@ -9,7 +9,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use App\Models\leadStage;
 use DataTables;
 use Illuminate\View\View;
-
+use Illuminate\Support\Str;
 
 class LeadStageController extends Controller implements HasMiddleware
 {
@@ -26,7 +26,7 @@ class LeadStageController extends Controller implements HasMiddleware
     public function index(Request $request){
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(leadStage::query())->addColumn('status', function ($data) {
+                return DataTables::eloquent(leadStage::query()->orderBy('id','desc'))->addColumn('status', function ($data) {
                     return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
@@ -43,6 +43,26 @@ class LeadStageController extends Controller implements HasMiddleware
             dd($e->getMessage());
             return redirect()->route('admin.dashboard')->with('error', $e->getMessage());
         }
+    }
+
+    public function store(Request $request){
+        $validated =  $request->validate([
+            'stage_name' => 'required|string|unique:lead_stages,stage_name',
+        ]);
+
+        $validated['stage_slug'] = Str::slug($validated['stage_name']);
+        $source = leadStage::create($validated);
+        if($source){
+            return redirect()->back()->withSuccess('Lead stage added successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while adding lead stage!!!');
+        }
+    }
+
+    public function destroy(leadStage $leadStage)
+    {
+        $leadStage->delete();
+        return redirect()->back()->withSuccess('Lead stage deleted !!!');
     }
 
 }

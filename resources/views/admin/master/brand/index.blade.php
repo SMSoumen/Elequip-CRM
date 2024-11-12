@@ -10,10 +10,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h3 class="card-title">DataTable with Brand</h3>
+                                <h3 class="card-title">Brand</h3>
                                 @can('Category create')
-                                    <a href="{{ route('admin.lead-category.create') }}" class="btn btn-sm btn-success">Add
-                                        Brand</a>
+                                    <button type="button" class="btn btn-primary add_brand">Add Brand</button>                              
                                 @endcan
                             </div>
                         </div>
@@ -47,8 +46,36 @@
     <!-- /.content -->
 @endsection
 
+    <!--==================> Add Brand Modal ============================-->
+
+<div class="modal fade" id="add_brand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Brand</h5>
+            </div>
+            <form action="{{route('admin.brand.store')}}" method="POST">@csrf
+                <div class="modal-body">
+                    <div class="col-12">
+                        <label for="brand_name">Brand Name <span class="text-danger">*</span></label>
+                        <input type="text" name="brand_name" id="brand_name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+
+            </div>
+        </div>
+    </div>
+
 @push('scripts')
     <script>
+        $(".add_brand").click(function(){
+            $("#add_brand").modal('show');
+        });
+        
         $(document).ready(function() {
             var currentdate = new Date();
             var datetime = currentdate.getDate() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate

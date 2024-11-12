@@ -12,8 +12,7 @@
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title">DataTable with Lead Sources</h3>
                                 @can('Category create')
-                                    <a href="{{ route('admin.lead-category.create') }}" class="btn btn-sm btn-success">Add
-                                        Lead Source</Source></a>
+                                    <button type="button" class="btn btn-primary add_lead_source">Add Lead Sources</button>                              
                                 @endcan
                             </div>
                         </div>
@@ -47,8 +46,37 @@
     <!-- /.content -->
 @endsection
 
+    <!--==================> Add Category Modal ============================-->
+
+    <div class="modal fade" id="add_lead_source" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Lead Source</h5>
+        </div>
+        <form action="{{route('admin.lead-sources.store')}}" method="POST">@csrf
+            <div class="modal-body">
+                <div class="col-12">
+                    <label for="source_name">Lead Source Name <span class="text-danger">*</span></label>
+                    <input type="text" name="source_name" id="source_name" class="form-control" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+
+        </div>
+    </div>
+    </div>
+
 @push('scripts')
     <script>
+
+        $(".add_lead_source").click(function(){
+            $("#add_lead_source").modal('show');
+        });
+
         $(document).ready(function() {
             var currentdate = new Date();
             var datetime = currentdate.getDate() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate

@@ -10,10 +10,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h3 class="card-title">DataTable with Lead Stage</h3>
+                                <h3 class="card-title">Lead Stage</h3>
                                 @can('Category create')
-                                    <a href="{{ route('admin.lead-category.create') }}" class="btn btn-sm btn-success">Add
-                                        Lead Stage</Source></a>
+                                    <button type="button" class="btn btn-primary add_lead_stage">Add Lead Stage</button>                              
                                 @endcan
                             </div>
                         </div>
@@ -47,8 +46,36 @@
     <!-- /.content -->
 @endsection
 
+    <!--==================> Add Lead Stage Modal ============================-->
+
+    <div class="modal fade" id="add_lead_stage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Lead Stage</h5>
+            </div>
+            <form action="{{route('admin.lead-stage.store')}}" method="POST">@csrf
+                <div class="modal-body">
+                    <div class="col-12">
+                        <label for="stage_name">Stage Name <span class="text-danger">*</span></label>
+                        <input type="text" name="stage_name" id="stage_name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+
+            </div>
+        </div>
+    </div>
+
 @push('scripts')
     <script>
+        $(".add_lead_stage").click(function(){
+            $("#add_lead_stage").modal('show');
+        });
+
         $(document).ready(function() {
             var currentdate = new Date();
             var datetime = currentdate.getDate() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate

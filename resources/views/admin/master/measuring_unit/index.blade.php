@@ -1,7 +1,5 @@
 @extends('admin.layouts.master')
 @section('main_content')
-    <x-breadcrumb />
-
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -10,10 +8,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h3 class="card-title">DataTable with Measuring Units</h3>
+                                <h3 class="card-title">Measuring Units</h3>
                                 @can('Category create')
-                                    <a href="{{ route('admin.lead-category.create') }}" class="btn btn-sm btn-success">Add
-                                    Measuring Unit</Source></a>
+                                    <button type="button" class="btn btn-primary add_measuring_unit">Add Measuring Unit</button>                              
                                 @endcan
                             </div>
                         </div>
@@ -47,8 +44,35 @@
     <!-- /.content -->
 @endsection
 
+    <!--==================> Add Measuring Modal ============================-->
+
+    <div class="modal fade" id="add_measuring_unit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Measuring Unit</h5>
+            </div>
+            <form action="{{route('admin.measuring-unit.store')}}" method="POST">@csrf
+                <div class="modal-body">
+                    <div class="col-12">
+                        <label for="unit_type">Unit Type Name <span class="text-danger">*</span></label>
+                        <input type="text" name="unit_type" id="unit_type" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+
+            </div>
+        </div>
+    </div>
+
 @push('scripts')
     <script>
+        $(".add_measuring_unit").click(function(){
+            $("#add_measuring_unit").modal('show');
+        })
         $(document).ready(function() {
             var currentdate = new Date();
             var datetime = currentdate.getDate() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate

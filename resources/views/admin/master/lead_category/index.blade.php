@@ -1,6 +1,5 @@
 @extends('admin.layouts.master')
 @section('main_content')
-    <x-breadcrumb />
 
     <!-- Main content -->
     <section class="content">
@@ -10,10 +9,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h3 class="card-title">DataTable with Lead Category</h3>
+                                <h3 class="card-title">Lead Category</h3>
                                 @can('Category create')
-                                    <a href="{{ route('admin.lead-category.create') }}" class="btn btn-sm btn-success">Add
-                                        Category</a>
+                                <button type="button" class="btn btn-primary add_category">Add Lead Category</button>                              
                                 @endcan
                             </div>
                         </div>
@@ -45,10 +43,44 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-@endsection
+
+    @endsection
+    <!--==================> Add Category Modal ============================-->
+
+    <div class="modal fade" id="add_category_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Lead Category</h5>
+        </div>
+        <form action="{{route('admin.lead-category.store')}}" method="POST">@csrf
+            <div class="modal-body">
+                <div class="col-12">
+                    <label for="category_name">Category Name <span class="text-danger">*</span></label>
+                    <input type="text" name="category_name" id="category_name" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+
+        </div>
+    </div>
+    </div>
+
+
+
 
 @push('scripts')
     <script>
+
+        $(".add_category").click(function(){
+            $("#add_category_modal").modal('show');
+        });
+
+
         $(document).ready(function() {
             var currentdate = new Date();
             var datetime = currentdate.getDate() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate
