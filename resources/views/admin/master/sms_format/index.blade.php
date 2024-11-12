@@ -1,7 +1,5 @@
 @extends('admin.layouts.master')
 @section('main_content')
-    <x-breadcrumb />
-
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -10,7 +8,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h3 class="card-title">DataTable with SMS Formats</h3>
+                                <h3 class="card-title">SMS Formats</h3>
                                 @can('Category create')
                                     <a href="{{ route('admin.lead-category.create') }}" class="btn btn-sm btn-success">Add
                                     SMS Format</Source></a>

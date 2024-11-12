@@ -1,6 +1,5 @@
 @extends('admin.layouts.master')
 @section('main_content')
-    <x-breadcrumb />
 
     <!-- Main content -->
     <section class="content">
@@ -10,7 +9,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h3 class="card-title">DataTable with Lead Sources</h3>
+                                <h3 class="card-title">Lead Sources</h3>
                                 @can('Category create')
                                     <button type="button" class="btn btn-primary add_lead_source">Add Lead Sources</button>                              
                                 @endcan

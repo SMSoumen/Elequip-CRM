@@ -1,7 +1,5 @@
 @extends('admin.layouts.master')
 @section('main_content')
-    <x-breadcrumb />
-
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -75,7 +73,7 @@
         $(".add_brand").click(function(){
             $("#add_brand").modal('show');
         });
-        
+
         $(document).ready(function() {
             var currentdate = new Date();
             var datetime = currentdate.getDate() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate

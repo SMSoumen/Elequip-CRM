@@ -1,6 +1,5 @@
 @extends('admin.layouts.master')
 @section('main_content')
-    <x-breadcrumb />
 
     <!-- Main content -->
     <section class="content">
