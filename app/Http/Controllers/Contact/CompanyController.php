@@ -47,51 +47,65 @@ class CompanyController extends Controller implements HasMiddleware
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated =  $request->validate([
+            'company_name' => 'required|string|unique:companies,company_name',
+            'city'         => 'required|integer',
+            'address'      => 'required|string',
+            'phone'        => 'string',
+            'website'      => 'string',
+            'email'        => 'string|email',
+            'gst'         => 'string',
+        ]);
+        $source = Company::create($validated);
+        if($source){
+            return redirect()->back()->withSuccess('Company added successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while adding company!!!');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Company $Company)
     {
-        //
+        return $Company;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function update(Request $request, Company $Company)
+    {
+        $validated =  $request->validate([
+            'company_name' => "required|string|unique:companies,company_name,$Company->id",
+            'city'         => 'required|integer',
+            'address'      => 'required|string',
+            'phone'        => 'string',
+            'website'      => 'string',
+            'email'        => 'string|email',
+            'gst'         => 'string',
+        ]);
+
+        if($Company->update($validated)){
+            return redirect()->back()->withSuccess('Company updated successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while updating company!!!');
+        }
+    }
+
+    public function destroy(Company $Company)
+    {
+        $Company->delete();
+        return redirect()->back()->withSuccess('Company deleted successfully !!!');
+    }
+
+
+    public function create()
+    {
+        
+    }
+
+    
     public function edit(string $id)
     {
-        //
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

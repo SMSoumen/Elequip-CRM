@@ -46,17 +46,15 @@
     <!-- /.content -->
 @endsection
 
-    <!--==================> Add Brand Modal ============================-->
+    <!--==================> Add Company Modal ============================-->
 
-    <div class="modal fade" id="add_brand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="add_company" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
                 </div>
-                <div class="load_html">
-
-                </div>
+                <div class="load_html"></div>
             </div>
         </div>
     </div>
@@ -64,52 +62,126 @@
 @push('scripts')
 
     <script>
-        $(".add_brand").click(function(){
-            $(".modal-title").html('Add Brand');
-            let html =`<form action="{{route('admin.brand.store')}}" method="POST" id="form_data">@csrf
-                <div class="modal-body">
-                    <div class="col-12">
-                        <label for="brand_name">Brand Name <span class="text-danger">*</span></label>
-                        <input type="text" name="brand_name" id="brand_name" class="form-control" required>
+        $(".add_company").click(function(){
+            $(".modal-title").html('Add Company');
+            let html =`<form action="{{route('admin.companies.store')}}" method="POST" id="form_data">@csrf
+                    <div class="modal-body">
+                        <div class="col-12">
+                            <label for="company_name">Company Name <span class="text-danger">*</span></label>
+                            <input type="text" name="company_name" id="company_name" class="form-control" required>
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" class="form-control">
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="website">Website</label>
+                            <input type="url" name="website" id="website" class="form-control">
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="phone">Phone</label>
+                            <input type="text" name="phone" id="phone" class="form-control">
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="city">City<span class="text-danger">*</span></label>
+                            <select name="city" id="city" class="form-control" required>
+                                <option value="">Select City</option>
+                                <option value="1">Kolkata</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="gstn">GSTN</label>
+                            <input type="text" name="gst" id="gst" class="form-control">
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="address">Address<span class="text-danger">*</span></label>
+                            <textarea name="address" id="address" class="form-control" required></textarea>
+                        </div>
+
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>`;
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>`;
             $(".load_html").html(html);
-            $("#add_brand").modal('show');
+            $("#add_company").modal('show');
         });
 
         $(document).on('click','.edit_data',function(){
-            let brand_id = $(this).data("modelid");
-            let url = `{{ route('admin.brand.show', ':id') }}`; 
-            url = url.replace(':id', brand_id);  
+            let company_id = $(this).data("modelid");
+            let url = `{{ route('admin.companies.show', ':id') }}`; 
+            url = url.replace(':id', company_id);  
 
             $.ajax({
                 method:"GET",
                 url: url,
                 success:function(res){
-                    $(".modal-title").html('Edit Brand');
-                    let html =`<form action="{{route('admin.brand.update',':res')}}" method="post" id="form_data">@csrf
+                    $(".modal-title").html('Edit Company');
+                    let html =`<form action="{{route('admin.companies.update',':res')}}" method="post" id="form_data">@csrf
                     @method('PUT')
-                            <div class="modal-body">
-                                <div class="col-12">
-                                    <label for="brand_name">Brand Name <span class="text-danger">*</span></label>
-                                    <input type="text" name="brand_name" id="brand_name" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>`;
+                    <div class="modal-body">
+                        <div class="col-12">
+                            <label for="company_name">Company Name <span class="text-danger">*</span></label>
+                            <input type="text" name="company_name" id="company_name" class="form-control" required>
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" class="form-control">
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="website">Website</label>
+                            <input type="url" name="website" id="website" class="form-control">
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="phone">Phone</label>
+                            <input type="text" name="phone" id="phone" class="form-control">
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="city">City<span class="text-danger">*</span></label>
+                            <select name="city" id="city" class="form-control" required>
+                                <option value="">Select City</option>
+                                <option value="1">Kolkata</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="gstn">GSTN</label>
+                            <input type="text" name="gst" id="gst" class="form-control">
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="address">Address<span class="text-danger">*</span></label>
+                            <textarea name="address" id="address" class="form-control" required></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>`;
 
                         $(".load_html").html(html);
-                        let update_url = `{{ route('admin.brand.update', ':id') }}`;
+                        let update_url = `{{ route('admin.companies.update', ':id') }}`;
                         update_url = update_url.replace(':id', res.id);
                         $("#form_data").attr('action',update_url);
-                        $("#brand_name").val(res.brand_name);
-                        $("#add_brand").modal('show');
+                        $("#company_name").val(res.company_name);
+                        $("#website").val(res.website);
+                        $("#phone").val(res.phone);
+                        $("#city").val(res.city);
+                        $("#email").val(res.email);
+                        $("#gst").val(res.gst);
+                        $("#address").val(res.address);
+                        $("#add_company").modal('show');
                 }
             })
         });
