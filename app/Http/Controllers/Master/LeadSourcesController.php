@@ -34,7 +34,7 @@ class LeadSourcesController extends Controller implements HasMiddleware
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.lead-sources.edit', $data->id);
                     $deleteRoute = route('admin.lead-sources.destroy', $data->id);
-                    $permission = 'Lead sources';
+                    $permission = 'Lead Sources';
                     $edit_type = "modal";
 
                     return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type']))->render();
@@ -64,11 +64,12 @@ class LeadSourcesController extends Controller implements HasMiddleware
     public function destroy(LeadSources $LeadSources)
     {
         $LeadSources->delete();
-        return redirect()->back()->withSuccess('Lead source deleted !!!');
+        return redirect()->back()->withSuccess('Lead source deleted successfully. !!!');
     }
 
-    public function show(LeadSources $leadSources){
-        return $leadSources;
+    public function show(LeadSources $LeadSources){
+        return LeadSources::where('id',$LeadSources->id)->get();
+        //return $LeadSources;
     }
 
     public function update(Request $request,LeadSources $LeadSources){

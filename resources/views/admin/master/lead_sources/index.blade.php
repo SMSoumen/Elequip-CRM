@@ -84,7 +84,7 @@
             url = url.replace(':id', sources_id); 
             $.ajax({
                 method:"GET",
-                url: url,
+                url:url,
                 success:function(res){
                     console.log(res);
                     $(".modal-title").html('Edit Lead Sources');
