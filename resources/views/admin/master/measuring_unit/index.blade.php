@@ -50,29 +50,68 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Measuring Unit</h5>
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
             </div>
-            <form action="{{route('admin.measuring-unit.store')}}" method="POST">@csrf
-                <div class="modal-body">
-                    <div class="col-12">
-                        <label for="unit_type">Unit Type Name <span class="text-danger">*</span></label>
-                        <input type="text" name="unit_type" id="unit_type" class="form-control" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
+                <div class="load_html">
 
+                </div>
             </div>
         </div>
     </div>
 
 @push('scripts')
     <script>
+
         $(".add_measuring_unit").click(function(){
+            $(".modal-title").html('Add Measuring Unit');
+            let html =`<form action="{{route('admin.measuring-unit.store')}}" method="POST">@csrf
+                    <div class="modal-body">
+                        <div class="col-12">
+                            <label for="unit_type">Unit Type Name <span class="text-danger">*</span></label>
+                            <input type="text" name="unit_type" id="unit_type" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>`;
+            $(".load_html").html(html);
             $("#add_measuring_unit").modal('show');
-        })
+        });
+
+        $(document).on('click','.edit_data',function(){
+            let sources_id = $(this).data("modelid");
+            let url = `{{route('admin.measuring-unit.show',':id')}}`; 
+            url = url.replace(':id', sources_id); 
+            $.ajax({
+                method:"GET",
+                url: url,
+                success:function(res){
+                    console.log(res.unit_type);
+                    $(".modal-title").html('Edit Measuring Unit');
+                    let html =`<form action="{{route('admin.measuring-unit.update',':res')}}" method="post" id="form_data">@csrf
+                    @method('PUT')
+                            <div class="modal-body">
+                                <div class="col-12">
+                                    <label for="unit_type1">Unit Type Name <span class="text-danger">*</span></label>
+                                    <input type="text" name="unit_type" id="unit_type1" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>`;
+
+                        $(".load_html").html(html);
+                        let update_url = `{{ route('admin.measuring-unit.update', ':id') }}`;
+                        update_url = update_url.replace(':id', res.id);
+                        $("#form_data").attr('action',update_url);
+                        $("#unit_type1").val(res.unit_type);
+                        $("#add_measuring_unit").modal('show');
+                }
+            })
+        });
+
         $(document).ready(function() {
             var currentdate = new Date();
             var datetime = currentdate.getDate() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate

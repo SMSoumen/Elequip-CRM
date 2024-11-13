@@ -34,6 +34,7 @@ class LeadStageController extends Controller implements HasMiddleware
                     $editRoute = route('admin.lead-stage.edit', $data->id);
                     $deleteRoute = route('admin.lead-stage.destroy', $data->id);
                     $permission = 'Lead Stage';
+                    $edit_type = "modal";
 
                     return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission']))->render();
                 })->addIndexColumn()->rawColumns(['action','status','created_date'])->make(true);
@@ -63,6 +64,22 @@ class LeadStageController extends Controller implements HasMiddleware
     {
         $leadStage->delete();
         return redirect()->back()->withSuccess('Lead stage deleted !!!');
+    }
+
+    public function show(leadStage $leadStage){
+        return $leadStage;
+    }
+
+    public function update(Request $request,leadStage $leadStage){
+        $validated =  $request->validate([
+            'brand_name' => "required|string|unique:lead_sources,source_name,$leadStage->id",
+        ]);
+        $validated['source_slug'] = Str::slug($validated['source_name']);
+        if($leadStage->update($validated)){
+            return redirect()->back()->withSuccess('Brand updated successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while updating brand!!!');
+        }
     }
 
 }

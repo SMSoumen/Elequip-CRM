@@ -36,8 +36,9 @@ class MeasuringUnitController extends Controller implements HasMiddleware
                     $editRoute = route('admin.measuring-unit.edit', $data->id);
                     $deleteRoute = route('admin.measuring-unit.destroy', $data->id);
                     $permission = 'Measuring Unit';
+                    $edit_type = "modal";
 
-                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission']))->render();
+                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type']))->render();
                 })->addIndexColumn()->rawColumns(['action','status','created_date'])->make(true);
             }
             return view('admin.master.measuring_unit.index');
@@ -65,4 +66,18 @@ class MeasuringUnitController extends Controller implements HasMiddleware
         return redirect()->back()->withSuccess('Measuring Unit deleted !!!');
     }
 
+    public function show(MeasuringUnit $MeasuringUnit){
+        return $MeasuringUnit;
+    }
+
+    public function update(Request $request,MeasuringUnit $MeasuringUnit){
+        $validated =  $request->validate([
+            'unit_type' => "required|string|unique:measuring_units,unit_type,$MeasuringUnit->id",
+        ]);
+        if($MeasuringUnit->update($validated)){
+            return redirect()->back()->withSuccess('Measuring Unit updated successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while updating measuring unit!!!');
+        }
+    }
 }

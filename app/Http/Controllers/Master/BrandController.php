@@ -33,9 +33,10 @@ class BrandController extends Controller implements HasMiddleware
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.brand.edit', $data->id);
                     $deleteRoute = route('admin.brand.destroy', $data->id);
+                    $edit_type = "modal";
                     $permission = 'Brand';
 
-                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission']))->render();
+                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type']))->render();
                 })->addIndexColumn()->rawColumns(['action','status','created_date'])->make(true);
             }
             return view('admin.master.brand.index');
@@ -61,5 +62,21 @@ class BrandController extends Controller implements HasMiddleware
     {
         $Brand->delete();
         return redirect()->back()->withSuccess('Brand deleted successfully !!!');
+    }
+
+    public function show(Brand $Brand){
+        return $Brand;
+    }
+
+    public function update(Request $request,Brand $Brand){
+        $validated =  $request->validate([
+            'brand_name' => "required|string|unique:brands,brand_name,$Brand->id",
+        ]);
+        
+        if($Brand->update($validated)){
+            return redirect()->back()->withSuccess('Brand updated successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while updating brand!!!');
+        }
     }
 }

@@ -51,20 +51,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Lead Source</h5>
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
         </div>
-        <form action="{{route('admin.lead-sources.store')}}" method="POST">@csrf
-            <div class="modal-body">
-                <div class="col-12">
-                    <label for="source_name">Lead Source Name <span class="text-danger">*</span></label>
-                    <input type="text" name="source_name" id="source_name" class="form-control" required>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-
+            <div class="load_html"></div>
         </div>
     </div>
     </div>
@@ -73,8 +62,55 @@
     <script>
 
         $(".add_lead_source").click(function(){
+            $(".modal-title").html('Add Lead Sources');
+            let html =`<form action="{{route('admin.lead-sources.store')}}" method="POST">@csrf
+                <div class="modal-body">
+                    <div class="col-12">
+                        <label for="source_name">Lead Source Name <span class="text-danger">*</span></label>
+                        <input type="text" name="source_name" id="source_name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>`;
+            $(".load_html").html(html);
             $("#add_lead_source").modal('show');
         });
+
+        $(document).on('click','.edit_data',function(){
+            let sources_id = $(this).data("modelid");
+            let url = `{{route('admin.lead-sources.show',':id')}}`; 
+            url = url.replace(':id', sources_id); 
+            $.ajax({
+                method:"GET",
+                url: url,
+                success:function(res){
+                    console.log(res);
+                    $(".modal-title").html('Edit Lead Sources');
+                    let html =`<form action="{{route('admin.lead-sources.update',':res')}}" method="post" id="form_data">@csrf
+                    @method('PUT')
+                            <div class="modal-body">
+                                <div class="col-12">
+                                    <label for="source_name1">Lead Source Name <span class="text-danger">*</span></label>
+                                    <input type="text" name="source_name" id="source_name1" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>`;
+
+                        $(".load_html").html(html);
+                        let update_url = `{{ route('admin.lead-sources.update', ':id') }}`;
+                        update_url = update_url.replace(':id', res.id);
+                        $("#form_data").attr('action',update_url);
+                        $("#source_name1").val(res.source_name);
+                        $("#add_lead_source").modal('show');
+                }
+            })
+        });
+
 
         $(document).ready(function() {
             var currentdate = new Date();

@@ -46,13 +46,25 @@
 
     <!--==================> Add Brand Modal ============================-->
 
-<div class="modal fade" id="add_brand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="add_brand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Brand</h5>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                </div>
+                <div class="load_html">
+
+                </div>
             </div>
-            <form action="{{route('admin.brand.store')}}" method="POST">@csrf
+        </div>
+    </div>
+
+@push('scripts')
+
+    <script>
+        $(".add_brand").click(function(){
+            $(".modal-title").html('Add Brand');
+            let html =`<form action="{{route('admin.brand.store')}}" method="POST" id="form_data">@csrf
                 <div class="modal-body">
                     <div class="col-12">
                         <label for="brand_name">Brand Name <span class="text-danger">*</span></label>
@@ -62,17 +74,45 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </form>
-
-            </div>
-        </div>
-    </div>
-
-@push('scripts')
-    <script>
-        $(".add_brand").click(function(){
+            </form>`;
+            $(".load_html").html(html);
             $("#add_brand").modal('show');
         });
+
+        $(document).on('click','.edit_data',function(){
+            let brand_id = $(this).data("modelid");
+            let url = `{{ route('admin.brand.show', ':id') }}`; 
+            url = url.replace(':id', brand_id);  
+
+            $.ajax({
+                method:"GET",
+                url: url,
+                success:function(res){
+                    $(".modal-title").html('Edit Brand');
+                    let html =`<form action="{{route('admin.brand.update',':res')}}" method="post" id="form_data">@csrf
+                    @method('PUT')
+                            <div class="modal-body">
+                                <div class="col-12">
+                                    <label for="brand_name">Brand Name <span class="text-danger">*</span></label>
+                                    <input type="text" name="brand_name" id="brand_name" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>`;
+
+                        $(".load_html").html(html);
+                        let update_url = `{{ route('admin.brand.update', ':id') }}`;
+                        update_url = update_url.replace(':id', res.id);
+                        $("#form_data").attr('action',update_url);
+                        $("#brand_name").val(res.brand_name);
+                        $("#add_brand").modal('show');
+                }
+            })
+        });
+
+
 
         $(document).ready(function() {
             var currentdate = new Date();

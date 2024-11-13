@@ -36,8 +36,9 @@ class LeadCategoryController extends Controller implements HasMiddleware
                     $editRoute = route('admin.lead-category.edit', $data->id);
                     $deleteRoute = route('admin.lead-category.destroy', $data->id);
                     $permission = 'Lead Category';
+                    $edit_type = "modal";
 
-                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission']))->render();
+                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type']))->render();
                 })->addIndexColumn()->rawColumns(['action','status','created_date'])->make(true);
             }
             return view('admin.master.lead_category.index');
@@ -64,15 +65,26 @@ class LeadCategoryController extends Controller implements HasMiddleware
     public function create(Request $request){
     }
 
-    public function edit(LeadCategory $LeadCategory): View
-    {
-
-    }
-
     public function destroy(LeadCategory $LeadCategory)
     {
         $LeadCategory->delete();
         return redirect()->back()->withSuccess('Category deleted !!!');
+    }
+
+    public function show(LeadCategory $LeadCategory){
+        return $LeadCategory;
+    }
+
+    public function update(Request $request,LeadCategory $LeadCategory){
+        $validated =  $request->validate([
+            'category_name' => "required|string|unique:lead_categories,category_name,$LeadCategory->id",
+        ]);
+        $validated['category_slug'] = Str::slug($validated['category_name']);
+        if($LeadCategory->update($validated)){
+            return redirect()->back()->withSuccess('Lead Category updated successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while updating lead category!!!');
+        }
     }
 
 
