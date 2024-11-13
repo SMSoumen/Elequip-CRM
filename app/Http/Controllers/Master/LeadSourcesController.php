@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-use App\Models\LeadSources;
+use App\Models\LeadSource;
 use DataTables;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
@@ -27,7 +27,7 @@ class LeadSourcesController extends Controller implements HasMiddleware
     public function index(Request $request){
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(LeadSources::query()->orderBy('id','desc'))->addColumn('status', function ($data) {
+                return DataTables::eloquent(LeadSource::query()->orderBy('id','desc'))->addColumn('status', function ($data) {
                     return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
@@ -53,7 +53,7 @@ class LeadSourcesController extends Controller implements HasMiddleware
         ]);
 
         $validated['source_slug'] = Str::slug($validated['source_name']);
-        $source = LeadSources::create($validated);
+        $source = LeadSource::create($validated);
         if($source){
             return redirect()->back()->withSuccess('Lead source added successfully.');
         }else{
@@ -61,23 +61,22 @@ class LeadSourcesController extends Controller implements HasMiddleware
         }
     }
 
-    public function destroy(LeadSources $LeadSources)
+    public function destroy(LeadSource $LeadSource)
     {
-        $LeadSources->delete();
+        $LeadSource->delete();
         return redirect()->back()->withSuccess('Lead source deleted successfully. !!!');
     }
 
-    public function show(LeadSources $LeadSources){
-        return LeadSources::where('id',$LeadSources->id)->get();
-        //return $LeadSources;
+    public function show(LeadSource $LeadSource){
+        return $LeadSource;
     }
 
-    public function update(Request $request,LeadSources $LeadSources){
+    public function update(Request $request,LeadSource $LeadSource){
         $validated =  $request->validate([
-            'source_name' => "required|string|unique:lead_sources,source_name,$LeadSources->id",
+            'source_name' => "required|string|unique:lead_sources,source_name,$LeadSource->id",
         ]);
         $validated['source_slug'] = Str::slug($validated['source_name']);
-        if($LeadSources->update($validated)){
+        if($LeadSource->update($validated)){
             return redirect()->back()->withSuccess('Lead Source updated successfully.');
         }else{
             return redirect()->back()->withErrors('Error!! while updating lead source!!!');
