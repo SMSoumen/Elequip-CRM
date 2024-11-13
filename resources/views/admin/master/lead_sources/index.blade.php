@@ -21,7 +21,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sl No</th>
-                                        <th>Sources Name</th>
+                                        <th>Source Name</th>
                                         <th>Created Date</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -86,7 +86,6 @@
                 method:"GET",
                 url:url,
                 success:function(res){
-                    console.log(res);
                     $(".modal-title").html('Edit Lead Sources');
                     let html =`<form action="{{route('admin.lead-sources.update',':res')}}" method="post" id="form_data">@csrf
                     @method('PUT')
