@@ -51,9 +51,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Lead Stage</h5>
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
             </div>
-            <form action="{{route('admin.lead-stage.store')}}" method="POST">@csrf
+            <div class="load_html"></div>
+
+            </div>
+        </div>
+    </div>
+
+@push('scripts')
+    <script>
+        $(".add_lead_stage").click(function(){
+            $(".modal-title").html('Add  Lead Stage');
+            let html =`<form action="{{route('admin.lead-stage.store')}}" method="POST">@csrf
                 <div class="modal-body">
                     <div class="col-12">
                         <label for="stage_name">Stage Name <span class="text-danger">*</span></label>
@@ -63,16 +73,42 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </form>
-
-            </div>
-        </div>
-    </div>
-
-@push('scripts')
-    <script>
-        $(".add_lead_stage").click(function(){
+            </form>`;
+            $(".load_html").html(html);
             $("#add_lead_stage").modal('show');
+        });
+
+        $(document).on('click','.edit_data',function(){
+            let sources_id = $(this).data("modelid");
+            let url = `{{route('admin.lead-stage.show',':id')}}`; 
+            url = url.replace(':id', sources_id); 
+            $.ajax({
+                method:"GET",
+                url: url,
+                success:function(res){
+                    console.log(res);
+                    $(".modal-title").html('Edit  Lead Stage');
+                    let html =`<form action="{{route('admin.lead-stage.update',':res')}}" method="post" id="form_data">@csrf
+                    @method('PUT')
+                            <div class="modal-body">
+                                <div class="col-12">
+                                    <label for="stage_name1">Stage Name <span class="text-danger">*</span></label>
+                                    <input type="text" name="stage_name" id="stage_name1" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>`;
+
+                        $(".load_html").html(html);
+                        let update_url = `{{ route('admin.lead-stage.update', ':id') }}`;
+                        update_url = update_url.replace(':id', res.id);
+                        $("#form_data").attr('action',update_url);
+                        $("#stage_name1").val(res.stage_name);
+                        $("#add_lead_stage").modal('show');
+                }
+            })
         });
 
         $(document).ready(function() {
