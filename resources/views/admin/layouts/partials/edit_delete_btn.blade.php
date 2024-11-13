@@ -1,8 +1,8 @@
-<div class="d-flex">
+<div class="">
+<!-- <div class="d-flex"> -->
     @can("$permission edit")
         @if($edit_type == 'modal')
-            <button type="button" class="btn btn-sm btn-warning mr-2 d-inline-block edit_data" data-modelid="{{$data->id}}">Edit</button>                              
-
+            <button type="button" class="btn btn-sm btn-warning mr-2 edit_data" data-modelid="{{$data->id}}">Edit</button>                              
         @else
         <a href="{{ $editRoute }}" class="btn btn-sm btn-warning mr-2 d-inline-block">Edit</a>
         @endif
