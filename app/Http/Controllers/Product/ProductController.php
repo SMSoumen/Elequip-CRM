@@ -5,9 +5,20 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class ProductController extends Controller
+class ProductController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role_or_permission:Product access|Product create|Product edit|Product delete', only: ['index', 'treeView']),
+            new Middleware('role_or_permission:Product create', only: ['create', 'store']),
+            new Middleware('role_or_permission:Product edit', only: ['edit', 'update']),
+            new Middleware('role_or_permission:Product delete', only: ['destroy']),
+        ];
+    }  
     /**
      * Display a listing of the resource.
      */

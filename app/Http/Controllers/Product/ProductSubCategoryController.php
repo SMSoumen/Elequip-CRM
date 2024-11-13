@@ -5,9 +5,21 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use App\Models\ProductSubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class ProductSubCategoryController extends Controller
+class ProductSubCategoryController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role_or_permission:ProductSubCategory access|ProductSubCategory create|ProductSubCategory edit|ProductSubCategory delete', only: ['index', 'treeView']),
+            new Middleware('role_or_permission:ProductSubCategory create', only: ['create', 'store']),
+            new Middleware('role_or_permission:ProductSubCategory edit', only: ['edit', 'update']),
+            new Middleware('role_or_permission:ProductSubCategory delete', only: ['destroy']),
+
+        ];
+    }  
     /**
      * Display a listing of the resource.
      */
