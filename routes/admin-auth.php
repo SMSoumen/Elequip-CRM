@@ -21,7 +21,7 @@ use App\Http\Controllers\Master\LeadStageController;
 use App\Http\Controllers\Master\BrandController;
 use App\Http\Controllers\Master\MeasuringUnitController;
 use App\Http\Controllers\Master\SMSFormatController;
-
+use App\Http\Controllers\Contact\CompanyController;
 
 Route::prefix('admin')->name('admin.')->middleware('guest:admin')->group(function () {
     // Route::get('register', [RegisteredUserController::class, 'create'])
@@ -91,6 +91,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::resource('measuring-unit', MeasuringUnitController::class);
    Route::resource('brand', BrandController::class);
    Route::resource('sms-format', SMSFormatController::class);
+   Route::resource('companies', CompanyController::class);
 
 
 });
