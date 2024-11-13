@@ -60,6 +60,13 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
 
     Route::resource('categories', 'CategoryController');
     Route::resource('subcategories', 'SubCategoryController');
+
+    // Elequip CRM 
+    Route::resource('product-categories', 'ProductCategoryController');
+    Route::resource('products', 'ProductController');
+    // Elequip CRM 
+
+
     // Route::resource('product_types', 'ProductTypeController');
     // Route::resource('categoryfeatureicon', 'CategoryFeatureIconController');
     // Route::resource('icons', 'IconController');
