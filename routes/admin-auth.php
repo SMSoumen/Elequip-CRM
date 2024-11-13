@@ -84,7 +84,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
         ->name('logout');
 
 
-    //==============================> Surajit Route <==============================//
+//==============================> Surajit Route <==============================//
 
    Route::resource('lead-category', LeadCategoryController::class);
    Route::resource('lead-sources', LeadSourcesController::class);
@@ -93,7 +93,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::resource('brand', BrandController::class);
    Route::resource('sms-format', SMSFormatController::class);
    Route::resource('companies', CompanyController::class);
-   Route::resource('customer', CustomerController::class);
+   Route::resource('customers', CustomerController::class);
 
 
 });

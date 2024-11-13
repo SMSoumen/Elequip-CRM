@@ -1,6 +1,5 @@
 @extends('admin.layouts.master')
 @section('main_content')
-
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -9,19 +8,38 @@
                     <div class="card mt-3">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h3 class="card-title">Lead Category</h3>
-                                @can('Category create')
-                                <button type="button" class="btn btn-primary add_category_modal">Add Lead Category</button>                              
+                                <h3 class="card-title">Customers</h3>
+                                @can('Customer create')
+                                    <a href="{{route('admin.customers.create')}}"><button type="button" class="btn btn-primary add_company">Add Customer</button></a>                             
                                 @endcan
                             </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+
+                            @if (session()->has('message'))
+                                <div class="alert alert-success">
+                                    <p class="text-center">{{ session()->get('message') }}</p>
+                                </div>
+                            @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                             <table class="listtable table table-bordered data-table">
                                 <thead>
                                     <tr>
                                         <th>Sl No</th>
-                                        <th>Category</th>
+                                        <th>Name(Designation)</th>
+                                        <th>Company</th>
+                                        <th>Email</th>
+                                        <th>Mobile</th>
                                         <th>Created Date</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -43,77 +61,12 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-
-    @endsection
-    <!--==================> Add Category Modal ============================-->
-
-    <div class="modal fade" id="add_category_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"></h5>
-        </div>
-            <div class="load_html"></div>
-
-        </div>
-    </div>
-    </div>
-
-
+@endsection
 
 
 @push('scripts')
+
     <script>
-
-        $(".add_category_modal").click(function(){
-            $(".modal-title").html('Add Lead Category');
-            let html =`<form action="{{route('admin.lead-category.store')}}" method="POST">@csrf
-                <div class="modal-body">
-                    <div class="col-12">
-                        <label for="category_name">Category Name <span class="text-danger">*</span></label>
-                        <input type="text" name="category_name" id="category_name" class="form-control">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>`;
-            $(".load_html").html(html);
-            $("#add_category_modal").modal('show');
-        });
-
-        $(document).on('click','.edit_data',function(){
-            let sources_id = $(this).data("modelid");
-            let url = `{{route('admin.lead-category.show',':id')}}`; 
-            url = url.replace(':id', sources_id); 
-            $.ajax({
-                method:"GET",
-                url: url,
-                success:function(res){
-                    $(".modal-title").html('Edit Lead Category');
-                    let html =`<form action="{{route('admin.lead-category.update',':res')}}" method="post" id="form_data">@csrf
-                    @method('PUT')
-                            <div class="modal-body">
-                                <div class="col-12">
-                                    <label for="category_name">Category Name <span class="text-danger">*</span></label>
-                                    <input type="text" name="category_name" id="category_name1" class="form-control">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>`;
-
-                        $(".load_html").html(html);
-                        let update_url = `{{ route('admin.lead-category.update', ':id') }}`;
-                        update_url = update_url.replace(':id', res.id);
-                        $("#form_data").attr('action',update_url);
-                        $("#category_name1").val(res.category_name);
-                        $("#add_category_modal").modal('show');
-                }
-            })
-        });
-
 
         $(document).ready(function() {
             var currentdate = new Date();
@@ -151,7 +104,7 @@
                 "responsive": true,
                 "lengthChange": true,
 
-                ajax: "{{ route('admin.lead-category.index') }}",
+                ajax: "{{ route('admin.customers.index') }}",
                 lengthMenu: [
                     [10, 25, 50, 200, 500, 1000, -1],
                     [10, 25, 50, 200, 500, 1000, "All"]
@@ -164,8 +117,20 @@
                         searchable: false
                     },
                     {
-                        data: 'category_name',
-                        name: 'category_name'
+                        data: 'name_designation',
+                        name: 'name_designation'
+                    },
+                    {
+                        data: 'company',
+                        name: 'company'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'phone',
+                        name: 'phone'
                     },
                     {
                         data: 'created_date',
