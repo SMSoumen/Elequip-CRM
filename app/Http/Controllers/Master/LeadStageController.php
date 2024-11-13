@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-use App\Models\leadStage;
+use App\Models\LeadStage;
 use DataTables;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
@@ -26,7 +26,7 @@ class LeadStageController extends Controller implements HasMiddleware
     public function index(Request $request){
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(leadStage::query()->orderBy('id','desc'))->addColumn('status', function ($data) {
+                return DataTables::eloquent(LeadStage::query()->orderBy('id','desc'))->addColumn('status', function ($data) {
                     return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
@@ -52,7 +52,7 @@ class LeadStageController extends Controller implements HasMiddleware
         ]);
 
         $validated['stage_slug'] = Str::slug($validated['stage_name']);
-        $source = leadStage::create($validated);
+        $source = LeadStage::create($validated);
         if($source){
             return redirect()->back()->withSuccess('Lead stage added successfully.');
         }else{
@@ -60,22 +60,22 @@ class LeadStageController extends Controller implements HasMiddleware
         }
     }
 
-    public function destroy(leadStage $leadStage)
+    public function destroy(LeadStage $LeadStage)
     {
-        $leadStage->delete();
+        $LeadStage->delete();
         return redirect()->back()->withSuccess('Lead stage deleted !!!');
     }
 
-    public function show(leadStage $leadStage){
-        return $leadStage;
+    public function show(LeadStage $LeadStage){
+        return $LeadStage;
     }
 
-    public function update(Request $request,leadStage $leadStage){
+    public function update(Request $request,LeadStage $LeadStage){
         $validated =  $request->validate([
-            'stage_name' => "required|string|unique:lead_stages,stage_name,$leadStage->id",
+            'stage_name' => "required|string|unique:lead_stages,stage_name,$LeadStage->id",
         ]);
         $validated['stage_slug'] = Str::slug($validated['stage_name']);
-        if($leadStage->update($validated)){
+        if($LeadStage->update($validated)){
             return redirect()->back()->withSuccess('Lead Stage updated successfully.');
         }else{
             return redirect()->back()->withErrors('Error!! while updating lead stage!!!');
