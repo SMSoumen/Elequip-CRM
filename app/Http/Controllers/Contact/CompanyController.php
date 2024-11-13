@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Contact;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Models\City;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use DataTables;
@@ -32,15 +33,16 @@ class CompanyController extends Controller implements HasMiddleware
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })->addColumn('action', function ($data) {
-                    $editRoute = route('admin.brand.edit', $data->id);
-                    $deleteRoute = route('admin.brand.destroy', $data->id);
+                    $editRoute = route('admin.companies.edit', $data->id);
+                    $deleteRoute = route('admin.companies.destroy', $data->id);
                     $edit_type = "modal";
                     $permission = 'Company';
 
                     return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type']))->render();
                 })->addIndexColumn()->rawColumns(['action','status','created_date'])->make(true);
             }
-            return view('admin.contacts.company.index');
+            $cities = City::orderBy('city_name','asc')->get();
+            return view('admin.contacts.company.index',compact(['cities']));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->route('admin.dashboard')->with('error', $e->getMessage());

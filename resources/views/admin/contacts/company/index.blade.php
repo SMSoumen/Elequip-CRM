@@ -90,7 +90,9 @@
                             <label for="city">City<span class="text-danger">*</span></label>
                             <select name="city" id="city" class="form-control" required>
                                 <option value="">Select City</option>
-                                <option value="1">Kolkata</option>
+                                @foreach($cities as $city)
+                                 <option value="{{$city->id}}">{{$city->city_name}}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -150,7 +152,9 @@
                             <label for="city">City<span class="text-danger">*</span></label>
                             <select name="city" id="city" class="form-control" required>
                                 <option value="">Select City</option>
-                                <option value="1">Kolkata</option>
+                                @foreach($cities as $city)
+                                 <option value="{{$city->id}}">{{$city->city_name}}</option>
+                                @endforeach
                             </select>
                         </div>
 
