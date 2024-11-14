@@ -114,6 +114,15 @@
 
 <script>
 
+    $('#product_tech_spec').summernote({
+        tabsize: 2,
+        height: 200
+    });
+    $('#product_marketing_spec').summernote({
+        tabsize: 2,
+        height: 200
+    });
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -83,7 +83,7 @@
 
                                     <div class="col-12 mt-3">
                                         <label for="product_marketing_spec">Marketing Specification</label>
-                                        <textarea name="product_marketing_spec" id="product_marketing_spec" class="form-control"></textarea>
+                                        <textarea name="product_marketing_spec" id="product_marketing_spec" class="form-control" ></textarea>
                                     </div>
 
                                     <div class="col-12 mt-5">
@@ -109,6 +109,15 @@
 @push('scripts')
 
 <script>
+
+    $('#product_tech_spec').summernote({
+        tabsize: 2,
+        height: 200
+    });
+    $('#product_marketing_spec').summernote({
+        tabsize: 2,
+        height: 200
+    });
 
     $.ajaxSetup({
         headers: {
