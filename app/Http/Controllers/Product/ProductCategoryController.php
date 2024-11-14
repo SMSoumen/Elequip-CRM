@@ -38,9 +38,9 @@ class ProductCategoryController extends Controller implements HasMiddleware
                 })->addColumn('no_of_subcategory', function ($data) {
                     return $data->no_of_subcategory = ProductSubCategory::where('product_category_id',$data->id)->count();
                 })->addColumn('action', function ($data) {
-                    $editRoute = route('admin.companies.edit', $data->id);
-                    $deleteRoute = route('admin.companies.destroy', $data->id);
-                    $subcategoryRoute = route('admin.product-subcategories.show', $data->id);
+                    $editRoute = route('admin.product-categories.edit', $data->id);
+                    $deleteRoute = route('admin.product-categories.destroy', $data->id);
+                    $subcategoryRoute = route('admin.product-subcategories.all', $data->id);
                     $edit_type = "modal";
                     $type="subcategory_list";
                     $permission = 'ProductCategory';
@@ -94,7 +94,7 @@ class ProductCategoryController extends Controller implements HasMiddleware
     public function update(Request $request, ProductCategory $productCategory)
     {
         $validated =  $request->validate([
-            'product_category_name' => 'required|string|unique:product_categories,product_category_name',
+            'product_category_name' => "required|string|unique:product_categories,product_category_name,$productCategory->id",
         ]);
 
         $validated['product_category_slug'] = Str::slug($validated['product_category_name']);
