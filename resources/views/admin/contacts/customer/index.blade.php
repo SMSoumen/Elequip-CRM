@@ -16,10 +16,9 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-
-                            @if (session()->has('message'))
+                            @if (session('success'))
                                 <div class="alert alert-success">
-                                    <p class="text-center">{{ session()->get('message') }}</p>
+                                    {{ session('success') }}
                                 </div>
                             @endif
                             @if ($errors->any())

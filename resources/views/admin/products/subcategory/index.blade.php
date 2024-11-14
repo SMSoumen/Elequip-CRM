@@ -16,6 +16,11 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             <table class="listtable table table-bordered data-table">
                                 <thead>
                                     <tr>
