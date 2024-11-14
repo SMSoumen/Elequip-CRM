@@ -15,10 +15,10 @@ class SMSFormatController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('role_or_permission:SMS Format access|SMS Format create|SMS Format edit|SMS Format delete', only: ['index', 'treeView']),
-            new Middleware('role_or_permission:SMS Format create', only: ['create', 'store']),
-            new Middleware('role_or_permission:SMS Format edit', only: ['edit', 'update']),
-            new Middleware('role_or_permission:SMS Format delete', only: ['destroy']),
+            new Middleware('role_or_permission:SmsFormat access|SmsFormat create|SmsFormat edit|SmsFormat delete', only: ['index', 'treeView']),
+            new Middleware('role_or_permission:SmsFormat create', only: ['create', 'store']),
+            new Middleware('role_or_permission:SmsFormat edit', only: ['edit', 'update']),
+            new Middleware('role_or_permission:SmsFormat delete', only: ['destroy']),
         ];
     }
 
@@ -33,7 +33,7 @@ class SMSFormatController extends Controller implements HasMiddleware
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.sms-format.edit', $data->id);
                     $deleteRoute = route('admin.sms-format.destroy', $data->id);
-                    $permission = 'SMS Format';
+                    $permission = 'SmsFormat';
                     $edit_type = "modal";
 
                     return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type']))->render();

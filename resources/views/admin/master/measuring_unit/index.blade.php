@@ -9,7 +9,7 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title">Measuring Units</h3>
-                                @can('Category create')
+                                @can('MeasuringUnit create')
                                     <button type="button" class="btn btn-primary add_measuring_unit">Add Measuring Unit</button>                              
                                 @endcan
                             </div>

@@ -17,10 +17,10 @@ class MeasuringUnitController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('role_or_permission:Measuring Unit access|Measuring Unit create|Measuring Unit edit|Measuring Unit delete', only: ['index', 'treeView']),
-            new Middleware('role_or_permission:Measuring Unit create', only: ['create', 'store']),
-            new Middleware('role_or_permission:Measuring Unit edit', only: ['edit', 'update']),
-            new Middleware('role_or_permission:Measuring Unit delete', only: ['destroy']),
+            new Middleware('role_or_permission:MeasuringUnit access|MeasuringUnit create|MeasuringUnit edit|MeasuringUnit delete', only: ['index', 'treeView']),
+            new Middleware('role_or_permission:MeasuringUnit create', only: ['create', 'store']),
+            new Middleware('role_or_permission:MeasuringUnit edit', only: ['edit', 'update']),
+            new Middleware('role_or_permission:MeasuringUnit delete', only: ['destroy']),
         ];
     }
 
@@ -35,7 +35,7 @@ class MeasuringUnitController extends Controller implements HasMiddleware
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.measuring-unit.edit', $data->id);
                     $deleteRoute = route('admin.measuring-unit.destroy', $data->id);
-                    $permission = 'Measuring Unit';
+                    $permission = 'MeasuringUnit';
                     $edit_type = "modal";
 
                     return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type']))->render();

@@ -9,7 +9,7 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title">Brand</h3>
-                                @can('Category create')
+                                @can('Brand create')
                                     <button type="button" class="btn btn-primary add_brand">Add Brand</button>                              
                                 @endcan
                             </div>

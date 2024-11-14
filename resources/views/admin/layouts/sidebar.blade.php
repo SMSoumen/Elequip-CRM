@@ -397,7 +397,7 @@
                 </li> --}}
 
                 @can(['Category access', 'Category create', 'SubCategory access', 'SubCategory create'])
-                <li class="nav-item menu-open">
+                <li class="nav-item menu-open d-none">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cubes"></i>
                         <p>
@@ -453,6 +453,127 @@
                                 </a>
                             </li>
                         @endcan                        
+                        
+                    </ul>
+                </li>
+                @endcan
+
+                
+                <li class="nav-item @if (Request::is('admin/lead-category*') || Request::is('admin/lead-stage*') || Request::is('admin/lead-sources*') || Request::is('admin/measuring-unit*') || Request::is('admin/brand*') || Request::is('admin/sms-format*')) menu-open @endif">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cubes"></i>
+                        <p>
+                            Master Management
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @can('Lead Category access')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.lead-category.index') }}"
+                                    class="nav-link @if (Request::is('admin/lead-category')) active @endif">
+                                    <i class="nav-icon fas fa-sitemap"></i>
+                                    <p>
+                                        Lead Category
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan                        
+
+                        @can('Lead Stage access')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.lead-stage.index') }}"
+                                    class="nav-link @if (Request::is('admin/lead-stage')) active @endif">
+                                    <i class="nav-icon fas fa-sitemap"></i>
+                                    <p>
+                                        Lead Stage
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
+
+                        @can('LeadSource create')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.lead-sources.index') }}"
+                                    class="nav-link @if (Request::is('admin/lead-sources')) active @endif">
+                                    <i class="nav-icon fas fa-sitemap"></i>
+                                    <p>
+                                        Add Lead Source
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan           
+
+                        @can('MeasuringUnit create')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.measuring-unit.index') }}"
+                                    class="nav-link @if (Request::is('admin/measuring-unit')) active @endif">
+                                    <i class="nav-icon fas fa-sitemap"></i>
+                                    <p>
+                                        Add Measuring Unit
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan                        
+                        @can('Brand create')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.brand.index') }}"
+                                    class="nav-link @if (Request::is('admin/brand')) active @endif">
+                                    <i class="nav-icon fas fa-sitemap"></i>
+                                    <p>
+                                        Add Brand
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan                        
+                        @can('SmsFormat create')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.sms-format.index') }}"
+                                    class="nav-link @if (Request::is('admin/sms-format')) active @endif">
+                                    <i class="nav-icon fas fa-sitemap"></i>
+                                    <p>
+                                        Add SMS Format
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan                        
+                        
+                    </ul>
+                </li>
+                
+                @can(['Company access', 'SubCategory access'])
+                <li class="nav-item @if (Request::is('admin/companies*') || Request::is('admin/customers*')) menu-open @endif">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cubes"></i>
+                        <p>
+                            Contact Management
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @can('Company access')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.companies.index') }}"
+                                    class="nav-link @if (Request::is('admin/companies')) active @endif">
+                                    <i class="nav-icon fas fa-sitemap"></i>
+                                    <p>
+                                        Company
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan
+
+                        @can('Customer access')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.customers.index') }}"
+                                    class="nav-link @if (Request::is('admin/customers/index')) active @endif">
+                                    <i class="nav-icon fas fa-sitemap"></i>
+                                    <p>
+                                        Customer
+                                    </p>
+                                </a>
+                            </li>
+                        @endcan                                            
                         
                     </ul>
                 </li>

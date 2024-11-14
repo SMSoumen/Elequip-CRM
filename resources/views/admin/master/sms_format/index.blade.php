@@ -9,7 +9,7 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title">SMS Formats</h3>
-                                @can('Category create')
+                                @can('SmsFormat create')
                                     <button type="button" class="btn btn-primary sms_format">Add SMS Format</button>                              
                                 @endcan
                             </div>
