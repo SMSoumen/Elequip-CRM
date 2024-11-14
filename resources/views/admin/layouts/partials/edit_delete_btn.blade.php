@@ -8,7 +8,9 @@
         @endif
     @endcan
 
-    
+    @if(isset($type) && $type == 'subcategory_list')
+        <a href="{{$subcategoryRoute}}" class="btn btn-sm btn-primary mr-2 d-inline-block">Subcategories</a>
+    @endif
 
     @can("$permission delete")
         <form action="{{ $deleteRoute }}" method="POST" class="inline deleteConfirm d-inline-block">

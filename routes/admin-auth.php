@@ -23,6 +23,9 @@ use App\Http\Controllers\Master\MeasuringUnitController;
 use App\Http\Controllers\Master\SMSFormatController;
 use App\Http\Controllers\Contact\CompanyController;
 use App\Http\Controllers\Contact\CustomerController;
+use App\Http\Controllers\Product\ProductCategoryController;
+use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Product\ProductSubCategoryController;
 
 Route::prefix('admin')->name('admin.')->middleware('guest:admin')->group(function () {
     // Route::get('register', [RegisteredUserController::class, 'create'])
@@ -73,18 +76,14 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->middleware(['verified'])->name('dashboard');
-
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 
 
-//==============================> Surajit Route <==============================//
+//==============================> Elequip CRM Surajit Route <==============================//
 
    Route::resource('lead-category', LeadCategoryController::class);
    Route::resource('lead-sources', LeadSourcesController::class);
@@ -94,6 +93,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::resource('sms-format', SMSFormatController::class);
    Route::resource('companies', CompanyController::class);
    Route::resource('customers', CustomerController::class);
-
+   Route::resource('product-categories', ProductCategoryController::class);
+   Route::resource('product-subcategories', ProductSubCategoryController::class);
+   Route::resource('products', ProductController::class);
 
 });
