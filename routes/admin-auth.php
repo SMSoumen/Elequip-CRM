@@ -16,7 +16,6 @@ use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Master\LeadCategoryController;
-use App\Http\Controllers\Master\LeadSourcesController;
 use App\Http\Controllers\Master\LeadStageController;
 use App\Http\Controllers\Master\BrandController;
 use App\Http\Controllers\Master\MeasuringUnitController;
@@ -26,6 +25,7 @@ use App\Http\Controllers\Contact\CustomerController;
 use App\Http\Controllers\Product\ProductCategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ProductSubCategoryController;
+use App\Http\Controllers\Master\LeadSourceController;
 
 Route::prefix('admin')->name('admin.')->middleware('guest:admin')->group(function () {
     // Route::get('register', [RegisteredUserController::class, 'create'])
@@ -86,8 +86,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
 //==============================> Elequip CRM Surajit Route <==============================//
 
    Route::resource('lead-category', LeadCategoryController::class);
-   Route::resource('lead-sources', LeadSourcesController::class);
    Route::resource('lead-stage', LeadStageController::class);
+   Route::resource('lead-sources', LeadSourceController::class);
    Route::resource('measuring-unit', MeasuringUnitController::class);
    Route::resource('brand', BrandController::class);
    Route::resource('sms-format', SMSFormatController::class);

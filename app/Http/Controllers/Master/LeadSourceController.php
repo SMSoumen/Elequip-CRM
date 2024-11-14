@@ -11,16 +11,16 @@ use DataTables;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 
-class LeadSourcesController extends Controller implements HasMiddleware
+class LeadSourceController extends Controller implements HasMiddleware
 {
     
     public static function middleware(): array
     {
         return [
-            new Middleware('role_or_permission:Lead Sources access|Lead Sources create|Lead Sources edit|Lead Sources delete', only: ['index', 'treeView']),
-            new Middleware('role_or_permission:Lead Sources create', only: ['create', 'store']),
-            new Middleware('role_or_permission:Lead Sources edit', only: ['edit', 'update']),
-            new Middleware('role_or_permission:Lead Sources delete', only: ['destroy']),
+            new Middleware('role_or_permission:LeadSource access|LeadSource create|LeadSource edit|LeadSource delete', only: ['index', 'treeView']),
+            new Middleware('role_or_permission:LeadSource create', only: ['create', 'store']),
+            new Middleware('role_or_permission:LeadSource edit', only: ['edit', 'update']),
+            new Middleware('role_or_permission:LeadSource delete', only: ['destroy']),
         ];
     }
 
@@ -34,7 +34,7 @@ class LeadSourcesController extends Controller implements HasMiddleware
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.lead-sources.edit', $data->id);
                     $deleteRoute = route('admin.lead-sources.destroy', $data->id);
-                    $permission = 'Lead Sources';
+                    $permission = 'LeadSource';
                     $edit_type = "modal";
 
                     return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type']))->render();
@@ -81,6 +81,9 @@ class LeadSourcesController extends Controller implements HasMiddleware
         }else{
             return redirect()->back()->withErrors('Error!! while updating lead source!!!');
         }
+    }
+
+    public function create(Request $request){
     }
 
 }
