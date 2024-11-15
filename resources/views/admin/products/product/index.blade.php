@@ -10,12 +10,17 @@
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title">Products</h3>
                                 @can('Products create')
-                                    <a href="{{route('admin.products.create')}}"><button type="button" class="btn btn-primary">Add Product</button></a>                              
+                                    <a href="{{route('admin.products.create')}}"><button type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Add Product</button></a>                              
                                 @endcan
                             </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <div class="mb-4">
+                               <a href="{{asset(asset_path('assets/admin/sample/products-sample.csv'))}}" download=""><button type="button" class="btn btn-warning" title="download"><i class="fas fa-download"></i> Sample File</button></a>                             
+                                <button type="button" class="btn btn-dark" onclick="uploadProduct()"><i class="fas fa-upload"></i> Upload Products</button>                             
+                            </div>
+
                             @if (session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
@@ -52,9 +57,37 @@
     <!-- /.content -->
 @endsection
 
+<!--===============================> Modal <==================================-->
+
+<div class="modal fade" id="uploadProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Upload Product</h5>
+      </div>
+    <form action="{{route('admin.products.upload')}}" method="POST" enctype="multipart/form-data">@csrf
+      <div class="modal-body">
+        <div class="col-12">
+            <label for="excel">Upload File</label>
+            <input type="file" name="excel" id="excel" class="form-control">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
 @push('scripts')
 
     <script>
+
+        function uploadProduct(){
+            $("#uploadProduct").modal('show');
+        };
+
         $(document).ready(function() {
             var currentdate = new Date();
             var datetime = currentdate.getDate() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate
