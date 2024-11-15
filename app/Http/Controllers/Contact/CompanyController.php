@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Contact;
 
 use App\Http\Controllers\Controller;
+use App\Imports\CompanyImport;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\City;
@@ -11,6 +12,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use DataTables;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CompanyController extends Controller implements HasMiddleware
 {
@@ -98,6 +100,30 @@ class CompanyController extends Controller implements HasMiddleware
         return redirect()->back()->withSuccess('Company deleted successfully !!!');
     }
 
+    public function uploadcontact(Request $request)
+    {
+        return view('admin.contacts.company.upload');
+    }
+
+    public function uploadcontactsubmit(Request $request)
+    {
+        $validated =  $request->validate([                        
+            'contact_import_file' => 'file|mimes:xlsx,csv|max:102400',
+        ]);
+
+        if ($request->hasFile('contact_import_file')) {
+            if ($request->file('contact_import_file')->isValid()) {
+                Excel::import(new CompanyImport, $request->file('contact_import_file')->store('temp'));
+                return redirect()->back()->withSuccess('contact import file uploaded successfully !!!');
+            }
+        }else{
+            
+            return redirect()->back()->withErrors('Invalid contact import file !!!');
+        }
+
+
+    }
+
 
     public function create()
     {
@@ -109,5 +135,7 @@ class CompanyController extends Controller implements HasMiddleware
     {
         
     }
+
+
 
 }

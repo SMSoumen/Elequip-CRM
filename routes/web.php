@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\FeatureController;
 // use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Contact\CompanyController;
 use App\Http\Controllers\Front\BlogController;
 use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\FrontController;
@@ -60,6 +61,9 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
 
     Route::resource('categories', 'CategoryController');
     Route::resource('subcategories', 'SubCategoryController');
+
+    Route::get('/upload/contact', [CompanyController::class, 'uploadcontact'])->name('upload.contact');
+    Route::post('/upload/contact', [CompanyController::class, 'uploadcontactsubmit'])->name('upload.contactsubmit');
 
     // Elequip CRM 
     // Route::resource('product-categories', 'ProductCategoryController');
