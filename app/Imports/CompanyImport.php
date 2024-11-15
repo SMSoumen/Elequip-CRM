@@ -29,7 +29,7 @@ class CompanyImport implements ToModel, WithStartRow
                 'company_gstn'       =>  $row[5] ? $row[5] : NULL,
             ];
             if (!Company::where(['center_name' => $row[0], 'phone' => $row[1], 'email' => $row[2]])->exists()) {
-                # code...
+                
             }
         }
     }
