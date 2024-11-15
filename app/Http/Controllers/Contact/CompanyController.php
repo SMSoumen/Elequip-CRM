@@ -55,7 +55,7 @@ class CompanyController extends Controller implements HasMiddleware
     {
         $validated =  $request->validate([
             'company_name' => 'required|string|unique:companies,company_name',
-            'city'         => 'required|integer',
+            'city_id'         => 'required|integer',
             'address'      => 'required|string',
             'phone'        => 'string',
             'website'      => 'string',
@@ -114,7 +114,7 @@ class CompanyController extends Controller implements HasMiddleware
         if ($request->hasFile('contact_import_file')) {
             if ($request->file('contact_import_file')->isValid()) {
                 Excel::import(new CompanyImport, $request->file('contact_import_file')->store('temp'));
-                return redirect()->back()->withSuccess('contact import file uploaded successfully !!!');
+                return redirect()->back()->withSuccess('Contact import file uploaded successfully !!!');
             }
         }else{
             

@@ -35,7 +35,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sl No</th>
-                                        <th>Name(Designation)</th>
+                                        <th>Name (Designation)</th>
                                         <th>Company</th>
                                         <th>Email</th>
                                         <th>Mobile</th>
@@ -128,8 +128,8 @@
                         name: 'email'
                     },
                     {
-                        data: 'phone',
-                        name: 'phone'
+                        data: 'mobile',
+                        name: 'mobile'
                     },
                     {
                         data: 'created_date',

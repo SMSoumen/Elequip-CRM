@@ -28,12 +28,14 @@ class CustomerController extends Controller implements HasMiddleware
     {
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(Customer::query()->join('companies','customers.company_name','companies.id')->select('customers.*','companies.company_name as company')->orderBy('customers.id','desc'))->addColumn('status', function ($data) {
+                return DataTables::eloquent(Customer::query()->with('company'))->addColumn('status', function ($data) {
                     return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+                })->addColumn('company', function ($data) {
+                    return $data->company->company_name;
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })->addColumn('name_designation', function ($data) {
-                    return $data->name_designation = $data->contact_person.'<br>('.$data->designation.')';
+                    return $data->name_designation = $data->customer_name.' - ('.$data->designation.')';
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.customers.edit', $data->id);
                     $deleteRoute = route('admin.customers.destroy', $data->id);
@@ -59,13 +61,13 @@ class CustomerController extends Controller implements HasMiddleware
     public function store(Request $request)
     {
         $validated =  $request->validate([
-            'contact_person' => 'required|string|unique:customers,contact_person',
+            'customer_name' => 'required|string|unique:customers,customer_name',
             'designation'    => 'required|string',
             'mobile'         => 'required|string',
-            'phone'          => 'string',
-            'email'          => 'string|email',
-            'email2'         => 'required|string|email',
-            'company_name'   => 'required|string',
+            'phone'          => '',
+            'email'          => 'required|string|email',
+            'email2'         => '',
+            'company_id'   => 'required|integer',
             'address'        => 'string',
         ]);
         $customer = Customer::create($validated);
@@ -88,7 +90,7 @@ class CustomerController extends Controller implements HasMiddleware
     public function edit(string $id)
     {
         $companies = Company::where('status','1')->orderBy('company_name','asc')->get();
-        $customer = Customer::where('id',$id)->get();
+        $customer = Customer::with('company')->where('id',$id)->get();
         return view('admin.contacts.customer.edit',compact(['companies','customer']));
     }
 
@@ -96,13 +98,13 @@ class CustomerController extends Controller implements HasMiddleware
     public function update(Request $request, string $id)
     {
         $validated =  $request->validate([
-            'contact_person' => "required|string|unique:customers,contact_person,$id",
+            'customer_name' => "required|string|unique:customers,customer_name,$id",
             'designation'    => 'required|string',
             'mobile'         => 'required|string',
-            'phone'          => 'string',
-            'email'          => 'string|email',
-            'email2'         => 'required|string|email',
-            'company_name'   => 'required|string',
+            'phone'          => '',
+            'email'          => 'required|string|email',
+            'email2'         => '',
+            'company_id'   => 'required|string',
             'address'        => 'string',
         ]);
         $customer = Customer::where('id',$id)->update($validated);
