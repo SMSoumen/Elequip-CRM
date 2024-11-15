@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProductSubCategory;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-
+use DataTables;
+use Illuminate\View\View;
+use Illuminate\Support\Str;
 class ProductSubCategoryController extends Controller implements HasMiddleware
 {
     public static function middleware(): array
@@ -20,9 +23,33 @@ class ProductSubCategoryController extends Controller implements HasMiddleware
 
         ];
     }  
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function allSubCategory(Request $request,$cat_id){
+        try {
+            if ($request->ajax()) {
+                return DataTables::eloquent(ProductSubCategory::query()->where('product_category_id',$cat_id)->orderBy('id','desc'))->addColumn('status', function ($data) {
+                    return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+                })->addColumn('created_date', function ($data) {
+                    return $data->created_date = date('d-m-Y',strtotime($data->created_at));
+                })->addColumn('no_of_subcategory', function ($data) {
+                    return $data->no_of_subcategory = ProductSubCategory::where('product_category_id',$data->id)->count();
+                })->addColumn('action', function ($data) {
+                    $editRoute = route('admin.product-subcategories.edit', $data->id);
+                    $deleteRoute = route('admin.product-subcategories.destroy', $data->id);
+                    $edit_type = "modal";
+                    $permission = 'ProductSubCategory';
+
+                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute','permission','edit_type']))->render();
+                })->addIndexColumn()->rawColumns(['action','status','created_date','no_of_subcategory'])->make(true);
+            }
+            $category = ProductCategory::where('id',$cat_id)->first(['product_category_name']);
+            return view('admin.products.subcategory.index',compact(['cat_id','category']));
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return redirect()->route('admin.dashboard')->with('error', $e->getMessage());
+        }
+
+    }
     public function index()
     {
         //
@@ -41,15 +68,24 @@ class ProductSubCategoryController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
-        //
+        $validated =  $request->validate([
+            'product_subcat_name' => 'required|string|unique:product_sub_categories,product_subcat_name',
+            'product_category_id' => 'required|integer',
+        ]);
+
+        $validated['product_subcat_slug'] = Str::slug($validated['product_subcat_name']);
+        $category = ProductSubCategory::create($validated);
+        if($category){
+            return redirect()->back()->withSuccess('Sub Category added successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while adding sub category!!!');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ProductSubCategory $productSubCategory)
+    public function show($id)
     {
-        //
+        $sub_cat = ProductSubCategory::where('id',$id)->first();
+        return $sub_cat;
     }
 
     /**
@@ -63,16 +99,28 @@ class ProductSubCategoryController extends Controller implements HasMiddleware
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductSubCategory $productSubCategory)
+    public function update(Request $request,$id)
     {
-        //
+        $validated =  $request->validate([
+            'product_subcat_name' => "required|string|unique:product_sub_categories,product_subcat_name,$id",
+            'product_category_id' => 'required|integer',
+        ]);
+
+        $validated['product_subcat_slug'] = Str::slug($validated['product_subcat_name']);
+        $subcategory = ProductSubCategory::where('id',$id)->update($validated);
+        if($subcategory){
+            return redirect()->back()->withSuccess('Sub Category updated successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while updating sub category!!!');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductSubCategory $productSubCategory)
+    public function destroy($id)
     {
-        //
+        ProductSubCategory::where('id',$id)->delete();
+        return redirect()->back()->withSuccess('Sub Category deleted successfully !!!');
     }
 }

@@ -4,9 +4,17 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductSubCategory;
+use App\Models\ProductCategory;
+use App\Models\Brand;
+use App\Models\MeasuringUnit;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use DataTables;
+use Illuminate\View\View;
+use Illuminate\Support\Str;
+
 
 class ProductController extends Controller implements HasMiddleware
 {
@@ -19,28 +27,67 @@ class ProductController extends Controller implements HasMiddleware
             new Middleware('role_or_permission:Product delete', only: ['destroy']),
         ];
     }  
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index(Request $request)
     {
-        //
+        try {
+            if ($request->ajax()) {
+                return DataTables::eloquent(Product::query()->join('product_categories','products.product_category_id','product_categories.id')
+                ->join('product_sub_categories','products.product_sub_category_id','product_sub_categories.id')
+                ->select('products.*','product_categories.product_category_name','product_sub_categories.product_subcat_name')->orderBy('products.id','desc'))
+                ->addColumn('status', function ($data) {
+                    return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+                })->addColumn('created_date', function ($data) {
+                    return $data->created_date = date('d-m-Y',strtotime($data->created_at));
+                })->addColumn('action', function ($data) {
+                    $editRoute = route('admin.products.edit', $data->id);
+                    $deleteRoute = route('admin.products.destroy', $data->id);
+                    $edit_type = "page";
+                    $permission = 'Product';
+
+                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute','permission','edit_type']))->render();
+                })->addIndexColumn()->rawColumns(['action','status','created_date','no_of_subcategory'])->make(true);
+            }
+            return view('admin.products.product.index');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return redirect()->route('admin.dashboard')->with('error', $e->getMessage());
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $categories = ProductCategory::where('status','1')->orderBy('product_category_name','asc')->get();
+        $brands = Brand::where('status','1')->orderBy('brand_name','asc')->get();
+        $units = MeasuringUnit::where('status','1')->orderBy('unit_type','asc')->get();
+        return view('admin.products.product.add',compact(['categories','brands','units']));
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function subCategoryList(Request $request){
+        $subcategories = ProductSubCategory::where('product_category_id',$request->cat_id)->where('status','1')->orderBy('product_subcat_name','asc')->get();
+        return $subcategories;
+    }
+
     public function store(Request $request)
     {
-        //
+        $validated =  $request->validate([
+            'product_name'  => 'required|string',
+            'product_code'  => 'required|string|unique:products,product_code',
+            'product_price' => 'required|integer',
+            'product_category_id'     => 'required|integer',
+            'product_sub_category_id' => 'required|integer',
+            'brand_id'          => 'required|integer',
+            'measuring_unit_id' => 'required|integer',
+            'product_tech_spec' => 'required|string',
+            'product_marketing_spec' => 'string',
+        ]);
+        $product = Product::create($validated);
+        if($product){
+            return redirect()->route('admin.products.index')->withSuccess('Product added successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while adding product!!!');
+        }
     }
 
     /**
@@ -48,30 +95,43 @@ class ProductController extends Controller implements HasMiddleware
      */
     public function show(Product $product)
     {
-        //
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Product $product)
     {
-        //
+        $categories = ProductCategory::where('status','1')->orderBy('product_category_name','asc')->get();
+        $brands = Brand::where('status','1')->orderBy('brand_name','asc')->get();
+        $units = MeasuringUnit::where('status','1')->orderBy('unit_type','asc')->get();
+        $subcategories = ProductSubCategory::where('status','1')->orderBy('product_subcat_name','asc')->get();
+        return view('admin.products.product.edit',compact(['categories','brands','units','product','subcategories']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Product $product)
     {
-        //
+        $validated =  $request->validate([
+            'product_name'  => 'required|string',
+            'product_code'  => "required|string|unique:products,product_code,$product->id",
+            'product_price' => 'required|decimal:2',
+            'product_category_id'     => 'required|integer',
+            'product_sub_category_id' => 'required|integer',
+            'brand_id'          => 'required|integer',
+            'measuring_unit_id' => 'required|integer',
+            'product_tech_spec' => 'required|string',
+            'product_marketing_spec' => 'string',
+        ]);
+        $product = $product->update($validated);
+        if($product){
+            return redirect()->route('admin.products.index')->withSuccess('Product updated successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while updating product!!!');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('admin.products.index')->withSuccess('Product deleted successfully.');
     }
 }

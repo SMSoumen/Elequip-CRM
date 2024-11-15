@@ -96,5 +96,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::resource('product-categories', ProductCategoryController::class);
    Route::resource('product-subcategories', ProductSubCategoryController::class);
    Route::resource('products', ProductController::class);
+   Route::get('product/subcategories/{id}', [ProductSubCategoryController::class, 'allSubCategory'])->name('product-subcategories.all');
+   Route::post('subcategories/list', [ProductController::class, 'subCategoryList'])->name('subcategory.list');
 
 });
