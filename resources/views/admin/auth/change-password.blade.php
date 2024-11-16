@@ -35,6 +35,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="phone">Phone No</label>
+                                <input type="text" class="form-control" id="phone" name="phone" value="{{auth()->user()->phone }}">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="current_password">Current Password</label>
                                 <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Enter Current Password">
                             </div>

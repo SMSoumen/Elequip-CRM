@@ -16,25 +16,32 @@ class ChangePasswordController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-            'current_password' => 'required',
-            'password' => 'required|confirmed|min:8|max:25'
-        ]);
-        
-        // dd(auth()->user());
-
+        $rules =['phone' => 'required|string',];
+        if(!empty($request->current_password) && !empty($request->password)){
+            $rules['current_password'] = 'required';
+            $rules['password'] = 'required|confirmed|min:8|max:25';          
+        }
+        $request->validate($rules);
         $user = Admin::where(['id' => auth()->user()->id])->first();
 
         if ($user) {
-            if (Hash::check($request->current_password, $user->password)) {
-                $user->update([
-                    'password' => Hash::make($request->password)
-                ]);
-                return redirect()->back()->withSuccess('Password changed !!!');
-            } else {
-                return redirect()->back()->withErrors('Password could not be changed');
+            
+            Admin::where(['id' => auth()->user()->id])->update(['phone' => $request->phone,]);
+
+            if(!empty($request->current_password) && !empty($request->password)){
+                if (Hash::check($request->current_password, $user->password)) {
+                    Admin::where(['id' => auth()->user()->id])->update([
+                        'password' => Hash::make($request->password),
+                    ]);
+                    return redirect()->back()->withSuccess('Password changed !!!');
+                } else {
+                    return redirect()->back()->withErrors('Password could not be changed');
+                }
             }
-        } else {
+
+            return redirect()->back()->withSuccess('Phone No updated successfully !!!');
+        } 
+        else {
             return redirect()->back()->withErrors('User Not Found');
         }
     }

@@ -25,8 +25,8 @@
                         <form action="{{route('admin.customers.store')}}" method="POST">@csrf
                             <div class="row">
                                     <div class="col-6">
-                                        <label for="contact_person">Contact Person <span class="text-danger"> *</span></label>
-                                        <input type="text" name="contact_person" id="contact_person" class="form-control" required>
+                                        <label for="customer_name">Contact Person <span class="text-danger"> *</span></label>
+                                        <input type="text" name="customer_name" id="customer_name" class="form-control" required>
                                     </div>
 
                                     <div class="col-6">
@@ -55,8 +55,8 @@
                                     </div>
 
                                     <div class="col-6 mt-2">
-                                        <label for="designation">Company Name <span class="text-danger"> *</span></label>
-                                        <select name="company_name" id="company_name" class="form-control" required>
+                                        <label for="company_id">Company Name <span class="text-danger"> *</span></label>
+                                        <select name="company_id" id="company_id" class="form-control" required>
                                             <option value="">Select Company</option>
                                             @foreach($companies as $company)
                                                 <option value="{{$company->id}}">{{$company->company_name}}</option>

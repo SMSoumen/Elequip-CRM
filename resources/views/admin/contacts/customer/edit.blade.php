@@ -26,8 +26,8 @@
                         @method('PUT')
                             <div class="row">
                                     <div class="col-6">
-                                        <label for="contact_person">Contact Person <span class="text-danger"> *</span></label>
-                                        <input type="text" name="contact_person" id="contact_person" class="form-control" required value="{{$customer[0]->contact_person}}">
+                                        <label for="customer_name">Contact Person <span class="text-danger"> *</span></label>
+                                        <input type="text" name="customer_name" id="customer_name" class="form-control" required value="{{$customer[0]->customer_name}}">
                                     </div>
 
                                     <div class="col-6">
@@ -57,10 +57,10 @@
 
                                     <div class="col-6 mt-2">
                                         <label for="designation">Company Name <span class="text-danger"> *</span></label>
-                                        <select name="company_name" id="company_name" class="form-control" required>
+                                        <select name="company_id" id="company_id" class="form-control" required>
                                             <option value="">Select Company</option>
                                             @foreach($companies as $company)
-                                                <option value="{{$company->id}}" @if($customer[0]->company_name == $company->id) {{'selected'}} @endif>{{$company->company_name}}</option>
+                                                <option value="{{$company->id}}" @if($customer[0]->company->id == $company->id) {{'selected'}} @endif>{{$company->company_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>

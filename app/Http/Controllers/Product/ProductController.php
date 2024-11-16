@@ -14,7 +14,8 @@ use Illuminate\Routing\Controllers\Middleware;
 use DataTables;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
-
+use App\Imports\ProductImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller implements HasMiddleware
 {
@@ -133,5 +134,15 @@ class ProductController extends Controller implements HasMiddleware
     {
         $product->delete();
         return redirect()->route('admin.products.index')->withSuccess('Product deleted successfully.');
+    }
+
+    public function uploadProduct(Request $request)
+    {
+        $request->validate([
+            'excel'  => 'required|file|extensions:csv,xlsx',
+        ]); 
+
+        Excel::import(new ProductImport, $request->excel);
+        return redirect()->route('admin.products.index')->withSuccess('Product Uploaded successfully.');
     }
 }
