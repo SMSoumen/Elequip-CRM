@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Company;
 use App\Models\Customer;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
@@ -51,6 +52,12 @@ class CompanyImport implements ToCollection, WithStartRow
     public function collection(Collection $rows)
     {
         // dd($rows);
+
+        // Validator::make($rows->toArray(), [
+        //     '*.0' => 'required',
+        // ])->validate();
+
+
         $contacts = [];
         $company_id = 0;
 
@@ -63,10 +70,7 @@ class CompanyImport implements ToCollection, WithStartRow
                     'phone'             =>  $row[3] ? $row[3] : NULL,
                     'address'           =>  $row[4],
                     'gst'               =>  $row[5] ? $row[5] : NULL,
-                ];
-
-                // dd($company_data);
-                // dd(Company::where($company_data)->first());
+                ];                
 
                 if (Company::where($company_data)->exists()) {
                     $company = Company::where($company_data)->first();
