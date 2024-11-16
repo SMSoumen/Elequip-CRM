@@ -36,7 +36,7 @@
 
                             <div class="form-group">
                                 <label for="phone">Phone No</label>
-                                <input type="text" class="form-control" id="phone" name="phone" value="{{auth()->user()->phone }}">
+                                <input type="text" class="form-control" id="phone" name="phone" value="{{auth()->user()->phone }}" required>
                             </div>
 
                             <div class="form-group">

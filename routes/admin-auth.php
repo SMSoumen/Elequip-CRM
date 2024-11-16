@@ -26,6 +26,8 @@ use App\Http\Controllers\Product\ProductCategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ProductSubCategoryController;
 use App\Http\Controllers\Master\LeadSourceController;
+use App\Http\Controllers\Lead\LeadController;
+use App\Http\Controllers\Lead\LeadDetailController;
 
 Route::prefix('admin')->name('admin.')->middleware('guest:admin')->group(function () {
     // Route::get('register', [RegisteredUserController::class, 'create'])
@@ -99,5 +101,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::get('product/subcategories/{id}', [ProductSubCategoryController::class, 'allSubCategory'])->name('product-subcategories.all');
    Route::post('subcategories/list', [ProductController::class, 'subCategoryList'])->name('subcategory.list');
    Route::post('products/upload', [ProductController::class, 'uploadProduct'])->name('products.upload');
+   Route::post('check/company', [CompanyController::class, 'checkCompany'])->name('checkcompany');
+   Route::resource('leads', LeadController::class);
 
 });

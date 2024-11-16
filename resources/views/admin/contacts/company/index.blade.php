@@ -76,6 +76,25 @@
 @push('scripts')
 
     <script>
+
+        function checkCompanyName(){
+            $("#company_name").keyup(function(){
+                let company_name = $("#company_name").val();
+                $.ajax({
+                    type:'post',
+                    url:"{{route('admin.checkcompany')}}",
+                    data:{"company_name":company_name},
+                    success:function(res){
+                        if(res.length != 0){
+                            $(".error_company").html("'"+company_name+"' Company Name allready exists.")
+                        }else{
+                            $(".error_company").html("");
+                        }
+                    }
+                })
+            })
+        };
+
         $(".add_company").click(function(){
             $(".modal-title").html('Add Company');
             let html =`<form action="{{route('admin.companies.store')}}" method="POST" id="form_data">@csrf
@@ -83,6 +102,7 @@
                         <div class="col-12">
                             <label for="company_name">Company Name <span class="text-danger">*</span></label>
                             <input type="text" name="company_name" id="company_name" class="form-control" required>
+                            <div class="text-danger error_company"></div>
                         </div>
 
                         <div class="col-12 mt-2">
@@ -102,7 +122,7 @@
 
                         <div class="col-12 mt-2">
                             <label for="city">City<span class="text-danger">*</span></label>
-                            <select name="city_id" id="city" class="form-control" required>
+                            <select name="city" id="city" class="form-control" required>
                                 <option value="">Select City</option>
                                 @foreach($cities as $city)
                                  <option value="{{$city->id}}">{{$city->city_name}}</option>
@@ -127,6 +147,7 @@
                 </form>`;
             $(".load_html").html(html);
             $("#add_company").modal('show');
+            checkCompanyName();
         });
 
         $(document).on('click','.edit_data',function(){

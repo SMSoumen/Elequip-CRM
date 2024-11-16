@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('lead_stage_id')->default(1)->constrained('lead_stages')->cascadeOnDelete();
             $table->foreignId('admin_id')->comment('lead creator')->constrained('admins')->cascadeOnDelete();
             $table->foreignId('lead_assigned_to')->nullable()->constrained('admins')->cascadeOnDelete();
-            $table->foreignId('lead_stage_id')->constrained('lead_stages')->cascadeOnDelete();
+            //$table->foreignId('lead_stage_id')->constrained('lead_stages')->cascadeOnDelete();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

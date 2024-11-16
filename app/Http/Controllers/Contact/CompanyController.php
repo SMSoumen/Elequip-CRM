@@ -120,10 +120,12 @@ class CompanyController extends Controller implements HasMiddleware
             
             return redirect()->back()->withErrors('Invalid contact import file !!!');
         }
-
-
     }
 
+    public function checkCompany(Request $request){
+        $result = Company::where('company_name',$request->company_name)->get();
+        return $result;
+    }
 
     public function create()
     {
