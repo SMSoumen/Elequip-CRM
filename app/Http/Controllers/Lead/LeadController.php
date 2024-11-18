@@ -9,6 +9,8 @@ use App\Models\Customer;
 use App\Models\LeadSource;
 use App\Models\LeadCategory;
 use App\Models\Product;
+use App\Models\LeadDetail;
+use App\Models\LeadFollowup;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -16,6 +18,7 @@ use DataTables;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class LeadController extends Controller implements HasMiddleware
 {
@@ -68,16 +71,70 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
-        $validated =  $request->validate([
-            'company_id' => 'required|string|unique:companies,company_name',
-            'lead_source_id'         => 'required|integer',
-            'customer_id'      => 'required|string',
-            'lead_category_id'        => 'string',
-            'lead_estimate_closure_date'      => 'string',
-            'product_id'        => 'string|email',
-            'qty'         => 'string',
-            'amount'      => 'required',
+        $request->validate([
+            'company_id'                 => 'required|integer',
+            'lead_source_id'             => 'required|integer',
+            'customer_id'                => 'required|integer',
+            'lead_category_id'           => 'required|integer',
+            'lead_estimate_closure_date' => 'required|date',
+            'product_id'        => 'required|array',
+            'qty'               => 'required|array',
+            'amount'            => 'required|array',
         ]);
+
+        DB::beginTransaction();
+        try {
+
+            $product_ids = $request->product_id;
+            $quatities = $request->qty;
+            $amounts = $request->amount;
+
+            $lead = Lead::create([
+                'company_id' => $request->company_id,
+                'lead_source_id' => $request->lead_source_id,
+                'customer_id' => $request->customer_id,
+                'lead_category_id' => $request->lead_category_id,
+                'lead_estimate_closure_date' => $request->lead_estimate_closure_date,
+                'lead_remarks' => $request->lead_remarks,
+                'admin_id'     => auth()->user()->id,
+                'lead_total_amount' => array_sum($amounts),
+            ]);
+
+            $lead_id = $lead->id;
+            LeadFollowup::create([
+                'lead_id'            => $lead_id,
+                'followup_next_date' => $request->Next_follow_up_date,
+                'admin_id'           => auth()->user()->id,
+            ]);
+
+            foreach($product_ids as $key=>$product_id){
+                $this->addProductDetails($product_id,$quatities[$key],$lead_id);
+            }
+
+            DB::commit();
+            return redirect()->back()->withSuccess('Lead added successfully.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors('Error!! while adding lead!!!');
+        }
+
+    }
+
+    private function addProductDetails($product_id,$qty,$lead_id){
+        $product = Product::join('measuring_units','products.measuring_unit_id','measuring_units.id')->where('products.id', $product_id)->first();
+        LeadDetail::create([
+            'lead_id' => $lead_id,
+            'product_id'         => $product_id,
+            'lead_product_name'  => $product->product_name,
+            'lead_product_code'  => $product->product_code,
+            'lead_product_qty'   => $qty,
+            'lead_product_price' => $product->product_price,
+            'lead_product_tech_spec' => $product->product_tech_spec,
+            'lead_product_m_spec'    => $product->product_marketing_spec,
+            'lead_product_unit'      => $product->unit_type,
+        ]);
+        unset($product);
+        return true;
     }
 
     /**

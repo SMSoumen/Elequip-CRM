@@ -22,7 +22,7 @@
                                     </ul>
                                 </div>
                             @endif
-                        <form action="{{route('admin.customers.store')}}" method="POST">@csrf
+                        <form action="{{route('admin.leads.store')}}" method="POST">@csrf
                             <div class="row">
                                     <div class="col-6">
                                         <label for="company_id">Company Name <span class="text-danger"> *</span></label>
@@ -148,7 +148,7 @@
                                         
                 for(i=0;i<res.length;i++){
                 var tr = tr + `<tr>
-                            <td><input type="hidden" name="product_id[]" value="`+res[i].id+`">`+res[i].product_name+`</td>
+                            <td><input type="hidden" name="product_ids[]" value="`+res[i].id+`">`+res[i].product_name+`</td>
                             <td><input type="text" name="qty[]" class="qty" value="1"></td>
                             <td>
                                 <input type="hidden" class="single_amount" value="`+res[i].product_price+`">
