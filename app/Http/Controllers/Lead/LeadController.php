@@ -68,7 +68,16 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
-        //
+        $validated =  $request->validate([
+            'company_id' => 'required|string|unique:companies,company_name',
+            'lead_source_id'         => 'required|integer',
+            'customer_id'      => 'required|string',
+            'lead_category_id'        => 'string',
+            'lead_estimate_closure_date'      => 'string',
+            'product_id'        => 'string|email',
+            'qty'         => 'string',
+            'amount'      => 'required',
+        ]);
     }
 
     /**
@@ -101,5 +110,10 @@ class LeadController extends Controller implements HasMiddleware
     public function destroy(Lead $lead)
     {
         //
+    }
+
+    public function productDetails(Request $request){
+        $product = Product::whereIn('id',$request->product_id)->get();
+        return $product;
     }
 }

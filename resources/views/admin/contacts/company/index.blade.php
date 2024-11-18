@@ -121,8 +121,8 @@
                         </div>
 
                         <div class="col-12 mt-2">
-                            <label for="city">City<span class="text-danger">*</span></label>
-                            <select name="city" id="city" class="form-control" required>
+                            <label for="city_id">City<span class="text-danger">*</span></label>
+                            <select name="city_id" id="city_id" class="form-control" required>
                                 <option value="">Select City</option>
                                 @foreach($cities as $city)
                                  <option value="{{$city->id}}">{{$city->city_name}}</option>
@@ -184,8 +184,8 @@
                         </div>
 
                         <div class="col-12 mt-2">
-                            <label for="city">City<span class="text-danger">*</span></label>
-                            <select name="city" id="city" class="form-control" required>
+                            <label for="city_id">City<span class="text-danger">*</span></label>
+                            <select name="city_id" id="city_id" class="form-control" required>
                                 <option value="">Select City</option>
                                 @foreach($cities as $city)
                                  <option value="{{$city->id}}">{{$city->city_name}}</option>

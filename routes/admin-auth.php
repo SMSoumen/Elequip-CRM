@@ -103,5 +103,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::post('products/upload', [ProductController::class, 'uploadProduct'])->name('products.upload');
    Route::post('check/company', [CompanyController::class, 'checkCompany'])->name('checkcompany');
    Route::resource('leads', LeadController::class);
+   Route::post('product/details', [LeadController::class, 'productDetails'])->name('product-details');
+
 
 });
