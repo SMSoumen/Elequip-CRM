@@ -63,11 +63,11 @@
 
                                     <div class="col-6 mt-3">
                                         <label for="lead_estimate_closure_date">Estimate Closure Date<span class="text-danger"> *</span></label>
-                                        <input type="date" name="lead_estimate_closure_date" id="lead_estimate_closure_date" class="form-control" required>
+                                        <input type="date" name="lead_estimate_closure_date" id="lead_estimate_closure_date" class="form-control" value="{{ old('lead_estimate_closure_date') }}" required>
                                     </div>
                                     <div class="col-6 mt-3">
                                         <label for="Next_follow_up_date">Next Follow-up Date<span class="text-danger"> *</span></label>
-                                        <input type="date" name="Next_follow_up_date" id="Next_follow_up_date" class="form-control" required>
+                                        <input type="date" name="Next_follow_up_date" id="Next_follow_up_date" class="form-control" value="{{ old('Next_follow_up_date') }}" required>
                                     </div>
 
                                     <div class="col-12 mt-3">
@@ -86,7 +86,7 @@
 
                                     <div class="col-12 mt-3">
                                         <label for="lead_remarks">Remarks</label>
-                                        <textarea class="form-control" name="lead_remarks" id="lead_remarks" rows="6"></textarea>
+                                        <textarea class="form-control" name="lead_remarks" id="lead_remarks" rows="6">{{ old('lead_remarks') }}</textarea>
                                     </div>
 
                                     <div class="col-12 mt-5">

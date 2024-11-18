@@ -26,12 +26,12 @@
                             <div class="row">
                                     <div class="col-6">
                                         <label for="product_name">Product Title <span class="text-danger"> *</span></label>
-                                        <input type="text" name="product_name" id="product_name" class="form-control" required>
+                                        <input type="text" name="product_name" id="product_name" class="form-control" value="{{old('product_name')}}" required>
                                     </div>
 
                                     <div class="col-6">
                                         <label for="product_code">Product Code <span class="text-danger"> *</span></label>
-                                        <input type="text" name="product_code" id="product_code" class="form-control" required>
+                                        <input type="text" name="product_code" id="product_code" class="form-control" value="{{old('product_code')}}" required>
                                     </div>
 
                                     <div class="col-6 mt-2">
@@ -64,7 +64,7 @@
                                     <div class="col-6 mt-2">
                                         <label>Product Price/Unit<span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control decimal" name="product_price" maxlength="12">
+                                            <input type="text" class="form-control decimal" name="product_price" maxlength="12" value="{{old('product_price')}}">
                                             <div class="input-group-append">
                                                 <select class="form-control" name="measuring_unit_id">
                                                             <option value="" hidden>/Unit</option>
@@ -78,12 +78,12 @@
 
                                     <div class="col-12 mt-3">
                                         <label for="product_tech_spec">Technical Specification <span class="text-danger">*</span></label>
-                                        <textarea name="product_tech_spec" id="product_tech_spec" class="form-control" required></textarea>
+                                        <textarea name="product_tech_spec" id="product_tech_spec" class="form-control" required>{{old('product_tech_spec')}}</textarea>
                                     </div>
 
                                     <div class="col-12 mt-3">
                                         <label for="product_marketing_spec">Marketing Specification</label>
-                                        <textarea name="product_marketing_spec" id="product_marketing_spec" class="form-control" ></textarea>
+                                        <textarea name="product_marketing_spec" id="product_marketing_spec" class="form-control" >{{old('product_marketing_spec')}}</textarea>
                                     </div>
 
                                     <div class="col-12 mt-5">
