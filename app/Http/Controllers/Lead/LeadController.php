@@ -56,13 +56,13 @@ class LeadController extends Controller implements HasMiddleware
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })->addColumn('action', function ($data) {
-                    $editRoute = route('admin.leads.edit', $data->id);
+                    $viewRoute = route('admin.leads.show', $data->id);
                     $deleteRoute = route('admin.leads.destroy', $data->id);
-                    $edit_type = "page";
+                    $edit_type = "lead";
                     $permission = 'Lead';
                     $type="lead";
 
-                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type','type']))->render();
+                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'viewRoute', 'deleteRoute', 'permission','edit_type','type']))->render();
                 })->addIndexColumn()->rawColumns(['customer','next_fllowup_date','assign_to','action','stage','created_date'])->make(true);
             }
             $users = Admin::whereNot('id',1)->orderBy('name','asc')->get();
