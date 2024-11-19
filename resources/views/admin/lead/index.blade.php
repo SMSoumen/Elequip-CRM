@@ -39,7 +39,7 @@
                                         <th>Quote Ref NO.</th>
                                         <th>Next Follow-up</th>
                                         <th>Assigned To</th>
-                                        <th>Status</th>
+                                        <th>Stage</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -116,28 +116,28 @@
                         searchable: false
                     },
                     {
-                        data: 'lead_customer',
-                        name: 'lead_customer'
+                        data: 'customer',
+                        name: 'customer'
                     },
                     {
-                        data: 'lead_customer',
-                        name: 'lead_customer'
+                        data: 'mobile',
+                        name: 'mobile'
                     },
                     {
-                        data: 'lead_customer',
-                        name: 'lead_customer'
+                        data: 'id',
+                        name: 'id'
                     },
                     {
-                        data: 'lead_customer',
-                        name: 'lead_customer'
+                        data: 'next_fllowup_date',
+                        name: 'next_fllowup_date'
                     },
                     {
-                        data: 'lead_customer',
-                        name: 'lead_customer'
+                        data: 'assign_to',
+                        name: 'assign_to'
                     },
                     {
-                        data: 'status',
-                        name: 'status'
+                        data: 'stage',
+                        name: 'stage'
                     },
                     {
                         data: 'action',

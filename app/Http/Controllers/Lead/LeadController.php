@@ -11,6 +11,7 @@ use App\Models\LeadCategory;
 use App\Models\Product;
 use App\Models\LeadDetail;
 use App\Models\LeadFollowup;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -36,8 +37,22 @@ class LeadController extends Controller implements HasMiddleware
     {
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(Lead::query()->orderBy('id','desc'))->addColumn('status', function ($data) {
-                    return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+                return DataTables::eloquent(Lead::query()->join('customers','leads.customer_id','customers.id')
+                ->join('companies','leads.company_id','companies.id')->join('lead_stages','leads.lead_stage_id','lead_stages.id')
+                ->select('leads.*','customers.customer_name','customers.mobile','customers.designation','companies.company_name','lead_stages.stage_name')
+                ->orderBy('leads.id','desc'))
+                ->addColumn('customer', function ($data) {
+                    return $data->customer = $data->customer_name.'('.$data->designation.')<br>'.$data->company_name;
+                })
+                ->addColumn('next_fllowup_date', function ($data) {
+                    $next_fllowup_date = LeadFollowup::where('lead_id',$data->id)->latest()->first();
+                    return $data->next_fllowup_date = date('d-m-Y',strtotime($next_fllowup_date->followup_next_date));
+                })
+                ->addColumn('assign_to', function ($data) {
+                    return $data->assign_to = ($data->lead_assigned_to) ? Admin::where('id',$data->lead_assigned_to)->first()->name : 'Admin';
+                })
+                ->addColumn('stage', function ($data) {
+                    return $data->stage = '<span class="badge bg-secondary">'.$data->stage_name.'</span>';
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })->addColumn('action', function ($data) {
@@ -47,7 +62,7 @@ class LeadController extends Controller implements HasMiddleware
                     $permission = 'Lead';
 
                     return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type']))->render();
-                })->addIndexColumn()->rawColumns(['action','status','created_date'])->make(true);
+                })->addIndexColumn()->rawColumns(['customer','next_fllowup_date','assign_to','action','stage','created_date'])->make(true);
             }
             return view('admin.lead.index');
         } catch (\Exception $e) {
@@ -166,7 +181,8 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function destroy(Lead $lead)
     {
-        //
+        $lead->delete();
+        return redirect()->back()->withSuccess('Lead deleted successfully.');
     }
 
     public function productDetails(Request $request){
