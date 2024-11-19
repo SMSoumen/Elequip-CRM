@@ -62,9 +62,44 @@
 @endsection
 
 
+    <!--==================> Add Brand Modal ============================-->
+
+    <div class="modal fade" id="assign_user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Assign Lead</h5>
+                </div>
+                <form action="{{route('admin.lead-assign')}}" method="POST" id="form_data">@csrf
+                    <div class="modal-body">
+                        <input type="hidden" name="lead_id" id="lead_id">
+                        <div class="col-12">
+                            <label for="lead_assigned_to">Select User <span class="text-danger">*</span></label>
+                            <select name="lead_assigned_to" id="lead_assigned_to" class="form-control" required>
+                                <option value="">Select User</option>
+                                @foreach($users as $user)
+                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @push('scripts')
 
     <script>
+
+        $(document).on('click','.assign_user',function(){
+            var lead_id = $(this).data("modelid");
+            $("#lead_id").val(lead_id);
+            $("#assign_user").modal('show');
+        });
 
 
         $(document).ready(function() {
@@ -153,5 +188,6 @@
             });            
 
         });
+
     </script>
 @endpush
