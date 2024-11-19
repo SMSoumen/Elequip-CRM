@@ -546,7 +546,7 @@
                     </ul>
                 </li>
 
-                @can(['Company access', 'SubCategory access', 'Customer create'])
+                @can(['Company access', 'Customer access', 'Customer create'])
                     <li class="nav-item @if (Request::is('admin/companies*') || Request::is('admin/customers*') || Request::is('admin/upload/contact*')) menu-open @endif">
                         <a href="#" class="nav-link">
                             <i class="nav-icon far fa-address-card"></i>
@@ -582,17 +582,85 @@
                             @endcan
 
                             @can('Customer create')
-                            <li class="nav-item">
-                                <a href="{{ route('admin.upload.contact') }}"
-                                    class="nav-link @if (Request::is('admin/upload/contact')) active @endif">
-                                    <i class="nav-icon fas fa-sitemap"></i>
-                                    <p>
-                                        Upload Contact
-                                    </p>
-                                </a>
-                            </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.upload.contact') }}"
+                                        class="nav-link @if (Request::is('admin/upload/contact')) active @endif">
+                                        <i class="nav-icon fas fa-sitemap"></i>
+                                        <p>
+                                            Upload Contact
+                                        </p>
+                                    </a>
+                                </li>
                             @endcan
 
+                        </ul>
+                    </li>
+                @endcan                
+
+
+                @can(['Company access', 'SubCategory access', 'Customer create'])
+                    <li class="nav-item @if (Request::is('admin/product-categories*') ||
+                            Request::is('admin/products*') ||
+                            Request::is('admin/product/subcategories*')) menu-open @endif">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon far fa-address-card"></i>
+                            {{-- <i class="fas fa-cubes"></i> --}}
+                            <p>
+                                Product Management
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Product access')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.product-categories.index') }}"
+                                        class="nav-link @if (Request::is('admin/product-categories')) active @endif">
+                                        <i class="nav-icon fas fa-sitemap"></i>
+                                        <p>
+                                            Category
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('Product access')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.products.index') }}"
+                                        class="nav-link @if (Request::is('admin/products')) active @endif">
+                                        <i class="nav-icon fas fa-sitemap"></i>
+                                        <p>
+                                            Products
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+
+
+                @can(['Lead access'])
+                    <li class="nav-item @if (Request::is('admin/leads*')) menu-open @endif">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon far fa-address-card"></i>
+                            {{-- <i class="fas fa-cubes"></i> --}}
+                            <p>
+                                Lead Management
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Lead access')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.leads.index') }}"
+                                        class="nav-link @if (Request::is('admin/leads')) active @endif">
+                                        <i class="nav-icon fas fa-sitemap"></i>
+                                        <p>
+                                            Lead
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            
                         </ul>
                     </li>
                 @endcan
