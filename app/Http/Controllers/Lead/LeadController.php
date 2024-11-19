@@ -159,7 +159,12 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function show(Lead $lead)
     {
-        //
+        $companies = Company::where('status','1')->orderBy('company_name','asc')->get();
+        $customers = Customer::where('status','1')->orderBy('customer_name','asc')->get();
+        $categories = LeadCategory::where('status','1')->orderBy('category_name','asc')->get();
+        $sources = LeadSource::where('status','1')->orderBy('source_name','asc')->get();
+        $products = Product::where('status','1')->orderBy('product_name','asc')->get();
+        return view('admin.lead.view',compact(['companies','customers','categories','sources','products']));
     }
 
     /**
