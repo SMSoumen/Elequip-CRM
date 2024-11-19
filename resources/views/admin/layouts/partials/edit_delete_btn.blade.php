@@ -10,6 +10,8 @@
 
     @if(isset($type) && $type == 'subcategory_list')
         <a href="{{$subcategoryRoute}}" class="btn btn-sm btn-primary mr-2 d-inline-block"><i class="fas fa-list"></i></a>
+    @elseif(isset($type) && $type == 'lead')
+        <button type="button" class="btn btn-sm btn-primary mr-2 assign_user" data-modelid="{{$data->id}}" title="Assign User"><i class="fas fa-user-plus"></i></button>                              
     @endif
 
     @can("$permission delete")

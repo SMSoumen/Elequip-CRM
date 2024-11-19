@@ -60,11 +60,13 @@ class LeadController extends Controller implements HasMiddleware
                     $deleteRoute = route('admin.leads.destroy', $data->id);
                     $edit_type = "page";
                     $permission = 'Lead';
+                    $type="lead";
 
-                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type']))->render();
+                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type','type']))->render();
                 })->addIndexColumn()->rawColumns(['customer','next_fllowup_date','assign_to','action','stage','created_date'])->make(true);
             }
-            return view('admin.lead.index');
+            $users = Admin::whereNot('id',1)->orderBy('name','asc')->get();
+            return view('admin.lead.index',compact('users'));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->route('admin.dashboard')->with('error', $e->getMessage());
@@ -188,5 +190,17 @@ class LeadController extends Controller implements HasMiddleware
     public function productDetails(Request $request){
         $product = Product::whereIn('id',$request->product_id)->get();
         return $product;
+    }
+
+    public function leadAssignUser(Request $request){
+        $request->validate([
+            'lead_assigned_to' => 'required|integer',
+            'lead_id'          => 'required|integer',
+        ]);
+        if(Lead::where('id',$request->lead_id)->update(['lead_assigned_to' => $request->lead_assigned_to])){
+            return redirect()->back()->withSuccess('Lead assign successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while lead assign to user!!!');
+        }
     }
 }
