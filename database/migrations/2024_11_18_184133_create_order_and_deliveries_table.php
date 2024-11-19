@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('order_product_name')->nullable();
             $table->string('order_product_code')->nullable();
             $table->foreignId('measuring_unit_id')->constrained('measuring_units')->cascadeOnDelete();
-            $table->string('order_product_unit')->nullable();
+            $table->decimal('order_product_qty', 15, 2)->default(0.00);
             $table->longText('order_product_spec')->nullable();
             $table->decimal('order_product_unit_price', 15, 2)->default(0.00)->nullable();
             $table->decimal('order_product_total_price', 15, 2)->default(0.00)->nullable();
