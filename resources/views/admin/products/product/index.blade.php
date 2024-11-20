@@ -59,7 +59,7 @@
 
 <!--===============================> Modal <==================================-->
 
-<div class="modal fade" id="uploadProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade d-none" id="uploadProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -78,7 +78,7 @@
     </form>
     </div>
   </div>
-</div>
+</div> --}}
 
 @push('scripts')
 

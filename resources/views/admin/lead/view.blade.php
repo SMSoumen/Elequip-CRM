@@ -59,8 +59,8 @@
                          </div>
 
                         <div id="tab1" class="tab-content active">
-                            <h2>Content for Tab 1</h2>
-                            <p>This is the content for the first tab. You can put any HTML here.</p>
+                            {{-- <h4>Timeline</h4> --}}
+                            @include('admin.lead.timeline')
                         </div>
 
                         <div id="lead_details" class="tab-content">
