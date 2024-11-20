@@ -35,7 +35,7 @@
     </div>
     <div class="col-6 mt-3">
         <label for="lead_category_id">Lead Category <span class="text-danger"> *</span></label>
-        <select name="lead_category_id" id="lead_category_id" class="form-control" disabled>
+        <select name="lead_category_id" id="lead_category_id" class="form-control" required>
             <option value="">Select Category</option>
             @foreach($categories as $category)
             <option value="{{$category->id}}" @if($lead->lead_category_id == $category->id) {{'selected'}} @endif>{{$category->category_name}}</option>
@@ -45,19 +45,21 @@
     
     <div class="col-6 mt-3">
         <label for="lead_estimate_closure_date">Estimate Closure Date<span class="text-danger"> *</span></label>
-        <input type="date" name="lead_estimate_closure_date" id="lead_estimate_closure_date" class="form-control" value="{{ $lead->lead_estimate_closure_date }}" disabled>
+        <input type="date" name="lead_estimate_closure_date" id="lead_estimate_closure_date" class="form-control" value="{{ $lead->lead_estimate_closure_date }}" required>
     </div>
     <div class="col-6 mt-3">
-        <label for="Next_follow_up_date">Next Follow-up Date<span class="text-danger"> *</span></label>
-        <input type="date" name="Next_follow_up_date" id="Next_follow_up_date" class="form-control" value="{{$fllowup_date->followup_next_date}}" disabled>
+        <label for="followup_next_date">Next Follow-up Date<span class="text-danger"> *</span></label>
+        <input type="date" name="followup_next_date" id="followup_next_date" class="form-control" value="{{$fllowup_date->followup_next_date}}" required>
     </div>
 
     <div class="col-6 mt-3">
         <label for="lead_stage_id">Update Lead Stage <span class="text-danger"> *</span></label>
-        <select name="lead_stage_id" id="lead_stage_id" class="form-control" required>
+        <select name="lead_stage_id" id="lead_stage_id" class="form-control">
             <option value="">Select Lead Stage</option>
             @foreach($stages as $stage)
-            <option value="{{$stage->id}}" @if($lead->lead_stage_id == $stage->id) {{'selected'}} @endif >{{$stage->stage_name}}</option>
+            <option value="{{$stage->id}}" 
+                 @if($lead->lead_stage_id == $stage->id) {{'selected'}} @endif
+                 @if($stage->id != '2') {{'disabled'}} @endif >{{$stage->stage_name}}</option>
             @endforeach
         </select>
     </div>  

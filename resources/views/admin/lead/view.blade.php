@@ -63,13 +63,29 @@
 
                             </div>
 
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                             <div id="tab1" class="tab-content active">
                                 {{-- <h4>Timeline</h4> --}}
                                 @include('admin.lead.timeline')
                             </div>
 
                             <div id="lead_details" class="tab-content">
-                                <form action="{{ route('admin.lead.stage_update') }}" method="POST">@csrf
+                                <form action="{{route('admin.leads.update',$lead)}}" method="post">@csrf
+                                @method('PUT')
                                     @include('admin.lead.lead_details')
                                 </form>
                             </div>
@@ -119,6 +135,10 @@
                 if (tab.dataset.target === "lead_details") {
                     $('.product_select_details').select2({
                         placeholder: "Select an option",
+                        allowClear: true
+                    });
+                    $('#lead_stage_id').select2({
+                        placeholder: "Select Lead Stage",
                         allowClear: true
                     });
                 } else if(tab.dataset.target === "tab3") {
