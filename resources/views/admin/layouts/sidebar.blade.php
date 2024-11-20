@@ -503,7 +503,7 @@
                                     class="nav-link @if (Request::is('admin/lead-sources')) active @endif">
                                     <i class="nav-icon fas fa-sitemap"></i>
                                     <p>
-                                        Add Lead Source
+                                        Lead Source
                                     </p>
                                 </a>
                             </li>
@@ -515,7 +515,7 @@
                                     class="nav-link @if (Request::is('admin/measuring-unit')) active @endif">
                                     <i class="nav-icon fas fa-sitemap"></i>
                                     <p>
-                                        Add Measuring Unit
+                                        Measuring Unit
                                     </p>
                                 </a>
                             </li>
@@ -526,7 +526,7 @@
                                     class="nav-link @if (Request::is('admin/brand')) active @endif">
                                     <i class="nav-icon fas fa-sitemap"></i>
                                     <p>
-                                        Add Brand
+                                        Brand
                                     </p>
                                 </a>
                             </li>
@@ -537,7 +537,7 @@
                                     class="nav-link @if (Request::is('admin/sms-format')) active @endif">
                                     <i class="nav-icon fas fa-sitemap"></i>
                                     <p>
-                                        Add SMS Format
+                                        SMS Format
                                     </p>
                                 </a>
                             </li>

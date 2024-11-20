@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sms_formats', function (Blueprint $table) {
             $table->id();
             $table->string('template_name')->unique();
-            $table->string('template_id');
+            $table->string('template_id')->nullable();
             $table->longText('template_format');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
