@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('stage_name')->unique();
             $table->string('stage_slug');
+            $table->tinyInteger('stage_is_automated')->default(0)->comment("1:Yes,0:No");
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

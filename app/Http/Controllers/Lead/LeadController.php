@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use DataTables;
+use Exception;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -89,6 +90,7 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
+        // dd(auth("admin")->user()->name);
         $request->validate([
             'company_id'                 => 'required|integer',
             'lead_source_id'             => 'required|integer',
@@ -114,7 +116,7 @@ class LeadController extends Controller implements HasMiddleware
                 'lead_category_id' => $request->lead_category_id,
                 'lead_estimate_closure_date' => $request->lead_estimate_closure_date,
                 'lead_remarks' => $request->lead_remarks,
-                'admin_id'     => auth()->user()->id,
+                'admin_id'     => auth("admin")->user()->id,
                 'lead_total_amount' => array_sum($amounts),
             ]);
 
@@ -122,7 +124,7 @@ class LeadController extends Controller implements HasMiddleware
             LeadFollowup::create([
                 'lead_id'            => $lead_id,
                 'followup_next_date' => $request->Next_follow_up_date,
-                'admin_id'           => auth()->user()->id,
+                'admin_id'           => auth("admin")->user()->id,
             ]);
 
             foreach($product_ids as $key=>$product_id){
