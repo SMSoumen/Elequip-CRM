@@ -46,9 +46,7 @@
                                         <label for="customer_id">Select Customer <span class="text-danger"> *</span></label>
                                         <select name="customer_id" id="customer_id" class="form-control" required>
                                             <option value="">Select Customer</option>
-                                            @foreach($customers as $customer)
-                                                <option value="{{$customer->id}}">{{$customer->customer_name}}</option>
-                                            @endforeach
+                                           
                                         </select>
                                     </div>
                                     <div class="col-6 mt-3">
@@ -125,6 +123,23 @@
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+    });
+
+    $("#company_id").change(function(){
+        var company_id = $(this).val();
+        $.ajax({
+            type:'post',
+            url:"{{route('admin.lead.company_customer')}}",
+            data:{"company_id":company_id},
+            success:function(res){
+                var i=0;
+                var html =`<option value="">Select Customer</option>`;
+                for(i=0; i < res.length; i++){
+                    html = html + `<option value="`+res[i].id+`">`+res[i].customer_name+`</option>`;
+                }
+                $("#customer_id").html(html);                    
+            }
+        })
     });
 
     $("#product_id").change(function(){

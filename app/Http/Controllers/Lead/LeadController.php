@@ -213,6 +213,11 @@ class LeadController extends Controller implements HasMiddleware
         }
     }
 
+    public function companyCustomers(Request $request){
+        $customers = Customer::where('company_id',$request->company_id)->where('status','1')->get();
+        return $customers;
+    }
+
     public function leadStageUpdate(Request $request){
         $request->validate([
             'lead_stage_id' => 'required|integer',

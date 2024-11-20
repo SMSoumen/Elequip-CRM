@@ -106,6 +106,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::post('product/details', [LeadController::class, 'productDetails'])->name('product-details');
    Route::post('leads/assign', [LeadController::class, 'leadAssignUser'])->name('lead-assign');
    Route::post('leads/stage-update', [LeadController::class, 'leadStageUpdate'])->name('lead.stage_update');
+   Route::post('leads/company/customer', [LeadController::class, 'companyCustomers'])->name('lead.company_customer');
 
 
 });
