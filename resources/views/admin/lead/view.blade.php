@@ -121,7 +121,7 @@
                         placeholder: "Select an option",
                         allowClear: true
                     });
-                } else if(tab.dataset.target = "tab3") {
+                } else if(tab.dataset.target === "tab3") {
                     $('.product_select_quot').select2({
                         placeholder: "Select an option",
                         allowClear: true
