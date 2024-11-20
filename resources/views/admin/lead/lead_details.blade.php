@@ -2,7 +2,7 @@
     <input type="hidden" name="lead_id" value="{{$lead->id}}">
     <div class="col-12">
         <label for="remarks">Remarks</label>
-        <textarea class="form-control" name="remarks" id="remarks" rows="5">{{$lead->lead_remarks}}</textarea>
+        <textarea class="form-control" name="remarks" id="remarks" rows="4">{{$lead->lead_remarks}}</textarea>
     </div>
 
     <div class="col-6 mt-3">
@@ -66,12 +66,36 @@
 
     <div class="col-12 mt-3">
         <label for="product_id">Select Products <span class="text-danger"> *</span></label>
-        <select name="product_id[]" id="product_id1" class="form-control product_select_details" multiple>
+        <select name="product_id[]" id="product_id1" class="form-control product_select_details" multiple disabled>
             <!-- <option value="">Select Product</option> -->
             @foreach($products as $product)
-            <option value="{{$product->id}}">{{$product->product_name}}</option>
+                <option value="{{$product->id}}"
+                @foreach($lead_details as $lead_product)
+                  @if($product->id == $lead_product->product_id) {{'selected'}} @endif 
+                @endforeach >{{$product->product_name}}</option>
             @endforeach
         </select>
+    </div>
+
+    <div class="col-12 mt-3">
+        <table class="table" id="myTable">
+            <thead>
+                <tr>
+                    <th>Product Details</th>
+                    <th>Qty</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>  
+            @foreach($lead_details as $lead_product)
+                <tr>
+                    <td>{{$lead_product->lead_product_name}} ({{$lead_product->lead_product_code}})</td>
+                    <td><input type="text" name="qty[]" class="qty" value="{{$lead_product->lead_product_qty}}" disabled></td>
+                    <td><input type="text" name="amount[]" class="amount" value="{{$lead_product->lead_product_price}}" disabled></td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
 
     <div class="col-12 mt-5">

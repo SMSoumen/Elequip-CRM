@@ -169,7 +169,8 @@ class LeadController extends Controller implements HasMiddleware
         $sources = LeadSource::where('status','1')->orderBy('source_name','asc')->get();
         $products = Product::where('status','1')->orderBy('product_name','asc')->get();
         $stages = LeadStage::where('status','1')->orderBy('id','asc')->get();
-        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','fllowup_date']));
+        $lead_details = LeadDetail::where('lead_id',$lead->id)->get();
+        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','fllowup_date','lead_details']));
     }
 
     /**
@@ -192,17 +193,14 @@ class LeadController extends Controller implements HasMiddleware
             'lead_estimate_closure_date' => 'required|date',
             'followup_next_date' => 'required|date',
         ]);
-
         $data = array(
             'lead_remarks' => $request->remarks,
             'lead_estimate_closure_date' => $request->lead_estimate_closure_date, 
             'lead_category_id' => $request->lead_category_id,
         );
-
         if($request->lead_stage_id){
             $data['lead_stage_id'] = $request->lead_stage_id;
         }
-
         if($lead->update($data)){
             LeadFollowup::create([
                 'lead_id'   => $request->lead_id,
@@ -210,10 +208,8 @@ class LeadController extends Controller implements HasMiddleware
                 'followup_next_date' => $request->followup_next_date, 
                 'followup_remarks' => ($request->lead_stage_id) ? 'Lead Stage Upgraded' : 'Lead Updated',
             ]);
-            
             return redirect()->back()->withSuccess('Lead stage updated successfully.');
         }else{
-            dd("hello");
             return redirect()->back()->withErrors('Error!! while updating lead stage!!!');
         }
     }
