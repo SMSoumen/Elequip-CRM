@@ -67,8 +67,9 @@ class LeadController extends Controller implements HasMiddleware
                     return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'viewRoute', 'deleteRoute', 'permission','edit_type','type']))->render();
                 })->addIndexColumn()->rawColumns(['customer','next_fllowup_date','assign_to','action','stage','created_date'])->make(true);
             }
+            $lead_stages = LeadStage::where('status','1')->orderBy('stage_name','asc')->get();
             $users = Admin::whereNot('id',1)->orderBy('name','asc')->get();
-            return view('admin.lead.index',compact('users'));
+            return view('admin.lead.index',compact('users','lead_stages'));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->route('admin.dashboard')->with('error', $e->getMessage());
@@ -90,7 +91,6 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
-        // dd(auth("admin")->user()->name);
         $request->validate([
             'company_id'                 => 'required|integer',
             'lead_source_id'             => 'required|integer',
@@ -103,8 +103,7 @@ class LeadController extends Controller implements HasMiddleware
         ]);
 
         DB::beginTransaction();
-        try {
-
+        try{
             $product_ids = $request->product_id;
             $quatities = $request->qty;
             $amounts = $request->amount;
@@ -130,10 +129,9 @@ class LeadController extends Controller implements HasMiddleware
             foreach($product_ids as $key=>$product_id){
                 $this->addProductDetails($product_id,$quatities[$key],$lead_id);
             }
-
             DB::commit();
-            return redirect()->back()->withSuccess('Lead added successfully.');
-        } catch (Exception $e) {
+            return redirect()->route('admin.leads.index')->withSuccess('Lead added successfully.');
+        } catch(Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors('Error!! while adding lead!!!');
         }

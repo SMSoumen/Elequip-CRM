@@ -16,6 +16,35 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+
+                           <form action="" method="get">@csrf
+                               <div class="row mb-5">
+                                    <div class="col-3">
+                                        <label for="lead_stage">Lead Stage</label>
+                                        <select class="form-control" name="lead_stage" id="lead_stage" required>
+                                            <option value="">Select Lead Stage</option>
+                                            @foreach($lead_stages as $lead_stage)
+                                            <option value="{{$lead_stage->id}}">{{$lead_stage->stage_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <label for="from_date">From Date</label>
+                                        <input type="date" class="form-control" name="ffrom_date" id="from_date">
+                                    </div>
+
+                                    <div class="col-3">
+                                        <label for="to_date">To Date</label>
+                                        <input type="date" class="form-control" name="to_date" id="to_date">
+                                    </div>
+
+                                    <div class="col-3 mt-4">
+                                        <button type="submit" class="btn btn-success">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+
                             @if (session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
