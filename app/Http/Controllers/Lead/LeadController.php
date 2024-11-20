@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Customer;
 use App\Models\LeadSource;
 use App\Models\LeadCategory;
+use App\Models\LeadStage;
 use App\Models\Product;
 use App\Models\LeadDetail;
 use App\Models\LeadFollowup;
@@ -159,12 +160,15 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function show(Lead $lead)
     {
+
+        $fllowup_date = LeadFollowup::where('lead_id',$lead->id)->latest()->first();
         $companies = Company::where('status','1')->orderBy('company_name','asc')->get();
         $customers = Customer::where('status','1')->orderBy('customer_name','asc')->get();
         $categories = LeadCategory::where('status','1')->orderBy('category_name','asc')->get();
         $sources = LeadSource::where('status','1')->orderBy('source_name','asc')->get();
         $products = Product::where('status','1')->orderBy('product_name','asc')->get();
-        return view('admin.lead.view',compact(['companies','customers','categories','sources','products']));
+        $stages = LeadStage::where('status','1')->orderBy('stage_name','asc')->get();
+        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','fllowup_date']));
     }
 
     /**
@@ -206,6 +210,18 @@ class LeadController extends Controller implements HasMiddleware
             return redirect()->back()->withSuccess('Lead assign successfully.');
         }else{
             return redirect()->back()->withErrors('Error!! while lead assign to user!!!');
+        }
+    }
+
+    public function leadStageUpdate(Request $request){
+        $request->validate([
+            'lead_stage_id' => 'required|integer',
+            'lead_id'       => 'required|integer',
+        ]);
+        if(Lead::where('id',$request->lead_id)->update(['lead_stage_id' => $request->lead_stage_id, 'lead_remarks' => $request->remarks])){
+            return redirect()->back()->withSuccess('Lead stage updated successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while updating lead stage!!!');
         }
     }
 }

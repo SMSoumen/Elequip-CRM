@@ -51,7 +51,7 @@
                           
                           <div class="tabs">
                             <div class="tab active" data-target="tab1">Time Line</div>
-                            <div class="tab" data-target="tab2">Lead Details</div>
+                            <div class="tab" data-target="lead_details">Lead Details</div>
                             <div class="tab" data-target="tab3">Quotation Stage</div>
                             <div class="tab" data-target="tab4">P.O. Stage</div>
                             <div class="tab" data-target="tab5">Proforma</div>
@@ -62,10 +62,13 @@
                             <h2>Content for Tab 1</h2>
                             <p>This is the content for the first tab. You can put any HTML here.</p>
                         </div>
-                        <div id="tab2" class="tab-content">
-                            <h2>Content for Tab 2</h2>
-                            <p>This is the content for the second tab. It's hidden by default.</p>
+
+                        <div id="lead_details" class="tab-content">
+                            <form action="{{route('admin.lead.stage_update')}}" method="POST">@csrf
+                                 @include('admin.lead.lead_details')
+                            </form>
                         </div>
+
                         <div id="tab3" class="tab-content">
                             <h2>Content for Tab 3</h2>
                             <p>This is the content for the third tab. Add as many tabs as you like!</p>
