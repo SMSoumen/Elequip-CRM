@@ -55,9 +55,9 @@
                         <div class="card-body">
 
                             <div class="tabs">
-                                <div class="tab active" data-target="tab1">Time Line</div>
+                                <div class="tab @if($lead->lead_stage_id != 3) active @endif" data-target="tab1">Time Line</div>
                                 <div class="tab" data-target="lead_details">Lead Details</div>
-                                <div class="tab" data-target="tab3">Quotation Stage</div>
+                                <div class="tab @if($lead->lead_stage_id == 3) active @endif" data-target="tab3">Quotation Stage</div>
                                 <div class="tab" data-target="tab4">P.O. Stage</div>
                                 <div class="tab" data-target="tab5">Proforma</div>
 
@@ -78,7 +78,7 @@
                                 </div>
                             @endif
 
-                            <div id="tab1" class="tab-content active">
+                            <div id="tab1" class="tab-content @if($lead->lead_stage_id != 3) active @endif">
                                 {{-- <h4>Timeline</h4> --}}
                                 @include('admin.lead.timeline')
                             </div>
@@ -90,13 +90,19 @@
                                 </form>
                             </div>
 
-                            <div id="tab3" class="tab-content">
-                                @include('admin.lead.quotation')
+                            <div id="tab3" class="tab-content @if($lead->lead_stage_id == 3) active @endif">
+                                @if($lead->lead_stage_id == 3)
+                                    @include('admin.lead.quotation_pdf')
+                                @elseif($lead->lead_stage_id == 2)
+                                    @include('admin.lead.quotation')
+                                @endif
                             </div>
+
                             <div id="tab4" class="tab-content">
-                                <h2>Content for Tab 4</h2>
+                                <h2>Content for Tab 5</h2>
                                 <p>This is the content for the third tab. Add as many tabs as you like!</p>
                             </div>
+
                             <div id="tab5" class="tab-content">
                                 <h2>Content for Tab 5</h2>
                                 <p>This is the content for the third tab. Add as many tabs as you like!</p>
@@ -118,6 +124,13 @@
 
 @push('scripts')
     <script>
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');
 
@@ -146,8 +159,55 @@
                         placeholder: "Select an option",
                         allowClear: true
                     });
+
+                    $("#product_id2").change(function(){
+                        var product_id = $(this).val();
+                        $.ajax({
+                            type:'post',
+                            url:"{{route('admin.product-details')}}",
+                            data:{"product_id":product_id},
+                            success:function(res){
+                                 console.log(res);
+                                var i=0;
+                                var tr='';                                       
+                                for(i=0;i<res.length;i++){
+                                var tr = tr + `<tr>
+                                            <td><input type="hidden" name="product_ids[]" value="`+res[i].id+`">`+res[i].product_name+`(`+res[i].product_code+`)</td>
+                                            <td><input type="text" name="qty[]" class="qty" value="1"></td>
+                                            <td><input type="text" name="rate[]" class="rate" value="`+res[i].product_price+`"></td>
+
+                                            <td>
+                                                <input type="hidden" class="single_amount" value="`+res[i].product_price+`">
+                                                <input type="text" name="amount[]" class="amount" value="`+res[i].product_price+`" readonly>
+                                            </td>
+                                        </tr>`;
+                                }
+                                $("tbody").html(tr);
+                                 changeAmount();
+                            }
+                        })  
+                    });
+
+                    function changeAmount(){
+                        $(".qty").keyup(function(){
+                            var quantity = $(this).val();
+                            var amount = $(this).closest('tr').find('.single_amount').val();
+                            var total_amount = quantity * amount; 
+                            if (isNaN(total_amount)) {
+                                $(this).closest('tr').find('.amount').val(0);
+                            }
+                            else{
+                                $(this).closest('tr').find('.amount').val(total_amount);
+                            }
+                        });
+                    }
+    
                 }
             });
         });
+
+
+
+
     </script>
 @endpush

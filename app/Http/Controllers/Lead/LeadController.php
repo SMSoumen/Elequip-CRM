@@ -13,6 +13,9 @@ use App\Models\Product;
 use App\Models\LeadDetail;
 use App\Models\LeadFollowup;
 use App\Models\Admin;
+use App\Models\Quotation;
+use App\Models\QuotationDetail;
+use App\Models\QuotationTerm;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -22,6 +25,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class LeadController extends Controller implements HasMiddleware
 {
@@ -162,6 +166,7 @@ class LeadController extends Controller implements HasMiddleware
     public function show(Lead $lead)
     {
 
+        // dd(session('quotation_data'));
         $fllowup_date = LeadFollowup::where('lead_id',$lead->id)->latest()->first();
         $companies = Company::where('status','1')->orderBy('company_name','asc')->get();
         $customers = Customer::where('status','1')->orderBy('customer_name','asc')->get();
@@ -245,15 +250,44 @@ class LeadController extends Controller implements HasMiddleware
         return $customers;
     }
 
-    // public function leadStageUpdate(Request $request){
-    //     $request->validate([
-    //         'lead_stage_id' => 'required|integer',
-    //         'lead_id'       => 'required|integer',
-    //     ]);
-    //     if(Lead::where('id',$request->lead_id)->update(['lead_stage_id' => $request->lead_stage_id, 'lead_remarks' => $request->remarks])){
-    //         return redirect()->back()->withSuccess('Lead stage updated successfully.');
-    //     }else{
-    //         return redirect()->back()->withErrors('Error!! while updating lead stage!!!');
-    //     }
-    // }
+    public function leadProductDetails(Request $request){
+        $products = Product::leftJoin('lead_details','products.id','lead_details.product_id')->whereIn('products.id',$request->product_id)
+        ->where('lead_details.lead_id',$request->lead_id)->get('products.id','products.product_name','products.product_code','products.product_price','products.product_tech_spec','lead_details.lead_product_qty');
+        return $products;
+    }
+
+    public function quotationGenerate(Request $request){
+        Lead::where('id',$request->lead_id)->update(['lead_stage_id' => '3']);
+        $data = array(
+                'lead_id' => $request->lead_id,
+                'quotation_remarks' => $request->quotation_remarks,
+                'enquiry_ref'=> $request->enquiry_ref,
+                'product_id' => $request->product_id,
+                'qty'        => $request->qty,
+                'rate'       => $request->rate,
+                'amount'     => $request->amount,
+                'discount'   => $request->discount,
+                'tax'        => $request->tax,
+                'basis'      => $request->basis,
+                'payment'    => $request->payment,
+                'enquiry_ref'=> $request->enquiry_ref,
+                'freight_forwarding' => $request->freight_forwarding,
+                'validity' => $request->validity,
+                'warranty' => $request->warranty,
+                'note_1'   => $request->note_1,
+                'note_2'   => $request->note_2,
+        );
+        $request->session()->put('quotation_data', $data);
+        return redirect()->back()->withSuccess('Quotation generated successfully.');
+        // $data= array();
+        // $pdf = Pdf::loadView('admin.pdf.quotation', $data);
+        // return $pdf->download('invoice.pdf');
+    }
+
+    public function addQuotation(Request $request){
+        Quotation::create([
+
+        ]);
+    }
+
 }

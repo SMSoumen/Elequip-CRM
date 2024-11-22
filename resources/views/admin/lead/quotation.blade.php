@@ -5,8 +5,9 @@
         <!-- Timelime example  -->
         <div class="row">
             <div class="col-md-12">
-                <form action="" method="post">
+                <form action="{{route('admin.lead.quotation_store')}}" method="post">@csrf
                     <div class="row">
+                        <input type="hidden" name="lead_id" value="{{$lead->id}}">
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="quotation_remarks">Quotation Remarks <span class="text-danger"> *</span></label>
@@ -22,12 +23,41 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="product_id">Select Products <span class="text-danger"> *</span></label>
-                                <select name="product_id[]" id="product_id1" class="form-control product_select_quot" multiple required>
+                                <select name="product_id[]" id="product_id2" class="form-control product_select_quot" multiple required>
                                     @foreach($products as $product)
-                                    <option value="{{$product->id}}">{{$product->product_name}}</option>
+                                    <option value="{{$product->id}}"
+                                    @foreach($lead_details as $lead_product)
+                                    @if($product->id == $lead_product->product_id) {{'selected'}} @endif 
+                                    @endforeach >{{$product->product_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <table class="table" id="myTable">
+                                <thead>
+                                    <tr>
+                                        <th>Product Details</th>
+                                        <th>Qty</th>
+                                        <th>Rate</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>  
+                                @foreach($lead_details as $lead_product)
+                                    @php
+                                        $amount = $lead_product->lead_product_price * $lead_product->lead_product_qty;
+                                    @endphp
+                                    <tr>
+                                        <td>{{$lead_product->lead_product_name}} ({{$lead_product->lead_product_code}})</td>
+                                        <td><input type="text" name="qty[]" class="qty" value="{{$lead_product->lead_product_qty}}" ></td>
+                                        <td><input type="text" name="rate[]" class="rate" value="{{$lead_product->lead_product_price}}" ></td>
+                                        <td><input type="text" name="amount[]" class="amount" value="{{$amount}}" disabled></td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
 
 
