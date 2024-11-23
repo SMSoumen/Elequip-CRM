@@ -92,7 +92,7 @@
 
     </style>
     <div class="row float-right">
-        <button class="btn btn-primary">Edit</button>
+        <a href="{{route('admin.lead.quotation.edit',$lead->id)}}"><button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button></a>
     </div>
     <div class="pdf-container">
         <header class="header">
@@ -132,5 +132,11 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class="row">
+                @foreach($quotations as $quotation)
+                <a href="#"><h5 class="badge bg-primary m-3">V - {{$quotation->quot_version}}</h5></a>
+                @endforeach
+            </div>
         </section>
     </div>

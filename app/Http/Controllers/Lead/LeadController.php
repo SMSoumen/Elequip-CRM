@@ -177,7 +177,9 @@ class LeadController extends Controller implements HasMiddleware
         $products = Product::where('status','1')->orderBy('product_name','asc')->get();
         $stages = LeadStage::where('status','1')->orderBy('id','asc')->get();
         $lead_details = LeadDetail::where('lead_id',$lead->id)->get();
-        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','fllowup_date','lead_details']));
+
+        $quotations = Quotation::where('lead_id',$lead->id)->orderBy('quot_version','desc')->get();
+        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','fllowup_date','lead_details','quotations']));
     }
 
     /**
@@ -282,6 +284,7 @@ class LeadController extends Controller implements HasMiddleware
                 'payment'    => $request->payment,
                 'freight_forwarding' => $request->freight_forwarding,
                 'validity' => $request->validity,
+                'delivery' => $request->delivery,
                 'warranty' => $request->warranty,
                 'note_1'   => $request->note_1,
                 'note_2'   => $request->note_2,
@@ -313,6 +316,8 @@ class LeadController extends Controller implements HasMiddleware
                 'term_payment'    => $data['payment'],
                 'term_note_1'     => $data['note_1'],
                 'term_note_2'     => $data['note_2'],
+                'term_dispatch'   => $data['delivery'],
+                'term_price'      => $data['basis'],
             ]);
 
             LeadFollowup::create([
@@ -342,6 +347,72 @@ class LeadController extends Controller implements HasMiddleware
             return $pdf->download('invoice.pdf');
         }
         return redirect()->back()->withSuccess('Quotation generated successfully.');
+    }
+
+    public function editQuotation(Request $request,$lead_id){
+        $quotation = Quotation::where('lead_id',$lead_id)->latest()->first();
+        $quotation_details = QuotationDetail::where('quotation_id',$quotation->id)->get();
+        $quotation_terms = QuotationTerm::where('quotation_id',$quotation->id)->first();
+        $products = Product::where('status','1')->orderBy('product_name','asc')->get();
+        return view('admin.lead.edit_quotation',compact(['quotation','quotation_details','quotation_terms','products','lead_id']));
+    }
+
+    public function updateQuotation(Request $request){
+        $request->validate([
+            'quotation_id'      => 'required|integer',
+            'lead_id'           => 'required|integer',
+            'quot_version'      => 'required|decimal:1',
+            'quotation_remarks' => 'required|string',
+            'enquiry_ref'       => 'required|string',
+            'product_id'        => 'required|array',
+            'qty'               => 'required|array',
+            'rate'              => 'required|array',
+            'amount'            => 'required|array',
+        ]);
+
+        Quotation::where('id',$request->quotation_id)->update(['qout_is_latest'=>'0']);
+        QuotationTerm::where('quotation_id',$request->quotation_id)->update(['term_is_latest' => '0']);
+
+        $quotation = Quotation::create([
+            'lead_id'      => $request->lead_id,
+            'quot_ref_no'  => $request->enquiry_ref,
+            'quot_remarks' => $request->quotation_remarks,
+            'quot_amount'  => array_sum($request->amount),
+            'admin_id'     => auth("admin")->user()->id,
+            'quot_version' => $request->quot_version + 0.1,
+        ]);
+
+        QuotationTerm::create([
+            'lead_id'         =>  $request->lead_id,
+            'quotation_id'    =>  $quotation->id,
+            'term_discount'   =>  $request->discount,
+            'term_tax'        =>  $request->tax,
+            'term_forwarding' =>  $request->freight_forwarding,
+            'term_validity'   =>  $request->validity,
+            'term_warranty'   =>  $request->warranty,
+            'term_payment'    =>  $request->payment,
+            'term_note_1'     =>  $request->note_1,
+            'term_note_2'     =>  $request->note_2,
+            'term_dispatch'   =>  $request->delivery,
+            'term_price'      =>  $request->basis,
+        ]);
+
+        foreach($request->product_id as $key=>$product_id){
+            QuotationDetail::create([
+                'quotation_id'            => $quotation->id,
+                'product_id'              => $product_id,
+                'quot_product_qty'        => $request->qty[$key],
+                'quot_product_unit_price' => $request->rate[$key],
+                'quot_product_total_price'=> $request->amount[$key],
+                'quot_product_unit'       => $request->product_unit[$key],
+                'quot_product_name'       => $request->product_name[$key],
+                'quot_product_code'       => $request->product_code[$key],
+                'quot_product_tech_spec'  => $request->product_tech_spec[$key],
+                'quot_product_m_spec'     => $request->product_m_spec[$key],
+            ]);
+        }
+        $lead = Lead::where('id',$request->lead_id)->first();
+        return redirect()->route('admin.leads.show',$lead)->withSuccess('Quotation generated successfully.');
 
     }
 

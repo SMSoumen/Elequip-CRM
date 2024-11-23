@@ -106,8 +106,8 @@
 
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="enquiry_ref">Delivery</label>
-                                <input type="text" class="form-control" id="enquiry_ref" name="enquiry_ref" value="2 days of PO" placeholder="2 days of PO">
+                                <label for="delivery">Delivery</label>
+                                <input type="text" class="form-control" id="delivery" name="delivery" value="2 days of PO" placeholder="2 days of PO">
                             </div>
                         </div>
 
