@@ -50,10 +50,18 @@
                                         $amount = $lead_product->lead_product_price * $lead_product->lead_product_qty;
                                     @endphp
                                     <tr>
-                                        <td>{{$lead_product->lead_product_name}} ({{$lead_product->lead_product_code}})</td>
+                                        <td>
+                                            {{$lead_product->lead_product_name}} ({{$lead_product->lead_product_code}})
+                                            <input type="hidden" name="product_name[]" value="{{$lead_product->lead_product_name}}">
+                                            <input type="hidden" name="product_code[]" value="{{$lead_product->lead_product_code}}">
+                                            <input type="hidden" name="product_unit[]" value="{{$lead_product->lead_product_unit}}">
+                                            <input type="hidden" name="product_tech_spec[]" value="{{$lead_product->lead_product_tech_spec}}">
+                                            <input type="hidden" name="product_m_spec[]" value="{{$lead_product->lead_product_m_spec}}">
+
+                                        </td>
                                         <td><input type="text" name="qty[]" class="qty" value="{{$lead_product->lead_product_qty}}" ></td>
                                         <td><input type="text" name="rate[]" class="rate" value="{{$lead_product->lead_product_price}}" ></td>
-                                        <td><input type="text" name="amount[]" class="amount" value="{{$amount}}" disabled></td>
+                                        <td><input type="text" name="amount[]" class="amount" value="{{$amount}}" readonly></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

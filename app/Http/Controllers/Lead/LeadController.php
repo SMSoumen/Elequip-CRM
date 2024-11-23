@@ -41,6 +41,10 @@ class LeadController extends Controller implements HasMiddleware
     
     public function index(Request $request)
     {
+        if(session()->has('quotation_data')){
+            $request->session()->forget('quotation_data');
+        }
+
         try {
             if ($request->ajax()) {
                 return DataTables::eloquent(Lead::query()->join('customers','leads.customer_id','customers.id')
@@ -163,10 +167,8 @@ class LeadController extends Controller implements HasMiddleware
     /**
      * Display the specified resource.
      */
-    public function show(Lead $lead)
+    public function show(Request $request,Lead $lead)
     {
-
-        // dd(session('quotation_data'));
         $fllowup_date = LeadFollowup::where('lead_id',$lead->id)->latest()->first();
         $companies = Company::where('status','1')->orderBy('company_name','asc')->get();
         $customers = Customer::where('status','1')->orderBy('customer_name','asc')->get();
@@ -229,7 +231,7 @@ class LeadController extends Controller implements HasMiddleware
     }
 
     public function productDetails(Request $request){
-        $product = Product::whereIn('id',$request->product_id)->get();
+        $product = Product::join('measuring_units','products.measuring_unit_id','measuring_units.id')->whereIn('products.id',$request->product_id)->get('products.*','measuring_units.unit_type');
         return $product;
     }
 
@@ -257,12 +259,20 @@ class LeadController extends Controller implements HasMiddleware
     }
 
     public function quotationGenerate(Request $request){
-        Lead::where('id',$request->lead_id)->update(['lead_stage_id' => '3']);
+        if(session()->has('quotation_data')){
+            $request->session()->forget('quotation_data');
+        }
+
         $data = array(
                 'lead_id' => $request->lead_id,
                 'quotation_remarks' => $request->quotation_remarks,
                 'enquiry_ref'=> $request->enquiry_ref,
                 'product_id' => $request->product_id,
+                'product_name' => $request->product_name,
+                'product_code' => $request->product_code,
+                'product_unit' => $request->product_unit,
+                'product_tech_spec' => $request->product_tech_spec,
+                'product_m_spec' => $request->product_m_spec,
                 'qty'        => $request->qty,
                 'rate'       => $request->rate,
                 'amount'     => $request->amount,
@@ -270,7 +280,6 @@ class LeadController extends Controller implements HasMiddleware
                 'tax'        => $request->tax,
                 'basis'      => $request->basis,
                 'payment'    => $request->payment,
-                'enquiry_ref'=> $request->enquiry_ref,
                 'freight_forwarding' => $request->freight_forwarding,
                 'validity' => $request->validity,
                 'warranty' => $request->warranty,
@@ -279,15 +288,63 @@ class LeadController extends Controller implements HasMiddleware
         );
         $request->session()->put('quotation_data', $data);
         return redirect()->back()->withSuccess('Quotation generated successfully.');
-        // $data= array();
-        // $pdf = Pdf::loadView('admin.pdf.quotation', $data);
-        // return $pdf->download('invoice.pdf');
     }
 
     public function addQuotation(Request $request){
-        Quotation::create([
+        $data = session('quotation_data');
+        if($data){
+            Lead::where('id',$data['lead_id'])->update(['lead_stage_id' => '3']);
+            $quotation = Quotation::create([
+                'lead_id'      => $data['lead_id'],
+                'quot_ref_no'  => $data['enquiry_ref'],
+                'quot_remarks' => $data['quotation_remarks'],
+                'quot_amount'  => array_sum($data['amount']),
+                'admin_id'     => auth("admin")->user()->id,
+            ]);
+    
+            QuotationTerm::create([
+                'lead_id'         => $data['lead_id'],
+                'quotation_id'    => $quotation->id,
+                'term_discount'   => $data['discount'],
+                'term_tax'        => $data['tax'],
+                'term_forwarding' => $data['freight_forwarding'],
+                'term_validity'   => $data['validity'],
+                'term_warranty'   => $data['warranty'],
+                'term_payment'    => $data['payment'],
+                'term_note_1'     => $data['note_1'],
+                'term_note_2'     => $data['note_2'],
+            ]);
 
-        ]);
+            LeadFollowup::create([
+                'lead_id'          => $data['lead_id'],
+                'followup_remarks' => 'Lead Stage Upgraded to Quotation Stage.',
+                'admin_id'         => auth("admin")->user()->id,
+                'followup_type'    => 'remarks',
+            ]);
+    
+            foreach($data['product_id'] as $key=>$product_id){
+                QuotationDetail::create([
+                    'quotation_id'            => $quotation->id,
+                    'product_id'              => $product_id,
+                    'quot_product_qty'        => $data['qty'][$key],
+                    'quot_product_unit_price' => $data['rate'][$key],
+                    'quot_product_total_price'=> $data['amount'][$key],
+                    'quot_product_unit'       => $data['product_unit'][$key],
+                    'quot_product_name'       => $data['product_name'][$key],
+                    'quot_product_code'       => $data['product_code'][$key],
+                    'quot_product_tech_spec'  => $data['product_tech_spec'][$key],
+                    'quot_product_m_spec'     => $data['product_m_spec'][$key],
+                ]);
+            }
+    
+            $request->session()->forget('quotation_data');
+            $pdf = Pdf::loadView('admin.pdf.quotation', $data);
+            return $pdf->download('invoice.pdf');
+        }
+        return redirect()->back()->withSuccess('Quotation generated successfully.');
+
     }
+
+
 
 }

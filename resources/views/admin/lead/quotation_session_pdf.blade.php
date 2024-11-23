@@ -91,13 +91,14 @@
         }
 
     </style>
-    <div class="row float-right">
-        <button class="btn btn-primary">Edit</button>
-    </div>
+
+    @php 
+        $quotation = session('quotation_data');
+    @endphp
     <div class="pdf-container">
         <header class="header">
             <h1>Quotaion</h1>
-            <p>Test</p>
+            <p>{{$quotation['quotation_remarks']}}</p>
         </header>
         <section class="content">
             <h2>About This Document</h2>
@@ -133,4 +134,11 @@
                 </tbody>
             </table>
         </section>
+        @if($lead->lead_stage_id == 2)
+        <footer class="footer">
+            <form action="{{route('admin.lead.quotation.create')}}" method="POST">@csrf
+                <button type="submit" class="btn btn-success float-right">Save & Next</button>
+            </form>
+        </footer>
+        @endif
     </div>

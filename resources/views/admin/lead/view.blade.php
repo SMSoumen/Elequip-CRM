@@ -91,10 +91,12 @@
                             </div>
 
                             <div id="tab3" class="tab-content @if($lead->lead_stage_id == 3) active @endif">
-                                @if($lead->lead_stage_id == 3)
-                                    @include('admin.lead.quotation_pdf')
+                                @if(session('quotation_data') && $lead->lead_stage_id == 2)
+                                    @include('admin.lead.quotation_session_pdf')
                                 @elseif($lead->lead_stage_id == 2)
                                     @include('admin.lead.quotation')
+                                @elseif($lead->lead_stage_id == 3)
+                                  @include('admin.lead.quotation_pdf')
                                 @endif
                             </div>
 
@@ -172,7 +174,14 @@
                                 var tr='';                                       
                                 for(i=0;i<res.length;i++){
                                 var tr = tr + `<tr>
-                                            <td><input type="hidden" name="product_ids[]" value="`+res[i].id+`">`+res[i].product_name+`(`+res[i].product_code+`)</td>
+                                            <td>
+                                                `+res[i].product_name+`(`+res[i].product_code+`)
+                                                <input type="hidden" name="product_name[]" value="`+res[i].product_name+`">
+                                                <input type="hidden" name="product_code[]" value="`+res[i].product_code+`">
+                                                <input type="hidden" name="product_unit[]" value="`+res[i].unit_type+`">
+                                                <input type="hidden" name="product_tech_spec[]" value="`+res[i].product_tech_spec+`">
+                                                <input type="hidden" name="product_m_spec[]" value="`+res[i].product_marketing_spec+`">
+                                            </td>
                                             <td><input type="text" name="qty[]" class="qty" value="1"></td>
                                             <td><input type="text" name="rate[]" class="rate" value="`+res[i].product_price+`"></td>
 
