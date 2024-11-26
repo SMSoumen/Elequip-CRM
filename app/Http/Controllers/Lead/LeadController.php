@@ -343,8 +343,7 @@ class LeadController extends Controller implements HasMiddleware
             }
     
             $request->session()->forget('quotation_data');
-            $pdf = Pdf::loadView('admin.pdf.quotation', $data);
-            return $pdf->download('invoice.pdf');
+            return $this->quotaionPdf($quotation->id);
         }
         return redirect()->back()->withSuccess('Quotation generated successfully.');
     }
@@ -417,5 +416,14 @@ class LeadController extends Controller implements HasMiddleware
     }
 
 
+    public function quotaionPdf($quotaion_id)
+    {
+        $data['quotation'] = Quotation::where('id',$quotaion_id)->first();
+        $data['quotaion_details'] = QuotationDetail::where('quotation_id',$quotaion_id)->get();
+        $data['quotation_terms'] = QuotationTerm::where('quotation_id',$quotaion_id)->first();
+        $pdf = Pdf::loadView('admin.pdf.quotation', $data);
+        return $pdf->download('invoice.pdf');
+        
+    }
 
 }

@@ -143,30 +143,20 @@
         </thead>
         <tbody>
             <!-- Row 1 -->
+             @foreach($quotaion_details as $key=>$quotaion)
             <tr style="font-size: 15px; text-align: center;">
-                <td style="border: 1px solid black; padding: 8px;">1</td>
+                <td style="border: 1px solid black; padding: 8px;">{{$key+1}}</td>
                 <td style="border: 1px solid black; padding: 8px; text-align: left;">
-                    CC-Spares (Spares/Crane)<br>
-                    a<br> Crane Model - <br> Part name -
+                    {{$quotaion->quot_product_name}} <br> ({{$quotaion->quot_product_code}})
                 </td>
-                <td style="border: 1px solid black; padding: 8px;">1.00</td>
-                <td style="border: 1px solid black; padding: 8px;">Nos.</td>
-                <td style="border: 1px solid black; padding: 8px;">₹ 1.00</td>
-                <td style="border: 1px solid black; padding: 8px;">₹ 1.00</td>
+                <td style="border: 1px solid black; padding: 8px;">{{$quotaion->quot_product_qty}}</td>
+                <td style="border: 1px solid black; padding: 8px;">{{$quotaion->quot_product_unit}}</td>
+                <td style="border: 1px solid black; padding: 8px;">₹ {{$quotaion->quot_product_unit_price}}</td>
+                <td style="border: 1px solid black; padding: 8px;">₹ {{$quotaion->quot_product_total_price}}</td>
             </tr>
-            <!-- Row 2 -->
-            <tr style="font-size: 15px; text-align: center;">
-                <td style="border: 1px solid black; padding: 8px;">2</td>
-                <td style="border: 1px solid black; padding: 8px; text-align: left;">
-                    Chain Hoist-Spares (Spares/CEH)<br>
-                    a <br> Model - <br> Part name -
-                </td>
-                <td style="border: 1px solid black; padding: 8px;">1.00</td>
-                <td style="border: 1px solid black; padding: 8px;">Nos.</td>
-                <td style="border: 1px solid black; padding: 8px;">₹ 1.00</td>
-                <td style="border: 1px solid black; padding: 8px;">₹ 1.00</td>
-            </tr>
-            <!-- Row Totals -->
+            @endforeach
+
+                <!-- Row Totals -->
             <tr style="font-size: 15px; text-align: center;">
                 <td style="border: 1px solid black; padding: 4px;"></td>
                 <td style="border: 1px solid black; padding: 4px; text-align: right;">
@@ -175,8 +165,9 @@
                 <td style="border: 1px solid black; padding: 4px;"></td>
                 <td style="border: 1px solid black; padding: 4px;"></td>
                 <td style="border: 1px solid black; padding: 4px;"></td>
-                <td style="border: 1px solid black; padding: 4px;">2.00</td>
+                <td style="border: 1px solid black; padding: 4px;">{{$quotation->quot_amount}}</td>
             </tr> 
+      
         </tbody>
     </table>
     <div style="font-weight: bold; padding: 10px; text-align: left; text-decoration: underline;">
@@ -187,35 +178,35 @@
 
         <tr>
             <td style="width: 20%; padding: 8px;">Discount:</td>
-            <td style="padding: 8px; ">10</td>
+            <td style="padding: 8px; ">{{$quotation_terms->term_discount}}</td>
         </tr>
         <tr>
             <td style="padding: 8px; ">Tax:</td>
-            <td style="padding: 8px; ">GST 18% EXTRA</td>
+            <td style="padding: 8px; ">{{$quotation_terms->term_tax}}</td>
         </tr>
         <tr>
             <td style="padding: 8px;">Price:</td>
-            <td style="padding: 8px;">F.O.R Kolkata</td>
+            <td style="padding: 8px;">{{$quotation_terms->term_price}}</td>
         </tr>
         <tr>
             <td style="padding: 8px; ">Payment:</td>
-            <td style="padding: 8px; ">100% against proforma invoice</td>
+            <td style="padding: 8px; ">{{$quotation_terms->term_payment}}</td>
         </tr>
         <tr>
             <td style="padding: 8px; ">Delivery:</td>
-            <td style="padding: 8px; ">2 days of PO</td>
+            <td style="padding: 8px; ">{{$quotation_terms->term_dispatch}}</td>
         </tr>
         <tr>
             <td style="padding: 8px; ">Freight:</td>
-            <td style="padding: 8px; ">2% Extra on basic price</td>
+            <td style="padding: 8px; ">{{$quotation_terms->term_forwarding}}</td>
         </tr>
         <tr>
             <td style="padding: 8px; ">Validity:</td>
-            <td style="padding: 8px; ">Offers remain valid for 30 days from the date of hereof.</td>
+            <td style="padding: 8px; ">{{$quotation_terms->term_validity}}</td>
         </tr>
         <tr>
             <td style="padding: 8px; ">Warranty:</td>
-            <td style="padding: 8px; ">12 months from the date of supply</td>
+            <td style="padding: 8px; ">{{$quotation_terms->term_warranty}}</td>
         </tr>
     </table>
     <p style="margin-top: 20px; font-family: Arial, sans-serif; font-size: 15px;">
