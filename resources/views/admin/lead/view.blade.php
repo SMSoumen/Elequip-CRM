@@ -55,9 +55,9 @@
                         <div class="card-body">
 
                             <div class="tabs">
-                                <div class="tab @if($lead->lead_stage_id != 3) active @endif" data-target="tab1">Time Line</div>
+                                <div class="tab @if(in_array($lead->lead_stage_id, [1,2])) active @endif" data-target="tab1">Time Line</div>
                                 <div class="tab" data-target="lead_details">Lead Details</div>
-                                <div class="tab @if($lead->lead_stage_id == 2) active @endif" data-target="tab3">Quotation Stage</div>
+                                <div class="tab @if(in_array($lead->lead_stage_id, [2,3,4])) active @endif" data-target="tab3">Quotation Stage</div>
                                 <div class="tab" data-target="tab4">P.O. Stage</div>
                                 <div class="tab" data-target="tab5">Proforma</div>
 
@@ -78,7 +78,7 @@
                                 </div>
                             @endif
 
-                            <div id="tab1" class="tab-content @if($lead->lead_stage_id != 3) active @endif">
+                            <div id="tab1" class="tab-content @if(in_array($lead->lead_stage_id, [1,2])) active @endif">
                                 {{-- <h4>Timeline</h4> --}}
                                 @include('admin.lead.timeline')
                             </div>
@@ -90,26 +90,28 @@
                                 </form>
                             </div>
 
-                            <div id="tab3" class="tab-content @if($lead->lead_stage_id == 2) active @endif">
+                            <div id="tab3" class="tab-content @if(in_array($lead->lead_stage_id, [2,3,4])) active @endif">
                                 @if(session('quotation_data') && $lead->lead_stage_id == 2)
                                     @include('admin.lead.quotation_session_pdf')
                                 @elseif($lead->lead_stage_id == 2)
                                     @include('admin.lead.quotation')
-                                @elseif($lead->lead_stage_id == 3)
+                                @elseif($lead->lead_stage_id == 3 || $lead->lead_stage_id == 4)
                                   @include('admin.lead.quotation_pdf')
                                 @endif
                             </div>
 
                             <div id="tab4" class="tab-content @if($lead->lead_stage_id == 3) active @endif">
 
+                                @if($lead->lead_stage_id == 3)
                                 <div class="modal fade" id="po_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Change Lead Stage</h5>
                                         </div>
-                                        <form method="POST" action="">@csrf
+                                        <form method="POST" action="{{route('admin.lead_stage.update')}}">@csrf
                                             <div class="modal-body">
+                                                <input type="hidden" name="lead_id" value="{{$lead->id}}">
                                                 <div class="col-12">
                                                     <label for="lead_stage_id">Update Lead Stage <span class="text-danger"> *</span></label>
                                                     <select name="lead_stage_id" id="lead_stage_id" class="form-control">
@@ -122,12 +124,17 @@
                                                 </div>  
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary">Submit</button>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </form>
                                         </div>
                                     </div>
                                 </div>
+                                @elseif($lead->lead_stage_id == 4)
+                                <form action="{{route('admin.lead.purchase_order.create')}}" method="POST" enctype="multipart/form-data"> @csrf
+                                    @include('admin.lead.po_stage')
+                                </form>
+                                @endif
 
                             </div>
 

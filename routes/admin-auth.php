@@ -114,5 +114,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::get('leads/quotation/edit/{lead_id}', [LeadController::class, 'editQuotation'])->name('lead.quotation.edit');
    Route::post('leads/quotation/update', [LeadController::class, 'updateQuotation'])->name('lead.quotation.update');
    Route::get('leads/quotation/pdf/{quotaion_id}', [LeadController::class, 'quotaionPdf'])->name('quotaion.pdf');
+   Route::post('lead-stage/update', [LeadController::class, 'leadStageUpdate'])->name('lead_stage.update');
+   Route::post('lead/purchase-order/create', [LeadController::class, 'createPurchaseOrder'])->name('lead.purchase_order.create');
 
 });

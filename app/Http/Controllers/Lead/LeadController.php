@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\LeadDetail;
 use App\Models\LeadFollowup;
 use App\Models\Admin;
+use App\Models\PurchaseOrder;
 use App\Models\Quotation;
 use App\Models\QuotationDetail;
 use App\Models\QuotationTerm;
@@ -179,7 +180,8 @@ class LeadController extends Controller implements HasMiddleware
         $lead_details = LeadDetail::where('lead_id',$lead->id)->get();
 
         $quotations = Quotation::where('lead_id',$lead->id)->orderBy('quot_version','desc')->get();
-        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','fllowup_date','lead_details','quotations']));
+        $letest_quotation = Quotation::where('lead_id',$lead->id)->latest()->first();
+        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','fllowup_date','lead_details','quotations','letest_quotation']));
     }
 
     /**
@@ -424,6 +426,66 @@ class LeadController extends Controller implements HasMiddleware
         $pdf = Pdf::loadView('admin.pdf.quotation', $data);
         return $pdf->download('invoice.pdf');
         
+    }
+
+    public function leadStageUpdate(Request $request){
+        $request->validate([
+            'lead_id'                 => 'required|integer',
+            'lead_stage_id'           => 'required|integer',
+        ]);
+        if(Lead::where('id',$request->lead_id)->update(['lead_stage_id' => $request->lead_stage_id])){
+            return redirect()->back()->withSuccess('lead stage updated successfully.');
+        }
+        else{
+            return redirect()->back()->withErrors('Error!! while updating lead stage!!!');
+        }
+    }
+
+    public function createPurchaseOrder(Request $request){
+        $request->validate([
+            'lead_id'              => 'required|integer',
+            'quotation_id'         => 'required|integer',
+            'tax_percent'          => 'required|integer',
+            'gross_total'          => 'required|integer',
+            'order_no'             => 'required|string',
+            'total_tax_amount'     => 'required|string',
+            'order_date'           => 'required|date',
+            'net_total'            => 'required|string',
+            'et_bill_no'           => 'required|string',
+            'order_remark'         => 'required|string',
+            'po_document'          => 'file|extensions:jpg,png.pdf'
+        ]);
+
+        $data = array([
+            'lead_id' => $request->lead_id,
+            'quotation_id' => $request->quotation_id,
+            // 'po_amount' => $request->
+            'po_gross_amount' =>$request->gross_total,
+            'po_net_amount' => $request->net_total,
+            'po_taxable' => $request->total_tax_amount,
+            'po_tax_percent' => $request->tax_percent,
+            'po_order_no' => $request->order_no,
+            'po_order_date' => $request->order_date,
+            'po_et_bill_no' => $request->et_bill_no,
+            'admin_id' => auth("admin")->user()->id,
+            'po_remarks' => $request->order_remark,
+        ]);
+
+        if($request->hasFile('po_document')){
+            $str_image = $request->file('po_document')->hashName();
+            $location = public_path('/upload/po/');
+            $request->file('po_document')->move($location, $str_image);
+            $data['po_document'] = $str_image;
+        }
+
+        if(PurchaseOrder::create($data)){
+            return redirect()->back()->withSuccess('P.O created successfully.');
+        }
+        else{
+            return redirect()->back()->withErrors('Error!! while creating P.O!!!');
+        }
+
+
     }
 
 }
