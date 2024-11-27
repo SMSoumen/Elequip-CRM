@@ -453,10 +453,10 @@ class LeadController extends Controller implements HasMiddleware
             'net_total'            => 'required|string',
             'et_bill_no'           => 'required|string',
             'order_remark'         => 'required|string',
-            'po_document'          => 'file|extensions:jpg,png.pdf'
+            // 'po_document'          => 'file|extensions:jpg,png.pdf'
         ]);
 
-        $data = array([
+        $data = array(
             'lead_id' => $request->lead_id,
             'quotation_id' => $request->quotation_id,
             // 'po_amount' => $request->
@@ -469,7 +469,7 @@ class LeadController extends Controller implements HasMiddleware
             'po_et_bill_no' => $request->et_bill_no,
             'admin_id' => auth("admin")->user()->id,
             'po_remarks' => $request->order_remark,
-        ]);
+        );
 
         if($request->hasFile('po_document')){
             $str_image = $request->file('po_document')->hashName();
@@ -477,7 +477,6 @@ class LeadController extends Controller implements HasMiddleware
             $request->file('po_document')->move($location, $str_image);
             $data['po_document'] = $str_image;
         }
-
         if(PurchaseOrder::create($data)){
             return redirect()->back()->withSuccess('P.O created successfully.');
         }

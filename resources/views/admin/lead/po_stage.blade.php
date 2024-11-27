@@ -32,7 +32,7 @@
         </div>
         <div class="col-6 mt-3">
             <label for="net_total">Net Total <span class="text-danger">*</span></label>
-            <input type="text" name="net_total" id="net_total" class="form-control" required>
+            <input type="text" name="net_total" id="net_total" class="form-control" required readonly>
         </div>
         <div class="col-6 mt-3">
             <label for="et_bill_no">ET Bill No <span class="text-danger">*</span></label>

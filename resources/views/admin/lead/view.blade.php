@@ -247,6 +247,32 @@
                 }
                 else if(tab.dataset.target === "tab4"){
                         $("#po_modal").modal('show');
+
+                        $("#tax_percent").change(function(){
+                            amountCalculation();
+                        });
+                        $("#gross_total").keyup(function(){
+                            amountCalculation();
+                        });
+                        $("#order_no").keyup(function(){
+                            amountCalculation();
+                        })
+
+                            function amountCalculation(){
+                                var tax_percent = $("#tax_percent").val();
+                                var gross_total = $("#gross_total").val();
+                                if(gross_total == ''){
+                                    $("#total_tax_amount").val('0');
+                                    $("#net_total").val('0');
+                                }else{
+                                    var tax_amount = gross_total * (tax_percent / 100);
+                                    var net_amount = Number(gross_total) + Number(tax_amount); 
+                                    $("#total_tax_amount").val(tax_amount);
+                                    $("#net_total").val(net_amount);
+                                }
+                            };
+                        
+ 
                     
                 }
             });
