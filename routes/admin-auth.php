@@ -28,6 +28,7 @@ use App\Http\Controllers\Product\ProductSubCategoryController;
 use App\Http\Controllers\Master\LeadSourceController;
 use App\Http\Controllers\Lead\LeadController;
 use App\Http\Controllers\Lead\LeadDetailController;
+use App\Http\Controllers\Lead\PurchaseOrderController;
 
 Route::prefix('admin')->name('admin.')->middleware('guest:admin')->group(function () {
     // Route::get('register', [RegisteredUserController::class, 'create'])
@@ -115,6 +116,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::post('leads/quotation/update', [LeadController::class, 'updateQuotation'])->name('lead.quotation.update');
    Route::get('leads/quotation/pdf/{quotaion_id}', [LeadController::class, 'quotaionPdf'])->name('quotaion.pdf');
    Route::post('lead-stage/update', [LeadController::class, 'leadStageUpdate'])->name('lead_stage.update');
-   Route::post('lead/purchase-order/create', [LeadController::class, 'createPurchaseOrder'])->name('lead.purchase_order.create');
+
+   Route::post('lead/purchase-order/create', [PurchaseOrderController::class, 'createPurchaseOrder'])->name('lead.purchase_order.create');
+   Route::get('lead/po-details/{po_id}', [PurchaseOrderController::class, 'poDetailsView'])->name('po.details');
+   Route::post('lead/purchase-order/update', [PurchaseOrderController::class, 'updatePurchaseOrder'])->name('lead.purchase_order.update');
 
 });

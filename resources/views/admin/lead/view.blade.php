@@ -55,10 +55,10 @@
                         <div class="card-body">
 
                             <div class="tabs">
-                                <div class="tab @if(in_array($lead->lead_stage_id, [1,2])) active @endif" data-target="tab1">Time Line</div>
+                                <div class="tab @if(in_array($lead->lead_stage_id, [1])) active @endif" data-target="tab1">Time Line</div>
                                 <div class="tab" data-target="lead_details">Lead Details</div>
-                                <div class="tab @if(in_array($lead->lead_stage_id, [2,3,4])) active @endif" data-target="tab3">Quotation Stage</div>
-                                <div class="tab" data-target="tab4">P.O. Stage</div>
+                                <div class="tab @if(in_array($lead->lead_stage_id, [2,3,4,5])) active @endif" data-target="quotation_stage">Quotation Stage</div>
+                                <div class="tab" data-target="po_stage">P.O. Stage</div>
                                 <div class="tab" data-target="tab5">Proforma</div>
 
                             </div>
@@ -78,7 +78,7 @@
                                 </div>
                             @endif
 
-                            <div id="tab1" class="tab-content @if(in_array($lead->lead_stage_id, [1,2])) active @endif">
+                            <div id="tab1" class="tab-content @if(in_array($lead->lead_stage_id, [1])) active @endif">
                                 {{-- <h4>Timeline</h4> --}}
                                 @include('admin.lead.timeline')
                             </div>
@@ -90,17 +90,17 @@
                                 </form>
                             </div>
 
-                            <div id="tab3" class="tab-content @if(in_array($lead->lead_stage_id, [2,3,4])) active @endif">
+                            <div id="quotation_stage" class="tab-content @if(in_array($lead->lead_stage_id, [2,3,4,5])) active @endif">
                                 @if(session('quotation_data') && $lead->lead_stage_id == 2)
                                     @include('admin.lead.quotation_session_pdf')
                                 @elseif($lead->lead_stage_id == 2)
                                     @include('admin.lead.quotation')
-                                @elseif($lead->lead_stage_id == 3 || $lead->lead_stage_id == 4)
+                                @elseif(in_array($lead->lead_stage_id, [3,4,5]))
                                   @include('admin.lead.quotation_pdf')
                                 @endif
                             </div>
 
-                            <div id="tab4" class="tab-content @if($lead->lead_stage_id == 3) active @endif">
+                            <div id="po_stage" class="tab-content @if($lead->lead_stage_id == 3) active @endif">
 
                                 @if($lead->lead_stage_id == 3)
                                 <div class="modal fade" id="po_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -131,9 +131,9 @@
                                     </div>
                                 </div>
                                 @elseif($lead->lead_stage_id == 4)
-                                <form action="{{route('admin.lead.purchase_order.create')}}" method="POST" enctype="multipart/form-data"> @csrf
                                     @include('admin.lead.po_stage')
-                                </form>
+                                @elseif($lead->lead_stage_id == 5)
+                                    @include('admin.lead.po_stage_update')
                                 @endif
 
                             </div>
@@ -189,7 +189,7 @@
                         placeholder: "Select Lead Stage",
                         allowClear: true
                     });
-                } else if(tab.dataset.target === "tab3") {
+                } else if(tab.dataset.target === "quotation_stage") {
                     $('.product_select_quot').select2({
                         placeholder: "Select an option",
                         allowClear: true
@@ -245,35 +245,8 @@
                     }
     
                 }
-                else if(tab.dataset.target === "tab4"){
-                        $("#po_modal").modal('show');
-
-                        $("#tax_percent").change(function(){
-                            amountCalculation();
-                        });
-                        $("#gross_total").keyup(function(){
-                            amountCalculation();
-                        });
-                        $("#order_no").keyup(function(){
-                            amountCalculation();
-                        })
-
-                            function amountCalculation(){
-                                var tax_percent = $("#tax_percent").val();
-                                var gross_total = $("#gross_total").val();
-                                if(gross_total == ''){
-                                    $("#total_tax_amount").val('0');
-                                    $("#net_total").val('0');
-                                }else{
-                                    var tax_amount = gross_total * (tax_percent / 100);
-                                    var net_amount = Number(gross_total) + Number(tax_amount); 
-                                    $("#total_tax_amount").val(tax_amount);
-                                    $("#net_total").val(net_amount);
-                                }
-                            };
-                        
- 
-                    
+                else if(tab.dataset.target === "po_stage"){
+                        $("#po_modal").modal('show');   
                 }
             });
         });
