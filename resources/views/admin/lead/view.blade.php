@@ -202,7 +202,6 @@
                             url:"{{route('admin.product-details')}}",
                             data:{"product_id":product_id},
                             success:function(res){
-                                 console.log(res);
                                 var i=0;
                                 var tr='';                                       
                                 for(i=0;i<res.length;i++){

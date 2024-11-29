@@ -245,7 +245,7 @@ class LeadController extends Controller implements HasMiddleware
     }
 
     public function productDetails(Request $request){
-        $product = Product::join('measuring_units','products.measuring_unit_id','measuring_units.id')->whereIn('products.id',$request->product_id)->get('products.*','measuring_units.unit_type');
+        $product = Product::join('measuring_units','products.measuring_unit_id','measuring_units.id')->select('products.*','measuring_units.unit_type')->whereIn('products.id',$request->product_id)->get();
         return $product;
     }
 
