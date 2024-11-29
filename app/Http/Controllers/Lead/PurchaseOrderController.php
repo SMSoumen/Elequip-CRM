@@ -8,14 +8,13 @@ use App\Models\PurchaseOrder;
 use App\Models\Admin;
 use App\Models\Quotation;
 use App\Models\QuotationDetail;
-use App\Models\QuotationTerm;
 use App\Models\OrderAndDelivery;
 use App\Models\Lead;
 use Illuminate\Support\Facades\DB;
 
 class PurchaseOrderController extends Controller
 {
-    
+
     public function createPurchaseOrder(Request $request){
         $request->validate([
             'lead_id'              => 'required|integer',

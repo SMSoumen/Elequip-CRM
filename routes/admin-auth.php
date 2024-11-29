@@ -27,7 +27,6 @@ use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ProductSubCategoryController;
 use App\Http\Controllers\Master\LeadSourceController;
 use App\Http\Controllers\Lead\LeadController;
-use App\Http\Controllers\Lead\LeadDetailController;
 use App\Http\Controllers\Lead\PurchaseOrderController;
 
 Route::prefix('admin')->name('admin.')->middleware('guest:admin')->group(function () {
