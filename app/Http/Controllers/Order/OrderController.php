@@ -31,7 +31,7 @@ class OrderController extends Controller implements HasMiddleware
                 return DataTables::eloquent(PurchaseOrder::query()->join('leads','purchase_orders.lead_id','leads.id')
                 ->join('lead_stages','leads.lead_stage_id','lead_stages.id')
                 ->join('customers','leads.company_id','customers.id')->join('companies','leads.customer_id','companies.id')
-                ->select('purchase_orders.id','purchase_orders.po_net_amount','customers.customer_name','customers.mobile','customers.designation','customers.email','companies.company_name','lead_stages.stage_name')
+                ->select('purchase_orders.id','purchase_orders.po_net_amount','purchase_orders.po_refer_no','customers.customer_name','customers.mobile','customers.designation','customers.email','companies.company_name','lead_stages.stage_name')
                 ->orderBy('purchase_orders.id','desc'))
                 ->addColumn('orderby', function ($data) {
                     return $data->orderby = $data->customer_name.'('.$data->designation.')<br>'.$data->company_name .'<br>Email : '.$data->email.'<br> Phone : '.$data->mobile;
