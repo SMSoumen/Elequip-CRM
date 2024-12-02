@@ -5,7 +5,8 @@
         <!-- Timelime example  -->
         <div class="row">
             <div class="col-md-12">
-                <form action="{{route('admin.lead.quotation_store')}}" method="post">@csrf
+                <form action="{{route('admin.lead.quotation_store')}}" method="post">
+                    @csrf
                     <div class="row">
                         <input type="hidden" name="lead_id" value="{{$lead->id}}">
                         <div class="col-12">
@@ -57,7 +58,6 @@
                                             <input type="hidden" name="product_unit[]" value="{{$lead_product->lead_product_unit}}">
                                             <input type="hidden" name="product_tech_spec[]" value="{{$lead_product->lead_product_tech_spec}}">
                                             <input type="hidden" name="product_m_spec[]" value="{{$lead_product->lead_product_m_spec}}">
-
                                         </td>
                                         <td><input type="text" name="qty[]" class="qty" value="{{$lead_product->lead_product_qty}}" ></td>
                                         <td><input type="text" name="rate[]" class="rate" value="{{$lead_product->lead_product_price}}" ></td>

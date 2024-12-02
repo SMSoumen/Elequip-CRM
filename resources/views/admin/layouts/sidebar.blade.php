@@ -665,6 +665,32 @@
                     </li>
                 @endcan
 
+                @can(['Order access'])
+                    <li class="nav-item @if (Request::is('admin/orders*')) menu-open @endif">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-boxes"></i>
+                            <p>
+                                Order Management
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('Order access')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.orders.index') }}"
+                                        class="nav-link @if (Request::is('admin/orders')) active @endif">
+                                        <i class="nav-icon fas fa-sitemap"></i>
+                                        <p>
+                                            Order
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            
+                        </ul>
+                    </li>
+                @endcan
+
                 {{-- <li class="nav-item">
                     <a href="" class="nav-link">
                         <i class="nav-icon fas fa-columns"></i>

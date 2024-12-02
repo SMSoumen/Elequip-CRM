@@ -15,35 +15,28 @@
                             </div>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
-
-                           <form action="" method="get">@csrf
+                        <div class="card-body">                                                       
                                <div class="row mb-5">
-                                    <div class="col-3">
-                                        <label for="lead_stage">Lead Stage</label>
-                                        <select class="form-control" name="lead_stage" id="lead_stage" required>
-                                            <option value="">Select Lead Stage</option>
+                                    <div class="col-4">
+                                        <label for="lead_stage"><i class="fas fa-filter"></i> Lead Stage</label>
+                                        <select class="form-control" name="lead_stage" id="lead_stage">
+                                            <option value="">All Lead Data</option>
                                             @foreach($lead_stages as $lead_stage)
                                             <option value="{{$lead_stage->id}}">{{$lead_stage->stage_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
-                                    <div class="col-3">
-                                        <label for="from_date">From Date</label>
-                                        <input type="date" class="form-control" name="ffrom_date" id="from_date">
+                                    <div class="col-4">
+                                        <label for="from_date"><i class="fas fa-filter"></i> From Date</label>
+                                        <input type="date" class="form-control" name="from_date" id="from_date">
                                     </div>
 
-                                    <div class="col-3">
-                                        <label for="to_date">To Date</label>
+                                    <div class="col-4">
+                                        <label for="to_date"><i class="fas fa-filter"></i> To Date</label>
                                         <input type="date" class="form-control" name="to_date" id="to_date">
-                                    </div>
-
-                                    <div class="col-3 mt-4">
-                                        <button type="submit" class="btn btn-success">Search</button>
-                                    </div>
+                                    </div>                                    
                                 </div>
-                            </form>
 
                             @if (session('success'))
                                 <div class="alert alert-success">
@@ -88,10 +81,6 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-@endsection
-
-
-    <!--==================> Add Brand Modal ============================-->
 
     <div class="modal fade" id="assign_user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -119,6 +108,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+    <!--==================> Add Brand Modal ============================-->
+
+    
 
 @push('scripts')
 
@@ -167,7 +162,14 @@
                 "responsive": true,
                 "lengthChange": true,
 
-                ajax: "{{ route('admin.leads.index') }}",
+                ajax: {
+                    url: "{{ route('admin.leads.index') }}",
+                    data: function (d) {
+                        d.lead_stage = $('#lead_stage').val();
+                        d.from_date = $('#from_date').val();
+                        d.to_date = $('#to_date').val();
+                    }
+                },
                 lengthMenu: [
                     [10, 25, 50, 200, 500, 1000, -1],
                     [10, 25, 50, 200, 500, 1000, "All"]
@@ -214,7 +216,11 @@
                     $('.statusChange').bootstrapSwitch();
                 }
 
-            });            
+            }); 
+
+            $('#lead_stage, #from_date, #to_date').on('change keyup', function () {
+                table.draw();
+            });           
 
         });
 

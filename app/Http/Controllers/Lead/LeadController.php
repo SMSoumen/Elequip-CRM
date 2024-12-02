@@ -28,6 +28,7 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
 
 class LeadController extends Controller implements HasMiddleware
 {
@@ -49,10 +50,26 @@ class LeadController extends Controller implements HasMiddleware
 
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(Lead::query()->join('customers','leads.customer_id','customers.id')
+
+                $query = Lead::query()->join('customers','leads.customer_id','customers.id')
                 ->join('companies','leads.company_id','companies.id')->join('lead_stages','leads.lead_stage_id','lead_stages.id')
                 ->select('leads.*','customers.customer_name','customers.mobile','customers.designation','companies.company_name','lead_stages.stage_name')
-                ->orderBy('leads.id','desc'))
+                ->orderBy('leads.id','desc');
+
+                if ($request->lead_stage) {
+                    Log::info($request->lead_stage);
+                    $query->where('leads.lead_stage_id', '=', $request->lead_stage);
+                }
+                if ($request->from_date) {
+                    Log::info($request->from_date);
+                    $query->where('leads.created_at', '>', $request->from_date);
+                }
+                if ($request->to_date) {
+                    Log::info($request->to_date);
+                    $query->where('leads.created_at', '<', $request->to_date);
+                }
+
+                return DataTables::eloquent($query)
                 ->addColumn('customer', function ($data) {
                     return $data->customer = $data->customer_name.'('.$data->designation.')<br>'.$data->company_name;
                 })
@@ -77,7 +94,7 @@ class LeadController extends Controller implements HasMiddleware
                     return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'viewRoute', 'deleteRoute', 'permission','edit_type','type']))->render();
                 })->addIndexColumn()->rawColumns(['customer','next_fllowup_date','assign_to','action','stage','created_date'])->make(true);
             }
-            $lead_stages = LeadStage::where('status','1')->orderBy('stage_name','asc')->get();
+            $lead_stages = LeadStage::where('status','1')->orderBy('id','asc')->get();
             $users = Admin::whereNot('id',1)->orderBy('name','asc')->get();
             return view('admin.lead.index',compact('users','lead_stages'));
         } catch (\Exception $e) {
