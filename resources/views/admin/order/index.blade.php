@@ -62,23 +62,48 @@
 @endsection
 
 
-    <!--==================> Add Brand Modal ============================-->
+    <!--==================> Add Advance Amount Modal ============================-->
 
-    <div class="modal fade" id="assign_user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="add_advance_amount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Assign Lead</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Advance Payment</h5>
                 </div>
-                <form action="{{route('admin.lead-assign')}}" method="POST" id="form_data">@csrf
+                <form method="POST" id="add_advance_amount_form">@csrf
                     <div class="modal-body">
-                        <input type="hidden" name="lead_id" id="lead_id">
+                        <p id="response-message"></p>
+                        <input type="hidden" name="order_id" id="order_id">
                         <div class="col-12">
-                            <label for="lead_assigned_to">Select User <span class="text-danger">*</span></label>
-                            <select name="lead_assigned_to" id="lead_assigned_to" class="form-control" required>
-                                <option value="">Select User</option>
+                            <label for="advance_amount">Advance Amount<span class="text-danger">*</span></label>
+                            <input name="advance_amount" id="advance_amount" class="form-control" required>
+                            <span class="text-danger" id="check_amount_msg"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-                            </select>
+        <!--==================> Add Remaining Amount ============================-->
+
+    <div class="modal fade" id="add_remaining_amount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Remaining Amount</h5>
+                </div>
+                <form method="POST" id="add_remaining_amount_form">@csrf
+                    <div class="modal-body">
+                        <p id="response-message"></p>
+                        <input type="hidden" name="order_id" id="order_id">
+                        <div class="col-12">
+                            <label for="advance_amount">Remaining Amount<span class="text-danger">*</span></label>
+                            <input name="advance_amount" id="advance_amount" class="form-control" required>
+                            <span class="text-danger" id="check_amount_msg"></span>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -93,11 +118,86 @@
 
     <script>
 
-        $(document).on('click','.assign_user',function(){
-            var lead_id = $(this).data("modelid");
-            $("#lead_id").val(lead_id);
-            $("#assign_user").modal('show');
+        $(document).on('click','.add_remaining_amount',function(){
+            var order_id = $(this).data("modelid");
+            $("#order_id").val(order_id);
+            $("#add_remaining_amount").modal('show');
         });
+
+        $(document).on('click','.add_advance_amount',function(){
+            var order_id = $(this).data("modelid");
+            $("#order_id").val(order_id);
+            $("#add_advance_amount").modal('show');
+        });
+
+
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#add_advance_amount_form').on('submit', function (e) {
+                e.preventDefault(); 
+                let formData = new FormData(this);
+                $.ajax({
+                    url: "{{route('admin.order.add_advance_amount')}}",
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                            console.log(response);
+                            $('#response-message').html('');
+                                    if (response.success) {
+                                        $('#response-message').html('<div class="alert alert-success text-center">' + response.message + '</div>');
+                                        setInterval(location.reload(), 30000);
+                                    }
+                                    else if(response.status == 'check_amount'){
+                                        $("#check_amount_msg").html(response.message);
+                                    }
+                                },
+                    error: function (xhr) {
+                        let errors = xhr.responseJSON.errors;
+                        let errorMessages = '';
+                        for (let field in errors) {
+                            errorMessages += `<p style="color: red;">${errors[field]}</p>`;
+                        }
+                        $('#response-message').html(errorMessages);
+                    }
+                })
+            });
+
+            $('#add_remaining_amount_form').on('submit', function (e) {
+                e.preventDefault(); 
+                let formData = new FormData(this);
+                $.ajax({
+                    url: "{{route('admin.order.add_advance_amount')}}",
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                            console.log(response);
+                            $('#response-message').html('');
+                                    if (response.success) {
+                                        $('#response-message').html('<div class="alert alert-success text-center">' + response.message + '</div>');
+                                        setInterval(location.reload(), 30000);
+                                    }
+                                    else if(response.status == 'check_amount'){
+                                        $("#check_amount_msg").html(response.message);
+                                    }
+                                },
+                    error: function (xhr) {
+                        let errors = xhr.responseJSON.errors;
+                        let errorMessages = '';
+                        for (let field in errors) {
+                            errorMessages += `<p style="color: red;">${errors[field]}</p>`;
+                        }
+                        $('#response-message').html(errorMessages);
+                    }
+                })
+            });
 
 
         $(document).ready(function() {
@@ -105,11 +205,7 @@
             var datetime = currentdate.getDate() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate
                 .getFullYear() + "-" + currentdate.getHours() + "-" + currentdate.getMinutes() + "-" + currentdate
                 .getSeconds();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+
 
             var table = $('.listtable').DataTable({
                 dom: "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +

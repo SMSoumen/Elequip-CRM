@@ -31,13 +31,13 @@ class OrderController extends Controller implements HasMiddleware
                 return DataTables::eloquent(PurchaseOrder::query()->join('leads','purchase_orders.lead_id','leads.id')
                 ->join('lead_stages','leads.lead_stage_id','lead_stages.id')
                 ->join('customers','leads.company_id','customers.id')->join('companies','leads.customer_id','companies.id')
-                ->select('purchase_orders.id','purchase_orders.po_net_amount','purchase_orders.po_refer_no','customers.customer_name','customers.mobile','customers.designation','customers.email','companies.company_name','lead_stages.stage_name')
+                ->select('purchase_orders.id','purchase_orders.po_net_amount','purchase_orders.po_refer_no','purchase_orders.po_advance','purchase_orders.po_remaining','purchase_orders.created_at','customers.customer_name','customers.mobile','customers.designation','customers.email','companies.company_name','lead_stages.stage_name')
                 ->orderBy('purchase_orders.id','desc'))
                 ->addColumn('orderby', function ($data) {
                     return $data->orderby = $data->customer_name.'('.$data->designation.')<br>'.$data->company_name .'<br>Email : '.$data->email.'<br> Phone : '.$data->mobile;
                 })
                 ->addColumn('balance_amount', function ($data) {
-                    return $data->balance_amount = $data->po_net_amount;
+                    return $data->balance_amount =number_format($data->po_remaining,2) ;
                 })
                 ->addColumn('stage', function ($data) {
                     return $data->stage = '<span class="badge bg-secondary">'.$data->stage_name.'</span>';
@@ -102,5 +102,27 @@ class OrderController extends Controller implements HasMiddleware
     public function destroy(string $id)
     {
         //
+    }
+
+    public function addAdvanceAmount(Request $request){
+        $request->validate([
+            'order_id'        => 'required|integer',
+            'advance_amount'  => 'required|integer',
+        ]);
+
+        $order_details = PurchaseOrder::where('id',$request->order_id)->first('po_net_amount');
+        if($request->advance_amount > $order_details->po_net_amount){
+            return response()->json(['status'=>'check_amount','message' => 'The Advance Amount field must contain a number less than or equal to '.$order_details->po_net_amount]);
+        }
+        else{
+            $remaining_amount = $order_details->po_net_amount - $request->advance_amount;
+            if(PurchaseOrder::where('id',$request->order_id)->update(['po_advance' => $request->advance_amount, 'po_remaining' =>  $remaining_amount])){
+                return response()->json(['success' => true, 'message' => 'Amount added successfully.']);
+            }
+            else{
+                return response()->json(['success' => false, 'message' => 'Error!! while adding amount!',]);
+            }
+        }
+        
     }
 }

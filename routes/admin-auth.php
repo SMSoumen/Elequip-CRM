@@ -122,5 +122,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::post('lead/purchase-order/update', [PurchaseOrderController::class, 'updatePurchaseOrder'])->name('lead.purchase_order.update');
 
    Route::resource('orders', OrderController::class);
+   Route::post('orders/advance-amount', [OrderController::class, 'addAdvanceAmount'])->name('order.add_advance_amount');
 
 });

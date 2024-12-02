@@ -34,6 +34,7 @@ class PurchaseOrderController extends Controller
             'lead_id' => $request->lead_id,
             'quotation_id' => $request->quotation_id,
             // 'po_amount' => $request->
+            'po_remaining'    => $request->net_total,
             'po_gross_amount' =>$request->gross_total,
             'po_net_amount' => $request->net_total,
             'po_taxable' => $request->total_tax_amount,
@@ -109,6 +110,7 @@ class PurchaseOrderController extends Controller
             'quotation_id' => $request->quotation_id,
             'po_gross_amount' =>$request->gross_total,
             'po_net_amount' => $request->net_total,
+            'po_remaining'    => $request->net_total,
             'po_taxable' => $request->total_tax_amount,
             'po_tax_percent' => $request->tax_percent,
             'po_order_no' => $request->order_no,
