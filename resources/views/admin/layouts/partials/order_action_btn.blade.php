@@ -11,6 +11,6 @@
         @endif
 
         @if($data->lead_stage_id > 5)
-        <button type="button" class="btn btn-sm btn-warning m-1 update_stage" data-modelid="{{$data->lead_id}}"><i class="fas fa-edit"></i></button>                              
+        <button type="button" class="btn btn-sm btn-warning m-1 update_stage" data-modelid="{{$data->lead_id}}" data-stageid="{{$data->lead_stage_id}}"><i class="fas fa-edit"></i></button>                              
         @endif
 </div>

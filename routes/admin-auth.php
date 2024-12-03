@@ -124,5 +124,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::resource('orders', OrderController::class);
    Route::post('orders/advance-amount', [OrderController::class, 'addAdvanceAmount'])->name('order.add_advance_amount');
    Route::post('orders/remaining-amount', [OrderController::class, 'addRemainingAmount'])->name('order.add_remaining_amount');
+   Route::post('orders/lead_stage/update', [OrderController::class, 'updateLeadStage'])->name('order.update_lead_stage');
 
+   
 });

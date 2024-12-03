@@ -114,9 +114,54 @@
         </div>
     </div>
 
+    <!--==================> update lead stage Modal ============================-->
+
+    <div class="modal fade" id="lead_stage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Stage</h5>
+                </div>
+                <form method="POST" id="lead_stage_form">@csrf
+                    <div class="modal-body">
+                        <p id="response-message_stage"></p>
+                        <input type="hidden" name="lead_id" id="lead_id">
+                        <div class="col-12">
+                            <label for="stage_id">Select Stage<span class="text-danger">*</span></label>
+                            <select name="stage_id" id="stage_id" class="form-control" required>
+                                    @foreach($lead_stages as $stage)
+                                    <option value="{{$stage->id}}" @if($stage->id == 9) {{'disabled'}} @endif>{{$stage->stage_name}}</option>
+                                    @endforeach
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 @push('scripts')
 
     <script>
+
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).on('click','.update_stage',function(){
+            var lead_id = $(this).data("modelid");
+            var stageid = $(this).data("stageid");
+            $("#lead_id").val(lead_id);
+            $("#stage_id").val(stageid);
+            $("#lead_stage").modal('show');
+        });
 
         $(document).on('click','.add_remaining_amount',function(){
             var order_id = $(this).data("modelid");
@@ -129,13 +174,6 @@
             $("#order_id").val(order_id);
             $("#add_advance_amount").modal('show');
         });
-
-
-        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
 
             $('#add_advance_amount_form').on('submit', function (e) {
                 e.preventDefault(); 
@@ -193,6 +231,33 @@
                             errorMessages += `<p style="color: red;">${errors[field]}</p>`;
                         }
                         $('#response-message1').html(errorMessages);
+                    }
+                })
+            });
+
+            $('#lead_stage_form').on('submit', function (e) {
+                e.preventDefault(); 
+                let formData = new FormData(this);
+                $.ajax({
+                    url: "{{route('admin.order.update_lead_stage')}}",
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                            $('#response-message_stage').html('');
+                                    if (response.success) {
+                                        $('#response-message_stage').html('<div class="alert alert-success text-center">' + response.message + '</div>');
+                                        setInterval(location.reload(), 100000);
+                                    }
+                                },
+                    error: function (xhr) {
+                        let errors = xhr.responseJSON.errors;
+                        let errorMessages = '';
+                        for (let field in errors) {
+                            errorMessages += `<p style="color: red;">${errors[field]}</p>`;
+                        }
+                        $('#response-message_stage').html(errorMessages);
                     }
                 })
             });

@@ -11,6 +11,8 @@ use Exception;
 use App\Models\PurchaseOrder;
 use App\Models\OrderAndDelivery;
 use App\Models\Lead;
+use App\Models\LeadFollowup;
+use App\Models\LeadStage;
 
 class OrderController extends Controller implements HasMiddleware
 {
@@ -51,7 +53,9 @@ class OrderController extends Controller implements HasMiddleware
                 })
                 ->addIndexColumn()->rawColumns(['orderby','balance_amount','action','stage','created_date'])->make(true);
             }
-            return view('admin.order.index');
+
+            $lead_stages = LeadStage::where('id','>',5)->get();
+            return view('admin.order.index',compact(['lead_stages']));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->route('admin.dashboard')->with('error', $e->getMessage());
@@ -117,6 +121,7 @@ class OrderController extends Controller implements HasMiddleware
         }
         else{
             Lead::where('id',$order_details->lead_id)->update(['lead_stage_id' => 6]);
+            LeadFollowup::create(['lead_id' => $order_details->lead_id, 'followup_remarks' =>'Advance Payment of Rs. '.$request->advance_amount.' Added', 'followup_type'=>'remarks', 'admin_id'=> auth("admin")->user()->id]);
             $remaining_amount = $order_details->po_net_amount - $request->advance_amount;
             if(PurchaseOrder::where('id',$request->order_id)->update(['po_advance' => $request->advance_amount, 'po_remaining' =>  $remaining_amount])){
                 return response()->json(['success' => true, 'message' => 'Amount added successfully.']);
@@ -133,11 +138,12 @@ class OrderController extends Controller implements HasMiddleware
             'remaining_amount'=> 'required|numeric',
         ]);
 
-        $order_details = PurchaseOrder::where('id',$request->order_id)->first('po_remaining');
+        $order_details = PurchaseOrder::where('id',$request->order_id)->first();
         if($request->remaining_amount > $order_details->po_remaining){
             return response()->json(['status'=>'check_amount','message' => 'The Remaining Amount field must contain a number less than or equal to '.$order_details->po_remaining]);
         }
         else{
+            LeadFollowup::create(['lead_id' => $order_details->lead_id, 'followup_remarks' => 'Remaining Payment of Rs. '.$request->remaining_amount.' Added', 'followup_type'=>'remarks', 'admin_id'=> auth("admin")->user()->id]);
             $remaining_amount = $order_details->po_remaining - $request->remaining_amount;
             if(PurchaseOrder::where('id',$request->order_id)->update(['po_remaining' =>  $remaining_amount])){
                 return response()->json(['success' => true, 'message' => 'Amount added successfully.']);
@@ -146,6 +152,19 @@ class OrderController extends Controller implements HasMiddleware
                 return response()->json(['success' => false, 'message' => 'Error!! while adding amount!',]);
             }
         } 
+    }
+
+    public function updateLeadStage(Request $request){
+        $request->validate([
+            'lead_id'  => 'required|integer',
+            'stage_id' => 'required|integer',
+        ]);
+        if(Lead::where('id',$request->lead_id)->update(['lead_stage_id' => $request->stage_id])){
+            return response()->json(['success' => true, 'message' => 'Lead stage updated successfully.']);
+        }
+        else{
+            return response()->json(['success' => false, 'message' => 'Error!! while updating lead stage!',]);
+        }
     }
 
 
