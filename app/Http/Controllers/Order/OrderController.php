@@ -13,6 +13,8 @@ use App\Models\OrderAndDelivery;
 use App\Models\Lead;
 use App\Models\LeadFollowup;
 use App\Models\LeadStage;
+use App\Models\SmsFormat;
+use App\Models\Quotation;
 
 class OrderController extends Controller implements HasMiddleware
 {
@@ -55,7 +57,8 @@ class OrderController extends Controller implements HasMiddleware
             }
 
             $lead_stages = LeadStage::where('id','>',5)->get();
-            return view('admin.order.index',compact(['lead_stages']));
+            $templates = SmsFormat::where('status',1)->orderBy('template_name','asc')->get(['id','template_name']); 
+            return view('admin.order.index',compact(['lead_stages','templates']));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->route('admin.dashboard')->with('error', $e->getMessage());
@@ -139,8 +142,8 @@ class OrderController extends Controller implements HasMiddleware
         ]);
 
         $order_details = PurchaseOrder::where('id',$request->order_id)->first();
-        if($request->remaining_amount > $order_details->po_remaining){
-            return response()->json(['status'=>'check_amount','message' => 'The Remaining Amount field must contain a number less than or equal to '.$order_details->po_remaining]);
+        if($request->remaining_amount != $order_details->po_remaining){
+            return response()->json(['status'=>'check_amount','message' => 'The Remaining Amount field must contain a number equal to '.$order_details->po_remaining]);
         }
         else{
             LeadFollowup::create(['lead_id' => $order_details->lead_id, 'followup_remarks' => 'Remaining Payment of Rs. '.$request->remaining_amount.' Added', 'followup_type'=>'remarks', 'admin_id'=> auth("admin")->user()->id]);
@@ -167,5 +170,25 @@ class OrderController extends Controller implements HasMiddleware
         }
     }
 
+    public function orderSendSms(Request $request){
+        // dd($request);
+        $request->validate([
+            'mobile_no' => 'required|string',
+            'lead_id'   => 'required|integer',
+            'sms_title' => 'required|integer',
+        ]);
+
+        $sms_template = SmsFormat::where('id',$request->sms_title)->first(['id','template_format']);
+
+        if($sms_template->id == 14){
+            $quotation = Quotation::where('lead_id',$request->lead_id)->latest()->first(['quot_ref_no']); 
+            $msg = str_replace('{ORDER_ID}', $quotation->quot_ref_no, $sms_template->template_format);
+        }else{
+            $po = PurchaseOrder::where('lead_id',$request->lead_id)->first(['po_refer_no']);
+            $msg = str_replace('{ORDER_ID}', $po->po_refer_no, $sms_template->template_format);
+        }
+
+        dd($msg);
+    }
 
 }

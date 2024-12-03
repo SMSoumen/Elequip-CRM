@@ -58,7 +58,7 @@
                                 <div class="tab @if(in_array($lead->lead_stage_id, [1])) active @endif" data-target="tab1">Time Line</div>
                                 <div class="tab" data-target="lead_details">Lead Details</div>
                                 <div class="tab @if(in_array($lead->lead_stage_id, [2,3,4,5])) active @endif" data-target="quotation_stage">Quotation Stage</div>
-                                <div class="tab" data-target="po_stage">P.O. Stage</div>
+                                <div class="tab @if($lead->lead_stage_id > 5) active @endif" data-target="po_stage">P.O. Stage</div>
                                 <div class="tab" data-target="tab5">Proforma</div>
 
                             </div>
