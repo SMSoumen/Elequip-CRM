@@ -13,9 +13,6 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-
-
-
                             @if (session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
@@ -76,7 +73,7 @@
                         <input type="hidden" name="order_id" id="order_id">
                         <div class="col-12">
                             <label for="advance_amount">Advance Amount<span class="text-danger">*</span></label>
-                            <input name="advance_amount" id="advance_amount" class="form-control" required>
+                            <input type="number" name="advance_amount" id="advance_amount" class="form-control" required>
                             <span class="text-danger" id="check_amount_msg"></span>
                         </div>
                     </div>
@@ -102,7 +99,7 @@
                         <input type="hidden" name="order_id" id="r_order_id">
                         <div class="col-12">
                             <label for="remaining_amount">Remaining Amount<span class="text-danger">*</span></label>
-                            <input name="remaining_amount" id="remaining_amount" class="form-control" required>
+                            <input type="number" name="remaining_amount" id="remaining_amount" class="form-control" required>
                             <span class="text-danger" id="check_remaining_msg"></span>
                         </div>
                     </div>
@@ -144,6 +141,35 @@
         </div>
     </div>
 
+    <!--==================> Send SMS Modal ============================-->
+
+    <div class="modal fade" id="send_sms" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send SMS</h5>
+                </div>
+                <form method="POST" action="{{route('admin.order.send_sms')}}">@csrf
+                    <div class="modal-body">
+                        <input type="hidden" name="mobile_no" id="mobile_no">
+                        <input type="hidden" name="lead_id" id="lead_id1">
+                        <div class="col-12">
+                            <label for="sms_title">SMS Title<span class="text-danger">*</span></label>
+                            <select name="sms_title" id="sms_title" class="form-control" required>
+                                    @foreach($templates as $template)
+                                    <option value="{{$template->id}}">{{$template->template_name}}</option>
+                                    @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 @push('scripts')
 
@@ -153,6 +179,14 @@
             headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+
+        $(document).on('click','.send_sms',function(){
+            var mobile_no = $(this).data("mobileno");
+            var lead_id = $(this).data("leadid");
+            $("#mobile_no").val(mobile_no);
+            $("#lead_id1").val(lead_id);
+            $("#send_sms").modal('show');
         });
 
         $(document).on('click','.update_stage',function(){
