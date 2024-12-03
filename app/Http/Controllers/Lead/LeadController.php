@@ -188,7 +188,7 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function show(Request $request,Lead $lead)
     {
-        $fllowup_date = LeadFollowup::where('lead_id',$lead->id)->latest()->first();
+        $followup_date = LeadFollowup::where('lead_id',$lead->id)->latest()->first();
         $companies = Company::where('status','1')->orderBy('company_name','asc')->get();
         $customers = Customer::where('status','1')->orderBy('customer_name','asc')->get();
         $categories = LeadCategory::where('status','1')->orderBy('category_name','asc')->get();
@@ -208,7 +208,7 @@ class LeadController extends Controller implements HasMiddleware
             }
         }
 
-        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','fllowup_date','lead_details','quotations','letest_quotation','po_details','orders']));
+        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders']));
     }
 
     /**

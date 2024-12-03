@@ -49,7 +49,7 @@
     </div>
     <div class="col-6 mt-3">
         <label for="followup_next_date">Next Follow-up Date<span class="text-danger"> *</span></label>
-        <input type="date" name="followup_next_date" id="followup_next_date" class="form-control" value="{{$fllowup_date->followup_next_date}}" required>
+        <input type="date" name="followup_next_date" id="followup_next_date" class="form-control" value="{{$followup_date->followup_next_date}}" required>
     </div>
 
     <div class="col-6 mt-3">
