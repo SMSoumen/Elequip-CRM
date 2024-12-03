@@ -151,6 +151,7 @@ class LeadController extends Controller implements HasMiddleware
             LeadFollowup::create([
                 'lead_id'            => $lead_id,
                 'followup_next_date' => $request->Next_follow_up_date,
+                'followup_remarks' => $request->lead_remarks,
                 'admin_id'           => auth("admin")->user()->id,
             ]);
 
@@ -188,7 +189,8 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function show(Request $request,Lead $lead)
     {
-        $followup_date = LeadFollowup::where('lead_id',$lead->id)->latest()->first();
+        $followups = LeadFollowup::with('admin')->where('lead_id',$lead->id)->latest()->get();
+        $followup_date = $followups->first();
         $companies = Company::where('status','1')->orderBy('company_name','asc')->get();
         $customers = Customer::where('status','1')->orderBy('customer_name','asc')->get();
         $categories = LeadCategory::where('status','1')->orderBy('category_name','asc')->get();
@@ -208,7 +210,7 @@ class LeadController extends Controller implements HasMiddleware
             }
         }
 
-        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders']));
+        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders', 'followups']));
     }
 
     /**
