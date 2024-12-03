@@ -98,12 +98,12 @@
                 </div>
                 <form method="POST" id="add_remaining_amount_form">@csrf
                     <div class="modal-body">
-                        <p id="response-message"></p>
-                        <input type="hidden" name="order_id" id="order_id">
+                        <p id="response-message1"></p>
+                        <input type="hidden" name="order_id" id="r_order_id">
                         <div class="col-12">
-                            <label for="advance_amount">Remaining Amount<span class="text-danger">*</span></label>
-                            <input name="advance_amount" id="advance_amount" class="form-control" required>
-                            <span class="text-danger" id="check_amount_msg"></span>
+                            <label for="remaining_amount">Remaining Amount<span class="text-danger">*</span></label>
+                            <input name="remaining_amount" id="remaining_amount" class="form-control" required>
+                            <span class="text-danger" id="check_remaining_msg"></span>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -120,7 +120,7 @@
 
         $(document).on('click','.add_remaining_amount',function(){
             var order_id = $(this).data("modelid");
-            $("#order_id").val(order_id);
+            $("#r_order_id").val(order_id);
             $("#add_remaining_amount").modal('show');
         });
 
@@ -147,11 +147,10 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
-                            console.log(response);
                             $('#response-message').html('');
                                     if (response.success) {
                                         $('#response-message').html('<div class="alert alert-success text-center">' + response.message + '</div>');
-                                        setInterval(location.reload(), 30000);
+                                        setInterval(location.reload(), 100000);
                                     }
                                     else if(response.status == 'check_amount'){
                                         $("#check_amount_msg").html(response.message);
@@ -172,20 +171,19 @@
                 e.preventDefault(); 
                 let formData = new FormData(this);
                 $.ajax({
-                    url: "{{route('admin.order.add_advance_amount')}}",
+                    url: "{{route('admin.order.add_remaining_amount')}}",
                     method: 'POST',
                     data: formData,
                     processData: false,
                     contentType: false,
                     success: function (response) {
-                            console.log(response);
-                            $('#response-message').html('');
+                            $('#response-message1').html('');
                                     if (response.success) {
-                                        $('#response-message').html('<div class="alert alert-success text-center">' + response.message + '</div>');
-                                        setInterval(location.reload(), 30000);
+                                        $('#response-message1').html('<div class="alert alert-success text-center">' + response.message + '</div>');
+                                        setInterval(location.reload(), 100000);
                                     }
                                     else if(response.status == 'check_amount'){
-                                        $("#check_amount_msg").html(response.message);
+                                        $("#check_remaining_msg").html(response.message);
                                     }
                                 },
                     error: function (xhr) {
@@ -194,7 +192,7 @@
                         for (let field in errors) {
                             errorMessages += `<p style="color: red;">${errors[field]}</p>`;
                         }
-                        $('#response-message').html(errorMessages);
+                        $('#response-message1').html(errorMessages);
                     }
                 })
             });

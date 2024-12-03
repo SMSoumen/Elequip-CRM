@@ -122,7 +122,28 @@ class OrderController extends Controller implements HasMiddleware
             else{
                 return response()->json(['success' => false, 'message' => 'Error!! while adding amount!',]);
             }
+        }  
+    }
+
+    public function addRemainingAmount(Request $request){
+        $request->validate([
+            'order_id'        => 'required|integer',
+            'remaining_amount'=> 'required|integer',
+        ]);
+
+        $order_details = PurchaseOrder::where('id',$request->order_id)->first('po_remaining');
+        if($request->remaining_amount > $order_details->po_remaining){
+            return response()->json(['status'=>'check_amount','message' => 'The Remaining Amount field must contain a number less than or equal to '.$order_details->po_remaining]);
         }
-        
+        else{
+            $remaining_amount = $order_details->po_remaining - $request->remaining_amount;
+            if(PurchaseOrder::where('id',$request->order_id)->update(['po_remaining' =>  $remaining_amount])){
+                return response()->json(['success' => true, 'message' => 'Amount added successfully.']);
+            }
+            else{
+                return response()->json(['success' => false, 'message' => 'Error!! while adding amount!',]);
+            }
+        } 
+
     }
 }
