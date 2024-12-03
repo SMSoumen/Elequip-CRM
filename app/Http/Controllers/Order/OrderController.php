@@ -50,7 +50,7 @@ class OrderController extends Controller implements HasMiddleware
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })
                 ->addColumn('action', function ($data) {
-                    $viewRoute = route('admin.orders.show', $data->id);
+                    $viewRoute = route('admin.leads.show', $data->lead_id);
                     return view('admin.layouts.partials.order_action_btn', compact(['data', 'viewRoute']))->render();
                 })
                 ->addIndexColumn()->rawColumns(['orderby','balance_amount','action','stage','created_date'])->make(true);

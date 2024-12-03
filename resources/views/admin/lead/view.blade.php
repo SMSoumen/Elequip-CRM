@@ -57,8 +57,8 @@
                             <div class="tabs">
                                 <div class="tab @if(in_array($lead->lead_stage_id, [1])) active @endif" data-target="tab1">Time Line</div>
                                 <div class="tab" data-target="lead_details">Lead Details</div>
-                                <div class="tab @if(in_array($lead->lead_stage_id, [2,3,4,5])) active @endif" data-target="quotation_stage">Quotation Stage</div>
-                                <div class="tab @if($lead->lead_stage_id > 5) active @endif" data-target="po_stage">P.O. Stage</div>
+                                <div class="tab @if($lead->lead_stage_id >= 2 && $lead->lead_stage_id < 5) active @endif" data-target="quotation_stage">Quotation Stage</div>
+                                <div class="tab @if($lead->lead_stage_id >= 5) active @endif" data-target="po_stage">P.O. Stage</div>
                                 <div class="tab" data-target="tab5">Proforma</div>
 
                             </div>
@@ -90,17 +90,17 @@
                                 </form>
                             </div>
 
-                            <div id="quotation_stage" class="tab-content @if(in_array($lead->lead_stage_id, [2,3,4,5])) active @endif">
+                            <div id="quotation_stage" class="tab-content @if($lead->lead_stage_id >= 2 &&  $lead->lead_stage_id < 5) active @endif">
                                 @if(session('quotation_data') && $lead->lead_stage_id == 2)
                                     @include('admin.lead.quotation_session_pdf')
                                 @elseif($lead->lead_stage_id == 2)
                                     @include('admin.lead.quotation')
-                                @elseif(in_array($lead->lead_stage_id, [3,4,5]))
+                                @elseif(in_array($lead->lead_stage_id, [3,4,5,6,7,8,9]))
                                   @include('admin.lead.quotation_pdf')
                                 @endif
                             </div>
 
-                            <div id="po_stage" class="tab-content @if($lead->lead_stage_id == 3) active @endif">
+                            <div id="po_stage" class="tab-content @if($lead->lead_stage_id >= 5) active @endif">
 
                                 @if($lead->lead_stage_id == 3)
                                 <div class="modal fade" id="po_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -132,7 +132,7 @@
                                 </div>
                                 @elseif($lead->lead_stage_id == 4)
                                     @include('admin.lead.po_stage')
-                                @elseif($lead->lead_stage_id == 5)
+                                @elseif($lead->lead_stage_id >= 5)
                                     @include('admin.lead.po_stage_update')
                                 @endif
 
