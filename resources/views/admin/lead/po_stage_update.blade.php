@@ -70,16 +70,26 @@
                                 <input type="hidden" name="order_id[]" value="{{$order->id}}">
                             </td>
                             <td><input type="date" name="estimate_delivery_date[]" value="{{$order->order_product_delivery_date}}" required></td>
-                            <td><span class="badge bg-warning">Pending</span></td>
+                            <td>
+                                @if($order->status == 0)
+							        <span class="badge badge-warning text-center">Pending</span>
+                                @elseif($order->status == 1)
+                                    <span class="badge badge-info text-center">Ready to Dispatch</span>
+                                @else if($order->status == 2)
+                                    <span class="badge badge-success text-center">Delivered</span>
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
 
+            @if($lead->lead_stage_id != 9)
             <div class="col-12 mt-5">
                 <button type="submit" class="btn btn-success float-right">Submit</button>
             </div>
+            @endif
     </div>
 </form>
 
