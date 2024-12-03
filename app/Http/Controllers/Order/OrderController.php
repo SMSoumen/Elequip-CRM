@@ -171,9 +171,8 @@ class OrderController extends Controller implements HasMiddleware
     }
 
     public function orderSendSms(Request $request){
-        // dd($request);
         $request->validate([
-            'mobile_no' => 'required|string',
+            'mobile_no' => 'required|integer',
             'lead_id'   => 'required|integer',
             'sms_title' => 'required|integer',
         ]);
@@ -188,7 +187,30 @@ class OrderController extends Controller implements HasMiddleware
             $msg = str_replace('{ORDER_ID}', $po->po_refer_no, $sms_template->template_format);
         }
 
-        dd($msg);
+        //$mobile_no = '91'.$request->mobile_no;
+        $mobile_no = 919932996178;
+        if($this->sendSms($mobile_no,$msg,$sms_template->id)){
+            LeadFollowup::create(['lead_id' => $request->lead_id, 'followup_remarks' => $msg, 'followup_type'=>'remarks', 'admin_id'=> auth("admin")->user()->id]);
+            return redirect()->back()->withSuccess('SMS send successfully.');
+        }else{
+            return redirect()->back()->withErrors('Error!! while sending sms!!!');
+        }
+    }
+
+    private function sendSms($to_mobile, $msg, $template_id){
+         $userID = "elequipsms";
+         $userPassword = "etplsms763";
+         $url = "http://server.sitanigroup.com/smsserver";
+
+         $msg = urlencode($msg);
+         $url = $url.'/?UserID='.$userID.'&UserPassWord='.$userPassword.'&PhoneNumber='.$to_mobile.'&Text='.$msg."&DltTID=".$template_id;
+         $ch = curl_init($url);
+         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+         curl_setopt($ch, CURLOPT_URL, $url);
+         $result = curl_exec($ch);
+         curl_close($ch);
+         return $result;
     }
 
 }
