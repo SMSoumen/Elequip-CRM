@@ -141,29 +141,31 @@
 
                             <div id="proforma" class="tab-content">
                                 @if($lead->lead_stage_id > 4)
-                                @if(!$lead_company->gst)
-                                    <div class="modal fade" id="update_gst_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Add Company GST No</h5>
-                                            </div>
-                                            <form method="POST" action="{{route('admin.update.company_gst')}}" id="update_gst">@csrf
-                                                <div class="modal-body">
-                                                    <input type="hidden" name="company_id" value="{{$lead_company->id}}">
-                                                    <div class="col-12">
-                                                        <label for="gst_no">Company GST No <span class="text-danger"> *</span></label>
-                                                        <input type="text" name="gst_no" id="gst_no" class="form-control" required>        
-                                                    </div>  
+                                    @if(!$lead_company->gst)
+                                        <div class="modal fade" id="update_gst_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Add Company GST No</h5>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                <form method="POST" action="{{route('admin.update.company_gst')}}" id="update_gst">@csrf
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="company_id" value="{{$lead_company->id}}">
+                                                        <div class="col-12">
+                                                            <label for="gst_no">Company GST No <span class="text-danger"> *</span></label>
+                                                            <input type="text" name="gst_no" id="gst_no" class="form-control" required>        
+                                                        </div>  
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </form>
                                                 </div>
-                                            </form>
                                             </div>
                                         </div>
-                                    </div>
-                                @endif
+                                    @else
+                                        @include('admin.lead.proforma')
+                                    @endif
                                 @endif
 
                             </div>
@@ -365,6 +367,20 @@
                 }
                 else if(tab.dataset.target === "proforma"){
                     $("#update_gst_modal").modal('show'); 
+                    changeAmount();
+                    function changeAmount(){
+                        $(".qty").keyup(function(){
+                            var quantity = $(this).val();
+                            var amount = $(this).closest('tr').find('.rate').val();
+                            var total_amount = quantity * amount; 
+                            if (isNaN(total_amount)) {
+                                $(this).closest('tr').find('.amount').val(0);
+                            }
+                            else{
+                                $(this).closest('tr').find('.amount').val(total_amount);
+                            }
+                        });
+                    }
                 }
 
             });
