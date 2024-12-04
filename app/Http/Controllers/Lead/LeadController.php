@@ -456,8 +456,10 @@ class LeadController extends Controller implements HasMiddleware
         $data['quotation'] = Quotation::where('id',$quotaion_id)->first();
         $data['quotaion_details'] = QuotationDetail::where('quotation_id',$quotaion_id)->get();
         $data['quotation_terms'] = QuotationTerm::where('quotation_id',$quotaion_id)->first();
-        $pdf = Pdf::loadView('admin.pdf.quotation', $data);
-        return $pdf->download('invoice.pdf');
+        $data['head_img'] = public_path('assets/admin/img/quotation-header.jpg');
+        
+        $pdf = Pdf::loadView('admin.pdf.quotation', $data)->setPaper('A4', 'portrait');
+        return $pdf->stream('invoice.pdf');
         
     }
 
