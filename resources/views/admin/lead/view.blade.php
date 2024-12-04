@@ -369,6 +369,12 @@
                 }
                 else if(tab.dataset.target === "proforma"){
                     $("#update_gst_modal").modal('show'); 
+                    
+                    $('.product_tech_spec').summernote({
+                        tabsize: 2,
+                        height: 100
+                    });
+
                     changeAmount();
                     function changeAmount(){
                         $(".qty").keyup(function(){
@@ -381,7 +387,17 @@
                             else{
                                 $(this).closest('tr').find('.amount').val(total_amount);
                             }
+                            updateTotal();
                         });
+                    }
+
+                    function updateTotal() {
+                        let total = 0;
+                        $('.amount').each(function() {
+                            const value = parseFloat($(this).val()) || 0;
+                            total += value;
+                        });
+                        $('#basic_amount').val('Rs. '+total);
                     }
                 }
 

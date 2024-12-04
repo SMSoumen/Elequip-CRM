@@ -42,19 +42,16 @@
                                                 <input type="text" name="dispatch" id="dispatch" class="form-control" value="{{$invoice->proforma_dispatch}}" required>
                                             </div>
 
-
                                             <div class="col-12 mt-3">
                                                 <label for="proforma_remark">Proforma Remarks <span class="text-danger">*</span></label>
                                                 <textarea name="proforma_remark" id="proforma_remark" class="form-control" required>{{$invoice->proforma_remarks}}</textarea>
                                             </div>
 
-
-
-
                                             <div class="col-12 mt-3">
                                                     <table class="table" id="myTable">
                                                                 <thead>
                                                                     <tr>
+                                                                        <th>#</th>
                                                                         <th>Product Details</th>
                                                                         <th>Qty</th>
                                                                         <th>Rate</th>
@@ -62,28 +59,40 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>  
-                                                                @foreach($proforma_details as $proforma)
+                                                                @php $total_amount = 0; @endphp
+                                                                @foreach($proforma_details as $key=>$proforma)
                                                                     @php
                                                                         $amount = $proforma->proforma_product_price * $proforma->proforma_product_qty;
+                                                                        $total_amount = $total_amount + $amount
                                                                     @endphp
                                                                     <tr>
+                                                                        <td>{{$key+1}}</td>
                                                                         <td>
-                                                                            {{$proforma->product_title}} ({{$proforma->product_code}})
+                                                                            {{$proforma->product_name}} ({{$proforma->product_code}}) <br><br>
+                                                                            <textarea name="product_tech_spec[]" class="product_tech_spec">{{$proforma->proforma_product_spec}}</textarea>
                                                                             <input type="hidden" name="product_id[]" value="{{$proforma->product_id}}">
-                                                                            <input type="hidden" name="product_tech_spec[]" value="{{$proforma->proforma_product_spec}}">
                                                                         </td>
                                                                         <td><input type="number" name="qty[]" class="qty" value="{{$proforma->proforma_product_qty}}" ></td>
                                                                         <td><input type="number" name="rate[]" class="rate" value="{{$proforma->proforma_product_price}}" ></td>
                                                                         <td><input type="text" name="amount[]" class="amount" value="{{$amount}}" readonly></td>
                                                                     </tr>
                                                                 @endforeach
+
+                                                                    <tr>
+                                                                        <td colspan="3"></td>
+                                                                        <td colspan="2">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text" id="basic-addon1">Basic Total =</span>
+                                                                                <input type="text" id="basic_amount" aria-label="Username" aria-describedby="basic-addon1" value="Rs. {{$total_amount}}" readonly>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
                                                                 </tbody>
                                                     </table>
                                             </div>
 
-
-                                            <div class="col-12 mt-5">
-                                                <button type="submit" class="btn btn-success float-right">Update Proforma</button>
+                                            <div class="col-12 mt-5 mb-3">
+                                                <button type="submit" class="btn btn-success float-right">Submit</button>
                                             </div>
 
                                         </div>
@@ -109,21 +118,36 @@
 @push('scripts')
 
 <script>
-
-changeAmount();
-function changeAmount(){
-    $(".qty").keyup(function(){
-        var quantity = $(this).val();
-        var amount = $(this).closest('tr').find('.rate').val();
-        var total_amount = quantity * amount; 
-        if (isNaN(total_amount)) {
-            $(this).closest('tr').find('.amount').val(0);
-        }
-        else{
-            $(this).closest('tr').find('.amount').val(total_amount);
-        }
+    $('.product_tech_spec').summernote({
+        tabsize: 2,
+        height: 100
     });
-}
+
+    changeAmount();
+    
+    function changeAmount(){
+        $(".qty").keyup(function(){
+            var quantity = $(this).val();
+            var amount = $(this).closest('tr').find('.rate').val();
+            var total_amount = quantity * amount; 
+            if (isNaN(total_amount)) {
+                $(this).closest('tr').find('.amount').val(0);
+            }
+            else{
+                $(this).closest('tr').find('.amount').val(total_amount);
+            }
+            updateTotal();
+        });
+    }
+
+    function updateTotal() {
+        let total = 0;
+        $('.amount').each(function() {
+            const value = parseFloat($(this).val()) || 0;
+            total += value;
+        });
+        $('#basic_amount').val('Rs. '+total);
+    }
 
 </script>
 

@@ -31,6 +31,7 @@
                     <table class="table" id="myTable">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Product Details</th>
                                         <th>Qty</th>
                                         <th>Rate</th>
@@ -38,21 +39,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>  
-                                @foreach($letest_quotation_details as $quotation)
+
+                                    @php $total_amount = 0; @endphp
+                                @foreach($letest_quotation_details as $key=>$quotation)
                                     @php
                                         $amount = $quotation->quot_product_unit_price * $quotation->quot_product_qty;
+                                        $total_amount = $total_amount + $amount
                                     @endphp
                                     <tr>
+                                        <td>{{$key+1}}</td>
                                         <td>
-                                            {{$quotation->quot_product_name}} ({{$quotation->quot_product_code}})
+                                            {{$quotation->quot_product_name}} ({{$quotation->quot_product_code}}) <br><br>
+                                            <textarea name="product_tech_spec[]" class="product_tech_spec">{{$quotation->quot_product_tech_spec}}</textarea>
                                             <input type="hidden" name="product_id[]" value="{{$quotation->product_id}}">
-                                            <input type="hidden" name="product_tech_spec[]" value="{{$quotation->quot_product_tech_spec}}">
                                         </td>
                                         <td><input type="number" name="qty[]" class="qty" value="{{$quotation->quot_product_qty}}" ></td>
                                         <td><input type="number" name="rate[]" class="rate" value="{{$quotation->quot_product_unit_price}}" ></td>
                                         <td><input type="text" name="amount[]" class="amount" value="{{$amount}}" readonly></td>
                                     </tr>
                                 @endforeach
+
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td colspan="2">
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">Basic Total =</span>
+                                                <input type="text" id="basic_amount" aria-label="Username" aria-describedby="basic-addon1" value="Rs. {{$total_amount}}" readonly>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 </tbody>
                     </table>
             </div>
