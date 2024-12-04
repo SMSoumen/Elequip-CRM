@@ -115,9 +115,6 @@ class LeadController extends Controller implements HasMiddleware
         return view('admin.lead.add',compact(['companies','customers','categories','sources','products']));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -207,6 +204,8 @@ class LeadController extends Controller implements HasMiddleware
 
         $lead_company = Company::where('id',$lead->company_id)->first(['id','gst']);
 
+        $proforma = ProformaInvoice::where('lead_id',$lead->id)->first();
+
         $po_details = $orders = '';
         if($letest_quotation){
             $po_details = PurchaseOrder::where('quotation_id',$letest_quotation->id)->first();
@@ -215,7 +214,7 @@ class LeadController extends Controller implements HasMiddleware
             }
         }
 
-        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders', 'followups','lead_company','letest_quotation_details']));
+        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders', 'followups','lead_company','letest_quotation_details','proforma']));
     }
 
     /**
@@ -490,22 +489,112 @@ class LeadController extends Controller implements HasMiddleware
 
     public function createProforma(Request $request){
         $request->validate([
-            'quotation_id'      => 'required|integer',
+            'po_id'             => 'required|integer',
             'lead_id'           => 'required|integer',
             'tax_type'          => 'required|string',
             'dispatch'          => 'required|string',
             'proforma_remark'   => 'required|string',
+
             'product_id'        => 'required|array',
             'product_id.*'      => 'required|integer',
+
             'qty'               => 'required|array',
             'qty.*'             => 'required|numeric',
+
             'rate'              => 'required|array',
             'rate.*'            => 'required|numeric',
-            'amount'            => 'required|array',
-            'amount.*'          => 'required|numeric',
+
+            'product_tech_spec'   => 'required|array',
+            'product_tech_spec.*' => 'required|string',
 
         ]);
 
+        DB::beginTransaction();
+        try{
+                $invoice = ProformaInvoice::create([
+                    'lead_id' => $request->lead_id,
+                    'purchase_order_id' => $request->po_id,
+                    'proforma_gst_type' => $request->tax_type,
+                    'proforma_dispatch' => $request->dispatch,
+                    'proforma_remarks' => $request->proforma_remark,
+                    'created_by' => auth("admin")->user()->id,
+                ]);
+
+                $details = [];
+                foreach($request->product_id as $key=>$product_id){
+                    array_push($details,[
+                        'proforma_invoice_id'    => $invoice->id,
+                        'product_id'             => $product_id,
+                        'proforma_product_spec'  => $request->product_tech_spec[$key],
+                        'proforma_product_qty'   => $request->qty[$key],
+                        'proforma_product_price' => $request->rate[$key],
+                    ]);
+                }
+                DB::table('proforma_details')->insert($details);
+                DB::commit();
+                return redirect()->back()->withSuccess('Proforma added successfully.');
+        }
+        catch(Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors('Error!! while adding proforma!!!');
+        }
+    }
+
+    public function proformaEdit(Request $request,$proforma_id){
+        $invoice = ProformaInvoice::where('id',$proforma_id)->first();
+        $proforma_details = ProformaDetail::join('products','proforma_details.product_id','products.id')
+            ->where('proforma_details.proforma_invoice_id',$proforma_id)->get(['proforma_details.*','products.product_name','products.product_code']);
+        return view('admin.lead.proforma_edit',compact(['invoice','proforma_details']));
+    }
+
+    public function updateProforma(Request $request){
+        $request->validate([
+            'invoice_id'        => 'required|integer',
+            'lead_id'           => 'required|integer',
+            'tax_type'          => 'required|string',
+            'dispatch'          => 'required|string',
+            'proforma_remark'   => 'required|string',
+
+            'product_id'        => 'required|array',
+            'product_id.*'      => 'required|integer',
+
+            'qty'               => 'required|array',
+            'qty.*'             => 'required|numeric',
+
+            'rate'              => 'required|array',
+            'rate.*'            => 'required|numeric',
+
+            'product_tech_spec'   => 'required|array',
+            'product_tech_spec.*' => 'required|string',
+        ]);
+
+        DB::beginTransaction();
+        try{
+            ProformaDetail::where('proforma_invoice_id',$request->invoice_id)->delete();
+            ProformaInvoice::where('id',$request->invoice_id)->update([
+                'proforma_gst_type' => $request->tax_type,
+                'proforma_dispatch' => $request->dispatch,
+                'proforma_remarks' => $request->proforma_remark,
+            ]);
+
+            $details = [];
+            foreach($request->product_id as $key=>$product_id){
+                array_push($details,[
+                    'proforma_invoice_id'    => $request->invoice_id,
+                    'product_id'             => $product_id,
+                    'proforma_product_spec'  => $request->product_tech_spec[$key],
+                    'proforma_product_qty'   => $request->qty[$key],
+                    'proforma_product_price' => $request->rate[$key],
+                ]);
+            }
+            DB::table('proforma_details')->insert($details);
+            DB::commit();
+            return redirect()->route('admin.leads.show',$request->lead_id)->withSuccess('Proforma updated successfully.');
+        }
+        catch(Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors('Error!! while updating proforma!!!');
+        }
 
     }
 

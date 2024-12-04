@@ -163,6 +163,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    @elseif($proforma)
+                                        @include('admin.lead.proforma_pdf')
                                     @else
                                         @include('admin.lead.proforma')
                                     @endif

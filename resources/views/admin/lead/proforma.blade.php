@@ -1,6 +1,10 @@
 <div id="response-message"></div>
 <form id="po_update" action="{{route('admin.lead.add_proforma')}}" method="POST" enctype="multipart/form-data"> @csrf
     <div class="row">
+
+            <input type="hidden" name="lead_id" value="{{$po_details->lead_id}}">
+            <input type="hidden" name="po_id" value="{{$po_details->id}}">
+
             <div class="col-6">
                 <label for="tax_type">Tax Type <span class="text-danger">*</span></label>
                 <select class="form-control" name="tax_type" id="tax_type" required>
@@ -42,8 +46,6 @@
                                         <td>
                                             {{$quotation->quot_product_name}} ({{$quotation->quot_product_code}})
                                             <input type="hidden" name="product_id[]" value="{{$quotation->product_id}}">
-                                            <input type="hidden" name="product_name[]" value="{{$quotation->quot_product_name}}">
-                                            <input type="hidden" name="product_code[]" value="{{$quotation->quot_product_code}}">
                                             <input type="hidden" name="product_tech_spec[]" value="{{$quotation->quot_product_tech_spec}}">
                                         </td>
                                         <td><input type="number" name="qty[]" class="qty" value="{{$quotation->quot_product_qty}}" ></td>

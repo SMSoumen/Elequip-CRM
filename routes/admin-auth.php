@@ -118,7 +118,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::post('lead-stage/update', [LeadController::class, 'leadStageUpdate'])->name('lead_stage.update');
    Route::post('company/gst-update', [LeadController::class, 'companyGstUpdate'])->name('update.company_gst');
    Route::post('lead/proforma/create', [LeadController::class, 'createProforma'])->name('lead.add_proforma');
+   Route::get('leads/proforma/edit/{proforma_id}', [LeadController::class, 'proformaEdit'])->name('lead.proforma.edit');
+   Route::post('lead/proforma/update', [LeadController::class, 'updateProforma'])->name('lead.proforma.update');
 
+   
    Route::post('lead/purchase-order/create', [PurchaseOrderController::class, 'createPurchaseOrder'])->name('lead.purchase_order.create');
    Route::get('lead/po-details/{po_id}', [PurchaseOrderController::class, 'poDetailsView'])->name('po.details');
    Route::post('lead/purchase-order/update', [PurchaseOrderController::class, 'updatePurchaseOrder'])->name('lead.purchase_order.update');
