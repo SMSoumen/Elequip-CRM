@@ -371,7 +371,8 @@
         border: 1px solid #001533;
         color: #00112a;
     }
-    .fs-14{
+
+    .fs-14 {
         font-size: 14px !important;
     }
 </style>
@@ -401,7 +402,7 @@
                                 <div class="timeline-badge"></div>
                                 <div class="timeline-panel">
                                     <div class="timeline-heading">
-                                        <h6 class="timeline-title">{{$followup->admin->name}}</h6>
+                                        <h6 class="timeline-title">{{ $followup->admin->name }}</h6>
                                     </div>
                                     <div class="timeline-body">
                                         <p class="fs-14">
@@ -432,20 +433,21 @@
                             <div class="timeline-badge"></div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h6 class="timeline-title">{{$lead->admin->name}}</h6>
+                                    <h6 class="timeline-title">{{ $lead->admin->name }}</h6>
                                 </div>
                                 <div class="timeline-body">
                                     <p class="fs-14">Lead Created
 
                                         @if ($lead->lead_remarks)
-                                           {!!'<br><b>Remarks</b>: '!!} {{$lead->lead_remarks}}
+                                            {!! '<br><b>Remarks</b>: ' !!} {{ $lead->lead_remarks }}
                                         @endif
                                     </p>
                                 </div>
                                 <div class="timeline-footer d-flex align-items-center flex-wrap">
                                     <i class="mdi mdi-heart-outline text-muted mr-1"></i>
                                     <span>{{ \Carbon\Carbon::parse($lead->created_at)->diffForHumans() }}</span>
-                                    <span class="ml-md-auto font-weight-bold">{{ \Carbon\Carbon::parse($lead->created_at)->format('M d, Y, H:i a') }}</span>
+                                    <span
+                                        class="ml-md-auto font-weight-bold">{{ \Carbon\Carbon::parse($lead->created_at)->format('M d, Y, H:i a') }}</span>
                                 </div>
                             </div>
                         </div>
