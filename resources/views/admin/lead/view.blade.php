@@ -53,13 +53,14 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <div id="response-message"></div>
 
                             <div class="tabs">
                                 <div class="tab @if(in_array($lead->lead_stage_id, [1])) active @endif" data-target="tab1">Time Line</div>
                                 <div class="tab" data-target="lead_details">Lead Details</div>
                                 <div class="tab @if($lead->lead_stage_id >= 2 && $lead->lead_stage_id < 5) active @endif" data-target="quotation_stage">Quotation Stage</div>
                                 <div class="tab @if($lead->lead_stage_id >= 5) active @endif" data-target="po_stage">P.O. Stage</div>
-                                <div class="tab" data-target="tab5">Proforma</div>
+                                <div class="tab" data-target="proforma">Proforma</div>
 
                             </div>
 
@@ -138,9 +139,33 @@
 
                             </div>
 
-                            <div id="tab5" class="tab-content">
-                                <h2>Content for Tab 5</h2>
-                                <p>This is the content for the third tab. Add as many tabs as you like!</p>
+                            <div id="proforma" class="tab-content">
+                                @if($lead->lead_stage_id > 4)
+                                @if(!$lead_company->gst)
+                                    <div class="modal fade" id="update_gst_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Add Company GST No</h5>
+                                            </div>
+                                            <form method="POST" action="{{route('admin.update.company_gst')}}" id="update_gst">@csrf
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="company_id" value="{{$lead_company->id}}">
+                                                    <div class="col-12">
+                                                        <label for="gst_no">Company GST No <span class="text-danger"> *</span></label>
+                                                        <input type="text" name="gst_no" id="gst_no" class="form-control" required>        
+                                                    </div>  
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                                @endif
+
                             </div>
 
                         </div>
@@ -189,7 +214,8 @@
                             placeholder: "Select Lead Stage",
                             allowClear: true
                         });
-                } else if(tab.dataset.target === "quotation_stage") {
+                }
+                else if(tab.dataset.target === "quotation_stage") {
                         $('.product_select_quot').select2({
                             placeholder: "Select an option",
                             allowClear: true
@@ -336,6 +362,9 @@
                                 }
                             });
                         })
+                }
+                else if(tab.dataset.target === "proforma"){
+                    $("#update_gst_modal").modal('show'); 
                 }
 
             });

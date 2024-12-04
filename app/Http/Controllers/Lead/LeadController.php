@@ -201,6 +201,8 @@ class LeadController extends Controller implements HasMiddleware
 
         $quotations = Quotation::where('lead_id',$lead->id)->orderBy('quot_version','desc')->get();
         $letest_quotation = Quotation::where('lead_id',$lead->id)->latest()->first();
+        
+        $lead_company = Company::where('id',$lead->company_id)->first(['id','gst']);
 
         $po_details = $orders = '';
         if($letest_quotation){
@@ -210,7 +212,7 @@ class LeadController extends Controller implements HasMiddleware
             }
         }
 
-        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders', 'followups']));
+        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders', 'followups','lead_company']));
     }
 
     /**
@@ -468,6 +470,19 @@ class LeadController extends Controller implements HasMiddleware
         else{
             return redirect()->back()->withErrors('Error!! while updating lead stage!!!');
         }
+    }
+
+    public function companyGstUpdate(Request $request){
+        $request->validate([
+            'company_id' => 'required|integer',
+            'gst_no'     => 'required|string',
+        ]);
+        if(Company::where('id',$request->company_id)->update(['gst' => $request->gst_no])){
+            return redirect()->back()->withSuccess('GST NO added successfully.');
+        }
+        else{
+            return redirect()->back()->withErrors('Error!! while adding GST NO!!!');
+        }  
     }
 
 
