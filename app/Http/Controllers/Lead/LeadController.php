@@ -18,6 +18,8 @@ use App\Models\QuotationDetail;
 use App\Models\QuotationTerm;
 use App\Models\PurchaseOrder;
 use App\Models\OrderAndDelivery;
+use App\Models\ProformaInvoice;
+use App\Models\ProformaDetail;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -201,7 +203,8 @@ class LeadController extends Controller implements HasMiddleware
 
         $quotations = Quotation::where('lead_id',$lead->id)->orderBy('quot_version','desc')->get();
         $letest_quotation = Quotation::where('lead_id',$lead->id)->latest()->first();
-        
+        $letest_quotation_details = QuotationDetail::where('quotation_id',$letest_quotation->id)->get();
+
         $lead_company = Company::where('id',$lead->company_id)->first(['id','gst']);
 
         $po_details = $orders = '';
@@ -212,7 +215,7 @@ class LeadController extends Controller implements HasMiddleware
             }
         }
 
-        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders', 'followups','lead_company']));
+        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders', 'followups','lead_company','letest_quotation_details']));
     }
 
     /**
@@ -485,6 +488,27 @@ class LeadController extends Controller implements HasMiddleware
         else{
             return redirect()->back()->withErrors('Error!! while adding GST NO!!!');
         }  
+    }
+
+    public function createProforma(Request $request){
+        $request->validate([
+            'quotation_id'      => 'required|integer',
+            'lead_id'           => 'required|integer',
+            'tax_type'          => 'required|string',
+            'dispatch'          => 'required|string',
+            'proforma_remark'   => 'required|string',
+            'product_id'        => 'required|array',
+            'product_id.*'      => 'required|integer',
+            'qty'               => 'required|array',
+            'qty.*'             => 'required|numeric',
+            'rate'              => 'required|array',
+            'rate.*'            => 'required|numeric',
+            'amount'            => 'required|array',
+            'amount.*'          => 'required|numeric',
+
+        ]);
+
+
     }
 
 
