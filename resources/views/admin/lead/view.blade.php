@@ -61,7 +61,6 @@
                                 <div class="tab @if($lead->lead_stage_id >= 2 && $lead->lead_stage_id < 5) active @endif" data-target="quotation_stage">Quotation Stage</div>
                                 <div class="tab @if($lead->lead_stage_id >= 5) active @endif" data-target="po_stage">P.O. Stage</div>
                                 <div class="tab" data-target="proforma">Proforma</div>
-
                             </div>
 
                             @if (session('success'))

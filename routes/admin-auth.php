@@ -29,6 +29,7 @@ use App\Http\Controllers\Master\LeadSourceController;
 use App\Http\Controllers\Lead\LeadController;
 use App\Http\Controllers\Lead\PurchaseOrderController;
 use App\Http\Controllers\Order\OrderController;
+use App\Http\Controllers\report\ReportController;
 
 Route::prefix('admin')->name('admin.')->middleware('guest:admin')->group(function () {
     // Route::get('register', [RegisteredUserController::class, 'create'])
@@ -132,5 +133,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::post('orders/lead_stage/update', [OrderController::class, 'updateLeadStage'])->name('order.update_lead_stage');
    Route::post('orders/send-sms', [OrderController::class, 'orderSendSms'])->name('order.send_sms');
 
-   
+   Route::get('reports', [ReportController::class, 'index'])->name('lead.proforma.edit');
+
 });
