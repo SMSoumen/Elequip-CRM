@@ -256,7 +256,7 @@
                                             <th>P.O. Stage</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="area_report_date">
+                                    <tbody id="area_wise_report">
                                         @foreach($area_wise_reports as $key=>$report)
                                             <tr>
                                                 <td>{{$key+1}}</td>
@@ -600,12 +600,12 @@
                                                 for(i=0;i<response.reports.length;i++){
                                                     var html = html +`<tr>`;
                                                     var html = html + `<td>`+(i+1)+`</td>`;
-                                                    var html = html + `<td>`+response.reports[i].company_name+` </td>`;
-                                                    var html = html + `<td>`+response.reports[i].quot_amount+`</td>`;
-                                                    var html = html + `<td>`+response.reports[i].name+`</td>`;
+                                                    var html = html + `<td>`+response.reports[i].area+` </td>`;
+                                                    var html = html + `<td>`+response.reports[i].quotations_amount+`</td>`;
+                                                    var html = html + `<td>`+response.reports[i].po_amount+`</td>`;
                                                     var html = html + `</tr>`;
                                                 }
-                                                $("#area_report_date").html(html);
+                                                $("#area_wise_report").html(html);
                                             } 
                                         }
                                     },
