@@ -136,11 +136,11 @@
         <thead>
             <tr style="border: 1px solid black;">
                 <th style="width: 3%">SN.</th>
-                <th style="width: 51%">DESCRIPTION</th>
-                <th style="width: 8%">QTY</th>
-                <th style="width: 8%">UNIT</th>
-                <th style="width: 15%">RATE</th>
-                <th style="width: 15%">AMOUNT</th>
+                <th>DESCRIPTION</th>
+                <th>QTY</th>
+                <th>UNIT</th>
+                <th>RATE</th>
+                <th>AMOUNT</th>
             </tr>
         </thead>
         <tbody>
@@ -167,10 +167,10 @@
                         </div>
 
                     </td>
-                    <td class="p_font" style="text-align: center;">
+                    <td class="p_font">
                         {{ $product->quot_product_qty }}
                     </td>
-                    <td class="p_font" style="text-align: center;">
+                    <td class="p_font">
                         {{ $product->quot_product_unit ? ' ' . $product->quot_product_unit : ' Unit' }}
                     </td>
                     <td class="p_font" style="width: 14%; text-align:center">

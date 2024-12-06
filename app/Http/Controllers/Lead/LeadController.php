@@ -197,10 +197,13 @@ class LeadController extends Controller implements HasMiddleware
         $products = Product::where('status','1')->orderBy('product_name','asc')->get();
         $stages = LeadStage::where('status','1')->orderBy('id','asc')->get();
         $lead_details = LeadDetail::where('lead_id',$lead->id)->get();
+        
 
         $quotations = Quotation::where('lead_id',$lead->id)->orderBy('quot_version','desc')->get();
-        $letest_quotation = Quotation::where('lead_id',$lead->id)->latest()->first();
+        // $letest_quotation = Quotation::where('lead_id',$lead->id)->latest()->first();
+        $letest_quotation = $quotations->first();
         $letest_quotation_details = QuotationDetail::where('quotation_id',$letest_quotation->id)->get();
+        $quot_terms = QuotationTerm::where('quotation_id', $letest_quotation->id)->first();
 
         $lead_company = Company::where('id',$lead->company_id)->first(['id','gst']);
 
@@ -214,7 +217,7 @@ class LeadController extends Controller implements HasMiddleware
             }
         }
 
-        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders', 'followups','lead_company','letest_quotation_details','proforma']));
+        return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders', 'followups','lead_company','letest_quotation_details','proforma', 'quot_terms']));
     }
 
     /**
@@ -455,12 +458,13 @@ class LeadController extends Controller implements HasMiddleware
     {
         $data['quotation'] = Quotation::where('id',$quotaion_id)->first();
         $data['quotaion_details'] = QuotationDetail::where('quotation_id',$quotaion_id)->get();
-        $data['quotation_terms'] = QuotationTerm::where('quotation_id',$quotaion_id)->first();
+        $data['quot_terms'] = QuotationTerm::where('quotation_id',$quotaion_id)->first();
         $data['head_img'] = public_path('assets/admin/img/quotation-header.jpg');
-        
-        $pdf = Pdf::loadView('admin.pdf.quotation', $data)->setPaper('A4', 'portrait');
-        return $pdf->stream('invoice.pdf');
-        
+        $data['lead'] = Lead::with('company', 'customer')->where('id',$data['quotation']->lead_id)->first();
+        $pdf = Pdf::loadView('admin.pdf.quotation', $data)->setOption('fontDir', public_path('assets/admin/fonts'))->setPaper('A4', 'portrait');
+        // $file_name = date('d-M-Y').'-'.$data['quotation']->id.'-'.$data['quotation']->quot_version.'-';
+        $file_name = mt_rand(11111111,999999999);
+        return $pdf->download('Lead Quotation-'. $file_name .'.pdf');
     }
 
     public function leadStageUpdate(Request $request){
