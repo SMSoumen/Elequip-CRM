@@ -222,25 +222,6 @@
                         <div class="card-body">
                             <form id="category_wise_report_form">
                                 <div class="row mb-4">
-                                    <div class="col-3">
-                                        <select class="form-control" name="company_id" id="company_id">
-                                            <option value="">Select a Quotation</option>
-                                            <option value="">1 Lacks to 3 Lacks</option>
-                                            <option value="">3 Lacks to 6 Lacks</option>
-                                            <option value="">6 Lacks to above</option>
-
-                                        </select>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <select class="form-control" name="company_id" id="company_id">
-                                            <option value="">Select Company</option>
-                                            @foreach($companies as $company)
-                                            <option value="{{$company->id}}">{{$company->company_name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
                                     <div class="col-4">
                                         <select class="form-control" name="company_id">
                                             <option value="">Select User</option>
@@ -260,9 +241,9 @@
                                     <thead>
                                         <tr>
                                             <th>Sl No</th>
-                                            <th>Company</th>
+                                            <th>City Name</th>
                                             <th>Quotation</th>
-                                            <th>Username</th>
+                                            <th>P.O. Stage</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -333,9 +314,12 @@
                                     <thead>
                                         <tr>
                                             <th>Sl No</th>
-                                            <th>Company</th>
+                                            <th>User Name</th>
                                             <th>Quotation</th>
-                                            <th>Username</th>
+                                            <th>Active Quotation</th>
+                                            <th>P.O.</th>
+                                            <th>A/c Closed</th>
+                                            <th>Due Amount</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -344,6 +328,9 @@
                                                 <td>{{$key+1}}</td>
                                                 <td>{{$report->company_name}}</td>
                                                 <td>{{$report->quot_amount}}</td>
+                                                <td>{{$report->name}}</td>
+                                                <td>{{$report->name}}</td>
+                                                <td>{{$report->name}}</td>
                                                 <td>{{$report->name}}</td>
                                             </tr>
                                         @endforeach
@@ -406,9 +393,11 @@
                                     <thead>
                                         <tr>
                                             <th>Sl No</th>
-                                            <th>Company</th>
-                                            <th>Quotation</th>
-                                            <th>Username</th>
+                                            <th>User Name</th>
+                                            <th>Lead</th>
+                                            <th>Lead->Quotation</th>
+                                            <th>Quotation -> P.O.</th>
+                                            <th>P.O -> A/c Closed</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -417,6 +406,8 @@
                                                 <td>{{$key+1}}</td>
                                                 <td>{{$report->company_name}}</td>
                                                 <td>{{$report->quot_amount}}</td>
+                                                <td>{{$report->name}}</td>
+                                                <td>{{$report->name}}</td>
                                                 <td>{{$report->name}}</td>
                                             </tr>
                                         @endforeach
