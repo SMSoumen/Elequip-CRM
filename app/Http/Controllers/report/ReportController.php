@@ -10,13 +10,18 @@ use App\Models\ProductCategory;
 use App\Models\PurchaseOrder;
 use App\Models\Quotation;
 use App\Models\Admin;
+use App\Models\City;
+use App\Models\Lead;
+use App\Models\Product;
+use App\Models\QuotationDetail;
 
 class ReportController extends Controller
 {
     public function index(Request $request){
         $companies = Company::orderBy('company_name','asc')->get(['company_name','id']);
         $product_categories = ProductCategory::orderBy('product_category_name','asc')->get();
-        $users = Admin::orderBy('name','desc')->get();
+        $users = Admin::orderBy('name','asc')->get();
+        $cities = City::orderBy('city_name','asc')->get(['id','city_name']);
 
         $client_business_reports = PurchaseOrder::join('quotations','purchase_orders.quotation_id','quotations.id')
                                     ->join('leads','purchase_orders.lead_id','leads.id')
@@ -31,7 +36,14 @@ class ReportController extends Controller
                                 ->join('admins','quotations.admin_id','admins.id')
                                 ->get(['companies.company_name','admins.name','quotations.quot_amount']);
 
-        return view("admin.report.index",compact(['companies','product_categories','users','client_business_reports','value_based_reports']));
+        $area_wise_reports = $this->areaWiseReport();
+        $category_wise_reports = $this->categoryWiseReport();
+
+        // echo "<pre>";
+        // print_r($category_wise_reports);
+        // exit();
+
+        return view("admin.report.index",compact(['companies','product_categories','users','cities','client_business_reports','value_based_reports','category_wise_reports','area_wise_reports']));
     }
 
     public function clientBusinessReport(Request $request){
@@ -57,5 +69,48 @@ class ReportController extends Controller
         }else{
             return response()->json(['success' => true, 'reports' =>[], 'message' => 'Record not found.']);
         }
+    }
+
+    public function areaWiseReport(){
+        $result = [];
+        $cities = City::get(['id','city_name']);
+        foreach($cities as $city){
+            $companies = Company::where('city_id',$city->id)->pluck('id');
+            $leads = Lead::whereIn('company_id',$companies)->pluck('id');
+            $quotations_amount = Quotation::whereIn('lead_id',$leads)->where('qout_is_latest',1)->sum('quot_amount');
+            $quotations = Quotation::whereIn('lead_id',$leads)->where('qout_is_latest',1)->pluck('id');
+            $po_amount = PurchaseOrder::whereIn('quotation_id',$quotations)->sum('po_net_amount');
+            $item = array(
+                'area' => $city->city_name,
+                'quotations_amount' => $quotations_amount,
+                'po_amount' => $po_amount,
+            );
+            $result[] = $item;
+        }
+            unset($cities,$companies,$leads,$quotations_amount,$quotations,$po_amount,$item);
+            return $result;  
+    }
+
+    public function categoryWiseReport(){
+        $result = [];
+        $categories = ProductCategory::where('status',1)->get(['id','product_category_name']);
+        foreach($categories as $category){
+            $products = Product::where('product_category_id',$category->id)->pluck('id');
+            $quotations = QuotationDetail::join('quotations','quotation_details.quotation_id','quotations.id')
+                        ->whereIn('product_id',$products)->where('quotations.qout_is_latest',1)->pluck('quotations.id');
+
+            $po_amount = PurchaseOrder::whereIn('quotation_id',$quotations)->sum('po_net_amount');
+            $quotation_amount = QuotationDetail::join('quotations','quotation_details.quotation_id','quotations.id')
+                        ->whereIn('product_id',$products)->where('quotations.qout_is_latest',1)->sum('quot_product_total_price');
+
+            $item = array(
+                'category_name' => $category->product_category_name,
+                'quotations_amount' => $quotation_amount,
+                'po_amount' => $po_amount,
+            );
+            $result[] = $item;
+        }
+        unset($categories,$category,$products,$quotations,$po_amount,$quotation_amount,$item);
+        return $result;
     }
 }

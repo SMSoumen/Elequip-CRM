@@ -129,7 +129,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    @foreach($category_wise_reports as $key=>$report)
+                                        <tr>
+                                            <td>{{$key+1}}</td>
+                                            <td>{{$report['category_name']}}</td>
+                                            <td>{{$report['quotations_amount']}}</td>
+                                            <td>{{$report['po_amount']}}</td>
+                                            <td>0.00</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -224,9 +232,9 @@
                                 <div class="row mb-4">
                                     <div class="col-4">
                                         <select class="form-control" name="company_id">
-                                            <option value="">Select User</option>
-                                            @foreach($users as $user)
-                                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                            <option value="">Select Area</option>
+                                            @foreach($cities as $city)
+                                                <option value="{{$city->id}}">{{$city->city_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -236,7 +244,7 @@
                                 </div>
                             </form>
 
-                            <div style="height:400px; overflow-y:scroll;">
+                            <div style="max-height:400px; overflow-y:scroll;">
                                 <table class="table table-bordered data-table">
                                     <thead>
                                         <tr>
@@ -247,12 +255,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($value_based_reports as $key=>$report)
+                                        @foreach($area_wise_reports as $key=>$report)
                                             <tr>
                                                 <td>{{$key+1}}</td>
-                                                <td>{{$report->company_name}}</td>
-                                                <td>{{$report->quot_amount}}</td>
-                                                <td>{{$report->name}}</td>
+                                                <td>{{$report['area']}}</td>
+                                                <td>{{$report['quotations_amount']}}</td>
+                                                <td>{{$report['po_amount']}}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
