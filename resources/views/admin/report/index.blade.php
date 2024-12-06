@@ -15,11 +15,11 @@
                            <div class="row">
                                 <div class="col-4">
                                     <label for="from_date">From Date</label>
-                                    <input type="date" id="from_date" class="form-control" name="from_date" value="{{date('Y-m-d')}}">
+                                    <input type="date" id="from_date" class="form-control" name="from_date" value="{{$from_date}}">
                                 </div>
                                 <div class="col-4">
                                     <label for="to_date">To Date</label>
-                                    <input type="date" id="to_date" class="form-control" name="to_date" value="{{date('Y-m-d',strtotime(' + 30 day'))}}">
+                                    <input type="date" id="to_date" class="form-control" name="to_date" value="{{$to_date}}">
                                 </div>
 
                                 <div class="col-4">
@@ -73,7 +73,7 @@
                                         <th>Total</th>
                                     </tr>
                                 </thead>
-                                <tbody id="business_report" style="height:10px;overflow-y:auto;overflow-x:hidden">
+                                <tbody id="business_report">
                                     @foreach($client_business_reports as $key=>$report)
                                     <tr>
                                         <td>{{$key+1}}</td>
@@ -106,7 +106,7 @@
                             <form id="category_wise_report_form">
                                 <div class="row mb-4">
                                     <div class="col-4">
-                                        <select class="form-control" name="company_id">
+                                        <select class="form-control" name="category_id" id="category_id">
                                             <option value="">Select Category</option>
                                             @foreach($product_categories as $category)
                                                 <option value="{{$category->id}}">{{$category->product_category_name}}</option>
@@ -114,32 +114,34 @@
                                         </select>
                                     </div>
                                     <div class="col-4">
-                                        <button type="button" name="search" class="btn btn-warning">Search</button>
+                                        <button type="button" id="category_wise_report" class="btn btn-warning">Search</button>
                                     </div>
                                 </div>
                             </form>
-                            <table class="table table-bordered data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Sl No</th>
-                                        <th>Category Name</th>
-                                        <th>Quotation</th>
-                                        <th>P.O. Stage</th>
-                                        <th>A/c Closed</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($category_wise_reports as $key=>$report)
+                            <div style="max-height:400px; overflow-y:scroll;">
+                                <table class="table table-bordered data-table">
+                                    <thead>
                                         <tr>
-                                            <td>{{$key+1}}</td>
-                                            <td>{{$report['category_name']}}</td>
-                                            <td>{{$report['quotations_amount']}}</td>
-                                            <td>{{$report['po_amount']}}</td>
-                                            <td>0.00</td>
+                                            <th>Sl No</th>
+                                            <th>Category Name</th>
+                                            <th>Quotation</th>
+                                            <th>P.O. Stage</th>
+                                            <th>A/c Closed</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody  id="category_report">
+                                        @foreach($category_wise_reports as $key=>$report)
+                                            <tr>
+                                                <td>{{$key+1}}</td>
+                                                <td>{{$report['category_name']}}</td>
+                                                <td>{{$report['quotations_amount']}}</td>
+                                                <td>{{$report['po_amount']}}</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -155,7 +157,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form id="category_wise_report_form">
+                            <form id="value_based_report_form">
                                 <div class="row mb-4">
                                     <div class="col-3">
                                         <select class="form-control" name="company_id" id="company_id">
@@ -185,7 +187,7 @@
                                         </select>
                                     </div>
                                     <div class="col-1">
-                                        <button type="button" name="search" class="btn btn-warning">Search</button>
+                                        <button type="button" id="value_based_report" class="btn btn-warning">Search</button>
                                     </div>
                                 </div>
                             </form>
@@ -466,6 +468,9 @@
         })
     });
 
+
+        //===================================================> Client Business Report Ajax<=============================================================//
+
                             $('#client_business_report').on('click', function (e) {
                                 var company_id = $("#company_id").val();
                                 var customer_id = $("#customer_id").val();
@@ -496,6 +501,76 @@
                                                     var html = html + `</tr>`;
                                                 }
                                                 $("#business_report").html(html);
+                                            } 
+                                        }
+                                    },
+                                });
+                            })
+
+        //===================================================> Category-wise Report Ajax<=============================================================//
+        
+                            $('#category_wise_report').on('click', function (e) {
+                                var category_id = $("#category_id").val();
+                                var from_date = $("#from_date").val();
+                                var to_date = $("#to_date").val();
+                                $.ajax({
+                                    url: "{{route('admin.category_wise_report.list')}}",
+                                    method: 'POST',
+                                    data: {"category_id":category_id,"from_date":from_date, "to_date":to_date},
+                                    success: function (response) {
+                                        //  console.log(response.reports);
+                                        var i;
+                                        var html ='';
+                                        if (response.success) {
+                                            if(response.reports.length == 0){
+                                                var html = html + `<tr><td colspan="7">`+response.message+`</td></tr>`;
+                                            }
+                                            else{
+                                                for(i=0;i<response.reports.length;i++){
+                                                    var html = html +`<tr>`;
+                                                    var html = html + `<td>`+(i+1)+`</td>`;
+                                                    var html = html + `<td>`+response.reports[i].category_name+` </td>`;
+                                                    var html = html + `<td>`+response.reports[i].quotations_amount+`</td>`;
+                                                    var html = html + `<td>`+response.reports[i].po_amount+`</td>`;
+                                                    var html = html + `<td>0.00</td>`;
+                                                    var html = html + `</tr>`;
+                                                }
+                                                $("#category_report").html(html);
+                                            } 
+                                        }
+                                    },
+                                });
+                            })
+
+        //===================================================> Value Based Report Ajax<=============================================================//
+        
+                            $('#value_based_report').on('click', function (e) {
+                                var category_id = $("#category_id").val();
+                                var from_date = $("#from_date").val();
+                                var to_date = $("#to_date").val();
+                                $.ajax({
+                                    url: "{{route('admin.category_wise_report.list')}}",
+                                    method: 'POST',
+                                    data: {"category_id":category_id,"from_date":from_date, "to_date":to_date},
+                                    success: function (response) {
+                                        //  console.log(response.reports);
+                                        var i;
+                                        var html ='';
+                                        if (response.success) {
+                                            if(response.reports.length == 0){
+                                                var html = html + `<tr><td colspan="7">`+response.message+`</td></tr>`;
+                                            }
+                                            else{
+                                                for(i=0;i<response.reports.length;i++){
+                                                    var html = html +`<tr>`;
+                                                    var html = html + `<td>`+(i+1)+`</td>`;
+                                                    var html = html + `<td>`+response.reports[i].category_name+` </td>`;
+                                                    var html = html + `<td>`+response.reports[i].quotations_amount+`</td>`;
+                                                    var html = html + `<td>`+response.reports[i].po_amount+`</td>`;
+                                                    var html = html + `<td>0.00</td>`;
+                                                    var html = html + `</tr>`;
+                                                }
+                                                $("#category_report").html(html);
                                             } 
                                         }
                                     },

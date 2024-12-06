@@ -134,6 +134,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::post('orders/send-sms', [OrderController::class, 'orderSendSms'])->name('order.send_sms');
 
    Route::get('reports', [ReportController::class, 'index'])->name('lead.proforma.edit');
-   Route::post('reports/client-business-report', [ReportController::class, 'clientBusinessReport'])->name('client_business_report.list');
+   Route::post('reports/client-business-report', [ReportController::class, 'clientBusinessReportAjax'])->name('client_business_report.list');
+   Route::post('reports/category-wise-report', [ReportController::class, 'categoryWiseReportAjax'])->name('category_wise_report.list');
 
 });
