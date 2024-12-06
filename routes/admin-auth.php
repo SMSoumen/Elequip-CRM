@@ -136,5 +136,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::get('reports', [ReportController::class, 'index'])->name('lead.proforma.edit');
    Route::post('reports/client-business-report', [ReportController::class, 'clientBusinessReportAjax'])->name('client_business_report.list');
    Route::post('reports/category-wise-report', [ReportController::class, 'categoryWiseReportAjax'])->name('category_wise_report.list');
+   Route::post('reports/value-based-report', [ReportController::class, 'valueBasedReportAjax'])->name('value_based_report.list');
+   Route::post('reports/area-wise-report', [ReportController::class, 'areaWiseReportAjax'])->name('area_wise_report.list');
 
 });

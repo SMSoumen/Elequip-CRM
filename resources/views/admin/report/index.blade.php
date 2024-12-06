@@ -160,11 +160,11 @@
                             <form id="value_based_report_form">
                                 <div class="row mb-4">
                                     <div class="col-3">
-                                        <select class="form-control" name="company_id" id="company_id">
+                                        <select class="form-control" name="quotation_amount" id="quotation_amount">
                                             <option value="">Select a Quotation</option>
-                                            <option value="">1 Lacks to 3 Lacks</option>
-                                            <option value="">3 Lacks to 6 Lacks</option>
-                                            <option value="">6 Lacks to above</option>
+                                            <option value="[100000,300000]">1 Lacks to 3 Lacks</option>
+                                            <option value="[300001,600000]">3 Lacks to 6 Lacks</option>
+                                            <option value="[600001,1000000000]">6 Lacks to above</option>
 
                                         </select>
                                     </div>
@@ -179,7 +179,7 @@
                                     </div>
 
                                     <div class="col-4">
-                                        <select class="form-control" name="company_id">
+                                        <select class="form-control" name="user_id" id="user_id">
                                             <option value="">Select User</option>
                                             @foreach($users as $user)
                                                 <option value="{{$user->id}}">{{$user->name}}</option>
@@ -192,7 +192,7 @@
                                 </div>
                             </form>
 
-                            <div style="height:400px; overflow-y:scroll;">
+                            <div style="max-height:400px; overflow-y:scroll;">
                                 <table class="table table-bordered data-table">
                                     <thead>
                                         <tr>
@@ -202,7 +202,7 @@
                                             <th>Username</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="value_report">
                                         @foreach($value_based_reports as $key=>$report)
                                             <tr>
                                                 <td>{{$key+1}}</td>
@@ -230,10 +230,10 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form id="category_wise_report_form">
+                            <form id="area_report_form">
                                 <div class="row mb-4">
                                     <div class="col-4">
-                                        <select class="form-control" name="company_id">
+                                        <select class="form-control" name="city_id" id="city_id">
                                             <option value="">Select Area</option>
                                             @foreach($cities as $city)
                                                 <option value="{{$city->id}}">{{$city->city_name}}</option>
@@ -241,7 +241,7 @@
                                         </select>
                                     </div>
                                     <div class="col-1">
-                                        <button type="button" name="search" class="btn btn-warning">Search</button>
+                                        <button type="button" id="area_report" class="btn btn-warning">Search</button>
                                     </div>
                                 </div>
                             </form>
@@ -256,7 +256,7 @@
                                             <th>P.O. Stage</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="area_report_date">
                                         @foreach($area_wise_reports as $key=>$report)
                                             <tr>
                                                 <td>{{$key+1}}</td>
@@ -545,15 +545,17 @@
         //===================================================> Value Based Report Ajax<=============================================================//
         
                             $('#value_based_report').on('click', function (e) {
-                                var category_id = $("#category_id").val();
+                                var quotation_amount = $("#quotation_amount").val();
+                                var company_id = $("#company_id").val();
+                                var user_id = $("#user_id").val();
                                 var from_date = $("#from_date").val();
                                 var to_date = $("#to_date").val();
                                 $.ajax({
-                                    url: "{{route('admin.category_wise_report.list')}}",
+                                    url: "{{route('admin.value_based_report.list')}}",
                                     method: 'POST',
-                                    data: {"category_id":category_id,"from_date":from_date, "to_date":to_date},
+                                    data: {"quotation_amount":quotation_amount,"company_id":company_id,"user_id":user_id,"from_date":from_date, "to_date":to_date},
                                     success: function (response) {
-                                        //  console.log(response.reports);
+                                          console.log(response.reports);
                                         var i;
                                         var html ='';
                                         if (response.success) {
@@ -564,13 +566,46 @@
                                                 for(i=0;i<response.reports.length;i++){
                                                     var html = html +`<tr>`;
                                                     var html = html + `<td>`+(i+1)+`</td>`;
-                                                    var html = html + `<td>`+response.reports[i].category_name+` </td>`;
-                                                    var html = html + `<td>`+response.reports[i].quotations_amount+`</td>`;
-                                                    var html = html + `<td>`+response.reports[i].po_amount+`</td>`;
-                                                    var html = html + `<td>0.00</td>`;
+                                                    var html = html + `<td>`+response.reports[i].company_name+` </td>`;
+                                                    var html = html + `<td>`+response.reports[i].quot_amount+`</td>`;
+                                                    var html = html + `<td>`+response.reports[i].name+`</td>`;
                                                     var html = html + `</tr>`;
                                                 }
-                                                $("#category_report").html(html);
+                                                $("#value_report").html(html);
+                                            } 
+                                        }
+                                    },
+                                });
+                            })
+
+        //===================================================> Area-wise Report Ajax<=============================================================//
+        
+                            $('#area_report').on('click', function (e) {
+                                var city_id = $("#city_id").val();
+                                var from_date = $("#from_date").val();
+                                var to_date = $("#to_date").val();
+                                $.ajax({
+                                    url: "{{route('admin.area_wise_report.list')}}",
+                                    method: 'POST',
+                                    data: {"city_id":city_id,"from_date":from_date, "to_date":to_date},
+                                    success: function (response) {
+                                          console.log(response.reports);
+                                        var i;
+                                        var html ='';
+                                        if (response.success) {
+                                            if(response.reports.length == 0){
+                                                var html = html + `<tr><td colspan="7">`+response.message+`</td></tr>`;
+                                            }
+                                            else{
+                                                for(i=0;i<response.reports.length;i++){
+                                                    var html = html +`<tr>`;
+                                                    var html = html + `<td>`+(i+1)+`</td>`;
+                                                    var html = html + `<td>`+response.reports[i].company_name+` </td>`;
+                                                    var html = html + `<td>`+response.reports[i].quot_amount+`</td>`;
+                                                    var html = html + `<td>`+response.reports[i].name+`</td>`;
+                                                    var html = html + `</tr>`;
+                                                }
+                                                $("#area_report_date").html(html);
                                             } 
                                         }
                                     },

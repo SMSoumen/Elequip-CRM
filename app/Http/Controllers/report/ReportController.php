@@ -39,7 +39,7 @@ class ReportController extends Controller
                                 ->join('admins','quotations.admin_id','admins.id')
                                 ->get(['companies.company_name','admins.name','quotations.quot_amount']);
 
-        $area_wise_reports = $this->areaWiseReport();
+        $area_wise_reports = $this->areaWiseReport(null,$from_date,$to_date);
         $category_wise_reports = $this->categoryWiseReport(null,$from_date,$to_date);
 
         // echo "<pre>";
@@ -49,10 +49,14 @@ class ReportController extends Controller
         return view("admin.report.index",compact(['from_date','to_date','companies','product_categories','users','cities','client_business_reports','value_based_reports','category_wise_reports','area_wise_reports']));
     }
 
-    public function areaWiseReport(){
+    public function areaWiseReport($city_id,$from_date,$to_date){
         
         $result = [];
-        $cities = City::get(['id','city_name']);
+        if($city_id){
+            $cities = City::where('id',$city_id)->get(['id','city_name']);
+        }else{
+            $cities = City::get(['id','city_name']);
+        }
         foreach($cities as $city){
             $companies = Company::where('city_id',$city->id)->pluck('id');
             $leads = Lead::whereIn('company_id',$companies)->pluck('id');
@@ -127,6 +131,40 @@ class ReportController extends Controller
 
     public function categoryWiseReportAjax(Request $request){
         $result = $this->categoryWiseReport($request->category_id,$request->from_date,$request->to_date);
+        if($result){
+            return response()->json(['success' => true, 'reports' =>$result, 'message' => 'Record found.']);
+        }else{
+            return response()->json(['success' => true, 'reports' =>[], 'message' => 'Record not found.']);
+        }
+    }
+
+    public function valueBasedReportAjax(Request $request){
+        $reports = Quotation::join('leads','quotations.lead_id','leads.id')
+                    ->join('companies','leads.company_id','companies.id')
+                    ->join('admins','quotations.admin_id','admins.id');
+        if($request->company_id){
+            $reports = $reports->where('companies.id',$request->company_id);
+        }
+        if($request->user_id){
+            $reports = $reports->where('admins.id',$request->user_id);
+        }
+        if($request->quotation_amount){
+            $reports = $reports->whereBetween('quotations.quot_amount',$request->quotation_amount);
+        }
+        if($request->from_date && $request->to_date){
+            $reports = $reports->whereBetween('quotations.created_at', [$request->from_date, $request->to_date]);
+        }
+        $reports = $reports->get(['companies.company_name','admins.name','quotations.quot_amount']);
+
+        if($reports){
+            return response()->json(['success' => true, 'reports' =>$reports, 'message' => 'Record found.']);
+        }else{
+            return response()->json(['success' => true, 'reports' =>[], 'message' => 'Record not found.']);
+        }
+    }
+
+    public function areaWiseReportAjax(Request $request){
+        $result = $this->areaWiseReport($request->city_id,$request->from_date,$request->to_date);
         if($result){
             return response()->json(['success' => true, 'reports' =>$result, 'message' => 'Record found.']);
         }else{
