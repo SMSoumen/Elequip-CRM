@@ -15,11 +15,11 @@
                            <div class="row">
                                 <div class="col-4">
                                     <label for="from_date">From Date</label>
-                                    <input type="date" id="from_date" class="form-control" name="from_date">
+                                    <input type="date" id="from_date" class="form-control" name="from_date" value="{{date('Y-m-d')}}">
                                 </div>
                                 <div class="col-4">
                                     <label for="to_date">To Date</label>
-                                    <input type="date" id="to_date" class="form-control" name="to_date">
+                                    <input type="date" id="to_date" class="form-control" name="to_date" value="{{date('Y-m-d',strtotime(' + 30 day'))}}">
                                 </div>
 
                                 <div class="col-4">
@@ -41,21 +41,26 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <div class="row mb-4">
-                                <div class="col-4">
-                                    <select class="form-control" name="company_id">
-                                        <option value="">Select Company</option>
-                                    </select>
+                            <form id="client_business_report_form">
+                                <div class="row mb-4">
+                                    <div class="col-4">
+                                        <select class="form-control" name="company_id" id="company_id">
+                                            <option value="">Select Company</option>
+                                            @foreach($companies as $company)
+                                            <option value="{{$company->id}}">{{$company->company_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                        <select class="form-control" name="customer_id" id="customer_id">
+                                            <option value="">Select Customer</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" id="client_business_report" class="btn btn-warning">Search</button>
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <select class="form-control" name="customer_id">
-                                        <option value="">Select Customer</option>
-                                    </select>
-                                </div>
-                                <div class="col-4">
-                                    <button type="button" name="search" class="btn btn-warning">Search</button>
-                                </div>
-                            </div>
+                            </form>
                             <table class="table table-bordered data-table">
                                 <thead>
                                     <tr>
@@ -68,7 +73,18 @@
                                         <th>Total</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="business_report" style="height:10px;overflow-y:auto;overflow-x:hidden">
+                                    @foreach($client_business_reports as $key=>$report)
+                                    <tr>
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$report->customer_name}} ({{$report->designation}})</td>
+                                        <td>{{$report->company_name}} </td>
+                                        <td>{{$report->quot_amount}} </td>
+                                        <td>{{$report->po_net_amount}} </td>
+                                        <td>0.00</td>
+                                        <td>{{$report->po_net_amount}} </td>
+                                    </tr>
+                                    @endforeach
 
                                 </tbody>
                             </table>
@@ -87,16 +103,21 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <div class="row mb-4">
-                                <div class="col-4">
-                                    <select class="form-control" name="company_id">
-                                        <option value="">Select Category</option>
-                                    </select>
+                            <form id="category_wise_report_form">
+                                <div class="row mb-4">
+                                    <div class="col-4">
+                                        <select class="form-control" name="company_id">
+                                            <option value="">Select Category</option>
+                                            @foreach($product_categories as $category)
+                                                <option value="{{$category->id}}">{{$category->product_category_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" name="search" class="btn btn-warning">Search</button>
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <button type="button" name="search" class="btn btn-warning">Search</button>
-                                </div>
-                            </div>
+                            </form>
                             <table class="table table-bordered data-table">
                                 <thead>
                                     <tr>
@@ -111,6 +132,298 @@
 
                                 </tbody>
                             </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+
+                <!--========================================================>Value Based Report<================================================================-->
+                <div class="col-12">
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">Value Based Report Report</h3>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <form id="category_wise_report_form">
+                                <div class="row mb-4">
+                                    <div class="col-3">
+                                        <select class="form-control" name="company_id" id="company_id">
+                                            <option value="">Select a Quotation</option>
+                                            <option value="">1 Lacks to 3 Lacks</option>
+                                            <option value="">3 Lacks to 6 Lacks</option>
+                                            <option value="">6 Lacks to above</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <select class="form-control" name="company_id" id="company_id">
+                                            <option value="">Select Company</option>
+                                            @foreach($companies as $company)
+                                            <option value="{{$company->id}}">{{$company->company_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <select class="form-control" name="company_id">
+                                            <option value="">Select User</option>
+                                            @foreach($users as $user)
+                                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="button" name="search" class="btn btn-warning">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div style="height:400px; overflow-y:scroll;">
+                                <table class="table table-bordered data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl No</th>
+                                            <th>Company</th>
+                                            <th>Quotation</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($value_based_reports as $key=>$report)
+                                            <tr>
+                                                <td>{{$key+1}}</td>
+                                                <td>{{$report->company_name}}</td>
+                                                <td>{{$report->quot_amount}}</td>
+                                                <td>{{$report->name}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+
+                <!--========================================================> Area-wise Report<================================================================-->
+                <div class="col-12">
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">Area-wise Report</h3>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <form id="category_wise_report_form">
+                                <div class="row mb-4">
+                                    <div class="col-3">
+                                        <select class="form-control" name="company_id" id="company_id">
+                                            <option value="">Select a Quotation</option>
+                                            <option value="">1 Lacks to 3 Lacks</option>
+                                            <option value="">3 Lacks to 6 Lacks</option>
+                                            <option value="">6 Lacks to above</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <select class="form-control" name="company_id" id="company_id">
+                                            <option value="">Select Company</option>
+                                            @foreach($companies as $company)
+                                            <option value="{{$company->id}}">{{$company->company_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <select class="form-control" name="company_id">
+                                            <option value="">Select User</option>
+                                            @foreach($users as $user)
+                                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="button" name="search" class="btn btn-warning">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div style="height:400px; overflow-y:scroll;">
+                                <table class="table table-bordered data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl No</th>
+                                            <th>Company</th>
+                                            <th>Quotation</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($value_based_reports as $key=>$report)
+                                            <tr>
+                                                <td>{{$key+1}}</td>
+                                                <td>{{$report->company_name}}</td>
+                                                <td>{{$report->quot_amount}}</td>
+                                                <td>{{$report->name}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+
+                <!--========================================================> Userwise Business Report <================================================================-->
+                <div class="col-12">
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">Userwise Business Report</h3>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <form id="category_wise_report_form">
+                                <div class="row mb-4">
+                                    <div class="col-3">
+                                        <select class="form-control" name="company_id" id="company_id">
+                                            <option value="">Select a Quotation</option>
+                                            <option value="">1 Lacks to 3 Lacks</option>
+                                            <option value="">3 Lacks to 6 Lacks</option>
+                                            <option value="">6 Lacks to above</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <select class="form-control" name="company_id" id="company_id">
+                                            <option value="">Select Company</option>
+                                            @foreach($companies as $company)
+                                            <option value="{{$company->id}}">{{$company->company_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <select class="form-control" name="company_id">
+                                            <option value="">Select User</option>
+                                            @foreach($users as $user)
+                                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="button" name="search" class="btn btn-warning">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div style="height:400px; overflow-y:scroll;">
+                                <table class="table table-bordered data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl No</th>
+                                            <th>Company</th>
+                                            <th>Quotation</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($value_based_reports as $key=>$report)
+                                            <tr>
+                                                <td>{{$key+1}}</td>
+                                                <td>{{$report->company_name}}</td>
+                                                <td>{{$report->quot_amount}}</td>
+                                                <td>{{$report->name}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+
+                <!--========================================================> Userwise Conversion Report <================================================================-->
+                <div class="col-12">
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">Userwise Conversion Report</h3>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <form id="category_wise_report_form">
+                                <div class="row mb-4">
+                                    <div class="col-3">
+                                        <select class="form-control" name="company_id" id="company_id">
+                                            <option value="">Select a Quotation</option>
+                                            <option value="">1 Lacks to 3 Lacks</option>
+                                            <option value="">3 Lacks to 6 Lacks</option>
+                                            <option value="">6 Lacks to above</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <select class="form-control" name="company_id" id="company_id">
+                                            <option value="">Select Company</option>
+                                            @foreach($companies as $company)
+                                            <option value="{{$company->id}}">{{$company->company_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <select class="form-control" name="company_id">
+                                            <option value="">Select User</option>
+                                            @foreach($users as $user)
+                                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="button" name="search" class="btn btn-warning">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div style="height:400px; overflow-y:scroll;">
+                                <table class="table table-bordered data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl No</th>
+                                            <th>Company</th>
+                                            <th>Quotation</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($value_based_reports as $key=>$report)
+                                            <tr>
+                                                <td>{{$key+1}}</td>
+                                                <td>{{$report->company_name}}</td>
+                                                <td>{{$report->quot_amount}}</td>
+                                                <td>{{$report->name}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -131,8 +444,64 @@
 @push('scripts')
 
     <script>
+           $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
-       
+    $("#company_id").change(function(){
+        var company_id = $(this).val();
+        $.ajax({
+            type:'post',
+            url:"{{route('admin.lead.company_customer')}}",
+            data:{"company_id":company_id},
+            success:function(res){
+                var i=0;
+                var html =`<option value="">Select Customer</option>`;
+                for(i=0; i < res.length; i++){
+                    html = html + `<option value="`+res[i].id+`">`+res[i].customer_name+`</option>`;
+                }
+                $("#customer_id").html(html);                    
+            }
+        })
+    });
+
+                            $('#client_business_report').on('click', function (e) {
+                                var company_id = $("#company_id").val();
+                                var customer_id = $("#customer_id").val();
+                                var from_date = $("#from_date").val();
+                                var to_date = $("#to_date").val();
+                                $.ajax({
+                                    url: "{{route('admin.client_business_report.list')}}",
+                                    method: 'POST',
+                                    data: {"company_id":company_id, "customer_id":customer_id, "from_date":from_date, "to_date":to_date},
+                                    success: function (response) {
+                                        // console.log(response.reports);
+                                        var i;
+                                        var html ='';
+                                        if (response.success) {
+                                            if(response.reports.length == 0){
+                                                var html = html + `<tr><td colspan="7">`+response.message+`</td></tr>`;
+                                            }
+                                            else{
+                                                for(i=0;i<response.reports.length;i++){
+                                                    var html = html +`<tr>`;
+                                                    var html = html + `<td>`+(i+1)+`</td>`;
+                                                    var html = html + `<td>`+response.reports[i].customer_name+` (`+response.reports[i].designation+`)</td>`;
+                                                    var html = html + `<td>`+response.reports[i].company_name+`</td>`;
+                                                    var html = html + `<td>`+response.reports[i].quot_amount+`</td>`;
+                                                    var html = html + `<td>`+response.reports[i].po_net_amount+`</td>`;
+                                                    var html = html + `<td>0.00</td>`;
+                                                    var html = html + `<td>`+response.reports[i].po_net_amount+`</td>`;
+                                                    var html = html + `</tr>`;
+                                                }
+                                                $("#business_report").html(html);
+                                            } 
+                                        }
+                                    },
+                                });
+                            })
 
     </script>
 @endpush
