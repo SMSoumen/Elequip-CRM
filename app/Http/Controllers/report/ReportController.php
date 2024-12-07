@@ -22,20 +22,23 @@ class ReportController extends Controller
         $product_categories = ProductCategory::orderBy('product_category_name','asc')->get();
         $users = Admin::orderBy('name','asc')->get();
         $cities = City::orderBy('city_name','asc')->get(['id','city_name']);
-        $from_date = date('Y-m-d');
-        $to_date = date('Y-m-d',strtotime(' + 30 day'));
 
+        $from_date = ($request->from_date) ? $request->from_date : date('Y-m-d');
+        $to_date = ($request->to_date) ? $request->to_date : date('Y-m-d',strtotime(' + 30 day'));
+  
         $client_business_reports = PurchaseOrder::join('quotations','purchase_orders.quotation_id','quotations.id')
                                     ->join('leads','purchase_orders.lead_id','leads.id')
                                     ->join('companies','leads.company_id','companies.id')
                                     ->join('customers','leads.customer_id','customers.id')
                                     ->where('customers.status','1')
+                                    ->whereBetween('purchase_orders.created_at', [$from_date, $to_date])
                                     ->orderBy('purchase_orders.id','desc')
                                     ->get(['customers.customer_name','customers.designation','companies.company_name','quotations.quot_amount','purchase_orders.po_net_amount']);
 
         $value_based_reports = Quotation::join('leads','quotations.lead_id','leads.id')
                                 ->join('companies','leads.company_id','companies.id')
                                 ->join('admins','quotations.admin_id','admins.id')
+                                ->whereBetween('quotations.created_at', [$from_date, $to_date])
                                 ->get(['companies.company_name','admins.name','quotations.quot_amount']);
 
         $area_wise_reports = $this->areaWiseReport(null,$from_date,$to_date);
