@@ -164,10 +164,10 @@
                 for(i=0;i<res.length;i++){
                 var tr = tr + `<tr>
                             <td><input type="hidden" name="product_ids[]" value="`+res[i].id+`">`+res[i].product_name+`</td>
-                            <td><input type="text" name="qty[]" class="qty" value="1"></td>
+                            <td><input type="number" name="qty[]" class="qty" value="1"> <span class="badge bg-secondary ml-1" style="font-size:18px">`+res[i].unit_type+`</span></td>
                             <td>
                                 <input type="hidden" class="single_amount" value="`+res[i].product_price+`">
-                                <input type="text" name="amount[]" class="amount" value="`+res[i].product_price+`" readonly>
+                                <input type="number" name="amount[]" class="amount" value="`+res[i].product_price+`" readonly>
                             </td>
                         </tr>`;
                 }
