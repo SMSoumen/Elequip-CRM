@@ -41,12 +41,14 @@ class ReportController extends Controller
 
         $area_wise_reports = $this->areaWiseReport(null,$from_date,$to_date);
         $category_wise_reports = $this->categoryWiseReport(null,$from_date,$to_date);
+        $user_wise_business_reports = $this->userWiseBusinessReport($from_date,$to_date);
+        $user_wise_conversion_reports = $this->userWiseConversionReport($from_date,$to_date);
 
         // echo "<pre>";
-        // print_r($category_wise_reports);
+        // print_r($user_wise_conversion_reports);
         // exit();
 
-        return view("admin.report.index",compact(['from_date','to_date','companies','product_categories','users','cities','client_business_reports','value_based_reports','category_wise_reports','area_wise_reports']));
+        return view("admin.report.index",compact(['from_date','to_date','companies','product_categories','users','cities','client_business_reports','value_based_reports','category_wise_reports','area_wise_reports','user_wise_business_reports','user_wise_conversion_reports']));
     }
 
     public function areaWiseReport($city_id,$from_date,$to_date){
@@ -103,6 +105,47 @@ class ReportController extends Controller
         return $result;
     }
 
+    public function userWiseBusinessReport($from_date,$to_date){
+        $result = [];
+        $users = Admin::orderBy('name','asc')->get(['id','name']);
+        foreach($users as $user){
+            $quotation_amount = Quotation::where('admin_id',$user->id)->sum('quot_amount');
+            $active_quotation_amount = Quotation::where('admin_id',$user->id)->where('qout_is_latest',1)->sum('quot_amount');
+            $po_amount = PurchaseOrder::where('admin_id',$user->id)->sum('po_net_amount');
+            $due_amount = PurchaseOrder::where('admin_id',$user->id)->sum('po_remaining');
+
+            $item = array(
+                'user_name' => $user->name,
+                'quotation_amount' => $quotation_amount,
+                'active_quotation_amount' => $active_quotation_amount,
+                'po_amount' => $po_amount,
+                'due_amount' => $due_amount,
+            );
+            $result[] = $item;
+        }
+        unset($users,$user,$quotation_amount,$active_quotation_amount,$po_amount,$due_amount,$item);
+        return $result;
+    }
+
+    public function userWiseConversionReport($from_date,$to_date){
+        $result = [];
+        $users = Admin::orderBy('name','asc')->get(['id','name']);
+        foreach($users as $user){
+            $leads = Lead::where('admin_id',$user->id)->count('id');
+            $quotations = Quotation::where('admin_id',$user->id)->where('qout_is_latest',1)->count('id');
+            $po = PurchaseOrder::where('admin_id',$user->id)->count('id');
+
+            $item = array(
+                'user_name' => $user->name,
+                'no_lead' => $leads,
+                'no_quotation' => $quotations,
+                'no_po' => $po,
+            );
+            $result[] = $item;
+        }
+        unset($users,$user,$leads,$quotations,$po,$item);
+        return $result;
+    }
 
     public function clientBusinessReportAjax(Request $request){
         $reports = PurchaseOrder::join('quotations','purchase_orders.quotation_id','quotations.id')

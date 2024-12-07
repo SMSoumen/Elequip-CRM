@@ -61,33 +61,35 @@
                                     </div>
                                 </div>
                             </form>
-                            <table class="table table-bordered data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Sl No</th>
-                                        <th>Customer(Designation)</th>
-                                        <th>Company</th>
-                                        <th>Quotation</th>
-                                        <th>P.O. Stage</th>
-                                        <th>A/c Closed</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="business_report">
-                                    @foreach($client_business_reports as $key=>$report)
-                                    <tr>
-                                        <td>{{$key+1}}</td>
-                                        <td>{{$report->customer_name}} ({{$report->designation}})</td>
-                                        <td>{{$report->company_name}} </td>
-                                        <td>{{$report->quot_amount}} </td>
-                                        <td>{{$report->po_net_amount}} </td>
-                                        <td>0.00</td>
-                                        <td>{{$report->po_net_amount}} </td>
-                                    </tr>
-                                    @endforeach
+                            <div style="max-height:400px; overflow-y:scroll;">
+                                <table class="table table-bordered data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl No</th>
+                                            <th>Customer(Designation)</th>
+                                            <th>Company</th>
+                                            <th>Quotation</th>
+                                            <th>P.O. Stage</th>
+                                            <th>A/c Closed</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="business_report">
+                                        @foreach($client_business_reports as $key=>$report)
+                                        <tr>
+                                            <td>{{$key+1}}</td>
+                                            <td>{{$report->customer_name}} ({{$report->designation}})</td>
+                                            <td>{{$report->company_name}} </td>
+                                            <td>{{$report->quot_amount}} </td>
+                                            <td>{{$report->po_net_amount}} </td>
+                                            <td>0.00</td>
+                                            <td>{{$report->po_net_amount}} </td>
+                                        </tr>
+                                        @endforeach
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -284,42 +286,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form id="category_wise_report_form">
-                                <div class="row mb-4">
-                                    <div class="col-3">
-                                        <select class="form-control" name="company_id" id="company_id">
-                                            <option value="">Select a Quotation</option>
-                                            <option value="">1 Lacks to 3 Lacks</option>
-                                            <option value="">3 Lacks to 6 Lacks</option>
-                                            <option value="">6 Lacks to above</option>
-
-                                        </select>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <select class="form-control" name="company_id" id="company_id">
-                                            <option value="">Select Company</option>
-                                            @foreach($companies as $company)
-                                            <option value="{{$company->id}}">{{$company->company_name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <select class="form-control" name="company_id">
-                                            <option value="">Select User</option>
-                                            @foreach($users as $user)
-                                                <option value="{{$user->id}}">{{$user->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-1">
-                                        <button type="button" name="search" class="btn btn-warning">Search</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <div style="height:400px; overflow-y:scroll;">
+                            <div style="max-height:400px; overflow-y:scroll;">
                                 <table class="table table-bordered data-table">
                                     <thead>
                                         <tr>
@@ -333,15 +300,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($value_based_reports as $key=>$report)
+                                        @foreach($user_wise_business_reports as $key=>$report)
                                             <tr>
                                                 <td>{{$key+1}}</td>
-                                                <td>{{$report->company_name}}</td>
-                                                <td>{{$report->quot_amount}}</td>
-                                                <td>{{$report->name}}</td>
-                                                <td>{{$report->name}}</td>
-                                                <td>{{$report->name}}</td>
-                                                <td>{{$report->name}}</td>
+                                                <td>{{$report['user_name']}}</td>
+                                                <td>{{$report['quotation_amount']}}</td>
+                                                <td>{{$report['active_quotation_amount']}}</td>
+                                                <td>{{$report['po_amount']}}</td>
+                                                <td>0.00</td>
+                                                <td>{{$report['due_amount']}}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -363,42 +330,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form id="category_wise_report_form">
-                                <div class="row mb-4">
-                                    <div class="col-3">
-                                        <select class="form-control" name="company_id" id="company_id">
-                                            <option value="">Select a Quotation</option>
-                                            <option value="">1 Lacks to 3 Lacks</option>
-                                            <option value="">3 Lacks to 6 Lacks</option>
-                                            <option value="">6 Lacks to above</option>
-
-                                        </select>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <select class="form-control" name="company_id" id="company_id">
-                                            <option value="">Select Company</option>
-                                            @foreach($companies as $company)
-                                            <option value="{{$company->id}}">{{$company->company_name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <select class="form-control" name="company_id">
-                                            <option value="">Select User</option>
-                                            @foreach($users as $user)
-                                                <option value="{{$user->id}}">{{$user->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-1">
-                                        <button type="button" name="search" class="btn btn-warning">Search</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <div style="height:400px; overflow-y:scroll;">
+                            <div style="max-height:400px; overflow-y:scroll;">
                                 <table class="table table-bordered data-table">
                                     <thead>
                                         <tr>
@@ -411,14 +343,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($value_based_reports as $key=>$report)
+                                        @foreach($user_wise_conversion_reports as $key=>$report)
                                             <tr>
                                                 <td>{{$key+1}}</td>
-                                                <td>{{$report->company_name}}</td>
-                                                <td>{{$report->quot_amount}}</td>
-                                                <td>{{$report->name}}</td>
-                                                <td>{{$report->name}}</td>
-                                                <td>{{$report->name}}</td>
+                                                <td>{{$report['user_name']}}</td>
+                                                <td>{{$report['no_lead']}}</td>
+                                                <td>{{$report['no_quotation']}}</td>
+                                                <td>{{$report['no_po']}}</td>
+                                                <td>0.00</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
