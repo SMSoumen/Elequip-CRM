@@ -160,17 +160,17 @@
                             <form id="value_based_report_form">
                                 <div class="row mb-4">
                                     <div class="col-3">
-                                        <select class="form-control" name="quotation_amount" id="quotation_amount">
+                                        <select class="form-control" name="quotation_amount" id="v_quotation_amount">
                                             <option value="">Select a Quotation</option>
-                                            <option value="[100000,300000]">1 Lacks to 3 Lacks</option>
-                                            <option value="[300001,600000]">3 Lacks to 6 Lacks</option>
-                                            <option value="[600001,1000000000]">6 Lacks to above</option>
+                                            <option value="100000&300000">1 Lacks to 3 Lacks</option>
+                                            <option value="300001&600000">3 Lacks to 6 Lacks</option>
+                                            <option value="600001&1000000000">6 Lacks to above</option>
 
                                         </select>
                                     </div>
 
                                     <div class="col-4">
-                                        <select class="form-control" name="company_id" id="company_id">
+                                        <select class="form-control" name="company_id" id="v_company_id">
                                             <option value="">Select Company</option>
                                             @foreach($companies as $company)
                                             <option value="{{$company->id}}">{{$company->company_name}}</option>
@@ -179,7 +179,7 @@
                                     </div>
 
                                     <div class="col-4">
-                                        <select class="form-control" name="user_id" id="user_id">
+                                        <select class="form-control" name="user_id" id="v_user_id">
                                             <option value="">Select User</option>
                                             @foreach($users as $user)
                                                 <option value="{{$user->id}}">{{$user->name}}</option>
@@ -233,7 +233,7 @@
                             <form id="area_report_form">
                                 <div class="row mb-4">
                                     <div class="col-4">
-                                        <select class="form-control" name="city_id" id="city_id">
+                                        <select class="form-control" name="city_id" id="a_city_id">
                                             <option value="">Select Area</option>
                                             @foreach($cities as $city)
                                                 <option value="{{$city->id}}">{{$city->city_name}}</option>
@@ -486,7 +486,7 @@
                                         var html ='';
                                         if (response.success) {
                                             if(response.reports.length == 0){
-                                                var html = html + `<tr><td colspan="7">`+response.message+`</td></tr>`;
+                                                var html = html + `<tr><td colspan="7">Record not found.</td></tr>`;
                                             }
                                             else{
                                                 for(i=0;i<response.reports.length;i++){
@@ -500,8 +500,8 @@
                                                     var html = html + `<td>`+response.reports[i].po_net_amount+`</td>`;
                                                     var html = html + `</tr>`;
                                                 }
-                                                $("#business_report").html(html);
                                             } 
+                                            $("#business_report").html(html);
                                         }
                                     },
                                 });
@@ -523,7 +523,7 @@
                                         var html ='';
                                         if (response.success) {
                                             if(response.reports.length == 0){
-                                                var html = html + `<tr><td colspan="7">`+response.message+`</td></tr>`;
+                                                var html = html + `<tr><td colspan="5">Record not found</td></tr>`;
                                             }
                                             else{
                                                 for(i=0;i<response.reports.length;i++){
@@ -535,8 +535,8 @@
                                                     var html = html + `<td>0.00</td>`;
                                                     var html = html + `</tr>`;
                                                 }
-                                                $("#category_report").html(html);
                                             } 
+                                            $("#category_report").html(html);
                                         }
                                     },
                                 });
@@ -545,22 +545,22 @@
         //===================================================> Value Based Report Ajax<=============================================================//
         
                             $('#value_based_report').on('click', function (e) {
-                                var quotation_amount = $("#quotation_amount").val();
-                                var company_id = $("#company_id").val();
-                                var user_id = $("#user_id").val();
+                                var quotation_amount = $("#v_quotation_amount").val();
+                                var company_id = $("#v_company_id").val();
+                                var user_id = $("#v_user_id").val();
                                 var from_date = $("#from_date").val();
                                 var to_date = $("#to_date").val();
                                 $.ajax({
                                     url: "{{route('admin.value_based_report.list')}}",
                                     method: 'POST',
-                                    data: {"quotation_amount":quotation_amount,"company_id":company_id,"user_id":user_id,"from_date":from_date, "to_date":to_date},
+                                    data: {"quotation_amount":quotation_amount, "company_id":company_id, "user_id":user_id, "from_date":from_date, "to_date":to_date},
                                     success: function (response) {
                                           console.log(response.reports);
                                         var i;
                                         var html ='';
                                         if (response.success) {
                                             if(response.reports.length == 0){
-                                                var html = html + `<tr><td colspan="7">`+response.message+`</td></tr>`;
+                                                var html = html + `<tr><td colspan="4">Record not found</td></tr>`;
                                             }
                                             else{
                                                 for(i=0;i<response.reports.length;i++){
@@ -571,8 +571,9 @@
                                                     var html = html + `<td>`+response.reports[i].name+`</td>`;
                                                     var html = html + `</tr>`;
                                                 }
-                                                $("#value_report").html(html);
                                             } 
+                                            $("#value_report").html(html);
+
                                         }
                                     },
                                 });
@@ -581,7 +582,7 @@
         //===================================================> Area-wise Report Ajax<=============================================================//
         
                             $('#area_report').on('click', function (e) {
-                                var city_id = $("#city_id").val();
+                                var city_id = $("#a_city_id").val();
                                 var from_date = $("#from_date").val();
                                 var to_date = $("#to_date").val();
                                 $.ajax({
@@ -594,7 +595,7 @@
                                         var html ='';
                                         if (response.success) {
                                             if(response.reports.length == 0){
-                                                var html = html + `<tr><td colspan="7">`+response.message+`</td></tr>`;
+                                                var html = html + `<tr><td colspan="4">Record not found.</td></tr>`;
                                             }
                                             else{
                                                 for(i=0;i<response.reports.length;i++){
@@ -605,8 +606,8 @@
                                                     var html = html + `<td>`+response.reports[i].po_amount+`</td>`;
                                                     var html = html + `</tr>`;
                                                 }
-                                                $("#area_wise_report").html(html);
                                             } 
+                                            $("#area_wise_report").html(html);
                                         }
                                     },
                                 });

@@ -142,18 +142,22 @@ class ReportController extends Controller
         $reports = Quotation::join('leads','quotations.lead_id','leads.id')
                     ->join('companies','leads.company_id','companies.id')
                     ->join('admins','quotations.admin_id','admins.id');
+
+        if($request->from_date && $request->to_date){
+            $reports = $reports->whereBetween('quotations.created_at', [$request->from_date, $request->to_date]);
+        }
         if($request->company_id){
+           
             $reports = $reports->where('companies.id',$request->company_id);
         }
         if($request->user_id){
             $reports = $reports->where('admins.id',$request->user_id);
         }
         if($request->quotation_amount){
-            $reports = $reports->whereBetween('quotations.quot_amount',$request->quotation_amount);
+            $amount = explode('&',$request->quotation_amount);
+            $reports = $reports->whereBetween('quotations.quot_amount',[$amount[0], $amount[1]]);
         }
-        if($request->from_date && $request->to_date){
-            $reports = $reports->whereBetween('quotations.created_at', [$request->from_date, $request->to_date]);
-        }
+
         $reports = $reports->get(['companies.company_name','admins.name','quotations.quot_amount']);
 
         if($reports){
