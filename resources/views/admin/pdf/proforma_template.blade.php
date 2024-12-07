@@ -1,8 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Proforma</title>
     <style>
+        @page {
+            margin: 0;
+            size: A4;
+        }
+
+        @font-face {
+            font-family: 'Open Sans';
+            src: url('assets/admin/fonts/OpenSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            /* font-family: 'Open Sans', sans-serif; */
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            width: 21cm;
+            height: 29.7cm;
+        }
+
         .pdf_preview_container {
-            border: 1px solid #d7d7d7;
-            padding: 10px;
-            font-family: "Open Sans"
+            /* border: 1px solid #d7d7d7; */
+            padding: 5px;
+            /* font-family: "Open Sans" */
         }
 
         .pdf_preview_container table thead {
@@ -17,9 +45,8 @@
         }
 
         .table td {
-            padding: 4px 10px;
+            padding: 4px 10px !important;
             font-size: 15px;
-            line-height: 1;
         }
 
         .fs-16 {
@@ -30,27 +57,24 @@
             color: #000 !important;
             padding: 0;
             text-align: center;
-            font-size: 15px;
         }
 
-        .table-product-quot,
         .table-product-quot tr,
         .table-product-quot th,
         .table-product-quot td {
             border: 1px solid #000 !important;
-        }
+            padding: 0;
+            padding: 1px 10px !important;
+            font-size: 14px;
+        }        
 
-        .table_terms {
-            border: 1px solid #000 !important;
-        }
-
-        .table_terms td {
+        .table-borderless td {
             line-height: 1;
+            padding: 2px 10px !important;
         }
 
-        .pdf-download-container {
-            border: 1px solid #d7d7d7;
-            padding: 10px;
+        .p_font {
+            padding: 0;
         }
 
         .pull-right {
@@ -62,34 +86,34 @@
             color: #082173 !important;
             margin-bottom: 0;
             text-decoration: underline;
+            margin-top: 0;
         }
         .p_font{
             font-size: 15px;
-            line-height: 24px !important;
-        }
+            /* line-height: 24px !important; */
+        }        
     </style>
-    <div class="row float-right">
-        <a href="{{ route('admin.lead.proforma.edit', $proforma->id) }}"><button type="button" class="btn btn-primary"><i
-                    class="fas fa-edit"></i></button></a>
-    </div>
+</head>
 
-    <div class="table pdf_preview_container" style="width:21cm;">
-        <table class="table table-borderless my-0">
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; width:21cm; ">
+
+    <div class="table pdf_preview_container">
+        <table class="table my-0" style="width: 100%; border-collapse: collapse;">
             <thead>
-                <tr>
-                    <th colspan="4" class="text-center" style="border:none;">
-                        <img src="{{ asset(asset_path('assets/admin/img/quotation-header.jpg')) }}" alt=""
-                            class="img-responsive" style="width:99%;height: 113px;border-radius: 0px;">
+                <tr style="" align="center">
+                    <th colspan="4" class="text-center" style="border:none;" align="center">
+                        <img src="{{ $head_img }}" alt="Elequip CRM"
+                            style="max-width:100%;height: auto;border-radius: 0px;margin-left: 0px;">
                     </th>
                 </tr>
                 <tr>
-                    <th colspan="4" class="text-center p-1">
-                        <h5 class="fs-16"><b style="color:#000;">PROFORMA</b></h5>
+                    <th colspan="4" class="text-center">
+                        <h5 class="fs-16" style="margin:5px;"><b style="color:#000;">PROFORMA</b></h5>
                     </th>
                 </tr>
             </thead>
         </table>
-        <table class="table table_quot_top my-0">
+        <table class="table table_quot_top my-0" style="width:100%;border-collapse:collapse;">
             <tbody style="">
                 <tr style="border-top:1px solid black;border-right:1px solid #000;">
                     <td style="width: 10%;">To:</td>
@@ -136,15 +160,15 @@
         </table>
         <br>
 
-        <table class="table table-product-quot">
+        <table class="table table-product-quot" style="width: 100%; border-collapse: collapse;">
             <thead>
                 <tr style="border: 1px solid black;">
                     <th style="width: 3%">SN.</th>
                     <th style="width: 51%">DESCRIPTION</th>
-                    <th style="width: 8%">QTY</th>
-                    <th style="width: 8%">UNIT</th>
+                    <th style="width: 6%">QTY</th>
+                    <th style="width: 7%">UNIT</th>
                     <th style="width: 15%">RATE</th>
-                    <th style="width: 15%">AMOUNT</th>
+                    <th style="width: 18%">AMOUNT</th>
                 </tr>
             </thead>
             <tbody>
@@ -172,12 +196,12 @@
                         <td class="p_font" style="text-align: center;">
                             {{ $product->proforma_product_unit ? ' ' . $product->proforma_product_unit : ' Unit' }}
                         </td>
-                        <td class="p_font" style="width: 14%; text-align:center">
-                            <span style="font-family: DejaVu Sans, sans-serif;">₹</span>{{ sprintf('%.2f', $product->proforma_product_price) }}
-                        </td>
-                        <td class="p_font" style="width: 14%; text-align:right">
+                        <td class="p_font" style="width: 15%; text-align:center">
                             <span style="font-family: DejaVu Sans, sans-serif;">₹</span>
-                            {{ sprintf('%.2f', $product->proforma_product_price * $product->proforma_product_qty) }}
+                            {{ sprintf('%.2f', $product->proforma_product_price) }}
+                        </td>
+                        <td class="p_font" style="width: 15%; text-align:right">
+                            <span style="font-family: DejaVu Sans, sans-serif;">₹</span>{{ sprintf('%.2f', $product->proforma_product_price * $product->proforma_product_qty) }}
                         </td>
                     </tr>
                     @php
@@ -190,11 +214,11 @@
 
                 <tr style="">
                     <td style=""></td>
-                    <td style="" class="text-right"><b>BASIC TOTAL</b> </td>
+                    <td style="" align="right"><b>BASIC TOTAL</b> </td>
                     <td style=""></td>
                     <td style=""></td>
                     <td style=""></td>
-                    <td style="" class="text-right">
+                    <td style="" align="right">
                         <b>
                             <span style="font-family: DejaVu Sans, sans-serif;">₹</span>{{ sprintf('%.2f', $total) }}
                         </b>
@@ -213,23 +237,23 @@
                     @endphp
                     <tr style="border-bottom: 2px solid black;">
                         <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
-                        <td style="border-right: 1px solid black;font-weight:700;" class="text-right">CGST % </td>
+                        <td style="border-right: 1px solid black;font-weight:700;margin:0;padding" align="right">CGST % </td>
                         <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
                         <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
                         <td style="border-right: 1px solid black;border-left: 2px solid black;font-weight:700;" align="center">
-                            <?= $tax_percent / 2 ?>%</td>
-                        <td style="border-right: 1px solid black;font-weight:700;" class="text-right"><span style="font-family: DejaVu Sans, sans-serif;">₹</span><?= sprintf('%.2f', $cgst) ?></td>
+                            {{$tax_percent / 2}}%</td>
+                        <td style="border-right: 1px solid black;font-weight:700;" align="right"><span style="font-family: DejaVu Sans, sans-serif;">₹</span>{{ sprintf('%.2f', $cgst) }}</td>
                     </tr>
                     <tr style="border-bottom: 2px solid black;">
                         <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
-                        <td style="border-right: 1px solid black;font-weight:700;" class="text-right">SGST % </td>
+                        <td style="border-right: 1px solid black;font-weight:700;" align="right">SGST % </td>
                         <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
                         <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
-                        <td style="border-right: 1px solid black;border-left: 2px solid black;font-weight:700;" align="center">
-                            <?= $tax_percent / 2 ?>%</td>
+                        <td style="border-right: 1px solid black;border-left: 2px solid black;font-weight:700;"  align="center">
+                            {{ $tax_percent / 2 }}%</td>
 
                         <!-- <td style="border-right: 1px solid black;"></td> -->
-                        <td style="border-right: 1px solid black;font-weight:700;" class="text-right"><span style="font-family: DejaVu Sans, sans-serif;">₹</span><?= sprintf('%.2f', $sgst) ?></td>
+                        <td style="border-right: 1px solid black;font-weight:700;" align="right"><span style="font-family: DejaVu Sans, sans-serif;">₹</span>{{ sprintf('%.2f', $sgst) }}</td>
                     </tr>
                 @else
                     @php
@@ -238,23 +262,23 @@
                     @endphp
                     <tr style="border-bottom: 2px solid black;">
                         <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
-                        <td style="border-right: 1px solid black;font-weight:700;" class="text-right">IGST % </td>
+                        <td style="border-right: 1px solid black;font-weight:700;" align="right">IGST % </td>
                         <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
                         <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
-                        <td style="border-right: 1px solid black;border-left: 2px solid black;font-weight:700;" align="center">
-                            <?= $tax_percent ?>%</td>
+                        <td style="border-right: 1px solid black;border-left: 2px solid black;font-weight:700;"  align="center">
+                            {{ $tax_percent }}%</td>
                         <!-- <td style="border-right: 1px solid black;"></td> -->
-                        <td style="border-right: 1px solid black;font-weight:700;" class="text-right"><span style="font-family: DejaVu Sans, sans-serif;">₹</span><?= sprintf('%.2f', $igst) ?></td>
+                        <td style="border-right: 1px solid black;font-weight:700;" align="right"><span style="font-family: DejaVu Sans, sans-serif;">₹</span>{{ sprintf('%.2f', $igst) }}</td>
                     </tr>
                 @endif
                 <tr style="border-bottom: 2px solid black;">
                     <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
-                    <td style="border-right: 1px solid black; font-weight:700;" class="text-right">TOTAL PAYABLE </td>
+                    <td style="border-right: 1px solid black; font-weight:700;" align="right">TOTAL PAYABLE </td>
                     <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
                     <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
                     <td style="border-right: 1px solid black;border-left: 2px solid black;"></td>
                     <!-- <td style="border-right: 1px solid black;"></td> -->
-                    <td style="border-right: 1px solid black;font-weight:700;" class="text-right"><span style="font-family: DejaVu Sans, sans-serif;">₹</span><?= sprintf('%.2f', $total_with_tax) ?></td>
+                    <td style="border-right: 1px solid black;font-weight:700;" align="right"><span style="font-family: DejaVu Sans, sans-serif;">₹</span>{{ sprintf('%.2f', $total_with_tax) }}</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -273,7 +297,7 @@
                 <td colspan="2"></td>
                 <tr>
                     <td colspan="2" class="text-left">
-                        <p style="text-decoration:underline;margin-bottom:0;"><b>Our Bank Details:</b></p>
+                        <p style="text-decoration:underline;margin-bottom:10px;"><b>Our Bank Details:</b></p>
                     </td>
                 </tr>
 
@@ -306,7 +330,7 @@
                 <td colspan="2"></td>
 
                 <tr>
-                    <td colspan="2" class="text-right">
+                    <td colspan="2" align="right" style="margin-top:10px;">
 
                         <?php
                         if ($lead->admin->name) {
@@ -319,7 +343,7 @@
                 </tr>
 
                 <tr>
-                    <td colspan="2" class="text-center">This is a software generated document and signature is not
+                    <td colspan="2" align="center">This is a software generated document and signature is not
                         required for authentication</td>
                 </tr>
             </tbody>
@@ -327,10 +351,6 @@
 
     </div>
 
-    <div class="pdf-download-container">
-        <div class="">
-            <a class="p-1 badge bg-primary" href="{{ route('admin.proforma.pdf', $lead->id) }}">
-                <h6 class="mb-0"><i class="fas fa-download"></i> Download Proforma</h6>
-            </a>
-        </div>
-    </div>
+</body>
+
+</html>

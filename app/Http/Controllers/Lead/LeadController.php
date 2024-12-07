@@ -207,9 +207,9 @@ class LeadController extends Controller implements HasMiddleware
 
         $lead_company = Company::where('id',$lead->company_id)->first(['id','gst']);
 
-        $proforma = ProformaInvoice::where('lead_id',$lead->id)->first();
+        $proforma = ProformaInvoice::with('proforma_details')->where('lead_id',$lead->id)->first();
 
-        $po_details = $orders = '';
+        $po_details = $orders = null;
         if($letest_quotation){
             $po_details = PurchaseOrder::where('quotation_id',$letest_quotation->id)->first();
             if($po_details){
@@ -602,6 +602,22 @@ class LeadController extends Controller implements HasMiddleware
             return redirect()->back()->withErrors('Error!! while updating proforma!!!');
         }
 
+    }
+
+    public function generateProformaPdf($lead_id) {
+
+        // $data['lead'] = Lead::where
+        // $data['quotation'] = Quotation::where('id',$quotaion_id)->first();
+        // $data['quotaion_details'] = QuotationDetail::where('quotation_id',$quotaion_id)->get();
+        // $data['quot_terms'] = QuotationTerm::where('quotation_id',$quotaion_id)->first();
+        $data['head_img'] = public_path('assets/admin/img/quotation-header.jpg');
+        $data['lead'] = Lead::with('company', 'customer')->where('id', $lead_id)->first();
+        $data['proforma'] = ProformaInvoice::with('proforma_details')->where('lead_id', $lead_id)->first();
+        $data['po_details'] = PurchaseOrder::where('lead_id', $lead_id)->first();
+        $pdf = Pdf::loadView('admin.pdf.proforma_template', $data)->setOption('fontDir', public_path('assets/admin/fonts'))->setPaper('A4', 'portrait');
+        // $file_name = date('d-M-Y').'-'.$data['quotation']->id.'-'.$data['quotation']->quot_version.'-';
+        $file_name = mt_rand(11111111,999999999).'-'.time();
+        return $pdf->download('Lead Proforma-'. $file_name .'.pdf');
     }
 
 
