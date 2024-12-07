@@ -12,22 +12,23 @@
                             </div>
                         </div>
                         <div class="card-body">
-                           <div class="row">
-                                <div class="col-4">
-                                    <label for="from_date">From Date</label>
-                                    <input type="date" id="from_date" class="form-control" name="from_date" value="{{$from_date}}">
-                                </div>
-                                <div class="col-4">
-                                    <label for="to_date">To Date</label>
-                                    <input type="date" id="to_date" class="form-control" name="to_date" value="{{$to_date}}">
-                                </div>
+                           <form action="" method="GET">
+                                <div class="row">
+                                        <div class="col-4">
+                                            <label for="from_date">From Date</label>
+                                            <input type="date" id="from_date" class="form-control" name="from_date" value="{{$from_date}}">
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="to_date">To Date</label>
+                                            <input type="date" id="to_date" class="form-control" name="to_date" value="{{$to_date}}">
+                                        </div>
 
-                                <div class="col-4">
-                                    <button type="button" name="search" class="btn btn-warning mt-4">Search</button>
+                                        <div class="col-4">
+                                            <button type="submit" name="search" class="btn btn-warning mt-4">Search</button>
+                                        </div>
                                 </div>
-                           </div>
+                           </form>
                         </div>
-                        
                     </div>
                 </div>
 

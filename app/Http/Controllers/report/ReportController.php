@@ -22,7 +22,6 @@ class ReportController extends Controller
         $product_categories = ProductCategory::orderBy('product_category_name','asc')->get();
         $users = Admin::orderBy('name','asc')->get();
         $cities = City::orderBy('city_name','asc')->get(['id','city_name']);
-
         $from_date = date('Y-m-d');
         $to_date = date('Y-m-d',strtotime(' + 30 day'));
 
@@ -62,9 +61,9 @@ class ReportController extends Controller
         foreach($cities as $city){
             $companies = Company::where('city_id',$city->id)->pluck('id');
             $leads = Lead::whereIn('company_id',$companies)->pluck('id');
-            $quotations_amount = Quotation::whereIn('lead_id',$leads)->where('qout_is_latest',1)->sum('quot_amount');
+            $quotations_amount = Quotation::whereIn('lead_id',$leads)->where('qout_is_latest',1)->whereBetween('created_at', [$from_date, $to_date])->sum('quot_amount');
             $quotations = Quotation::whereIn('lead_id',$leads)->where('qout_is_latest',1)->pluck('id');
-            $po_amount = PurchaseOrder::whereIn('quotation_id',$quotations)->sum('po_net_amount');
+            $po_amount = PurchaseOrder::whereIn('quotation_id',$quotations)->whereBetween('created_at', [$from_date, $to_date])->sum('po_net_amount');
             $item = array(
                 'area' => $city->city_name,
                 'quotations_amount' => $quotations_amount,
@@ -109,10 +108,10 @@ class ReportController extends Controller
         $result = [];
         $users = Admin::orderBy('name','asc')->get(['id','name']);
         foreach($users as $user){
-            $quotation_amount = Quotation::where('admin_id',$user->id)->sum('quot_amount');
-            $active_quotation_amount = Quotation::where('admin_id',$user->id)->where('qout_is_latest',1)->sum('quot_amount');
-            $po_amount = PurchaseOrder::where('admin_id',$user->id)->sum('po_net_amount');
-            $due_amount = PurchaseOrder::where('admin_id',$user->id)->sum('po_remaining');
+            $quotation_amount = Quotation::where('admin_id',$user->id)->whereBetween('created_at', [$from_date, $to_date])->sum('quot_amount');
+            $active_quotation_amount = Quotation::where('admin_id',$user->id)->where('qout_is_latest',1)->whereBetween('created_at', [$from_date, $to_date])->sum('quot_amount');
+            $po_amount = PurchaseOrder::where('admin_id',$user->id)->whereBetween('created_at', [$from_date, $to_date])->sum('po_net_amount');
+            $due_amount = PurchaseOrder::where('admin_id',$user->id)->whereBetween('created_at', [$from_date, $to_date])->sum('po_remaining');
 
             $item = array(
                 'user_name' => $user->name,
@@ -131,9 +130,9 @@ class ReportController extends Controller
         $result = [];
         $users = Admin::orderBy('name','asc')->get(['id','name']);
         foreach($users as $user){
-            $leads = Lead::where('admin_id',$user->id)->count('id');
-            $quotations = Quotation::where('admin_id',$user->id)->where('qout_is_latest',1)->count('id');
-            $po = PurchaseOrder::where('admin_id',$user->id)->count('id');
+            $leads = Lead::where('admin_id',$user->id)->whereBetween('created_at', [$from_date, $to_date])->count('id');
+            $quotations = Quotation::where('admin_id',$user->id)->where('qout_is_latest',1)->whereBetween('created_at', [$from_date, $to_date])->count('id');
+            $po = PurchaseOrder::where('admin_id',$user->id)->whereBetween('created_at', [$from_date, $to_date])->count('id');
 
             $item = array(
                 'user_name' => $user->name,
