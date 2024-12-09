@@ -221,7 +221,6 @@ class LeadController extends Controller implements HasMiddleware
                 $orders = OrderAndDelivery::where('purchase_order_id',$po_details->id)->get(['id','order_product_name','order_product_code','order_product_delivery_date']);
             }
         }
-        // dd($letest_quotation->id);
 
         return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders', 'followups','lead_company','letest_quotation_details','proforma', 'quot_terms']));
     }
