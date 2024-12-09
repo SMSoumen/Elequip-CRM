@@ -210,13 +210,15 @@
                 </form>`;
 
                         $(".load_html").html(html);
+                        console.log(res);
+                        
                         let update_url = `{{ route('admin.companies.update', ':id') }}`;
                         update_url = update_url.replace(':id', res.id);
                         $("#form_data").attr('action',update_url);
                         $("#company_name").val(res.company_name);
                         $("#website").val(res.website);
                         $("#phone").val(res.phone);
-                        $("#city").val(res.city);
+                        $("#city_id").val(res.city_id);
                         $("#email").val(res.email);
                         $("#gst").val(res.gst);
                         $("#address").val(res.address);

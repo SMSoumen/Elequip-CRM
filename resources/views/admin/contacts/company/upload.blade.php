@@ -43,6 +43,12 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-end h-100 align-items-center">
+                                        <a href="{{asset(asset_path('assets/admin/sample/contact-sample.xlsx'))}}" download=""><button type="button" class="btn btn-warning" title="download"><i class="fas fa-download"></i> Sample Contact File</button></a>
+                                    </div>
+                                </div>
+
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

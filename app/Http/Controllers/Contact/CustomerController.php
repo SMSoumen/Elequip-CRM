@@ -64,11 +64,11 @@ class CustomerController extends Controller implements HasMiddleware
             'customer_name' => 'required|string|unique:customers,customer_name',
             'designation'    => 'required|string',
             'mobile'         => 'required|string',
-            'phone'          => '',
+            'phone'          => 'string|nullable',
             'email'          => 'required|string|email',
-            'email2'         => '',
+            'email2'         => 'string|email|nullable',
             'company_id'   => 'required|integer',
-            'address'        => 'string',
+            'address'        => 'string|nullable',
         ]);
         $customer = Customer::create($validated);
         if($customer){
@@ -101,11 +101,11 @@ class CustomerController extends Controller implements HasMiddleware
             'customer_name' => "required|string|unique:customers,customer_name,$id",
             'designation'    => 'required|string',
             'mobile'         => 'required|string',
-            'phone'          => '',
+            'phone'          => 'string|nullable',
             'email'          => 'required|string|email',
-            'email2'         => '',
-            'company_id'   => 'required|string',
-            'address'        => 'string',
+            'email2'         => 'string|email|nullable',
+            'company_id'   => 'required|integer',
+            'address'        => 'string|nullable',
         ]);
         $customer = Customer::where('id',$id)->update($validated);
         if($customer){

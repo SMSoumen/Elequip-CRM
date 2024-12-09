@@ -57,16 +57,16 @@ class CompanyController extends Controller implements HasMiddleware
             'company_name' => 'required|string|unique:companies,company_name',
             'city_id'         => 'required|integer',
             'address'      => 'required|string',
-            'phone'        => 'string',
-            'website'      => 'string',
-            'email'        => 'string|email',
-            'gst'         => 'string',
+            'phone'        => 'string|nullable',
+            'website'      => 'string|nullable',
+            'email'        => 'string|email|nullable',
+            'gst'         => 'string|nullable',
         ]);
         $source = Company::create($validated);
         if($source){
             return redirect()->back()->withSuccess('Company added successfully.');
         }else{
-            return redirect()->back()->withErrors('Error!! while adding company!!!');
+            return redirect()->back()->withErrors('Error!! While adding company!!!');
         }
     }
 
@@ -79,12 +79,12 @@ class CompanyController extends Controller implements HasMiddleware
     {
         $validated =  $request->validate([
             'company_name' => "required|string|unique:companies,company_name,$Company->id",
-            'city'         => 'required|integer',
+            'city_id'         => 'required|integer',
             'address'      => 'required|string',
-            'phone'        => 'string',
-            'website'      => 'string',
-            'email'        => 'string|email',
-            'gst'         => 'string',
+            'phone'        => 'string|nullable',
+            'website'      => 'string|nullable',
+            'email'        => 'string|email|nullable',
+            'gst'         => 'string|nullable',
         ]);
 
         if($Company->update($validated)){

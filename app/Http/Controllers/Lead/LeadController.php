@@ -199,14 +199,19 @@ class LeadController extends Controller implements HasMiddleware
         $lead_details = LeadDetail::where('lead_id',$lead->id)->get();
         
 
+
         $quotations = Quotation::where('lead_id',$lead->id)->orderBy('quot_version','desc')->get();
         // $letest_quotation = Quotation::where('lead_id',$lead->id)->latest()->first();
         $letest_quotation = $quotations->first();
-        $letest_quotation_details = QuotationDetail::where('quotation_id',$letest_quotation->id)->get();
-        $quot_terms = QuotationTerm::where('quotation_id', $letest_quotation->id)->first();
 
+        $letest_quotation_details = null;
+        $quot_terms = null;
+        if ($letest_quotation) {
+            $letest_quotation_details = QuotationDetail::where('quotation_id',$letest_quotation->id)->get();
+            $quot_terms = QuotationTerm::where('quotation_id', $letest_quotation->id)->first();
+        }
+        
         $lead_company = Company::where('id',$lead->company_id)->first(['id','gst']);
-
         $proforma = ProformaInvoice::with('proforma_details')->where('lead_id',$lead->id)->first();
 
         $po_details = $orders = null;
@@ -606,7 +611,6 @@ class LeadController extends Controller implements HasMiddleware
 
     public function generateProformaPdf($lead_id) {
 
-        // $data['lead'] = Lead::where
         // $data['quotation'] = Quotation::where('id',$quotaion_id)->first();
         // $data['quotaion_details'] = QuotationDetail::where('quotation_id',$quotaion_id)->get();
         // $data['quot_terms'] = QuotationTerm::where('quotation_id',$quotaion_id)->first();
