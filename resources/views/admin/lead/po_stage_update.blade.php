@@ -1,3 +1,4 @@
+@if($po_details)
 <div id="response-message"></div>
 <form id="po_update" enctype="multipart/form-data"> @csrf
     <div class="row">
@@ -92,6 +93,8 @@
             @endif
     </div>
 </form>
+
+@endif
 
 
 

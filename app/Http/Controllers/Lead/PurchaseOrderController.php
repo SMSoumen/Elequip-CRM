@@ -54,6 +54,7 @@ class PurchaseOrderController extends Controller
         }
         Lead::where('id',$request->lead_id)->update(['lead_stage_id' => 5]);
         $po = PurchaseOrder::create($data);
+        PurchaseOrder::where('id',$po->id)->update(['po_refer_no' => auth("admin")->user()->code.'/'.$po->id]);
 
         $quotation_details = QuotationDetail::where('quotation_id',$request->quotation_id)->get();
         $add_order_details = [];
