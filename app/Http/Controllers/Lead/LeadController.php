@@ -201,21 +201,27 @@ class LeadController extends Controller implements HasMiddleware
 
         $quotations = Quotation::where('lead_id',$lead->id)->orderBy('quot_version','desc')->get();
         // $letest_quotation = Quotation::where('lead_id',$lead->id)->latest()->first();
+
+        $po_details = $orders = $letest_quotation_details = $quot_terms = null;
+
         $letest_quotation = $quotations->first();
-        $letest_quotation_details = QuotationDetail::where('quotation_id',$letest_quotation->id)->get();
-        $quot_terms = QuotationTerm::where('quotation_id', $letest_quotation->id)->first();
+        if($letest_quotation){
+            $letest_quotation_details = QuotationDetail::where('quotation_id',$letest_quotation->id)->get();
+            $quot_terms = QuotationTerm::where('quotation_id', $letest_quotation->id)->first();
+
+        }
 
         $lead_company = Company::where('id',$lead->company_id)->first(['id','gst']);
 
         $proforma = ProformaInvoice::with('proforma_details')->where('lead_id',$lead->id)->first();
 
-        $po_details = $orders = null;
         if($letest_quotation){
             $po_details = PurchaseOrder::where('quotation_id',$letest_quotation->id)->first();
             if($po_details){
                 $orders = OrderAndDelivery::where('purchase_order_id',$po_details->id)->get(['id','order_product_name','order_product_code','order_product_delivery_date']);
             }
         }
+        // dd($letest_quotation->id);
 
         return view('admin.lead.view',compact(['companies','customers','categories','sources','products','stages','lead','followup_date','lead_details','quotations','letest_quotation','po_details','orders', 'followups','lead_company','letest_quotation_details','proforma', 'quot_terms']));
     }
@@ -337,7 +343,8 @@ class LeadController extends Controller implements HasMiddleware
             Lead::where('id',$data['lead_id'])->update(['lead_stage_id' => '3']);
             $quotation = Quotation::create([
                 'lead_id'      => $data['lead_id'],
-                'quot_ref_no'  => $data['enquiry_ref'],
+                'quot_ref_no'  => auth("admin")->user()->code.strtoupper(substr($data['product_name'][0],0,2)).'/'.$data['lead_id'],
+                'quot_user_ref_no' => $data['enquiry_ref'],
                 'quot_remarks' => $data['quotation_remarks'],
                 'quot_amount'  => array_sum($data['amount']),
                 'admin_id'     => auth("admin")->user()->id,
@@ -412,7 +419,8 @@ class LeadController extends Controller implements HasMiddleware
 
         $quotation = Quotation::create([
             'lead_id'      => $request->lead_id,
-            'quot_ref_no'  => $request->enquiry_ref,
+            'quot_user_ref_no'  => $request->enquiry_ref,
+            'quot_ref_no'  => auth("admin")->user()->code.strtoupper(substr($request->product_name[0],0,2)).'/'.$request->lead_id,
             'quot_remarks' => $request->quotation_remarks,
             'quot_amount'  => array_sum($request->amount),
             'admin_id'     => auth("admin")->user()->id,

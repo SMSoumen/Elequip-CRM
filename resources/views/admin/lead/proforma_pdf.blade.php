@@ -1,3 +1,4 @@
+@if($po_details)
     <style>
         .pdf_preview_container {
             border: 1px solid #d7d7d7;
@@ -334,3 +335,5 @@
             </a>
         </div>
     </div>
+
+    @endif
