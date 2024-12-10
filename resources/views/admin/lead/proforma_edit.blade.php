@@ -71,6 +71,9 @@
                                                                             {{$proforma->product_name}} ({{$proforma->product_code}}) <br><br>
                                                                             <textarea name="product_tech_spec[]" class="product_tech_spec">{{$proforma->proforma_product_spec}}</textarea>
                                                                             <input type="hidden" name="product_id[]" value="{{$proforma->product_id}}">
+                                                                            <input type="hidden" name="product_name[]" value="{{ $proforma->proforma_product_name }}">
+                                                                            <input type="hidden" name="product_code[]" value="{{ $proforma->proforma_product_code }}">
+                                                                            <input type="hidden" name="product_unit[]" value="{{ $proforma->proforma_product_unit }}">
                                                                         </td>
                                                                         <td><input type="number" name="qty[]" class="qty" value="{{$proforma->proforma_product_qty}}" ></td>
                                                                         <td><input type="number" name="rate[]" class="rate" value="{{$proforma->proforma_product_price}}" ></td>

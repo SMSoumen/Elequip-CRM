@@ -52,6 +52,9 @@
                                 {{ $quotation->quot_product_name }} ({{ $quotation->quot_product_code }}) <br><br>
                                 <textarea name="product_tech_spec[]" class="product_tech_spec">{{ $quotation->quot_product_tech_spec }}</textarea>
                                 <input type="hidden" name="product_id[]" value="{{ $quotation->product_id }}">
+                                <input type="hidden" name="product_name[]" value="{{ $quotation->quot_product_name }}">
+                                <input type="hidden" name="product_code[]" value="{{ $quotation->quot_product_code }}">
+                                <input type="hidden" name="product_unit[]" value="{{ $quotation->quot_product_unit }}">
                             </td>
                             <td><input type="number" name="qty[]" class="qty"
                                     value="{{ $quotation->quot_product_qty }}"></td>

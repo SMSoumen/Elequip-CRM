@@ -527,6 +527,14 @@ class LeadController extends Controller implements HasMiddleware
             'product_tech_spec'   => 'required|array',
             'product_tech_spec.*' => 'required|string',
 
+            'product_name'   => 'required|array',
+            'product_name.*' => 'required|string',
+
+            'product_code'   => 'required|array',
+            'product_code.*' => 'required|string',
+
+            'product_unit'   => 'required|array',
+            'product_unit.*' => 'required|string',
         ]);
 
         DB::beginTransaction();
@@ -548,7 +556,10 @@ class LeadController extends Controller implements HasMiddleware
                         'proforma_product_spec'  => $request->product_tech_spec[$key],
                         'proforma_product_qty'   => $request->qty[$key],
                         'proforma_product_price' => $request->rate[$key],
-                    ]);
+                        'proforma_product_name'  => $request->product_name[$key],
+                        'proforma_product_code'  => $request->product_code[$key],
+                        'proforma_product_unit'  => $request->product_unit[$key],
+                     ]);
                 }
                 DB::table('proforma_details')->insert($details);
                 DB::commit();
@@ -586,6 +597,16 @@ class LeadController extends Controller implements HasMiddleware
 
             'product_tech_spec'   => 'required|array',
             'product_tech_spec.*' => 'required|string',
+
+            'product_name'   => 'required|array',
+            'product_name.*' => 'required|string',
+
+            'product_code'   => 'required|array',
+            'product_code.*' => 'required|string',
+
+            'product_unit'   => 'required|array',
+            'product_unit.*' => 'required|string',
+
         ]);
 
         DB::beginTransaction();
@@ -605,6 +626,9 @@ class LeadController extends Controller implements HasMiddleware
                     'proforma_product_spec'  => $request->product_tech_spec[$key],
                     'proforma_product_qty'   => $request->qty[$key],
                     'proforma_product_price' => $request->rate[$key],
+                    'proforma_product_name'  => $request->product_name[$key],
+                    'proforma_product_code'  => $request->product_code[$key],
+                    'proforma_product_unit'  => $request->product_unit[$key],
                 ]);
             }
             DB::table('proforma_details')->insert($details);
