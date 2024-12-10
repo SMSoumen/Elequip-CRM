@@ -305,40 +305,40 @@
                                 }
                         };
 
-                        $('#po_add').on('submit', function (e) {
-                                e.preventDefault(); 
-                                let formData = new FormData(this);
-                                $.ajax({
-                                    url: "{{route('admin.lead.purchase_order.create')}}",
-                                    method: 'POST',
-                                    data: formData,
-                                    processData: false,
-                                    contentType: false, 
-                                    success: function (response) {
-                                        $('#response-message').html('');
-                                        if (response.success) {
-                                            $('#response-message').html('<div class="alert alert-success text-center">' + response.message + '</div>');
-                                            let url = `{{route('admin.po.details',':po_id')}}`; 
-                                            url = url.replace(':po_id', response.po_id);
-                                            $.ajax({
-                                                url: url,
-                                                method: 'GET',
-                                                success: function (res) {
-                                                    $(".load_content").html(res);
-                                                }
-                                            });
-                                        }
-                                    },
-                                    error: function (xhr) {
-                                        let errors = xhr.responseJSON.errors;
-                                        let errorMessages = '';
-                                        for (let field in errors) {
-                                            errorMessages += `<p style="color: red;">${errors[field]}</p>`;
-                                        }
-                                        $('#response-message').html(errorMessages);
-                                    }
-                                });
-                        })
+                        // $('#po_add').on('submit', function (e) {
+                        //         e.preventDefault(); 
+                        //         let formData = new FormData(this);
+                        //         $.ajax({
+                        //             url: "{{route('admin.lead.purchase_order.create')}}",
+                        //             method: 'POST',
+                        //             data: formData,
+                        //             processData: false,
+                        //             contentType: false, 
+                        //             success: function (response) {
+                        //                 $('#response-message').html('');
+                        //                 if (response.success) {
+                        //                     $('#response-message').html('<div class="alert alert-success text-center">' + response.message + '</div>');
+                        //                     let url = `{{route('admin.po.details',':po_id')}}`; 
+                        //                     url = url.replace(':po_id', response.po_id);
+                        //                     $.ajax({
+                        //                         url: url,
+                        //                         method: 'GET',
+                        //                         success: function (res) {
+                        //                             $(".load_content").html(res);
+                        //                         }
+                        //                     });
+                        //                 }
+                        //             },
+                        //             error: function (xhr) {
+                        //                 let errors = xhr.responseJSON.errors;
+                        //                 let errorMessages = '';
+                        //                 for (let field in errors) {
+                        //                     errorMessages += `<p style="color: red;">${errors[field]}</p>`;
+                        //                 }
+                        //                 $('#response-message').html(errorMessages);
+                        //             }
+                        //         });
+                        // })
 
                         // $('#po_update').on('submit', function (e) {
                         //     console.log("hello");

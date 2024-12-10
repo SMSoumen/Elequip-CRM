@@ -76,10 +76,12 @@ class PurchaseOrderController extends Controller
         DB::table('order_and_deliveries')->insert($add_order_details);
     
         if($po){
-            return response()->json(['success' => true, 'message' => 'P.O created successfully.', 'po_id' =>$po->id,]);
+            return redirect()->route('admin.leads.show',$request->lead_id)->withSuccess('P.O created successfully.');
+            // return response()->json(['success' => true, 'message' => 'P.O created successfully.', 'po_id' =>$po->id,]);
         }
         else{
-            return response()->json(['success' => false, 'message' => 'Error!! while creating P.O!',]);
+            return redirect()->back()->withErrors('Error!! while creating P.O!!!');
+            // return response()->json(['success' => false, 'message' => 'Error!! while creating P.O!',]);
         }
     }
 
@@ -134,7 +136,7 @@ class PurchaseOrderController extends Controller
         }
         
         if(PurchaseOrder::where('id',$request->po_id)->update($data)){
-            return redirect()->route('admin.leads.show',$request->lead_id)->withSuccess('P.O updated successfull.');
+            return redirect()->route('admin.leads.show',$request->lead_id)->withSuccess('P.O updated successfully.');
             // return response()->json(['success' => true, 'message' => 'P.O updated successfully.']);
         }
         else{

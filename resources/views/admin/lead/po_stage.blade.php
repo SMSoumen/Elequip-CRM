@@ -1,6 +1,6 @@
 <div class="load_content">
     <div id="response-message"></div>
-    <form id="po_add" enctype="multipart/form-data"> @csrf
+    <form id="po_add" action="{{route('admin.lead.purchase_order.create')}}" method="POST" enctype="multipart/form-data"> @csrf
         <div class="row">
                 <input type="hidden" name="lead_id" value="{{$lead->id}}">
                 <input type="hidden" name="quotation_id" value="{{$letest_quotation->id}}">
