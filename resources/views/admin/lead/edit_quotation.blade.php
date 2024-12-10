@@ -151,21 +151,21 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="warranty">Warranty</label>
-                                                    <input type="text" class="form-control" id="warranty" name="warranty" value="12 months from the date of supply" placeholder="{{$quotation_terms->term_warranty}}">
+                                                    <input type="text" class="form-control" id="warranty" name="warranty" placeholder="12 months from the date of supply" value="{{$quotation_terms->term_warranty}}">
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="note_1">Note 1</label>
-                                                    <input type="text" class="form-control" id="note_1" name="note_1" placeholder="{{$quotation_terms->term_note_1}}">
+                                                    <input type="text" class="form-control" id="note_1" name="note_1" value="{{$quotation_terms->term_note_1}}">
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="note_2">Note 2</label>
-                                                    <input type="text" class="form-control" id="note_2" name="note_2" placeholder="{{$quotation_terms->term_note_2}}">
+                                                    <input type="text" class="form-control" id="note_2" name="note_2" value="{{$quotation_terms->term_note_2}}">
                                                 </div>
                                             </div>
 

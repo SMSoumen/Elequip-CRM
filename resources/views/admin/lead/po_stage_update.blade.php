@@ -1,6 +1,6 @@
-@if($po_details)
+
 <div id="response-message"></div>
-<form id="po_update" enctype="multipart/form-data"> @csrf
+<form id="po_update" action="{{route('admin.lead.purchase_order.update')}}" method="POST" enctype="multipart/form-data"> @csrf
     <div class="row">
             <input type="hidden" name="lead_id" value="{{$po_details->lead_id}}">
             <input type="hidden" name="quotation_id" value="{{$po_details->quotation_id}}">
@@ -70,7 +70,7 @@
                                 {{$order->order_product_name}} ({{$order->order_product_code}})
                                 <input type="hidden" name="order_id[]" value="{{$order->id}}">
                             </td>
-                            <td><input type="date" name="estimate_delivery_date[]" value="{{$order->order_product_delivery_date}}" required></td>
+                            <td><input type="date" name="estimate_delivery_date[]" value="@if($order->order_product_delivery_date){{$order->order_product_delivery_date}}@else{{date('Y-m-d')}}@endif" required></td>
                             <td>
                                 @if($order->status == 0)
 							        <span class="badge badge-warning text-center">Pending</span>
@@ -94,7 +94,7 @@
     </div>
 </form>
 
-@endif
+
 
 
 

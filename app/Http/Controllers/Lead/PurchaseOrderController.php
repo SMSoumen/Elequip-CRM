@@ -105,7 +105,7 @@ class PurchaseOrderController extends Controller
             'estimate_delivery_date.*' => 'required|date',
             'estimate_delivery_date'   => 'required|array'
         ]);
-
+        
         $data = array(
             'lead_id' => $request->lead_id,
             'quotation_id' => $request->quotation_id,
@@ -134,10 +134,12 @@ class PurchaseOrderController extends Controller
         }
         
         if(PurchaseOrder::where('id',$request->po_id)->update($data)){
-            return response()->json(['success' => true, 'message' => 'P.O updated successfully.']);
+            return redirect()->route('admin.leads.show',$request->lead_id)->withSuccess('P.O updated successfull.');
+            // return response()->json(['success' => true, 'message' => 'P.O updated successfully.']);
         }
         else{
-            return response()->json(['success' => false, 'message' => 'Error!! while updating P.O!',]);
+            return redirect()->back()->withErrors('Error!! while updating P.O!!!');
+            //return response()->json(['success' => false, 'message' => 'Error!! while updating P.O!',]);
         }
     }
 }
