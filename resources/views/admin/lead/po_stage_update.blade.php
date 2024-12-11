@@ -2,6 +2,13 @@
 <div id="response-message"></div>
 <form id="po_update" action="{{route('admin.lead.purchase_order.update')}}" method="POST" enctype="multipart/form-data"> @csrf
     <div class="row">
+
+            @if($po_details->po_document)
+                <div>
+                    <a href="{{asset(asset_path('upload/po/'.$po_details->po_document))}}" download><h3 class="m-3 text-warning"><i class="fas fa-download" title="Download P.O"></i></h3></a>
+                </div>
+            @endif
+
             <input type="hidden" name="lead_id" value="{{$po_details->lead_id}}">
             <input type="hidden" name="quotation_id" value="{{$po_details->quotation_id}}">
             <input type="hidden" name="po_id" value="{{$po_details->id}}">

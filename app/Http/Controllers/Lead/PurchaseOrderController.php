@@ -47,7 +47,7 @@ class PurchaseOrderController extends Controller
         );
 
         if($request->hasFile('po_document')){
-            $str_image = $request->file('po_document')->hashName();
+            $str_image = $request->file('po_document')->getClientOriginalName();
             $location = public_path('/upload/po/');
             $request->file('po_document')->move($location, $str_image);
             $data['po_document'] = $str_image;
@@ -123,8 +123,9 @@ class PurchaseOrderController extends Controller
             'po_remarks' => $request->order_remark,
         );
 
+        // dd($request->file('po_document')->getClientOriginalName());
         if($request->hasFile('po_document')){
-            $str_image = $request->file('po_document')->hashName();
+            $str_image = $request->file('po_document')->getClientOriginalName();
             $location = public_path('/upload/po/');
             $request->file('po_document')->move($location, $str_image);
             $data['po_document'] = $str_image;
