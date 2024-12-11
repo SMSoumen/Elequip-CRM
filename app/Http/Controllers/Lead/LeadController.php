@@ -189,7 +189,7 @@ class LeadController extends Controller implements HasMiddleware
     public function show(Request $request,Lead $lead)
     {
         $followups = LeadFollowup::with('admin')->where('lead_id',$lead->id)->latest()->get();
-        $followup_date = $followups->first();
+        $followup_date = LeadFollowup::where(['lead_id' => $lead->id, 'followup_type' => "followup"])->latest()->value('followup_next_date');
         $companies = Company::where('status','1')->orderBy('company_name','asc')->get();
         $customers = Customer::where('status','1')->orderBy('customer_name','asc')->get();
         $categories = LeadCategory::where('status','1')->orderBy('category_name','asc')->get();
@@ -245,6 +245,7 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function update(Request $request, Lead $lead)
     {
+        // dd($request->all());
         $request->validate([
             'lead_stage_id' => 'integer',
             'lead_id'       => 'required|integer',
@@ -261,12 +262,22 @@ class LeadController extends Controller implements HasMiddleware
             $data['lead_stage_id'] = $request->lead_stage_id;
         }
         if($lead->update($data)){
-            LeadFollowup::create([
+            $prev_followup = LeadFollowup::where(['lead_id' => $lead->id, 'followup_type' => "followup"])->latest()->value('followup_next_date');
+            $followup_data = [
                 'lead_id'   => $request->lead_id,
                 'admin_id'  => auth("admin")->user()->id,
-                'followup_next_date' => $request->followup_next_date, 
+                // 'followup_next_date' => $request->followup_next_date, 
                 'followup_remarks' => ($request->lead_stage_id) ? 'Lead Stage Upgraded' : 'Lead Updated',
-            ]);
+                // 'followup_type' => 'remarks'
+            ];
+            
+            if ($request->followup_next_date != $prev_followup) {
+                $followup_data['followup_next_date'] = $request->followup_next_date;
+            } else {
+                $followup_data['followup_type']		= 'remarks';
+            }
+
+            LeadFollowup::create($followup_data);
             return redirect()->back()->withSuccess('Lead stage updated successfully.');
         }else{
             return redirect()->back()->withErrors('Error!! while updating lead stage!!!');
