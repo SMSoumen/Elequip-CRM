@@ -56,8 +56,6 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-@endsection
-
 
     <!--==================> Add Advance Amount Modal ============================-->
 
@@ -85,7 +83,7 @@
         </div>
     </div>
 
-        <!--==================> Add Remaining Amount ============================-->
+    <!--==================> Add Remaining Amount ============================-->
 
     <div class="modal fade" id="add_remaining_amount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -99,7 +97,8 @@
                         <input type="hidden" name="order_id" id="r_order_id">
                         <div class="col-12">
                             <label for="remaining_amount">Remaining Amount<span class="text-danger">*</span></label>
-                            <input type="number" name="remaining_amount" id="remaining_amount" class="form-control" required>
+                            <input type="number" name="remaining_amount" id="remaining_amount" class="form-control"
+                                required>
                             <span class="text-danger" id="check_remaining_msg"></span>
                         </div>
                     </div>
@@ -126,9 +125,11 @@
                         <div class="col-12">
                             <label for="stage_id">Select Stage<span class="text-danger">*</span></label>
                             <select name="stage_id" id="stage_id" class="form-control" required>
-                                    @foreach($lead_stages as $stage)
-                                    <option value="{{$stage->id}}" @if($stage->id == 9) {{'disabled'}} @endif>{{$stage->stage_name}}</option>
-                                    @endforeach
+                                @foreach ($lead_stages as $stage)
+                                    <option value="{{ $stage->id }}"
+                                        @if ($stage->id == 9) {{ 'disabled' }} @endif>
+                                        {{ $stage->stage_name }}</option>
+                                @endforeach
                             </select>
 
                         </div>
@@ -149,16 +150,16 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Send SMS</h5>
                 </div>
-                <form method="POST" action="{{route('admin.order.send_sms')}}">@csrf
+                <form method="POST" action="{{ route('admin.order.send_sms') }}">@csrf
                     <div class="modal-body">
                         <input type="hidden" name="mobile_no" id="mobile_no">
                         <input type="hidden" name="lead_id" id="lead_id1">
                         <div class="col-12">
                             <label for="sms_title">SMS Title<span class="text-danger">*</span></label>
                             <select name="sms_title" id="sms_title" class="form-control" required>
-                                    @foreach($templates as $template)
-                                    <option value="{{$template->id}}">{{$template->template_name}}</option>
-                                    @endforeach
+                                @foreach ($templates as $template)
+                                    <option value="{{ $template->id }}">{{ $template->template_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -169,19 +170,18 @@
             </div>
         </div>
     </div>
+@endsection
 
 
 @push('scripts')
-
     <script>
-
         $.ajaxSetup({
             headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
 
-        $(document).on('click','.send_sms',function(){
+        $(document).on('click', '.send_sms', function() {
             var mobile_no = $(this).data("mobileno");
             var lead_id = $(this).data("leadid");
             $("#mobile_no").val(mobile_no);
@@ -189,7 +189,7 @@
             $("#send_sms").modal('show');
         });
 
-        $(document).on('click','.update_stage',function(){
+        $(document).on('click', '.update_stage', function() {
             var lead_id = $(this).data("modelid");
             var stageid = $(this).data("stageid");
             $("#lead_id").val(lead_id);
@@ -197,104 +197,106 @@
             $("#lead_stage").modal('show');
         });
 
-        $(document).on('click','.add_remaining_amount',function(){
+        $(document).on('click', '.add_remaining_amount', function() {
             var order_id = $(this).data("modelid");
             $("#r_order_id").val(order_id);
             $("#add_remaining_amount").modal('show');
         });
 
-        $(document).on('click','.add_advance_amount',function(){
+        $(document).on('click', '.add_advance_amount', function() {
             var order_id = $(this).data("modelid");
             $("#order_id").val(order_id);
             $("#add_advance_amount").modal('show');
         });
 
-            $('#add_advance_amount_form').on('submit', function (e) {
-                e.preventDefault(); 
-                let formData = new FormData(this);
-                $.ajax({
-                    url: "{{route('admin.order.add_advance_amount')}}",
-                    method: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                            $('#response-message').html('');
-                                    if (response.success) {
-                                        $('#response-message').html('<div class="alert alert-success text-center">' + response.message + '</div>');
-                                        setInterval(location.reload(), 100000);
-                                    }
-                                    else if(response.status == 'check_amount'){
-                                        $("#check_amount_msg").html(response.message);
-                                    }
-                                },
-                    error: function (xhr) {
-                        let errors = xhr.responseJSON.errors;
-                        let errorMessages = '';
-                        for (let field in errors) {
-                            errorMessages += `<p style="color: red;">${errors[field]}</p>`;
-                        }
-                        $('#response-message').html(errorMessages);
+        $('#add_advance_amount_form').on('submit', function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $.ajax({
+                url: "{{ route('admin.order.add_advance_amount') }}",
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#response-message').html('');
+                    if (response.success) {
+                        $('#response-message').html('<div class="alert alert-success text-center">' +
+                            response.message + '</div>');
+                        setInterval(location.reload(), 100000);
+                    } else if (response.status == 'check_amount') {
+                        $("#check_amount_msg").html(response.message);
                     }
-                })
-            });
+                },
+                error: function(xhr) {
+                    let errors = xhr.responseJSON.errors;
+                    let errorMessages = '';
+                    for (let field in errors) {
+                        errorMessages += `<p style="color: red;">${errors[field]}</p>`;
+                    }
+                    $('#response-message').html(errorMessages);
+                }
+            })
+        });
 
-            $('#add_remaining_amount_form').on('submit', function (e) {
-                e.preventDefault(); 
-                let formData = new FormData(this);
-                $.ajax({
-                    url: "{{route('admin.order.add_remaining_amount')}}",
-                    method: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                            $('#response-message1').html('');
-                                    if (response.success) {
-                                        $('#response-message1').html('<div class="alert alert-success text-center">' + response.message + '</div>');
-                                        setInterval(location.reload(), 100000);
-                                    }
-                                    else if(response.status == 'check_amount'){
-                                        $("#check_remaining_msg").html(response.message);
-                                    }
-                                },
-                    error: function (xhr) {
-                        let errors = xhr.responseJSON.errors;
-                        let errorMessages = '';
-                        for (let field in errors) {
-                            errorMessages += `<p style="color: red;">${errors[field]}</p>`;
-                        }
-                        $('#response-message1').html(errorMessages);
+        $('#add_remaining_amount_form').on('submit', function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $.ajax({
+                url: "{{ route('admin.order.add_remaining_amount') }}",
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#response-message1').html('');
+                    if (response.success) {
+                        $('#response-message1').html('<div class="alert alert-success text-center">' +
+                            response.message + '</div>');
+                        setInterval(location.reload(), 100000);
+                    } else if (response.status == 'check_amount') {
+                        $("#check_remaining_msg").html(response.message);
                     }
-                })
-            });
+                },
+                error: function(xhr) {
+                    let errors = xhr.responseJSON.errors;
+                    let errorMessages = '';
+                    for (let field in errors) {
+                        errorMessages += `<p style="color: red;">${errors[field]}</p>`;
+                    }
+                    $('#response-message1').html(errorMessages);
+                }
+            })
+        });
 
-            $('#lead_stage_form').on('submit', function (e) {
-                e.preventDefault(); 
-                let formData = new FormData(this);
-                $.ajax({
-                    url: "{{route('admin.order.update_lead_stage')}}",
-                    method: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                            $('#response-message_stage').html('');
-                                    if (response.success) {
-                                        $('#response-message_stage').html('<div class="alert alert-success text-center">' + response.message + '</div>');
-                                        setInterval(location.reload(), 100000);
-                                    }
-                                },
-                    error: function (xhr) {
-                        let errors = xhr.responseJSON.errors;
-                        let errorMessages = '';
-                        for (let field in errors) {
-                            errorMessages += `<p style="color: red;">${errors[field]}</p>`;
-                        }
-                        $('#response-message_stage').html(errorMessages);
+        $('#lead_stage_form').on('submit', function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            $.ajax({
+                url: "{{ route('admin.order.update_lead_stage') }}",
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#response-message_stage').html('');
+                    if (response.success) {
+                        $('#response-message_stage').html(
+                            '<div class="alert alert-success text-center">' + response.message +
+                            '</div>');
+                        setInterval(location.reload(), 100000);
                     }
-                })
-            });
+                },
+                error: function(xhr) {
+                    let errors = xhr.responseJSON.errors;
+                    let errorMessages = '';
+                    for (let field in errors) {
+                        errorMessages += `<p style="color: red;">${errors[field]}</p>`;
+                    }
+                    $('#response-message_stage').html(errorMessages);
+                }
+            })
+        });
 
 
         $(document).ready(function() {
@@ -376,9 +378,8 @@
                     $('.statusChange').bootstrapSwitch();
                 }
 
-            });            
+            });
 
         });
-
     </script>
 @endpush

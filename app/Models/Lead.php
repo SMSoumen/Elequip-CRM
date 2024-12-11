@@ -24,4 +24,9 @@ class Lead extends Model
         return $this->belongsTo(Customer::class);
     }
 
+    public function followups(): BelongsTo
+    {
+        return $this->belongsTo(LeadFollowup::class);
+    }
+
 }
