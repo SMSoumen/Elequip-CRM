@@ -4,7 +4,7 @@
 
         @if($data->po_remaining != 0.00)
             @if($data->po_net_amount > $data->po_remaining)
-            <button type="button" class="btn btn-sm btn-primary m-1 add_remaining_amount" data-modelid="{{$data->id}}" title="Add Remaining Amount"><i class="fas fa-plus"></i></button> 
+            <button type="button" class="btn btn-sm btn-primary m-1 add_remaining_amount" data-modelid="{{$data->id}}" data-remaining_amount="{{$data->balance_amount}}" title="Add Remaining Amount"><i class="fas fa-plus"></i></button> 
             @else
             <button type="button" class="btn btn-sm btn-primary m-1 add_advance_amount" data-modelid="{{$data->id}}" title="Add Advance Payment"><i class="fas fa-plus"></i></button> 
             @endif

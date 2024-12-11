@@ -199,7 +199,9 @@
 
         $(document).on('click','.add_remaining_amount',function(){
             var order_id = $(this).data("modelid");
+            var remaining_amount = $(this).data("remaining_amount");
             $("#r_order_id").val(order_id);
+            $('#remaining_amount').attr('placeholder', remaining_amount);
             $("#add_remaining_amount").modal('show');
         });
 

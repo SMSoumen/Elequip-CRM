@@ -162,6 +162,7 @@ class OrderController extends Controller implements HasMiddleware
             'lead_id'  => 'required|integer',
             'stage_id' => 'required|integer',
         ]);
+        LeadFollowup::create(['lead_id' => $request->lead_id, 'followup_remarks' =>'Lead Stage Updated', 'followup_type'=>'remarks', 'admin_id'=> auth("admin")->user()->id]);
         if(Lead::where('id',$request->lead_id)->update(['lead_stage_id' => $request->stage_id])){
             return response()->json(['success' => true, 'message' => 'Lead stage updated successfully.']);
         }
