@@ -18,7 +18,7 @@
                         <div class="card-body">
                             <div class="mb-4">
                                <a href="{{asset(asset_path('assets/admin/sample/products-sample.csv'))}}" download=""><button type="button" class="btn btn-warning" title="download"><i class="fas fa-download"></i> Sample File</button></a>                             
-                                <button type="button" class="btn btn-dark" onclick="uploadProduct()"><i class="fas fa-upload"></i> Upload Products</button>                             
+                                <button type="button" class="btn btn-dark uploadProduct"><i class="fas fa-upload"></i> Upload Products</button>                             
                             </div>
 
                             @if (session('success'))
@@ -59,7 +59,7 @@
 
 <!--===============================> Modal <==================================-->
 
-{{-- <div class="modal fade d-none" id="uploadProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="uploadProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -78,15 +78,16 @@
     </form>
     </div>
   </div>
-</div> --}}
+</div>
 
 @push('scripts')
 
     <script>
 
-        function uploadProduct(){
+        $(".uploadProduct").click(function(){
             $("#uploadProduct").modal('show');
-        };
+        });
+        
 
         $(document).ready(function() {
             var currentdate = new Date();

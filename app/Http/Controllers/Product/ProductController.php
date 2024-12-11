@@ -37,7 +37,11 @@ class ProductController extends Controller implements HasMiddleware
                 ->join('product_sub_categories','products.product_sub_category_id','product_sub_categories.id')
                 ->select('products.*','product_categories.product_category_name','product_sub_categories.product_subcat_name')->orderBy('products.id','desc'))
                 ->addColumn('status', function ($data) {
-                    return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+                    //return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+
+                    $table = 'products';
+                    return view('admin.layouts.partials.listing_status_switch', compact(['data','table']))->render();
+
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })->addColumn('action', function ($data) {
