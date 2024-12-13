@@ -211,229 +211,251 @@
 
 @push('scripts')
     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            $('.product_select_details').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            });
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', (e) => {
-                // Remove 'active' class from all tabs and contents                
-                if (!e.target.classList.contains('disabled')) {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
+            // for quotation_stage
+            $('.product_select_quot').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            });
 
-                    // Add 'active' class to the clicked tab and corresponding content
-                    tab.classList.add('active');
-                    const target = document.getElementById(tab.dataset.target);
-                    target.classList.add('active');
-
-                    if (tab.dataset.target === "lead_details") {
-                        $('.product_select_details').select2({
-                            placeholder: "Select an option",
-                            allowClear: true
-                        });
-                        $('#lead_stage_id').select2({
-                            placeholder: "Select Lead Stage",
-                            allowClear: true
-                        });
-                    } else if (tab.dataset.target === "quotation_stage") {
-                        $('.product_select_quot').select2({
-                            placeholder: "Select an option",
-                            allowClear: true
-                        });
-
-                        $("#product_id2").change(function() {
-                            var product_id = $(this).val();
-                            $.ajax({
-                                type: 'post',
-                                url: "{{ route('admin.product-details') }}",
-                                data: {
-                                    "product_id": product_id
-                                },
-                                success: function(res) {
-                                    var i = 0;
-                                    var tr = '';
-                                    for (i = 0; i < res.length; i++) {
-                                        var tr = tr + `<tr>
+            $("#product_id2").change(function() {
+                var product_id = $(this).val();
+                $.ajax({
+                    type: 'post',
+                    url: "{{ route('admin.product-details') }}",
+                    data: {
+                        "product_id": product_id
+                    },
+                    success: function(res) {
+                        var i = 0;
+                        var tr = '';
+                        for (i = 0; i < res.length; i++) {
+                            var tr = tr + `<tr>
                                                 <td>
                                                     ` + res[i].product_name + `(` + res[i].product_code + `)
                                                     <input type="hidden" name="product_name[]" value="` + res[i]
-                                            .product_name + `">
+                                .product_name + `">
                                                     <input type="hidden" name="product_code[]" value="` + res[i]
-                                            .product_code + `">
+                                .product_code + `">
                                                     <input type="hidden" name="product_unit[]" value="` + res[i]
-                                            .unit_type + `">
+                                .unit_type + `">
                                                     <input type="hidden" name="product_tech_spec[]" value="` + res[i]
-                                            .product_tech_spec + `">
+                                .product_tech_spec + `">
                                                     <input type="hidden" name="product_m_spec[]" value="` + res[i]
-                                            .product_marketing_spec + `">
+                                .product_marketing_spec + `">
                                                 </td>
                                                 <td><input type="text" name="qty[]" class="qty" value="1"></td>
                                                 <td><input type="text" name="rate[]" class="rate" value="` + res[i]
-                                            .product_price + `"></td>
+                                .product_price + `"></td>
 
                                                 <td>
                                                     <input type="hidden" class="single_amount" value="` + res[i]
-                                            .product_price + `">
+                                .product_price + `">
                                                     <input type="text" name="amount[]" class="amount" value="` + res[i]
-                                            .product_price + `" readonly>
+                                .product_price + `" readonly>
                                                 </td>
                                             </tr>`;
-                                    }
-                                    $("tbody").html(tr);
-                                    changeAmount();
-                                }
-                            })
-                        });
-
-                        function changeAmount() {
-                            $(".qty").keyup(function() {
-                                var quantity = $(this).val();
-                                var amount = $(this).closest('tr').find('.single_amount').val();
-                                var total_amount = quantity * amount;
-                                if (isNaN(total_amount)) {
-                                    $(this).closest('tr').find('.amount').val(0);
-                                } else {
-                                    $(this).closest('tr').find('.amount').val(total_amount);
-                                }
-                            });
                         }
-                    } else if (tab.dataset.target === "po_stage") {
-
-                        $("#po_modal").modal('show');
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-
-                        $("#tax_percent").change(function() {
-                            amountCalculation();
-                        });
-                        $("#gross_total").keyup(function() {
-                            amountCalculation();
-                        });
-                        $("#order_no").keyup(function() {
-                            amountCalculation();
-                        })
-
-                        function amountCalculation() {
-                            var tax_percent = $("#tax_percent").val();
-                            var gross_total = $("#gross_total").val();
-                            if (gross_total == '') {
-                                $("#total_tax_amount").val('0');
-                                $("#net_total").val('0');
-                            } else {
-                                var tax_amount = gross_total * (tax_percent / 100);
-                                var net_amount = Number(gross_total) + Number(tax_amount);
-                                $("#total_tax_amount").val(tax_amount);
-                                $("#net_total").val(net_amount);
-                            }
-                        };
-
-                        // $('#po_add').on('submit', function (e) {
-                        //         e.preventDefault(); 
-                        //         let formData = new FormData(this);
-                        //         $.ajax({
-                        //             url: "{{ route('admin.lead.purchase_order.create') }}",
-                        //             method: 'POST',
-                        //             data: formData,
-                        //             processData: false,
-                        //             contentType: false, 
-                        //             success: function (response) {
-                        //                 $('#response-message').html('');
-                        //                 if (response.success) {
-                        //                     $('#response-message').html('<div class="alert alert-success text-center">' + response.message + '</div>');
-                        //                     let url = `{{ route('admin.po.details', ':po_id') }}`; 
-                        //                     url = url.replace(':po_id', response.po_id);
-                        //                     $.ajax({
-                        //                         url: url,
-                        //                         method: 'GET',
-                        //                         success: function (res) {
-                        //                             $(".load_content").html(res);
-                        //                         }
-                        //                     });
-                        //                 }
-                        //             },
-                        //             error: function (xhr) {
-                        //                 let errors = xhr.responseJSON.errors;
-                        //                 let errorMessages = '';
-                        //                 for (let field in errors) {
-                        //                     errorMessages += `<p style="color: red;">${errors[field]}</p>`;
-                        //                 }
-                        //                 $('#response-message').html(errorMessages);
-                        //             }
-                        //         });
-                        // })
-
-                        // $('#po_update').on('submit', function (e) {
-                        //     console.log("hello");
-                        //     e.preventDefault(); 
-                        //     let formData = new FormData(this);
-                        //     $.ajax({
-                        //         url: "{{ route('admin.lead.purchase_order.update') }}",
-                        //         method: 'POST',
-                        //         data: formData,
-                        //         processData: false,
-                        //         contentType: false, 
-                        //         success: function (response) {
-                        //             $('#response-message').html('');
-                        //             if (response.success) {
-                        //                 $('#response-message').html('<div class="alert alert-success text-center">' + response.message + '</div>');
-                        //             }
-                        //         },
-                        //         error: function (xhr) {
-                        //             let errors = xhr.responseJSON.errors;
-                        //             let errorMessages = '';
-                        //             for (let field in errors) {
-                        //                 errorMessages += `<p style="color: red;">${errors[field]}</p>`;
-                        //             }
-                        //             $('#response-message').html(errorMessages);
-                        //         }
-                        //     });
-                        // })
-                    } else if (tab.dataset.target === "proforma") {
-                        $("#update_gst_modal").modal('show');
-
-                        $('.product_tech_spec').summernote({
-                            tabsize: 2,
-                            height: 100
-                        });
-
+                        $("tbody").html(tr);
                         changeAmount();
+                    }
+                })
+            });
 
-                        function changeAmount() {
-                            $(".qty").keyup(function() {
-                                var quantity = $(this).val();
-                                var amount = $(this).closest('tr').find('.rate').val();
-                                var total_amount = quantity * amount;
-                                if (isNaN(total_amount)) {
-                                    $(this).closest('tr').find('.amount').val(0);
-                                } else {
-                                    $(this).closest('tr').find('.amount').val(total_amount);
-                                }
-                                updateTotal();
-                            });
-                        }
+            function changeAmount() {
+                $(".qty").keyup(function() {
+                    var quantity = $(this).val();
+                    var amount = $(this).closest('tr').find(
+                        '.single_amount').val();
+                    var total_amount = quantity * amount;
+                    if (isNaN(total_amount)) {
+                        $(this).closest('tr').find('.amount').val(0);
+                    } else {
+                        $(this).closest('tr').find('.amount').val(
+                            total_amount);
+                    }
+                });
+            }
+            // for quotation_stage
 
-                        function updateTotal() {
-                            let total = 0;
-                            $('.amount').each(function() {
-                                const value = parseFloat($(this).val()) || 0;
-                                total += value;
+            // for po stage
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                        'content')
+                }
+            });
+
+            $("#tax_percent").change(function() {
+                amountCalculation();
+            });
+            $("#gross_total").keyup(function() {
+                amountCalculation();
+            });
+            $("#order_no").keyup(function() {
+                amountCalculation();
+            })
+
+            function amountCalculation() {
+                var tax_percent = $("#tax_percent").val();
+                var gross_total = $("#gross_total").val();
+                if (gross_total == '') {
+                    $("#total_tax_amount").val('0');
+                    $("#net_total").val('0');
+                } else {
+                    var tax_amount = gross_total * (tax_percent / 100);
+                    var net_amount = Number(gross_total) + Number(tax_amount);
+                    $("#total_tax_amount").val(tax_amount);
+                    $("#net_total").val(net_amount);
+                }
+            };
+            // for po stage
+
+            // for proforma
+            $('.product_tech_spec').summernote({
+                tabsize: 2,
+                height: 100
+            });
+
+            changeAmount();
+
+            function changeAmount() {
+                $(".qty").keyup(function() {
+                    var quantity = $(this).val();
+                    var amount = $(this).closest('tr').find('.rate').val();
+                    var total_amount = quantity * amount;
+                    if (isNaN(total_amount)) {
+                        $(this).closest('tr').find('.amount').val(0);
+                    } else {
+                        $(this).closest('tr').find('.amount').val(
+                            total_amount);
+                    }
+                    updateTotal();
+                });
+            }
+
+            function updateTotal() {
+                let total = 0;
+                $('.amount').each(function() {
+                    const value = parseFloat($(this).val()) || 0;
+                    total += value;
+                });
+                $('#basic_amount').val('Rs. ' + total);
+            }
+            // for proforma
+
+
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    // Remove 'active' class from all tabs and contents                
+                    if (!e.target.classList.contains('disabled')) {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+
+                        // Add 'active' class to the clicked tab and corresponding content
+                        tab.classList.add('active');
+                        const target = document.getElementById(tab.dataset.target);
+                        target.classList.add('active');
+
+                        console.log(tab.dataset.target);
+
+                        if (tab.dataset.target === "lead_details") {
+
+                            $('#lead_stage_id').select2({
+                                placeholder: "Select Lead Stage",
+                                allowClear: true
                             });
-                            $('#basic_amount').val('Rs. ' + total);
+                        } else if (tab.dataset.target === "quotation_stage") {
+
+
+                        } else if (tab.dataset.target === "po_stage") {
+                            $("#po_modal").modal('show');
+
+
+                            // $('#po_add').on('submit', function (e) {
+                            //         e.preventDefault(); 
+                            //         let formData = new FormData(this);
+                            //         $.ajax({
+                            //             url: "{{ route('admin.lead.purchase_order.create') }}",
+                            //             method: 'POST',
+                            //             data: formData,
+                            //             processData: false,
+                            //             contentType: false, 
+                            //             success: function (response) {
+                            //                 $('#response-message').html('');
+                            //                 if (response.success) {
+                            //                     $('#response-message').html('<div class="alert alert-success text-center">' + response.message + '</div>');
+                            //                     let url = `{{ route('admin.po.details', ':po_id') }}`; 
+                            //                     url = url.replace(':po_id', response.po_id);
+                            //                     $.ajax({
+                            //                         url: url,
+                            //                         method: 'GET',
+                            //                         success: function (res) {
+                            //                             $(".load_content").html(res);
+                            //                         }
+                            //                     });
+                            //                 }
+                            //             },
+                            //             error: function (xhr) {
+                            //                 let errors = xhr.responseJSON.errors;
+                            //                 let errorMessages = '';
+                            //                 for (let field in errors) {
+                            //                     errorMessages += `<p style="color: red;">${errors[field]}</p>`;
+                            //                 }
+                            //                 $('#response-message').html(errorMessages);
+                            //             }
+                            //         });
+                            // })
+
+                            // $('#po_update').on('submit', function (e) {
+                            //     console.log("hello");
+                            //     e.preventDefault(); 
+                            //     let formData = new FormData(this);
+                            //     $.ajax({
+                            //         url: "{{ route('admin.lead.purchase_order.update') }}",
+                            //         method: 'POST',
+                            //         data: formData,
+                            //         processData: false,
+                            //         contentType: false, 
+                            //         success: function (response) {
+                            //             $('#response-message').html('');
+                            //             if (response.success) {
+                            //                 $('#response-message').html('<div class="alert alert-success text-center">' + response.message + '</div>');
+                            //             }
+                            //         },
+                            //         error: function (xhr) {
+                            //             let errors = xhr.responseJSON.errors;
+                            //             let errorMessages = '';
+                            //             for (let field in errors) {
+                            //                 errorMessages += `<p style="color: red;">${errors[field]}</p>`;
+                            //             }
+                            //             $('#response-message').html(errorMessages);
+                            //         }
+                            //     });
+                            // })
+                        } else if (tab.dataset.target === "proforma") {
+                            $("#update_gst_modal").modal('show');
                         }
                     }
-                }
 
 
+                });
             });
-        });
+        })
     </script>
 @endpush

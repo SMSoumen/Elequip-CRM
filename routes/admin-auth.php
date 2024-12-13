@@ -115,7 +115,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::post('leads/quotation/create', [LeadController::class, 'addQuotation'])->name('lead.quotation.create');
    Route::get('leads/quotation/edit/{lead_id}', [LeadController::class, 'editQuotation'])->name('lead.quotation.edit');
    Route::post('leads/quotation/update', [LeadController::class, 'updateQuotation'])->name('lead.quotation.update');
-   Route::get('leads/quotation/pdf/{quotaion_id}', [LeadController::class, 'quotaionPdf'])->name('quotaion.pdf');
+   Route::get('leads/quotation/pdf/{quotaion_id}', [LeadController::class, 'quotationPdf'])->name('quotaion.pdf');
    Route::post('lead-stage/update', [LeadController::class, 'leadStageUpdate'])->name('lead_stage.update');
    Route::post('company/gst-update', [LeadController::class, 'companyGstUpdate'])->name('update.company_gst');
    Route::post('lead/proforma/create', [LeadController::class, 'createProforma'])->name('lead.add_proforma');
