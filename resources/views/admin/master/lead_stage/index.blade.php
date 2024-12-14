@@ -10,9 +10,9 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title">Lead Stage</h3>
-                                @can('Lead Stage create')
+                                <!-- @can('Lead Stage create')
                                     <button type="button" class="btn btn-primary add_lead_stage">Add Lead Stage</button>                              
-                                @endcan
+                                @endcan -->
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -100,7 +100,7 @@
                 method:"GET",
                 url: url,
                 success:function(res){
-                    console.log(res);
+                    // console.log(res);
                     $(".modal-title").html('Edit  Lead Stage');
                     let html =`<form action="{{route('admin.lead-stage.update',':res')}}" method="post" id="form_data">@csrf
                     @method('PUT')

@@ -201,6 +201,10 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
+
+                    <div class="alert alert-danger" role="alert">
+                        (*) marks fields are mandatory
+                    </div>
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->

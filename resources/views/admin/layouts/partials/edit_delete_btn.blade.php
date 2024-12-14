@@ -16,10 +16,12 @@
     @endif
 
     @can("$permission delete")
+    @if($deleteRoute)
         <form action="{{ $deleteRoute }}" method="POST" class="inline deleteConfirm d-inline-block">
             @csrf
             @method('delete')
             <button type="submit" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash-alt"></i></button>
         </form>
+    @endif
     @endcan
 </div>

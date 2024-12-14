@@ -19,7 +19,7 @@ class LeadStageController extends Controller implements HasMiddleware
             new Middleware('role_or_permission:Lead Stage access|Lead Stage create|Lead Stage edit|Lead Stage delete', only: ['index', 'treeView']),
             new Middleware('role_or_permission:Lead Stage create', only: ['create', 'store']),
             new Middleware('role_or_permission:Lead Stage edit', only: ['edit', 'update']),
-            new Middleware('role_or_permission:Lead Stage delete', only: ['destroy']),
+            // new Middleware('role_or_permission:Lead Stage delete', only: ['destroy']),
         ];
     }
 
@@ -32,7 +32,8 @@ class LeadStageController extends Controller implements HasMiddleware
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.lead-stage.edit', $data->id);
-                    $deleteRoute = route('admin.lead-stage.destroy', $data->id);
+                    // $deleteRoute = route('admin.lead-stage.destroy', $data->id);
+                    $deleteRoute = '';
                     $permission = 'Lead Stage';
                     $edit_type = "modal";
 
