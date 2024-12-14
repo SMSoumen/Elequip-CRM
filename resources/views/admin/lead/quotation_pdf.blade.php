@@ -62,10 +62,13 @@
         text-decoration: underline;
     }
 </style>
+
+@if($lead->lead_stage_id < 4)
 <div class="row float-right">
     <a href="{{ route('admin.lead.quotation.edit', $lead->id) }}"><button type="button" class="btn btn-primary"><i
                 class="fas fa-edit"></i></button></a>
 </div>
+@endif
 
 
 <div class="table pdf_preview_container" style="width:21cm;">
