@@ -93,9 +93,13 @@
             <tbody>  
             @foreach($lead_details as $lead_product)
                 <tr>
-                    <td>{{$lead_product->lead_product_name}} ({{$lead_product->lead_product_code}})</td>
-                    <td><input type="text" name="qty[]" class="qty" value="{{$lead_product->lead_product_qty}}" disabled></td>
-                    <td><input type="text" name="amount[]" class="amount" value="{{$lead_product->lead_product_price}}" disabled></td>
+                    <td>
+                   <p>{{$lead_product->lead_product_name}} ({{$lead_product->lead_product_code}})</p>
+                    <textarea class="product_tech_spec mt-3" readonly>{{$lead_product->lead_product_tech_spec}}</textarea>
+
+                    </td>
+                    <td><input type="text" name="qty[]" class="qty mt-5" value="{{$lead_product->lead_product_qty}}" disabled></td>
+                    <td><input type="text" name="amount[]" class="amount mt-5" value="{{$lead_product->lead_product_price}}" disabled></td>
                 </tr>
             @endforeach
             </tbody>
