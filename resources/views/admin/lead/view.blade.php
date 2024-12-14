@@ -254,7 +254,9 @@
                         for (i = 0; i < res.length; i++) {
                             var tr = tr + `<tr>
                                                 <td>
-                                                    ` + res[i].product_name + `(` + res[i].product_code + `)
+                                                   <p> ` + res[i].product_name + `(` + res[i].product_code + `)</p>
+                                                    <textarea class="product_tech_spec mt-3" readonly>`+res[i].product_tech_spec+`</textarea>
+
                                                     <input type="hidden" name="product_name[]" value="` + res[i]
                                 .product_name + `">
                                                     <input type="hidden" name="product_code[]" value="` + res[i]
@@ -266,19 +268,21 @@
                                                     <input type="hidden" name="product_m_spec[]" value="` + res[i]
                                 .product_marketing_spec + `">
                                                 </td>
-                                                <td><input type="number" name="qty[]" class="qty" value="1"></td>
-                                                <td><input type="number" name="rate[]" class="rate" value="` + res[i]
+                                                <td><input type="number" name="qty[]" class="qty mt-5" value="1"></td>
+                                                <td><input type="number" name="rate[]" class="rate mt-5" value="` + res[i]
                                 .product_price + `"></td>
 
                                                 <td>
                                                     <input type="hidden" class="single_amount" value="` + res[i]
                                 .product_price + `">
-                                                    <input type="text" name="amount[]" class="amount" value="` + res[i]
+                                                    <input type="text" name="amount[]" class="amount mt-5" value="` + res[i]
                                 .product_price + `" readonly>
                                                 </td>
                                             </tr>`;
                         }
+
                         $("tbody").append(tr);
+                        $('.product_tech_spec').summernote({tabsize: 2, height: 100});
                         changeAmount();
                     }
                 })

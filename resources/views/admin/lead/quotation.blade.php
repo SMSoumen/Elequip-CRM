@@ -52,16 +52,18 @@
                                     @endphp
                                     <tr>
                                         <td>
-                                            {{$lead_product->lead_product_name}} ({{$lead_product->lead_product_code}})
+                                            <p>{{$lead_product->lead_product_name}} ({{$lead_product->lead_product_code}})</p>
+                                            <textarea class="product_tech_spec mt-3" readonly>{{$lead_product->lead_product_tech_spec}}</textarea>
+
                                             <input type="hidden" name="product_name[]" value="{{$lead_product->lead_product_name}}">
                                             <input type="hidden" name="product_code[]" value="{{$lead_product->lead_product_code}}">
                                             <input type="hidden" name="product_unit[]" value="{{$lead_product->lead_product_unit}}">
                                             <input type="hidden" name="product_tech_spec[]" value="{{$lead_product->lead_product_tech_spec}}">
                                             <input type="hidden" name="product_m_spec[]" value="{{$lead_product->lead_product_m_spec}}">
                                         </td>
-                                        <td><input type="number" name="qty[]" class="qty" value="{{$lead_product->lead_product_qty}}" ></td>
-                                        <td><input type="number" name="rate[]" class="rate" value="{{$lead_product->lead_product_price}}" ></td>
-                                        <td><input type="text" name="amount[]" class="amount" value="{{$amount}}" readonly></td>
+                                        <td><input type="number" name="qty[]" class="qty mt-5" value="{{$lead_product->lead_product_qty}}" ></td>
+                                        <td><input type="number" name="rate[]" class="rate mt-5" value="{{$lead_product->lead_product_price}}" ></td>
+                                        <td><input type="text" name="amount[]" class="amount mt-5" value="{{$amount}}" readonly></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
