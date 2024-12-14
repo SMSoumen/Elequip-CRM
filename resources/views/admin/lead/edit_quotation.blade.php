@@ -39,7 +39,7 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="enquiry_ref">Enquiry Ref <span class="text-danger"> *</span></label>
-                                                    <input type="text" class="form-control" id="enquiry_ref" name="enquiry_ref" required value="{{$quotation->quot_ref_no}}">
+                                                    <input type="text" class="form-control" id="enquiry_ref" name="enquiry_ref" required value="{{$quotation->quot_user_ref_no}}">
                                                 </div>
                                             </div>
                                        
@@ -81,8 +81,8 @@
                                                                 <input type="hidden" name="product_tech_spec[]" value="{{$quotation->quot_product_tech_spec}}">
                                                                 <input type="hidden" name="product_m_spec[]" value="{{$quotation->quot_product_m_spec}}">
                                                             </td>
-                                                            <td><input type="text" name="qty[]" class="qty" value="{{$quotation->quot_product_qty}}" ></td>
-                                                            <td><input type="text" name="rate[]" class="rate" value="{{$quotation->quot_product_unit_price}}" ></td>
+                                                            <td><input type="number" name="qty[]" class="qty" value="{{$quotation->quot_product_qty}}" ></td>
+                                                            <td><input type="number" name="rate[]" class="rate" value="{{$quotation->quot_product_unit_price}}" ></td>
                                                             <td><input type="text" name="amount[]" class="amount" value="{{$amount}}" readonly></td>
                                                         </tr>
                                                     @endforeach
@@ -233,8 +233,8 @@
                                                 <input type="hidden" name="product_tech_spec[]" value="`+res[i].product_tech_spec+`">
                                                 <input type="hidden" name="product_m_spec[]" value="`+res[i].product_marketing_spec+`">
                                             </td>
-                                            <td><input type="text" name="qty[]" class="qty" value="1"></td>
-                                            <td><input type="text" name="rate[]" class="rate" value="`+res[i].product_price+`"></td>
+                                            <td><input type="number" name="qty[]" class="qty" value="1"></td>
+                                            <td><input type="number" name="rate[]" class="rate" value="`+res[i].product_price+`"></td>
 
                                             <td>
                                                 <input type="text" name="amount[]" class="amount" value="`+res[i].product_price+`" readonly>

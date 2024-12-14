@@ -20,6 +20,7 @@ use App\Models\PurchaseOrder;
 use App\Models\OrderAndDelivery;
 use App\Models\ProformaInvoice;
 use App\Models\ProformaDetail;
+use App\Rules\GstNumber;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -75,9 +76,9 @@ class LeadController extends Controller implements HasMiddleware
                     ->addColumn('customer', function ($data) {
                         return $data->customer = $data->customer_name . '(' . $data->designation . ')<br>' . $data->company_name;
                     })
-                    ->addColumn('next_fllowup_date', function ($data) {
-                        $next_fllowup_date = LeadFollowup::where('lead_id', $data->id)->latest()->first();
-                        return $data->next_fllowup_date = date('d-m-Y', strtotime($next_fllowup_date->followup_next_date));
+                    ->addColumn('next_followup_date', function ($data) {
+                        $next_followup_date = LeadFollowup::where(['lead_id' => $data->id, 'followup_type' => 'followup'])->latest()->first();
+                        return $data->next_followup_date = date('d-m-Y', strtotime($next_followup_date->followup_next_date));
                     })
                     ->addColumn('assign_to', function ($data) {
                         return $data->assign_to = ($data->lead_assigned_to) ? Admin::where('id', $data->lead_assigned_to)->first()->name : 'Admin';
@@ -94,7 +95,7 @@ class LeadController extends Controller implements HasMiddleware
                         $type = "lead";
 
                         return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'viewRoute', 'deleteRoute', 'permission', 'edit_type', 'type']))->render();
-                    })->addIndexColumn()->rawColumns(['customer', 'next_fllowup_date', 'assign_to', 'action', 'stage', 'created_date'])->make(true);
+                    })->addIndexColumn()->rawColumns(['customer', 'next_followup_date', 'assign_to', 'action', 'stage', 'created_date'])->make(true);
             }
             $lead_stages = LeadStage::where('status', '1')->orderBy('id', 'asc')->get();
             $users = Admin::whereNot('id', 1)->orderBy('name', 'asc')->get();
@@ -224,7 +225,7 @@ class LeadController extends Controller implements HasMiddleware
         if ($letest_quotation) {
             $po_details = PurchaseOrder::where('quotation_id', $letest_quotation->id)->first();
             if ($po_details) {
-                $orders = OrderAndDelivery::where('purchase_order_id', $po_details->id)->get(['id', 'order_product_name', 'order_product_code', 'order_product_delivery_date']);
+                $orders = OrderAndDelivery::where('purchase_order_id', $po_details->id)->get(['id', 'order_product_name', 'order_product_code', 'order_product_delivery_date', 'status']);
             }
         }
 
@@ -449,7 +450,9 @@ class LeadController extends Controller implements HasMiddleware
 
         Quotation::where('id', $request->quotation_id)->update(['qout_is_latest' => '0']);
         QuotationTerm::where('quotation_id', $request->quotation_id)->update(['term_is_latest' => '0']);
+
         $product = Product::with('brand')->where('id', $request->product_id[0])->first()->toArray();
+
         $ref_no = auth("admin")->user()->code . '/';
         $ref_no .= $product['brand']['brand_name']
             ? strtoupper(substr($product['brand']['brand_name'], 0, 2))
@@ -509,7 +512,7 @@ class LeadController extends Controller implements HasMiddleware
         $data['lead'] = Lead::with('company', 'customer')->where('id', $data['quotation']->lead_id)->first();
         $pdf = Pdf::loadView('admin.pdf.quotation', $data)->setOption('fontDir', public_path('assets/admin/fonts'))->setPaper('A4', 'portrait');
         // $file_name = date('d-M-Y').'-'.$data['quotation']->id.'-'.$data['quotation']->quot_version.'-';
-        $file_name = mt_rand(11111111, 999999999);      
+        $file_name = mt_rand(11111111, 999999999);
 
         return $pdf->download('Lead Quotation-' . $file_name . '.pdf');
     }
@@ -531,7 +534,7 @@ class LeadController extends Controller implements HasMiddleware
     {
         $request->validate([
             'company_id' => 'required|integer',
-            'gst_no'     => 'required|string',
+            'gst_no'     => ['required', 'string', 'size:15', new GstNumber()],
         ]);
         if (Company::where('id', $request->company_id)->update(['gst' => $request->gst_no])) {
             return redirect()->back()->withSuccess('GST NO added successfully.');

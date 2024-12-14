@@ -15,6 +15,7 @@ use App\Models\LeadFollowup;
 use App\Models\LeadStage;
 use App\Models\SmsFormat;
 use App\Models\Quotation;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller implements HasMiddleware
 {
@@ -33,32 +34,32 @@ class OrderController extends Controller implements HasMiddleware
     {
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(PurchaseOrder::query()->join('leads','purchase_orders.lead_id','leads.id')
-                ->join('lead_stages','leads.lead_stage_id','lead_stages.id')
-                ->join('customers','leads.company_id','customers.id')->join('companies','leads.customer_id','companies.id')
-                ->select('purchase_orders.id','purchase_orders.po_net_amount','purchase_orders.po_refer_no','purchase_orders.po_advance','purchase_orders.po_remaining','purchase_orders.created_at','purchase_orders.lead_id','customers.customer_name','customers.mobile','customers.designation','customers.email','companies.company_name','lead_stages.stage_name','leads.lead_stage_id')
-                ->orderBy('purchase_orders.id','desc'))
-                ->addColumn('orderby', function ($data) {
-                    return $data->orderby = $data->customer_name.'('.$data->designation.')<br>'.$data->company_name .'<br>Email : '.$data->email.'<br> Phone : '.$data->mobile;
-                })
-                ->addColumn('balance_amount', function ($data) {
-                    return $data->balance_amount =number_format($data->po_remaining,2) ;
-                })
-                ->addColumn('stage', function ($data) {
-                    return $data->stage = '<span class="badge bg-secondary">'.$data->stage_name.'</span>';
-                })->addColumn('created_date', function ($data) {
-                    return $data->created_date = date('d-m-Y',strtotime($data->created_at));
-                })
-                ->addColumn('action', function ($data) {
-                    $viewRoute = route('admin.leads.show', $data->lead_id);
-                    return view('admin.layouts.partials.order_action_btn', compact(['data', 'viewRoute']))->render();
-                })
-                ->addIndexColumn()->rawColumns(['orderby','balance_amount','action','stage','created_date'])->make(true);
+                return DataTables::eloquent(PurchaseOrder::query()->join('leads', 'purchase_orders.lead_id', 'leads.id')
+                    ->join('lead_stages', 'leads.lead_stage_id', 'lead_stages.id')
+                    ->join('customers', 'leads.company_id', 'customers.id')->join('companies', 'leads.customer_id', 'companies.id')
+                    ->select('purchase_orders.id', 'purchase_orders.po_net_amount', 'purchase_orders.po_refer_no', 'purchase_orders.po_advance', 'purchase_orders.po_remaining', 'purchase_orders.created_at', 'purchase_orders.lead_id', 'customers.customer_name', 'customers.mobile', 'customers.designation', 'customers.email', 'companies.company_name', 'lead_stages.stage_name', 'leads.lead_stage_id')
+                    ->orderBy('purchase_orders.id', 'desc'))
+                    ->addColumn('orderby', function ($data) {
+                        return $data->orderby = $data->customer_name . '(' . $data->designation . ')<br>' . $data->company_name . '<br>Email : ' . $data->email . '<br> Phone : ' . $data->mobile;
+                    })
+                    ->addColumn('balance_amount', function ($data) {
+                        return $data->balance_amount = number_format($data->po_remaining, 2);
+                    })
+                    ->addColumn('stage', function ($data) {
+                        return $data->stage = '<span class="badge bg-secondary">' . $data->stage_name . '</span>';
+                    })->addColumn('created_date', function ($data) {
+                        return $data->created_date = date('d-m-Y', strtotime($data->created_at));
+                    })
+                    ->addColumn('action', function ($data) {
+                        $viewRoute = route('admin.leads.show', $data->lead_id);
+                        return view('admin.layouts.partials.order_action_btn', compact(['data', 'viewRoute']))->render();
+                    })
+                    ->addIndexColumn()->rawColumns(['orderby', 'balance_amount', 'action', 'stage', 'created_date'])->make(true);
             }
 
-            $lead_stages = LeadStage::where('id','>',5)->get();
-            $templates = SmsFormat::where('status',1)->orderBy('template_name','asc')->get(['id','template_name']); 
-            return view('admin.order.index',compact(['lead_stages','templates']));
+            $lead_stages = LeadStage::where('id', '>', 5)->get();
+            $templates = SmsFormat::whereNotNull('template_id')->where('status', 1)->orderBy('id', 'desc')->get(['id', 'template_name']);
+            return view('admin.order.index', compact(['lead_stages', 'templates']));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->route('admin.dashboard')->with('error', $e->getMessage());
@@ -112,106 +113,170 @@ class OrderController extends Controller implements HasMiddleware
         //
     }
 
-    public function addAdvanceAmount(Request $request){
+    public function addAdvanceAmount(Request $request)
+    {
         $request->validate([
             'order_id'        => 'required|integer',
             'advance_amount'  => 'required|numeric',
         ]);
 
-        $order_details = PurchaseOrder::where('id',$request->order_id)->first();
-        if($request->advance_amount > $order_details->po_net_amount){
-            return response()->json(['status'=>'check_amount','message' => 'The Advance Amount field must contain a number less than or equal to '.$order_details->po_net_amount]);
-        }
-        else{
-            Lead::where('id',$order_details->lead_id)->update(['lead_stage_id' => 6]);
-            LeadFollowup::create(['lead_id' => $order_details->lead_id, 'followup_remarks' =>'Advance Payment of Rs. '.$request->advance_amount.' Added', 'followup_type'=>'remarks', 'admin_id'=> auth("admin")->user()->id]);
+        $order_details = PurchaseOrder::where('id', $request->order_id)->first();
+        if ($request->advance_amount > $order_details->po_net_amount) {
+            return response()->json(['status' => 'check_amount', 'message' => 'The Advance Amount field must contain a number less than or equal to ' . $order_details->po_net_amount]);
+        } else {
+            Lead::where('id', $order_details->lead_id)->update(['lead_stage_id' => 6]);
+            LeadFollowup::create(['lead_id' => $order_details->lead_id, 'followup_remarks' => 'Advance Payment of Rs. ' . $request->advance_amount . ' Added', 'followup_type' => 'remarks', 'admin_id' => auth("admin")->user()->id]);
             $remaining_amount = $order_details->po_net_amount - $request->advance_amount;
-            if(PurchaseOrder::where('id',$request->order_id)->update(['po_advance' => $request->advance_amount, 'po_remaining' =>  $remaining_amount])){
+            if (PurchaseOrder::where('id', $request->order_id)->update(['po_advance' => $request->advance_amount, 'po_remaining' =>  $remaining_amount])) {
                 return response()->json(['success' => true, 'message' => 'Amount added successfully.']);
-            }
-            else{
+            } else {
                 return response()->json(['success' => false, 'message' => 'Error!! while adding amount!',]);
             }
-        }  
+        }
     }
 
-    public function addRemainingAmount(Request $request){
+    public function addRemainingAmount(Request $request)
+    {
         $request->validate([
             'order_id'        => 'required|integer',
-            'remaining_amount'=> 'required|numeric',
+            'remaining_amount' => 'required|numeric',
         ]);
 
-        $order_details = PurchaseOrder::where('id',$request->order_id)->first();
-        if($request->remaining_amount != $order_details->po_remaining){
-            return response()->json(['status'=>'check_amount','message' => 'The Remaining Amount field must contain a number equal to '.$order_details->po_remaining]);
-        }
-        else{
-            LeadFollowup::create(['lead_id' => $order_details->lead_id, 'followup_remarks' => 'Remaining Payment of Rs. '.$request->remaining_amount.' Added', 'followup_type'=>'remarks', 'admin_id'=> auth("admin")->user()->id]);
+        $order_details = PurchaseOrder::where('id', $request->order_id)->first();
+        if ($request->remaining_amount != $order_details->po_remaining) {
+            return response()->json(['status' => 'check_amount', 'message' => 'The Remaining Amount field must contain a number equal to ' . $order_details->po_remaining]);
+        } else {
+            LeadFollowup::create(['lead_id' => $order_details->lead_id, 'followup_remarks' => 'Remaining Payment of Rs. ' . $request->remaining_amount . ' Added', 'followup_type' => 'remarks', 'admin_id' => auth("admin")->user()->id]);
             $remaining_amount = $order_details->po_remaining - $request->remaining_amount;
-            if(PurchaseOrder::where('id',$request->order_id)->update(['po_remaining' =>  $remaining_amount])){
+            if (PurchaseOrder::where('id', $request->order_id)->update(['po_remaining' =>  $remaining_amount])) {
                 return response()->json(['success' => true, 'message' => 'Amount added successfully.']);
-            }
-            else{
+            } else {
                 return response()->json(['success' => false, 'message' => 'Error!! while adding amount!',]);
             }
-        } 
+        }
     }
 
-    public function updateLeadStage(Request $request){
+    public function updateLeadStageModal(Request $request)
+    {
         $request->validate([
             'lead_id'  => 'required|integer',
             'stage_id' => 'required|integer',
         ]);
-        LeadFollowup::create(['lead_id' => $request->lead_id, 'followup_remarks' =>'Lead Stage Updated', 'followup_type'=>'remarks', 'admin_id'=> auth("admin")->user()->id]);
-        if(Lead::where('id',$request->lead_id)->update(['lead_stage_id' => $request->stage_id])){
-            return response()->json(['success' => true, 'message' => 'Lead stage updated successfully.']);
-        }
-        else{
-            return response()->json(['success' => false, 'message' => 'Error!! while updating lead stage!',]);
+
+        $lead_id = $request->lead_id;
+        $stage_id = $request->stage_id;
+
+        $lead = Lead::where('id', $request->lead_id)->first();
+        $stages = LeadStage::where('id', '>=', $lead->lead_stage_id)->where(['status' => 1])->get(['id', 'stage_name']);
+
+        $order = PurchaseOrder::with(['deliveries' => function ($query) {
+            $query->where('status', '!=', 2);
+        }])->where('lead_id', $request->lead_id)->latest()->first();
+        $to_be_delivered = $order->deliveries->count();
+        $remaining_amt = $order->po_remaining;
+
+        return view('admin.modal.lead_stage_update_modal', compact(['stages', 'stage_id', 'lead_id', 'to_be_delivered', 'remaining_amt']));
+    }
+
+    public function updateLeadStage(Request $request)
+    {
+        $request->validate([
+            'lead_id'  => 'required|integer',
+            'stage_id' => 'required|integer',
+        ]);
+
+        $lead = Lead::where('id', $request->lead_id)->first();
+
+        if ($lead->lead_stage_id == $request->stage_id) {
+            return response()->json(['success' => false, 'message' => 'Nothing Changed!',]);
+        } else {
+            $order = PurchaseOrder::with(['deliveries' => function ($query) {
+                $query->where('status', '!=', 2);
+            }])->where('lead_id', $request->lead_id)->latest()->first();
+
+            $to_be_delivered = $order->deliveries->count();
+            if ($request->stage_id == 9) {
+                if (($to_be_delivered > 0) || ($order->po_remaining > 0)) {
+                    $msg = ($to_be_delivered) ? $to_be_delivered . ' Product need to be delivered first' : 'Remaining amount need to be added first';
+                    return response()->json(['success' => false, 'message' => $msg,]);
+                }
+            }
+
+
+            if (Lead::where('id', $request->lead_id)->update(['lead_stage_id' => $request->stage_id])) {
+                LeadFollowup::create(['lead_id' => $request->lead_id, 'followup_remarks' => 'Lead Stage Updated', 'followup_type' => 'remarks', 'admin_id' => auth("admin")->user()->id]);
+                $lead_status = $request->stage_id;
+                if (in_array($lead_status, [7, 8])) {
+                    if ($order->deliveries) {
+                        foreach ($order->deliveries as $detail) {
+                            if ($detail->status != 2) {
+                                $stat = $lead_status == 7 ? 1 : 2;
+                                OrderAndDelivery::where('id', $detail->id)->update(['status' => $stat]);
+                            }
+                        }
+                    }
+                }
+                return response()->json(['success' => true, 'message' => 'Lead stage updated successfully.']);
+            } else {
+                return response()->json(['success' => false, 'message' => 'Error!! while updating lead stage!',]);
+            }
         }
     }
 
-    public function orderSendSms(Request $request){
+    public function orderSendSms(Request $request)
+    {
         $request->validate([
             'mobile_no' => 'required|integer',
             'lead_id'   => 'required|integer',
             'sms_title' => 'required|integer',
         ]);
 
-        $sms_template = SmsFormat::where('id',$request->sms_title)->first(['id','template_format']);
-
-        if($sms_template->id == 14){
-            $quotation = Quotation::where('lead_id',$request->lead_id)->latest()->first(['quot_ref_no']); 
+        $sms_template = SmsFormat::where('id', $request->sms_title)->first(['id', 'template_format', 'template_id']);
+        $mobile_no = 918777269326;
+        if ($sms_template->id == 14) {
+            $quotation = Quotation::where('lead_id', $request->lead_id)->latest()->first(['quot_ref_no']);
             $msg = str_replace('{ORDER_ID}', $quotation->quot_ref_no, $sms_template->template_format);
-        }else{
-            $po = PurchaseOrder::where('lead_id',$request->lead_id)->first(['po_refer_no']);
+        } else {
+            $po = PurchaseOrder::where('lead_id', $request->lead_id)->first(['po_refer_no']);
             $msg = str_replace('{ORDER_ID}', $po->po_refer_no, $sms_template->template_format);
         }
 
         //$mobile_no = '91'.$request->mobile_no;
-        $mobile_no = 919932996178;
-        if($this->sendSms($mobile_no,$msg,$sms_template->id)){
-            LeadFollowup::create(['lead_id' => $request->lead_id, 'followup_remarks' => $msg, 'followup_type'=>'remarks', 'admin_id'=> auth("admin")->user()->id]);
+
+        if ($this->sendSms($mobile_no, $msg, $sms_template->template_id)) {
+
+            $lf_remarks = 'SMS Sent to ' . $mobile_no;
+            $lf_remarks .= $msg ? '<br><b>Message: </b>' . $msg : NULL;
+
+            LeadFollowup::create(['lead_id' => $request->lead_id, 'followup_remarks' => $lf_remarks, 'followup_type' => 'remarks', 'admin_id' => auth("admin")->user()->id]);
             return redirect()->back()->withSuccess('SMS send successfully.');
-        }else{
+        } else {
             return redirect()->back()->withErrors('Error!! while sending sms!!!');
         }
     }
 
-    private function sendSms($to_mobile, $msg, $template_id){
-         $userID = "elequipsms";
-         $userPassword = "etplsms763";
-         $url = "http://server.sitanigroup.com/smsserver";
+    private function sendSms($to_mobile, $msg, $template_id)
+    {
+        $userID = "elequipsms";
+        $userPassword = "etplsms763";
+        $url = "http://server.sitanigroup.com/smsserver";
 
-         $msg = urlencode($msg);
-         $url = $url.'/?UserID='.$userID.'&UserPassWord='.$userPassword.'&PhoneNumber='.$to_mobile.'&Text='.$msg."&DltTID=".$template_id;
-         $ch = curl_init($url);
-         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-         curl_setopt($ch, CURLOPT_URL, $url);
-         $result = curl_exec($ch);
-         curl_close($ch);
-         return $result;
+        $msg = urlencode($msg);
+        $url = $url . '/?UserID=' . $userID . '&UserPassWord=' . $userPassword . '&PhoneNumber=' . $to_mobile . '&Text=' . $msg . "&DltTID=" . $template_id;
+        Log::info($url);
+        try {
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            $result = curl_exec($ch);
+            curl_close($ch);
+            Log::info($result);
+            return $result;
+        } catch (\Exception $e) {
+            Log::info($e->getMessage());
+            return false;
+            //throw $th;
+        }
     }
-
 }

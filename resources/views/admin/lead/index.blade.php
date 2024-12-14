@@ -194,8 +194,8 @@
                         name: 'id'
                     },
                     {
-                        data: 'next_fllowup_date',
-                        name: 'next_fllowup_date'
+                        data: 'next_followup_date',
+                        name: 'next_followup_date'
                     },
                     {
                         data: 'assign_to',

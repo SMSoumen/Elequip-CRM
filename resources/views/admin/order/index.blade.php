@@ -71,7 +71,7 @@
                         <input type="hidden" name="order_id" id="order_id">
                         <div class="col-12">
                             <label for="advance_amount">Advance Amount<span class="text-danger">*</span></label>
-                            <input type="number" name="advance_amount" id="advance_amount" class="form-control" required>
+                            <input type="number" step="0.01" name="advance_amount" id="advance_amount" class="form-control" required>
                             <span class="text-danger" id="check_amount_msg"></span>
                         </div>
                     </div>
@@ -97,8 +97,8 @@
                         <input type="hidden" name="order_id" id="r_order_id">
                         <div class="col-12">
                             <label for="remaining_amount">Remaining Amount<span class="text-danger">*</span></label>
-                            <input type="number" name="remaining_amount" id="remaining_amount" class="form-control"
-                                required>
+                            <input type="number" step="0.01" name="remaining_amount" id="remaining_amount"
+                                class="form-control" required>
                             <span class="text-danger" id="check_remaining_msg"></span>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                     <div class="modal-body">
                         <p id="response-message_stage"></p>
                         <input type="hidden" name="lead_id" id="lead_id">
-                        <div class="col-12">
+                        <div class="col-12" id="dynamic_lead_stages">
                             <label for="stage_id">Select Stage<span class="text-danger">*</span></label>
                             <select name="stage_id" id="stage_id" class="form-control" required>
                                 @foreach ($lead_stages as $stage)
@@ -157,6 +157,7 @@
                         <div class="col-12">
                             <label for="sms_title">SMS Title<span class="text-danger">*</span></label>
                             <select name="sms_title" id="sms_title" class="form-control" required>
+                                <option value="" class="d-none">Select SMS Template</option>
                                 @foreach ($templates as $template)
                                     <option value="{{ $template->id }}">{{ $template->template_name }}</option>
                                 @endforeach
@@ -191,9 +192,30 @@
 
         $(document).on('click', '.update_stage', function() {
             var lead_id = $(this).data("modelid");
-            var stageid = $(this).data("stageid");
+            var stage_id = $(this).data("stageid");
             $("#lead_id").val(lead_id);
-            $("#stage_id").val(stageid);
+            $("#stage_id").val(stage_id);
+
+            $("#response-message_stage").html("")
+
+            $.ajax({
+                url: "{{ route('admin.order.update_lead_stage.modal') }}",
+                method: 'POST',
+                data: {lead_id, stage_id},
+                datatype: 'json',
+                success: function(response) {
+                    $("#dynamic_lead_stages").html(response)
+                },
+                error: function(xhr) {
+                    let errors = xhr.responseJSON.errors;
+                    let errorMessages = '';
+                    for (let field in errors) {
+                        errorMessages += `<p style="color: red;">${errors[field]}</p>`;
+                    }
+                    $('#response-message_stage').html(errorMessages);
+                }
+            })
+
             $("#lead_stage").modal('show');
         });
 
@@ -255,7 +277,7 @@
                     if (response.success) {
                         $('#response-message1').html('<div class="alert alert-success text-center">' +
                             response.message + '</div>');
-                        setInterval(location.reload(), 100000);
+                        setTimeout(location.reload(), 100000);
                     } else if (response.status == 'check_amount') {
                         $("#check_remaining_msg").html(response.message);
                     }
@@ -287,6 +309,10 @@
                             '<div class="alert alert-success text-center">' + response.message +
                             '</div>');
                         setInterval(location.reload(), 100000);
+                    }else{
+                        $('#response-message_stage').html(
+                            '<div class="alert alert-danger text-center">' + response.message +
+                            '</div>');
                     }
                 },
                 error: function(xhr) {

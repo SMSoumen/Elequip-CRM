@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Elequip ADMIN | Dashboard</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset(asset_path('assets/frontend/images/favicon/cropped-favicon-192x192.png')) }}">
+    <link rel="icon" type="image/x-icon"
+        href="{{ asset(asset_path('assets/frontend/images/favicon/cropped-favicon-192x192.png')) }}">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -55,6 +56,8 @@
     <link rel="stylesheet" href="{{ asset(asset_path('assets/admin/css/adminlte.min.css')) }}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset(asset_path('assets/admin/plugins/treeview/treeview.css')) }}">
+
+    <link rel="stylesheet" href="{{ asset(asset_path('assets/admin/plugins/dropify/dropify.css')) }}">
 
     <link rel="stylesheet" href="{{ asset(asset_path('assets/admin/css/custom.css')) }}">
 
@@ -138,6 +141,8 @@
 
     <script src="{{ asset(asset_path('assets/admin/plugins/treeview/treeview.js')) }}"></script>
 
+    <script src="{{ asset(asset_path('assets/admin/plugins/dropify/dropify.js')) }}"></script>
+
     <script src="{{ asset(asset_path('assets/admin/plugins/cloneData/cloneData.js')) }}"></script>
 
 
@@ -155,24 +160,7 @@
                 return del;
             });
 
-            $('a#add-more').cloneData({
-                mainContainerId: 'main-container', // Main container Should be ID
-                cloneContainer: 'container-item', // Which you want to clone
-                removeButtonClass: 'remove-item', // Remove button for remove cloned HTML
-                removeConfirm: true, // default true confirm before delete clone item
-                removeConfirmMessage: 'Are you sure want to delete?', // confirm delete message
-                //append: '<a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger remove-social-media">Remove</a>', // Set extra HTML append to clone HTML
-                minLimit: 1, // Default 1 set minimum clone HTML required
-                maxLimit: 10000, // Default unlimited or set maximum limit of clone HTML
-                defaultRender: 1,
-
-                // afterRender: function (e) {
-                //     $(".inv_prod_id:last").val(0)
-                //     console.info(':: After rendered callback called');
-                //     //$(".selectpicker").selectpicker('refresh');
-                // },
-            });
-
+            $('.dropify').dropify();
         })
     </script>
     <script>

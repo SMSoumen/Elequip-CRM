@@ -5,7 +5,7 @@
 
             @if($po_details->po_document)
                 <div>
-                    <a href="{{asset(asset_path('upload/po/'.$po_details->po_document))}}" download><h3 class="m-3 text-warning"><i class="fas fa-download" title="Download P.O"></i></h3></a>
+                    <a class="btn btn-secondary mb-3" href="{{asset(asset_path('upload/po/'.$po_details->po_document))}}" download><span class="m-3 text-warning"><i class="fas fa-download" title="Download P.O"></i> P.O. Download</span></a>
                 </div>
             @endif
 
@@ -52,15 +52,17 @@
             </div>
             <div class="col-6 mt-3">
                 <label for="po_document">Upload P.O.</label>
-                <input type="file" name="po_document" id="po_document" class="form-control">
+                <input type="file" name="po_document" id="po_document" class="form-control dropify" data-max-file-size="3M" data-allowed-file-extensions="pdf png jpeg jpg doc docx">
             </div>
             <div class="col-6 mt-3">
                 <label for="order_remark">Order Remarks (Dispatch / Pakaging / Payment / installation) <span class="text-danger">*</span></label>
-                <textarea name="order_remark" id="order_remark" class="form-control" required>{{$po_details->po_remarks}}</textarea>
+                <textarea name="order_remark" id="order_remark" class="form-control" rows="4" required>{{$po_details->po_remarks}}</textarea>
             </div>
+            <br>
+            <br>
 
             <div class="col-12">
-                <table class="table">
+                <table class="table mt-4">
                     <thead>
                         <tr>
                             <th>Sl No</th>
@@ -83,7 +85,7 @@
 							        <span class="badge badge-warning text-center">Pending</span>
                                 @elseif($order->status == 1)
                                     <span class="badge badge-info text-center">Ready to Dispatch</span>
-                                @else if($order->status == 2)
+                                @elseif($order->status == 2)
                                     <span class="badge badge-success text-center">Delivered</span>
                                 @endif
                             </td>

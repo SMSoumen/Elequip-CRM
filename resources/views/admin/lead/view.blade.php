@@ -66,7 +66,7 @@
                                     data-target="quotation_stage">Quotation Stage</div>
 
                                 @php
-                                    $disabled = $lead->lead_stage_id > 3 ? '' : 'disabled';
+                                    $disabled = $lead->lead_stage_id >= 3 ? '' : 'disabled';
                                 @endphp
                                 <div class="tab {{ $disabled }} @if ($lead->lead_stage_id >= 5) active @endif"
                                     data-target="po_stage">P.O.
@@ -133,7 +133,10 @@
                                                             <select name="lead_stage_id" id="lead_stage_id"
                                                                 class="form-control">
                                                                 <option value="">Select Lead Stage</option>
-                                                                @foreach ($stages as $stage)
+                                                                @php
+                                                                    $manual_stages = $stages->where('stage_is_automated', '0');
+                                                                @endphp
+                                                                @foreach ($manual_stages as $stage)
                                                                     <option value="{{ $stage->id }}"
                                                                         @if ($stage->id != '4') {{ 'disabled' }} @endif>
                                                                         {{ $stage->stage_name }}</option>
@@ -176,7 +179,7 @@
                                                                 <label for="gst_no">Company GST No <span
                                                                         class="text-danger"> *</span></label>
                                                                 <input type="text" name="gst_no" id="gst_no"
-                                                                    class="form-control" required>
+                                                                    class="form-control" minlength="15" maxlength="15" required>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -257,8 +260,8 @@
                                                     <input type="hidden" name="product_m_spec[]" value="` + res[i]
                                 .product_marketing_spec + `">
                                                 </td>
-                                                <td><input type="text" name="qty[]" class="qty" value="1"></td>
-                                                <td><input type="text" name="rate[]" class="rate" value="` + res[i]
+                                                <td><input type="number" name="qty[]" class="qty" value="1"></td>
+                                                <td><input type="number" name="rate[]" class="rate" value="` + res[i]
                                 .product_price + `"></td>
 
                                                 <td>
@@ -319,8 +322,8 @@
                 } else {
                     var tax_amount = gross_total * (tax_percent / 100);
                     var net_amount = Number(gross_total) + Number(tax_amount);
-                    $("#total_tax_amount").val(tax_amount);
-                    $("#net_total").val(net_amount);
+                    $("#total_tax_amount").val(tax_amount.toFixed(2));
+                    $("#net_total").val(net_amount.toFixed(2));
                 }
             };
             // for po stage
@@ -342,7 +345,7 @@
                         $(this).closest('tr').find('.amount').val(0);
                     } else {
                         $(this).closest('tr').find('.amount').val(
-                            total_amount);
+                            total_amount.toFixed(2));
                     }
                     updateTotal();
                 });

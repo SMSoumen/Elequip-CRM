@@ -59,8 +59,8 @@
                                             <input type="hidden" name="product_tech_spec[]" value="{{$lead_product->lead_product_tech_spec}}">
                                             <input type="hidden" name="product_m_spec[]" value="{{$lead_product->lead_product_m_spec}}">
                                         </td>
-                                        <td><input type="text" name="qty[]" class="qty" value="{{$lead_product->lead_product_qty}}" ></td>
-                                        <td><input type="text" name="rate[]" class="rate" value="{{$lead_product->lead_product_price}}" ></td>
+                                        <td><input type="number" name="qty[]" class="qty" value="{{$lead_product->lead_product_qty}}" ></td>
+                                        <td><input type="number" name="rate[]" class="rate" value="{{$lead_product->lead_product_price}}" ></td>
                                         <td><input type="text" name="amount[]" class="amount" value="{{$amount}}" readonly></td>
                                     </tr>
                                 @endforeach

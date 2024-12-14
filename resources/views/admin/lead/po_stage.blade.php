@@ -4,6 +4,7 @@
         <div class="row">
                 <input type="hidden" name="lead_id" value="{{$lead->id}}">
                 <input type="hidden" name="quotation_id" value="{{$letest_quotation->id}}">
+                <input type="hidden" name="lead_closure_date" value="{{$lead->lead_estimate_closure_date}}">
 
                 <div class="col-12">
                     <label for="tax_percent">Tax Percentage <span class="text-danger">*</span></label>
@@ -43,12 +44,12 @@
                 </div>
                 <div class="col-6 mt-3">
                     <label for="po_document">Upload P.O.</label>
-                    <input type="file" name="po_document" id="po_document" class="form-control">
+                    <input type="file" name="po_document" id="po_document" class="form-control dropify" data-max-file-size="3M" data-allowed-file-extensions="pdf png jpeg jpg doc docx">
                 </div>
 
                 <div class="col-6 mt-3">
                     <label for="order_remark">Order Remarks (Dispatch / Pakaging / Payment / installation) <span class="text-danger">*</span></label>
-                    <textarea name="order_remark" id="order_remark" class="form-control" required></textarea>
+                    <textarea name="order_remark" id="order_remark" class="form-control" rows="4" required></textarea>
                 </div>
 
                 <div class="col-12 mt-5">

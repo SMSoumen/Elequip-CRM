@@ -409,7 +409,7 @@
                                             @if ($followup->followup_type == 'followup')
                                                 {{ 'Follow-up Date Added as: ' . \Carbon\Carbon::parse($followup->followup_next_date)->format('d M Y') }}
                                             @else
-                                                {{ $followup->followup_remarks }}
+                                                {!! $followup->followup_remarks !!}
                                             @endif
                                         </p>
                                     </div>
