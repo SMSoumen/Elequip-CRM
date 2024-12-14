@@ -282,7 +282,7 @@
                         }
 
                         $("tbody").append(tr);
-                        $('.product_tech_spec').summernote({tabsize: 2, height: 100});
+                        $('.product_tech_spec').summernote({tabsize: 2, minheight: 100,  toolbar: []});
                         changeAmount();
                     }
                 })
@@ -339,10 +339,7 @@
             // for po stage
 
             // for proforma
-            $('.product_tech_spec').summernote({
-                tabsize: 2,
-                height: 100
-            });
+            $('.product_tech_spec').summernote({tabsize: 2, minheight: 50,  toolbar: []});
 
             changeAmount();
 
