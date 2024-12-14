@@ -49,9 +49,10 @@
                                                     <select name="product_id[]" id="product_id" class="form-control product_select_quot" multiple required>
                                                         @foreach($products as $product)
                                                         <option value="{{$product->id}}"
-                                                        @foreach($quotation_details as $quotation)
-                                                        @if($product->id == $quotation->product_id) {{'selected'}} @endif 
-                                                        @endforeach >{{$product->product_name}}</option>
+                                                            @foreach($quotation_details as $quotation)
+                                                            @if($product->id == $quotation->product_id) {{'selected'}} @endif 
+                                                            @endforeach >{{$product->product_name}}
+                                                       </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -197,13 +198,13 @@
 
 <script>
 
-    $(document).ready(function() {
+$(document).ready(function() {
         $('#product_id').select2({
             placeholder: "Select Product",
             allowClear: true,
         });
         changeAmount();   
-    });
+ 
 
     $.ajaxSetup({
         headers: {
@@ -211,14 +212,13 @@
         }
     });
 
-
-
                 $("#product_id").change(function(){
-                        var product_id = $(this).val();
+                    var last_product_id = $(this).val().slice(-1)[0]; 
+                    console.log(last_product_id);
                         $.ajax({
                             type:'post',
                             url:"{{route('admin.product-details')}}",
-                            data:{"product_id":product_id},
+                            data:{"product_id":last_product_id},
                             success:function(res){
                                  console.log(res);
                                 var i=0;
@@ -241,7 +241,7 @@
                                             </td>
                                         </tr>`;
                                 }
-                                $("tbody").html(tr);
+                                $("tbody").append(tr);
                                  changeAmount();
                             }
                         })  
@@ -261,7 +261,9 @@
                         });
                     }
 
-</script>
+
+});
+                                    </script>
 
 
 @endpush

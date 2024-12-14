@@ -81,8 +81,19 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-12 mt-3" id="load_table">
-                                        
+                                    <div class="col-12 mt-3">
+                                        <table class="table" id="myTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product Details</th>
+                                                    <th>Qty</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="load_table">
+
+                                            </tbody>
+                                        </table>
                                     </div>
 
                                     <div class="col-12 mt-3">
@@ -144,42 +155,33 @@
         })
     });
 
-    $("#product_id").change(function(){
-        var product_id = $(this).val();
-        $.ajax({
-            type:'post',
-            url:"{{route('admin.product-details')}}",
-            data:{"product_id":product_id},
-            success:function(res){
-                // console.log(res);
-                var i=0;
-                var tr=`<table class="table" id="myTable">
-                            <thead>
-                                <tr>
-                                    <th>Product Details</th>
-                                    <th>Qty</th>
-                                    <th>Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>`;
-                                        
-                for(i=0;i<res.length;i++){
-                var tr = tr + `<tr>
-                            <td><input type="hidden" name="product_ids[]" value="`+res[i].id+`">`+res[i].product_name+`</td>
-                            <td><input type="number" name="qty[]" class="qty" value="1"> <span class="badge bg-secondary ml-1" style="font-size:18px">`+res[i].unit_type+`</span></td>
-                            <td>
-                                <input type="hidden" class="single_amount" value="`+res[i].product_price+`">
-                                <input type="number" name="amount[]" class="amount" value="`+res[i].product_price+`" readonly>
-                            </td>
-                        </tr>`;
-                }
-                var tr = tr + ` </tbody>
-                            </table>`;
-                $("#load_table").html(tr);
-                changeAmount();
-            }
-        })
-        
+
+    $('#product_id').on('change', function (e) {
+            var last_product_id = $(this).val().slice(-1)[0]; 
+            // console.log(last_product_id);
+                $.ajax({
+                    type:'post',
+                    url:"{{route('admin.product-details')}}",
+                    data:{"product_id":last_product_id},
+                    success:function(res){
+                        console.log(res);
+                        var i=0;
+                        var tr=``;                  
+                        for(i=0;i<res.length;i++){
+                        var tr = tr + `<tr>
+                                    <td><input type="hidden" name="product_ids[]" value="`+res[i].id+`">`+res[i].product_name+`</td>
+                                    <td><input type="number" name="qty[]" class="qty" value="1"> <span class="badge bg-secondary ml-1" style="font-size:18px">`+res[i].unit_type+`</span></td>
+                                    <td>
+                                        <input type="hidden" class="single_amount" value="`+res[i].product_price+`">
+                                        <input type="number" name="amount[]" class="amount" value="`+res[i].product_price+`" readonly>
+                                    </td>
+                                </tr>`;
+                        }
+                        $("#load_table").append(tr);
+                        changeAmount();
+                    }
+                })
+            
     });
 
     function changeAmount(){

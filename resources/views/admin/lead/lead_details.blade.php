@@ -38,7 +38,7 @@
 
  
     <div class="col-6 mt-3">
-        <label for="lead_estimate_closure_date">Estimate Closure Date<span class="text-warning"> *</span></label>
+        <label for="lead_estimate_closure_date">Estimate Closure Date<span class="text-danger"> *</span></label>
         <input type="date" name="lead_estimate_closure_date" id="lead_estimate_closure_date" class="form-control" value="{{ $lead->lead_estimate_closure_date }}" required>
     </div>
 

@@ -1,4 +1,3 @@
-
 <div id="response-message"></div>
 <form id="po_update" action="{{route('admin.lead.purchase_order.update')}}" method="POST" enctype="multipart/form-data"> @csrf
     <div class="row">

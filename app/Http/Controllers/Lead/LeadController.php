@@ -204,9 +204,10 @@ class LeadController extends Controller implements HasMiddleware
         $quotations = Quotation::where('lead_id', $lead->id)->orderBy('quot_version', 'desc')->get();
         // $letest_quotation = Quotation::where('lead_id',$lead->id)->latest()->first();
 
-        $po_details = $orders = $letest_quotation_details = $quot_terms = null;
+        $po_details = $orders = $letest_quotation_details = $quot_terms = '';
 
         $letest_quotation = $quotations->first();
+        // dd($letest_quotation->id);
         if ($letest_quotation) {
             $letest_quotation_details = QuotationDetail::where('quotation_id', $letest_quotation->id)->get();
             $quot_terms = QuotationTerm::where('quotation_id', $letest_quotation->id)->first();
@@ -295,7 +296,7 @@ class LeadController extends Controller implements HasMiddleware
 
     public function productDetails(Request $request)
     {
-        $product = Product::join('measuring_units', 'products.measuring_unit_id', 'measuring_units.id')->select('products.*', 'measuring_units.unit_type')->whereIn('products.id', $request->product_id)->get();
+        $product = Product::join('measuring_units', 'products.measuring_unit_id', 'measuring_units.id')->select('products.*', 'measuring_units.unit_type')->where('products.id', $request->product_id)->get();
         return $product;
     }
 
