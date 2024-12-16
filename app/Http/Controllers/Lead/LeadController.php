@@ -21,6 +21,7 @@ use App\Models\OrderAndDelivery;
 use App\Models\ProformaInvoice;
 use App\Models\ProformaDetail;
 use App\Rules\GstNumber;
+use App\Models\SmsFormat;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -189,6 +190,7 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function show(Request $request, Lead $lead)
     {
+        $templates = SmsFormat::whereNotNull('template_id')->where('status', 1)->orderBy('id', 'desc')->get(['id', 'template_name']);
         $followups = LeadFollowup::with('admin')->where('lead_id', $lead->id)->latest()->get();
         $followup_date = LeadFollowup::where(['lead_id' => $lead->id, 'followup_type' => "followup"])->latest()->value('followup_next_date');
         $companies = Company::where('status', '1')->orderBy('company_name', 'asc')->get();
@@ -230,7 +232,7 @@ class LeadController extends Controller implements HasMiddleware
             }
         }
 
-        return view('admin.lead.view', compact(['companies', 'customers', 'categories', 'sources', 'products', 'stages', 'lead', 'followup_date', 'lead_details', 'quotations', 'letest_quotation', 'po_details', 'orders', 'followups', 'lead_company', 'letest_quotation_details', 'proforma', 'quot_terms']));
+        return view('admin.lead.view', compact(['companies', 'customers', 'categories', 'sources', 'products', 'stages', 'lead', 'followup_date', 'lead_details', 'quotations', 'letest_quotation', 'po_details', 'orders', 'followups', 'lead_company', 'letest_quotation_details', 'proforma', 'quot_terms','templates']));
     }
 
     /**

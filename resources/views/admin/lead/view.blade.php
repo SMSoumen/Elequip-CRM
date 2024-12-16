@@ -369,6 +369,16 @@
 
 
 
+            //For Time line //
+            $(".send_sms").click(function(){
+                $("#send_sms").modal('show');
+            });
+
+            $(".add_remark").click(function(){
+                $("#add_remark").modal('show');
+            });
+
+
             tabs.forEach(tab => {
                 tab.addEventListener('click', (e) => {
                     // Remove 'active' class from all tabs and contents                
