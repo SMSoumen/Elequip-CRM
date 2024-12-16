@@ -238,10 +238,9 @@
                 allowClear: true
             });
 
-            $("#product_id2").change(function() {
-                // var product_id = $(this).val();
-                var product_id = $(this).val().slice(-1)[0]; 
-
+            $('#product_id2').on('select2:select', function (e) {
+                    const selectedData = e.params.data;
+                    var product_id = selectedData.id;
                 $.ajax({
                     type: 'post',
                     url: "{{ route('admin.product-details') }}",

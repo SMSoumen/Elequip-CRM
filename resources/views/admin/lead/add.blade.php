@@ -155,10 +155,13 @@
         })
     });
 
+    $('#product_id').on('select2:select', function (e) {
+        const selectedData = e.params.data;
+        var last_product_id = selectedData.id;
+        // Log the selected value and text
+        // console.log("Value:", selectedData.id);
+        // console.log("Text:", selectedData.text);
 
-    $('#product_id').on('change', function (e) {
-            var last_product_id = $(this).val().slice(-1)[0]; 
-            // console.log(last_product_id);
                 $.ajax({
                     type:'post',
                     url:"{{route('admin.product-details')}}",
@@ -181,7 +184,6 @@
                         changeAmount();
                     }
                 })
-            
     });
 
     function changeAmount(){
