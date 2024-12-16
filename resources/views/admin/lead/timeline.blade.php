@@ -10,8 +10,8 @@
                     <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">Timeline</li> -->
 
-                    <button type="button" class="btn btn-warning m-2 send_sms" data-leadid="{{$lead->id}}" data-mobileno="{{$lead->mobile}}" title="Send SMS"><i class="fas fa-envelope"></i> Send SMS</button>                              
-                    <button type="button" class="btn btn-warning m-2 add_remark" data-modelid="{{$lead->id}}" title="Add Remark"><i class="fas fa-plus"></i> Add Remark</button> 
+                    <button type="button" class="btn btn-warning m-2 send_sms" title="Send SMS"><i class="fas fa-envelope"></i> Send SMS</button>                              
+                    <button type="button" class="btn btn-warning m-2 add_remark"  title="Add Remark"><i class="fas fa-plus"></i> Add Remark</button> 
                 </ol>
             </div>
         </div>
@@ -516,8 +516,8 @@
                 </div>
                 <form method="POST" action="{{ route('admin.order.send_sms') }}">@csrf
                     <div class="modal-body">
-                        <input type="hidden" name="mobile_no" id="mobile_no">
-                        <input type="hidden" name="lead_id" id="lead_id1">
+                        <input type="hidden" name="mobile_no" value="{{$lead_customer->mobile}}">
+                        <input type="hidden" name="lead_id" value="{{$lead->id}}">
                         <div class="col-12">
                             <label for="sms_title">SMS Title<span class="text-danger">*</span></label>
                             <select name="sms_title" id="sms_title" class="form-control" required>
@@ -544,10 +544,9 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Remark</h5>
                 </div>
-                <form method="POST" action="{{ route('admin.order.send_sms') }}">@csrf
+                <form method="POST" action="{{ route('admin.lead.add_remark') }}">@csrf
                     <div class="modal-body">
-                        <input type="hidden" name="mobile_no" id="mobile_no">
-                        <input type="hidden" name="lead_id" id="lead_id1">
+                        <input type="hidden" name="lead_id" value="{{$lead->id}}">
                         <div class="col-12">
                             <label for="remark">Remarks<span class="text-danger">*</span></label>
                             <textarea name="remark" id="remark" class="form-control" rows="3" required></textarea>

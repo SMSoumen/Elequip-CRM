@@ -190,6 +190,7 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function show(Request $request, Lead $lead)
     {
+        $lead_customer = Customer::where('id',$lead->customer_id)->first(['customer_name','mobile']);
         $templates = SmsFormat::whereNotNull('template_id')->where('status', 1)->orderBy('id', 'desc')->get(['id', 'template_name']);
         $followups = LeadFollowup::with('admin')->where('lead_id', $lead->id)->latest()->get();
         $followup_date = LeadFollowup::where(['lead_id' => $lead->id, 'followup_type' => "followup"])->latest()->value('followup_next_date');
@@ -232,7 +233,7 @@ class LeadController extends Controller implements HasMiddleware
             }
         }
 
-        return view('admin.lead.view', compact(['companies', 'customers', 'categories', 'sources', 'products', 'stages', 'lead', 'followup_date', 'lead_details', 'quotations', 'letest_quotation', 'po_details', 'orders', 'followups', 'lead_company', 'letest_quotation_details', 'proforma', 'quot_terms','templates']));
+        return view('admin.lead.view', compact(['companies', 'customers', 'categories', 'sources', 'products', 'stages', 'lead', 'followup_date', 'lead_details', 'quotations', 'letest_quotation', 'po_details', 'orders', 'followups', 'lead_company', 'letest_quotation_details', 'proforma', 'quot_terms','templates','lead_customer']));
     }
 
     /**
@@ -695,5 +696,23 @@ class LeadController extends Controller implements HasMiddleware
         // $file_name = date('d-M-Y').'-'.$data['quotation']->id.'-'.$data['quotation']->quot_version.'-';
         $file_name = mt_rand(11111111, 999999999) . '-' . time();
         return $pdf->download('Lead Proforma-' . $file_name . '.pdf');
+    }
+
+    public function addRemarks(Request $request){
+        $request->validate([
+            'lead_id' => 'required|integer',
+            'remark'  => 'required|string',
+        ]);
+
+        if(LeadFollowup::create([
+            'lead_id'            => $request->lead_id,
+            'followup_remarks'   => $request->remark,
+            'followup_type'      =>'remarks',
+            'admin_id'           => auth("admin")->user()->id,
+        ])){
+            return redirect()->back()->withSuccess('Remarks added successfully.');
+        } else {
+            return redirect()->back()->withErrors('Error!! while adding remarks!!!');
+        }
     }
 }
