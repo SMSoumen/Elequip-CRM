@@ -34,11 +34,26 @@ class OrderController extends Controller implements HasMiddleware
     {
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(PurchaseOrder::query()->join('leads', 'purchase_orders.lead_id', 'leads.id')
-                    ->join('lead_stages', 'leads.lead_stage_id', 'lead_stages.id')
-                    ->join('customers', 'leads.company_id', 'customers.id')->join('companies', 'leads.customer_id', 'companies.id')
-                    ->select('purchase_orders.id', 'purchase_orders.po_net_amount', 'purchase_orders.po_refer_no', 'purchase_orders.po_advance', 'purchase_orders.po_remaining', 'purchase_orders.created_at', 'purchase_orders.lead_id', 'customers.customer_name', 'customers.mobile', 'customers.designation', 'customers.email', 'companies.company_name', 'lead_stages.stage_name', 'leads.lead_stage_id')
-                    ->orderBy('purchase_orders.id', 'desc'))
+                $query = PurchaseOrder::query()->join('leads', 'purchase_orders.lead_id', 'leads.id')
+                ->join('lead_stages', 'leads.lead_stage_id', 'lead_stages.id')
+                ->join('customers', 'leads.company_id', 'customers.id')->join('companies', 'leads.customer_id', 'companies.id')
+                ->select('purchase_orders.id', 'purchase_orders.po_net_amount', 'purchase_orders.po_refer_no', 'purchase_orders.po_advance', 'purchase_orders.po_remaining', 'purchase_orders.created_at', 'purchase_orders.lead_id', 'customers.customer_name', 'customers.mobile', 'customers.designation', 'customers.email', 'companies.company_name', 'lead_stages.stage_name', 'leads.lead_stage_id')
+                ->orderBy('purchase_orders.id', 'desc');
+
+                if ($request->lead_stage) {
+                    // Log::info($request->lead_stage);
+                    $query->where('leads.lead_stage_id', '=', $request->lead_stage);
+                }
+                if ($request->from_date) {
+                    // Log::info($request->from_date);
+                    $query->where('purchase_orders.created_at', '>', $request->from_date);
+                }
+                if ($request->to_date) {
+                    // Log::info($request->to_date);
+                    $query->where('purchase_orders.created_at', '<', $request->to_date);
+                }
+
+                return DataTables::eloquent($query)
                     ->addColumn('orderby', function ($data) {
                         return $data->orderby = $data->customer_name . '(' . $data->designation . ')<br>' . $data->company_name . '<br>Email : ' . $data->email . '<br> Phone : ' . $data->mobile;
                     })
@@ -57,7 +72,7 @@ class OrderController extends Controller implements HasMiddleware
                     ->addIndexColumn()->rawColumns(['orderby', 'balance_amount', 'action', 'stage', 'created_date'])->make(true);
             }
 
-            $lead_stages = LeadStage::where('id', '>', 5)->get();
+            $lead_stages = LeadStage::where('id', '>=', 5)->get();
             $templates = SmsFormat::whereNotNull('template_id')->where('status', 1)->orderBy('id', 'desc')->get(['id', 'template_name']);
             return view('admin.order.index', compact(['lead_stages', 'templates']));
         } catch (\Exception $e) {

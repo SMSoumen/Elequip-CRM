@@ -60,15 +60,15 @@ class LeadController extends Controller implements HasMiddleware
                     ->orderBy('leads.id', 'desc');
 
                 if ($request->lead_stage) {
-                    Log::info($request->lead_stage);
+                    // Log::info($request->lead_stage);
                     $query->where('leads.lead_stage_id', '=', $request->lead_stage);
                 }
                 if ($request->from_date) {
-                    Log::info($request->from_date);
+                    // Log::info($request->from_date);
                     $query->where('leads.created_at', '>', $request->from_date);
                 }
                 if ($request->to_date) {
-                    Log::info($request->to_date);
+                    // Log::info($request->to_date);
                     $query->where('leads.created_at', '<', $request->to_date);
                 }
 

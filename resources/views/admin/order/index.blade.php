@@ -13,6 +13,29 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+
+                            <div class="row mb-5">
+                                <div class="col-4">
+                                    <label for="lead_stage"><i class="fas fa-filter"></i> Order Stage</label>
+                                    <select class="form-control" name="lead_stage" id="lead_stage">
+                                        <option value="">All Order Data</option>
+                                        @foreach($lead_stages as $lead_stage)
+                                        <option value="{{$lead_stage->id}}">{{$lead_stage->stage_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="from_date"><i class="fas fa-filter"></i> From Date</label>
+                                    <input type="date" class="form-control" name="from_date" id="from_date">
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="to_date"><i class="fas fa-filter"></i> To Date</label>
+                                    <input type="date" class="form-control" name="to_date" id="to_date">
+                                </div>                                    
+                            </div>
+
                             @if (session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
@@ -71,7 +94,8 @@
                         <input type="hidden" name="order_id" id="order_id">
                         <div class="col-12">
                             <label for="advance_amount">Advance Amount<span class="text-danger">*</span></label>
-                            <input type="number" step="0.01" name="advance_amount" id="advance_amount" class="form-control" required>
+                            <input type="number" step="0.01" name="advance_amount" id="advance_amount"
+                                class="form-control" required>
                             <span class="text-danger" id="check_amount_msg"></span>
                         </div>
                     </div>
@@ -201,7 +225,10 @@
             $.ajax({
                 url: "{{ route('admin.order.update_lead_stage.modal') }}",
                 method: 'POST',
-                data: {lead_id, stage_id},
+                data: {
+                    lead_id,
+                    stage_id
+                },
                 datatype: 'json',
                 success: function(response) {
                     $("#dynamic_lead_stages").html(response)
@@ -309,7 +336,7 @@
                             '<div class="alert alert-success text-center">' + response.message +
                             '</div>');
                         setInterval(location.reload(), 100000);
-                    }else{
+                    } else {
                         $('#response-message_stage').html(
                             '<div class="alert alert-danger text-center">' + response.message +
                             '</div>');
@@ -359,7 +386,14 @@
                 "responsive": true,
                 "lengthChange": true,
 
-                ajax: "{{ route('admin.orders.index') }}",
+                ajax: {
+                    url: "{{ route('admin.orders.index') }}",
+                    data: function (d) {
+                        d.lead_stage = $('#lead_stage').val();
+                        d.from_date = $('#from_date').val();
+                        d.to_date = $('#to_date').val();
+                    }
+                },
                 lengthMenu: [
                     [10, 25, 50, 200, 500, 1000, -1],
                     [10, 25, 50, 200, 500, 1000, "All"]
@@ -407,6 +441,10 @@
                 }
 
             });
+
+            $('#lead_stage, #from_date, #to_date').on('change keyup', function () {
+                table.draw();
+            }); 
 
         });
     </script>
