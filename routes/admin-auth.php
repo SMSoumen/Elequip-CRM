@@ -140,4 +140,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
    Route::post('reports/value-based-report', [ReportController::class, 'valueBasedReportAjax'])->name('value_based_report.list');
    Route::post('reports/area-wise-report', [ReportController::class, 'areaWiseReportAjax'])->name('area_wise_report.list');
 
-});
+   Route::post('leads/add-remark', [LeadController::class, 'addRemarks'])->name('lead.add_remark');
+});   
+

@@ -238,10 +238,9 @@
                 allowClear: true
             });
 
-            $("#product_id2").change(function() {
-                // var product_id = $(this).val();
-                var product_id = $(this).val().slice(-1)[0]; 
-
+            $('#product_id2').on('select2:select', function (e) {
+                    const selectedData = e.params.data;
+                    var product_id = selectedData.id;
                 $.ajax({
                     type: 'post',
                     url: "{{ route('admin.product-details') }}",
@@ -282,7 +281,7 @@
                         }
 
                         $("tbody").append(tr);
-                        $('.product_tech_spec').summernote({tabsize: 2, height: 100});
+                        $('.product_tech_spec').summernote({tabsize: 2, minheight: 100,  toolbar: []});
                         changeAmount();
                     }
                 })
@@ -339,10 +338,7 @@
             // for po stage
 
             // for proforma
-            $('.product_tech_spec').summernote({
-                tabsize: 2,
-                height: 100
-            });
+            $('.product_tech_spec').summernote({tabsize: 2, minheight: 50,  toolbar: []});
 
             changeAmount();
 
@@ -371,6 +367,16 @@
             }
             // for proforma
 
+
+
+            //For Time line //
+            $(".send_sms").click(function(){
+                $("#send_sms").modal('show');
+            });
+
+            $(".add_remark").click(function(){
+                $("#add_remark").modal('show');
+            });
 
 
             tabs.forEach(tab => {

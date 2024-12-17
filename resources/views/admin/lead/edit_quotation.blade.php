@@ -212,9 +212,11 @@ $(document).ready(function() {
         }
     });
 
-                $("#product_id").change(function(){
-                    var last_product_id = $(this).val().slice(-1)[0]; 
-                    console.log(last_product_id);
+
+                    $('#product_id').on('select2:select', function (e) {
+                        const selectedData = e.params.data;
+                        var last_product_id = selectedData.id;
+                        // console.log(last_product_id);
                         $.ajax({
                             type:'post',
                             url:"{{route('admin.product-details')}}",

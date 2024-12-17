@@ -75,9 +75,9 @@
                                                                             <input type="hidden" name="product_code[]" value="{{ $proforma->proforma_product_code }}">
                                                                             <input type="hidden" name="product_unit[]" value="{{ $proforma->proforma_product_unit }}">
                                                                         </td>
-                                                                        <td><input type="number" name="qty[]" class="qty" value="{{$proforma->proforma_product_qty}}" ></td>
-                                                                        <td><input type="number" name="rate[]" class="rate" value="{{$proforma->proforma_product_price}}" ></td>
-                                                                        <td><input type="text" name="amount[]" class="amount" value="{{$amount}}" readonly></td>
+                                                                        <td><input type="number" name="qty[]" class="qty mt-5" value="{{$proforma->proforma_product_qty}}" ></td>
+                                                                        <td><input type="number" name="rate[]" class="rate mt-5" value="{{$proforma->proforma_product_price}}" ></td>
+                                                                        <td><input type="text" name="amount[]" class="amount mt-5" value="{{$amount}}" readonly></td>
                                                                     </tr>
                                                                 @endforeach
 
@@ -123,7 +123,14 @@
 <script>
     $('.product_tech_spec').summernote({
         tabsize: 2,
-        height: 100
+        height: 100,
+        toolbar: [
+                    ['style', ['bold', 'italic', 'underline']],
+                    ['font', ['fontname', 'fontsize', 'color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture']],
+                    ['view', ['fullscreen', 'codeview']]
+                ]
     });
 
     changeAmount();

@@ -48,7 +48,8 @@ class PurchaseOrderController extends Controller
         );
 
         if ($request->hasFile('po_document')) {
-            $str_image = $request->file('po_document')->getClientOriginalName();
+            $file = $request->file('po_document');
+            $str_image ='Lead Quotation-'. uniqid() . '.' . $file->getClientOriginalExtension();
             $location = public_path('/upload/po/');
             $request->file('po_document')->move($location, $str_image);
             $data['po_document'] = $str_image;
@@ -79,13 +80,10 @@ class PurchaseOrderController extends Controller
             ]);
         }
         DB::table('order_and_deliveries')->insert($add_order_details);
-
         if ($po) {
             return redirect()->route('admin.leads.show', $request->lead_id)->withSuccess('P.O created successfully.');
-            // return response()->json(['success' => true, 'message' => 'P.O created successfully.', 'po_id' =>$po->id,]);
         } else {
             return redirect()->back()->withErrors('Error!! while creating P.O!!!');
-            // return response()->json(['success' => false, 'message' => 'Error!! while creating P.O!',]);
         }
     }
 
@@ -130,9 +128,9 @@ class PurchaseOrderController extends Controller
             'po_remarks' => $request->order_remark,
         );
 
-        // dd($request->file('po_document')->getClientOriginalName());
         if ($request->hasFile('po_document')) {
-            $str_image = $request->file('po_document')->getClientOriginalName();
+            $file = $request->file('po_document');
+            $str_image ='Lead Quotation-'. uniqid() . '.' . $file->getClientOriginalExtension();
             $location = public_path('/upload/po/');
             $request->file('po_document')->move($location, $str_image);
             $data['po_document'] = $str_image;
@@ -145,10 +143,8 @@ class PurchaseOrderController extends Controller
 
         if (PurchaseOrder::where('id', $request->po_id)->update($data)) {
             return redirect()->route('admin.leads.show', $request->lead_id)->withSuccess('P.O updated successfully.');
-            // return response()->json(['success' => true, 'message' => 'P.O updated successfully.']);
         } else {
             return redirect()->back()->withErrors('Error!! while updating P.O!!!');
-            //return response()->json(['success' => false, 'message' => 'Error!! while updating P.O!',]);
         }
     }
 }
