@@ -38,7 +38,7 @@ class UserController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        $auth_user = auth()->user();
+        $auth_user = auth('web')->user();
         if ($auth_user->id !== 1) {
             $users = User::where('id', '!=', 1)->latest()->get();
         } else {

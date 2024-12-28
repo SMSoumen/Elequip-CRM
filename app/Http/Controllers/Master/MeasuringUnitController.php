@@ -28,13 +28,14 @@ class MeasuringUnitController extends Controller implements HasMiddleware
     public function index(Request $request){
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(MeasuringUnit::query()->orderBy('id','desc'))->addColumn('status', function ($data) {
+                return DataTables::eloquent(MeasuringUnit::query())->addColumn('status', function ($data) {
                     return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.measuring-unit.edit', $data->id);
-                    $deleteRoute = route('admin.measuring-unit.destroy', $data->id);
+                    // $deleteRoute = route('admin.measuring-unit.destroy', $data->id);
+                    $deleteRoute = null;
                     $permission = 'MeasuringUnit';
                     $edit_type = "modal";
 

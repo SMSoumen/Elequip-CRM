@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\FeatureController;
 // use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Contact\CompanyController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Front\BlogController;
 use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\FrontController;
@@ -17,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/command', function ()  {
+Route::get('/command', function () {
     Artisan::call('cache:clear');
     return redirect()->route('front.home');
 });
@@ -44,18 +46,19 @@ Route::get('/robots.txt', [FrontController::class, 'robotsText']);
 // });
 
 // require __DIR__.'/auth.php';
-require __DIR__.'/admin-auth.php';
+require __DIR__ . '/admin-auth.php';
 
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth:admin'])->name('admin.dashboard');
+// Route::get('/admin/dashboard', function () {
+//     return view('admin.dashboard');
+// })->middleware(['auth:admin'])->name('admin.dashboard');
 
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware(['auth:admin'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
     Route::resource('users', 'AdminController');
-    Route::post('/user-status-change', [UserController::class, 'userStatusChange'])->name('user.change.status');
+    Route::post('/user-status-change', [AdminController::class, 'userStatusChange'])->name('user.change.status');
 
     Route::post('/common-status-change', [AjaxController::class, 'statusChange']);
 
@@ -65,53 +68,20 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
     Route::get('/upload/contact', [CompanyController::class, 'uploadcontact'])->name('upload.contact');
     Route::post('/upload/contact', [CompanyController::class, 'uploadcontactsubmit'])->name('upload.contactsubmit');
 
-    // Elequip CRM 
-    // Route::resource('product-categories', 'ProductCategoryController');
-    // Route::resource('products', 'ProductController');
-    // Elequip CRM 
-
-
-    // Route::resource('product_types', 'ProductTypeController');
-    // Route::resource('categoryfeatureicon', 'CategoryFeatureIconController');
-    // Route::resource('icons', 'IconController');
-    // Route::resource('features', 'FeatureController');
-    // Route::post('feature-sort', [FeatureController::class, 'updateSortOrder'])->name('features.sort');
-    // Route::resource('faqs', 'FaqController');
-    // Route::resource('product_features', 'ProductFeatureController');
-
-    // Route::get('categories-treeview', [CategoryController::class, 'treeView'])->name('category.treeview');
-    // Route::resource('brands', 'BrandController');
-    // Route::resource('units', 'UnitController');
-    // Route::resource('taxes', 'TaxController');
-
-    // Route::resource('attributes', 'AttributeController');
-    // Route::resource('attribute-values', 'AttributeValueController');
-
-
-    // Route::resource('products', 'ProductController');
-    // Route::post('/get-attr-value', [AjaxController::class, 'getProductAttrValue']);
-    // Route::post('/get-variant-template', [AjaxController::class, 'getProductVariantTemplate']);
-    
-    // Route::resource('diseases', 'DiseaseController');
-    // Route::resource('drugs', 'DrugController');
-    // Route::get('drug-import', [DrugController::class, 'importDrug'])->name('drug_import');
-    // Route::post('drug-import', [DrugController::class, 'importDrugSubmit'])->name('drug_import.store');
-
-    // Route::resource('pages', 'PageController');
-    // Route::resource('frontusers', 'CustomerController');
-
-    // Route::resource('vendors', 'VendorController');
-    
-    // Route::resource('product_attributes', 'ProductAttributeController');
-    // Route::resource('product_attribute_values', 'ProductAttributeValueController');
-    // Route::resource('productgroups', 'ProductgroupController');
-    // Route::resource('homebanners', 'HomebannerController');
-
-    // Route::resource('blog-category', 'BlogCategoryController');
-    // Route::resource('blog', 'BlogController');
-
-
-    // Route::resource('service_center', 'ServiceCenterController');
-    // Route::resource('pagevisit', 'PageVisitController')->only('index');
-    
+    Route::get('/temp-user-store', [AdminController::class, 'tempUserCreate']);
+    Route::get('/temp-brand-store', [AdminController::class, 'tempBrandCreate']);
+    Route::get('/temp-company-store', [AdminController::class, 'tempCompanyCreate']);
+    Route::get('/temp-customer-store', [AdminController::class, 'tempCustomerCreate']);
+    Route::get('/temp-subcat-store', [AdminController::class, 'tempSubcategoryCreate']);
+    Route::get('/temp-product-store', [AdminController::class, 'tempProductCreate']);
+    Route::get('/temp-lead-store', [AdminController::class, 'tempLeadCreate']);
+    Route::get('/temp-lead-details-store', [AdminController::class, 'tempLeadDetailsCreate']);
+    Route::get('/temp-lead-followup-store', [AdminController::class, 'tempLeadFollowupCreate']);
+    Route::get('/temp-lead-quot-store', [AdminController::class, 'tempLeadQuotCreate']);
+    Route::get('/temp-quot-details-store', [AdminController::class, 'tempQuotDetailsCreate']);
+    Route::get('/temp-quot-terms-store', [AdminController::class, 'tempQuotTermsCreate']);
+    Route::get('/temp-po-store', [AdminController::class, 'tempPOCreate']);
+    Route::get('/temp-order-delivery-store', [AdminController::class, 'tempOrderDeliveryCreate']);
+    Route::get('/temp-proforma-store', [AdminController::class, 'tempProformaCreate']);
+    Route::get('/temp-proforma-details-store', [AdminController::class, 'tempProformaDetailsCreate']);
 });

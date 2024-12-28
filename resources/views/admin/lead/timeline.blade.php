@@ -380,8 +380,6 @@
     }
 </style>
 
-
-
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -460,59 +458,15 @@
         </div>
     </div>
 </div>
-
-<section class="content d-none">
-    <div class="container-fluid">
-
-        <!-- Timelime example  -->
-        <div class="row">
-            <div class="col-md-12">
-                <!-- The time line -->
-                <div class="timeline">
-
-                    @forelse ($followups as $i => $followup)
-                        <div class="time-label">
-                            <span class="bg-red">{{ $followup->followup_next_date }}</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-comments bg-yellow"></i>
-                            <div class="timeline-item">
-                                <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-                                <div class="timeline-body">
-                                    Take me to your leader!
-                                    Switzerland is small and neutral!
-                                    We are more like Germany, ambitious and misunderstood!
-                                </div>
-                                <div class="timeline-footer">
-                                    <a class="btn btn-warning btn-sm">View comment</a>
-                                </div>
-                            </div>
-                        </div>
-                    @empty
-                    @endforelse
-
-
-                    <div>
-                        <i class="fas fa-clock bg-gray"></i>
-                    </div>
-                </div>
-            </div>
-            <!-- /.col -->
-        </div>
-    </div>
-    <!-- /.timeline -->
-
-</section>
 <!-- /.content -->
 
 <!--==================> Send SMS Modal ============================-->
 
-    <div class="modal fade" id="send_sms" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="send_sms" tabindex="-1" aria-labelledby="exampleModalLabelSMS" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Send SMS</h5>
+                    <h5 class="modal-title" id="exampleModalLabelSMS">Send SMS</h5>
                 </div>
                 <form method="POST" action="{{ route('admin.order.send_sms') }}">@csrf
                     <div class="modal-body">
@@ -538,11 +492,11 @@
 
     <!--==================> Add Remark Modal ============================-->
 
-    <div class="modal fade" id="add_remark" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="add_remark" tabindex="-1" aria-labelledby="exampleModalLabelRemark" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Remark</h5>
+                    <h5 class="modal-title" id="exampleModalLabelRemark">Add Remark</h5>
                 </div>
                 <form method="POST" action="{{ route('admin.lead.add_remark') }}">@csrf
                     <div class="modal-body">

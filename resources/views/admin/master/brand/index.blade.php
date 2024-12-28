@@ -10,7 +10,7 @@
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title">Brand</h3>
                                 @can('Brand create')
-                                    <button type="button" class="btn btn-primary add_brand">Add Brand</button>                              
+                                    <button type="button" class="btn btn-primary add_brand">Add Brand</button>
                                 @endcan
                             </div>
                         </div>
@@ -56,9 +56,6 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-@endsection
-
-    <!--==================> Add Brand Modal ============================-->
 
     <div class="modal fade" id="add_brand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -72,13 +69,17 @@
             </div>
         </div>
     </div>
+@endsection
+
+<!--==================> Add Brand Modal ============================-->
+
+
 
 @push('scripts')
-
     <script>
-        $(".add_brand").click(function(){
+        $(".add_brand").click(function() {
             $(".modal-title").html('Add Brand');
-            let html =`<form action="{{route('admin.brand.store')}}" method="POST" id="form_data">@csrf
+            let html = `<form action="{{ route('admin.brand.store') }}" method="POST" id="form_data">@csrf
                 <div class="modal-body">
                     <div class="col-12">
                         <label for="brand_name">Brand Name <span class="text-danger">*</span></label>
@@ -93,17 +94,17 @@
             $("#add_brand").modal('show');
         });
 
-        $(document).on('click','.edit_data',function(){
+        $(document).on('click', '.edit_data', function() {
             let brand_id = $(this).data("modelid");
-            let url = `{{ route('admin.brand.show', ':id') }}`; 
-            url = url.replace(':id', brand_id);  
+            let url = `{{ route('admin.brand.show', ':id') }}`;
+            url = url.replace(':id', brand_id);
 
             $.ajax({
-                method:"GET",
+                method: "GET",
                 url: url,
-                success:function(res){
+                success: function(res) {
                     $(".modal-title").html('Edit Brand');
-                    let html =`<form action="{{route('admin.brand.update',':res')}}" method="post" id="form_data">@csrf
+                    let html = `<form action="{{ route('admin.brand.update', ':res') }}" method="post" id="form_data">@csrf
                     @method('PUT')
                             <div class="modal-body">
                                 <div class="col-12">
@@ -116,12 +117,12 @@
                             </div>
                         </form>`;
 
-                        $(".load_html").html(html);
-                        let update_url = `{{ route('admin.brand.update', ':id') }}`;
-                        update_url = update_url.replace(':id', res.id);
-                        $("#form_data").attr('action',update_url);
-                        $("#brand_name").val(res.brand_name);
-                        $("#add_brand").modal('show');
+                    $(".load_html").html(html);
+                    let update_url = `{{ route('admin.brand.update', ':id') }}`;
+                    update_url = update_url.replace(':id', res.id);
+                    $("#form_data").attr('action', update_url);
+                    $("#brand_name").val(res.brand_name);
+                    $("#add_brand").modal('show');
                 }
             })
         });
@@ -199,7 +200,7 @@
                     $('.statusChange').bootstrapSwitch();
                 }
 
-            });            
+            });
 
         });
     </script>

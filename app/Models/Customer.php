@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Customer extends Model
 {
     use HasFactory;
-    protected $fillable = ['customer_name','designation','mobile','phone','email','email2','company_id','address','status','created_at','updated_at'];
+    protected $fillable = ['id','customer_name','designation','mobile','phone','email','email2','company_id','address','status','created_at','updated_at'];
 
     public function company(): BelongsTo
     {

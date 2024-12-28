@@ -34,7 +34,8 @@ class LeadCategoryController extends Controller implements HasMiddleware
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.lead-category.edit', $data->id);
-                    $deleteRoute = route('admin.lead-category.destroy', $data->id);
+                    // $deleteRoute = route('admin.lead-category.destroy', $data->id);
+                    $deleteRoute = null;
                     $permission = 'Lead Category';
                     $edit_type = "modal";
 

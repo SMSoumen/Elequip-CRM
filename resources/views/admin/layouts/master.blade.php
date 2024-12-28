@@ -61,7 +61,6 @@
 
     <link rel="stylesheet" href="{{ asset(asset_path('assets/admin/css/custom.css')) }}">
 
-
     {{-- Js FILES --}}
 
     <!-- jQuery -->
@@ -225,6 +224,45 @@
 
         });
     </script>
+    <style>
+        .main-header .nav-link {
+            height: 1.6rem !important;
+        }
+
+        .product_tech_spec {
+            box-shadow: 3px 3px 3px burlywood;
+            border: 1px solid #f3f5f6;
+            font-size: 14px;
+            line-height: 1.2;
+        }
+
+        .product_tech_spec p, .note-editable p {
+            margin-bottom: 1px;
+        }
+
+        .note-editor {
+            margin-bottom: 0;
+        }
+
+        .prod_head {
+            font-weight: 800 !important;
+            color: #082173 !important;
+            /* margin-bottom: 0; */
+            text-decoration: underline;
+        }
+        .amount_p {
+            border: 2px solid #e0bd90;
+            padding: 10px 5px;
+            color: #e86338;
+            height: 40px;
+            margin-top: 15px;
+            line-height: 18px;
+        }
+        .input-orange-elequip{
+            border: 2px solid #e0bd90;
+            color: #e86338;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

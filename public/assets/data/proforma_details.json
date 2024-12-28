@@ -1,0 +1,2662 @@
+[
+    {
+        "_proforma_details_id": "1",
+        "proforma_id": "1",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "13275.00",
+        "created_at": "2021-08-14 17:53:31",
+        "updated_at": "2021-08-14 17:53:31"
+    },
+    {
+        "_proforma_details_id": "4",
+        "proforma_id": "3",
+        "proforma_product_id": "667",
+        "proforma_product_spec": "",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "30000.00",
+        "created_at": "2021-08-18 19:13:44",
+        "updated_at": "2021-08-18 19:13:44"
+    },
+    {
+        "_proforma_details_id": "5",
+        "proforma_id": "3",
+        "proforma_product_id": "290",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 9 mtrs</li>\r\n\t<li>Class 2 duty, 2 Fall</li>\r\n\t<li>With Electric trolley</li>\r\n\t<li>Hoist speed- 6 metre/min</li>\r\n\t<li>Trolley speed- 17 metre/min</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "235000.00",
+        "created_at": "2021-08-18 19:13:44",
+        "updated_at": "2021-08-18 19:13:44"
+    },
+    {
+        "_proforma_details_id": "6",
+        "proforma_id": "3",
+        "proforma_product_id": "607",
+        "proforma_product_spec": "<ul>\r\n\t<li>Complete with C Rail Bar (Giovenzana, ITALY make)</li>\r\n\t<li>Track supporting bracket</li>\r\n\t<li>Joint cover</li>\r\n\t<li>Steel trolley</li>\r\n\t<li>End Stop</li>\r\n\t<li>Hoist Power supply cables</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "20",
+        "proforma_product_price": "1900.00",
+        "created_at": "2021-08-18 19:13:44",
+        "updated_at": "2021-08-18 19:13:44"
+    },
+    {
+        "_proforma_details_id": "7",
+        "proforma_id": "4",
+        "proforma_product_id": "27",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 10&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "23800.00",
+        "created_at": "2021-08-19 15:03:02",
+        "updated_at": "2021-08-19 15:03:02"
+    },
+    {
+        "_proforma_details_id": "8",
+        "proforma_id": "5",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<p>Capacity: 1.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 1</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "5",
+        "proforma_product_price": "9779.00",
+        "created_at": "2021-08-19 16:25:27",
+        "updated_at": "2021-08-19 16:25:27"
+    },
+    {
+        "_proforma_details_id": "9",
+        "proforma_id": "5",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "5",
+        "proforma_product_price": "12390.00",
+        "created_at": "2021-08-19 16:25:27",
+        "updated_at": "2021-08-19 16:25:27"
+    },
+    {
+        "_proforma_details_id": "10",
+        "proforma_id": "6",
+        "proforma_product_id": "29",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 5.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 25&amp;nbsp;mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 2&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "45220.00",
+        "created_at": "2021-08-25 15:22:33",
+        "updated_at": "2021-08-25 15:22:33"
+    },
+    {
+        "_proforma_details_id": "11",
+        "proforma_id": "7",
+        "proforma_product_id": "513",
+        "proforma_product_spec": "<ul>\r\n\t<li>6 dual speed directional buttons + Emergency stop+ start</li>\r\n\t<li>Dual speed mechanical interlock buttons and indelible laser engraved symbols</li>\r\n\t<li>CE marked products with IEC/EN60947complaint</li>\r\n\t<li>Rated insulation voltage: 690V & Rated thermal current: 16A</li>\r\n\t<li>M3.5 Screw type terminal</li>\r\n</ul>",
+        "proforma_product_qty": "3",
+        "proforma_product_price": "5500.00",
+        "created_at": "2021-08-30 17:57:43",
+        "updated_at": "2021-08-30 17:57:43"
+    },
+    {
+        "_proforma_details_id": "12",
+        "proforma_id": "8",
+        "proforma_product_id": "518",
+        "proforma_product_spec": "<ul>\r\n\t<li>2+6 dual speed directional buttons + custom switches</li>\r\n\t<li>Dual speed mechanical interlock buttons and indelible laser engraved symbols</li>\r\n\t<li>CE marked products with IEC/EN60947complaint</li>\r\n\t<li>Rated insulation voltage: 690V &amp; Rated thermal current: 16A</li>\r\n\t<li>M3.5 Screw type terminal</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "6",
+        "proforma_product_price": "7950.00",
+        "created_at": "2021-09-02 19:04:35",
+        "updated_at": "2021-09-02 19:04:35"
+    },
+    {
+        "_proforma_details_id": "13",
+        "proforma_id": "9",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 4 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "14819.00",
+        "created_at": "2021-09-11 15:10:56",
+        "updated_at": "2021-09-11 15:10:56"
+    },
+    {
+        "_proforma_details_id": "14",
+        "proforma_id": "9",
+        "proforma_product_id": "105",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of beam: 4 mtrs.</p>\r\n\r\n<p>Flange range: 88-203mm</p>\r\n\r\n<p>Anti-corrosive power coat finish</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "10402.00",
+        "created_at": "2021-09-11 15:10:56",
+        "updated_at": "2021-09-11 15:10:56"
+    },
+    {
+        "_proforma_details_id": "15",
+        "proforma_id": "10",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 3.0 ton&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;Fork Length: 1220 mm&lt;/p&gt;\r\n\r\n&lt;p&gt;fork width: 685mm&lt;/p&gt;\r\n\r\n&lt;p&gt;Lifting height: 200mm&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17000.00",
+        "created_at": "2021-09-20 16:51:18",
+        "updated_at": "2021-09-20 16:51:18"
+    },
+    {
+        "_proforma_details_id": "16",
+        "proforma_id": "11",
+        "proforma_product_id": "27",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 6 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "22265.00",
+        "created_at": "2021-09-23 16:07:54",
+        "updated_at": "2021-09-23 16:07:54"
+    },
+    {
+        "_proforma_details_id": "17",
+        "proforma_id": "12",
+        "proforma_product_id": "685",
+        "proforma_product_spec": "",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "12500.00",
+        "created_at": "2021-09-30 20:14:13",
+        "updated_at": "2021-09-30 20:14:13"
+    },
+    {
+        "_proforma_details_id": "18",
+        "proforma_id": "12",
+        "proforma_product_id": "681",
+        "proforma_product_spec": "",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "5000.00",
+        "created_at": "2021-09-30 20:14:13",
+        "updated_at": "2021-09-30 20:14:13"
+    },
+    {
+        "_proforma_details_id": "19",
+        "proforma_id": "13",
+        "proforma_product_id": "667",
+        "proforma_product_spec": "<ul>\r\n\t<li>Indef (IR) Manual Travelling Trolley</li>\r\n\t<li>Capacity - 2 Ton,</li>\r\n\t<li>Travel Length - 3 Mtrs</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "38000.00",
+        "created_at": "2021-10-04 16:36:51",
+        "updated_at": "2021-10-04 16:36:51"
+    },
+    {
+        "_proforma_details_id": "20",
+        "proforma_id": "14",
+        "proforma_product_id": "672",
+        "proforma_product_spec": "<p>Part name- F24-10D</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "23000.00",
+        "created_at": "2021-10-19 08:08:10",
+        "updated_at": "2021-10-19 08:08:10"
+    },
+    {
+        "_proforma_details_id": "21",
+        "proforma_id": "15",
+        "proforma_product_id": "684",
+        "proforma_product_spec": "",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "5750.00",
+        "created_at": "2021-10-22 07:37:08",
+        "updated_at": "2021-10-22 07:37:08"
+    },
+    {
+        "_proforma_details_id": "22",
+        "proforma_id": "16",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<p>Capacity: 1.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 1</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "11362.00",
+        "created_at": "2021-10-28 06:44:53",
+        "updated_at": "2021-10-28 06:44:53"
+    },
+    {
+        "_proforma_details_id": "23",
+        "proforma_id": "16",
+        "proforma_product_id": "28",
+        "proforma_product_spec": "<p>Capacity: 5.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "27375.00",
+        "created_at": "2021-10-28 06:44:53",
+        "updated_at": "2021-10-28 06:44:53"
+    },
+    {
+        "_proforma_details_id": "24",
+        "proforma_id": "17",
+        "proforma_product_id": "470",
+        "proforma_product_spec": "<p>Capacity: 300 Kgs.</p>\r\n\r\n<p>Lifting height: 1500mm</p>\r\n\r\n<p>Suitable Drum : Dia.572X900</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "68000.00",
+        "created_at": "2021-11-13 03:11:34",
+        "updated_at": "2021-11-13 03:11:34"
+    },
+    {
+        "_proforma_details_id": "25",
+        "proforma_id": "18",
+        "proforma_product_id": "30",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 8.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 3</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "37100.00",
+        "created_at": "2021-11-27 06:50:58",
+        "updated_at": "2021-11-27 06:50:58"
+    },
+    {
+        "_proforma_details_id": "26",
+        "proforma_id": "19",
+        "proforma_product_id": "37",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 1.0 ton&lt;/li&gt;\r\n\t&lt;li&gt;Height of lift: 16&amp;nbsp;mtrs.&lt;/li&gt;\r\n\t&lt;li&gt;No. of falls (load chain): 1&lt;/li&gt;\r\n\t&lt;li&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/li&gt;\r\n\t&lt;li&gt;HSN Code : 8425&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "19040.00",
+        "created_at": "2021-12-08 07:27:40",
+        "updated_at": "2021-12-08 07:27:40"
+    },
+    {
+        "_proforma_details_id": "27",
+        "proforma_id": "19",
+        "proforma_product_id": "39",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 2.0 ton&lt;/li&gt;\r\n\t&lt;li&gt;Height of lift: 16&amp;nbsp;mtrs.&lt;/li&gt;\r\n\t&lt;li&gt;No. of falls (load chain): 2&lt;/li&gt;\r\n\t&lt;li&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/li&gt;\r\n\t&lt;li&gt;HSN Code : 8425&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "25568.00",
+        "created_at": "2021-12-08 07:27:40",
+        "updated_at": "2021-12-08 07:27:40"
+    },
+    {
+        "_proforma_details_id": "28",
+        "proforma_id": "20",
+        "proforma_product_id": "33",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 10.0 ton&lt;/li&gt;\r\n\t&lt;li&gt;Height of lift: 12&amp;nbsp;mtrs.&lt;/li&gt;\r\n\t&lt;li&gt;No. of falls (load chain): 4&lt;/li&gt;\r\n\t&lt;li&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/li&gt;\r\n\t&lt;li&gt;HSN Code - 8425.&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "62424.00",
+        "created_at": "2021-12-08 07:49:55",
+        "updated_at": "2021-12-08 07:49:55"
+    },
+    {
+        "_proforma_details_id": "29",
+        "proforma_id": "21",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton&nbsp;</li>\r\n\t<li>Fork Length: 1220 mm</li>\r\n\t<li>fork width: 685mm</li>\r\n\t<li>Lifting height: 200mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17500.00",
+        "created_at": "2021-12-21 09:12:44",
+        "updated_at": "2021-12-21 09:12:44"
+    },
+    {
+        "_proforma_details_id": "30",
+        "proforma_id": "22",
+        "proforma_product_id": "23",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "4",
+        "proforma_product_price": "11477.00",
+        "created_at": "2021-12-29 09:20:46",
+        "updated_at": "2021-12-29 09:20:46"
+    },
+    {
+        "_proforma_details_id": "31",
+        "proforma_id": "22",
+        "proforma_product_id": "25",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "4",
+        "proforma_product_price": "14941.00",
+        "created_at": "2021-12-29 09:20:46",
+        "updated_at": "2021-12-29 09:20:46"
+    },
+    {
+        "_proforma_details_id": "32",
+        "proforma_id": "22",
+        "proforma_product_id": "27",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "3",
+        "proforma_product_price": "20435.00",
+        "created_at": "2021-12-29 09:20:46",
+        "updated_at": "2021-12-29 09:20:46"
+    },
+    {
+        "_proforma_details_id": "33",
+        "proforma_id": "22",
+        "proforma_product_id": "29",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 5.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "3",
+        "proforma_product_price": "27108.00",
+        "created_at": "2021-12-29 09:20:46",
+        "updated_at": "2021-12-29 09:20:46"
+    },
+    {
+        "_proforma_details_id": "34",
+        "proforma_id": "23",
+        "proforma_product_id": "447",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.5 ton&nbsp;</li>\r\n\t<li>Fork Length: 900 mm</li>\r\n\t<li>fork width: 200-580 (adjustible)</li>\r\n\t<li>Lifting height: 1600mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "52000.00",
+        "created_at": "2021-12-31 09:38:43",
+        "updated_at": "2021-12-31 09:38:43"
+    },
+    {
+        "_proforma_details_id": "35",
+        "proforma_id": "24",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton&nbsp;</li>\r\n\t<li>Fork Length: 1220 mm</li>\r\n\t<li>fork width: 685mm</li>\r\n\t<li>Lifting height: 200mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "19950.00",
+        "created_at": "2022-01-17 10:46:37",
+        "updated_at": "2022-01-17 10:46:37"
+    },
+    {
+        "_proforma_details_id": "36",
+        "proforma_id": "25",
+        "proforma_product_id": "89",
+        "proforma_product_spec": "<ul>\r\n\t<li>Lift Capacity: 1600 Kgs.</li>\r\n\t<li>Pull Capacity: 2600 Kgs.</li>\r\n\t<li>Rope dia. : 11.3mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "14560.00",
+        "created_at": "2022-01-20 11:32:11",
+        "updated_at": "2022-01-20 11:32:11"
+    },
+    {
+        "_proforma_details_id": "37",
+        "proforma_id": "25",
+        "proforma_product_id": "90",
+        "proforma_product_spec": "<ul>\r\n\t<li>Lift Capacity: 2000 Kgs.</li>\r\n\t<li>Pull Capacity: 3000 Kgs.</li>\r\n\t<li>Rope dia. : 12mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "18200.00",
+        "created_at": "2022-01-20 11:32:11",
+        "updated_at": "2022-01-20 11:32:11"
+    },
+    {
+        "_proforma_details_id": "38",
+        "proforma_id": "26",
+        "proforma_product_id": "494",
+        "proforma_product_spec": "<p>Double row with 4 directional buttons + 2 custom switches</p>\r\n\r\n<p>Bi-directional mechanical interlock buttons and indelible laser engraved symbols</p>\r\n\r\n<p>CE marked products with IEC/EN60947complaint</p>\r\n\r\n<p>Operable temperature: -30? to 70?</p>\r\n\r\n<p>Rated insulation voltage: 690V &amp; Rated thermal current: 16A</p>\r\n\r\n<p>M3.5 Screw type terminal</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "14950.00",
+        "created_at": "2022-01-27 06:58:52",
+        "updated_at": "2022-01-27 06:58:52"
+    },
+    {
+        "_proforma_details_id": "39",
+        "proforma_id": "27",
+        "proforma_product_id": "41",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 5&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "28742.00",
+        "created_at": "2022-01-31 12:00:56",
+        "updated_at": "2022-01-31 12:00:56"
+    },
+    {
+        "_proforma_details_id": "40",
+        "proforma_id": "27",
+        "proforma_product_id": "108",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of beam: 6&nbsp;mtrs.</li>\r\n\t<li>Flange range: 100-203mm</li>\r\n\t<li>Anti-corrosive power coat finish</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "11228.00",
+        "created_at": "2022-01-31 12:00:56",
+        "updated_at": "2022-01-31 12:00:56"
+    },
+    {
+        "_proforma_details_id": "41",
+        "proforma_id": "28",
+        "proforma_product_id": "29",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 5.0 ton&lt;/li&gt;\r\n\t&lt;li&gt;Height of lift: 20&amp;nbsp;mtrs.&lt;/li&gt;\r\n\t&lt;li&gt;No. of falls (load chain): 2&lt;/li&gt;\r\n\t&lt;li&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "45983.00",
+        "created_at": "2022-02-01 10:59:02",
+        "updated_at": "2022-02-01 10:59:02"
+    },
+    {
+        "_proforma_details_id": "42",
+        "proforma_id": "29",
+        "proforma_product_id": "91",
+        "proforma_product_spec": "<ul>\r\n\t<li>Lift Capacity: 3200 Kgs.</li>\r\n\t<li>Pull Capacity: 5200 Kgs.</li>\r\n\t<li>Rope dia. : 16mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "21450.00",
+        "created_at": "2022-02-10 06:40:54",
+        "updated_at": "2022-02-10 06:40:54"
+    },
+    {
+        "_proforma_details_id": "43",
+        "proforma_id": "30",
+        "proforma_product_id": "680",
+        "proforma_product_spec": "<p>Fixed type overhead suspension</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "5000.00",
+        "created_at": "2022-02-18 07:37:49",
+        "updated_at": "2022-02-18 07:37:49"
+    },
+    {
+        "_proforma_details_id": "44",
+        "proforma_id": "30",
+        "proforma_product_id": "676",
+        "proforma_product_spec": "<ul>\r\n\t<li>2 way reed sensor with car Magnet with Buzzer indicator</li>\r\n\t<li>G+1</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "10000.00",
+        "created_at": "2022-02-18 07:37:49",
+        "updated_at": "2022-02-18 07:37:49"
+    },
+    {
+        "_proforma_details_id": "45",
+        "proforma_id": "30",
+        "proforma_product_id": "133",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 7 mtrs.</li>\r\n\t<li>Single hoisting speed: 4 mpm</li>\r\n\t<li>Motor: 0.90 kW (3 Phase)</li>\r\n</ul>\r\n\r\n<h3><strong>Basic Price : Rs. 1,37,400/-</strong></h3>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "98700.00",
+        "created_at": "2022-02-18 07:37:49",
+        "updated_at": "2022-02-18 07:37:49"
+    },
+    {
+        "_proforma_details_id": "46",
+        "proforma_id": "31",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "12675.00",
+        "created_at": "2022-02-21 11:12:29",
+        "updated_at": "2022-02-21 11:12:29"
+    },
+    {
+        "_proforma_details_id": "47",
+        "proforma_id": "32",
+        "proforma_product_id": "127",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 1.0 ton&lt;/li&gt;\r\n\t&lt;li&gt;Height from beam: 4 mtrs.&lt;/li&gt;\r\n\t&lt;li&gt;Flange range: 58-150 mm&lt;/li&gt;\r\n\t&lt;li&gt;with Counter-weight&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "41500.00",
+        "created_at": "2022-02-23 11:29:03",
+        "updated_at": "2022-02-23 11:29:03"
+    },
+    {
+        "_proforma_details_id": "48",
+        "proforma_id": "32",
+        "proforma_product_id": "481",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;4 directional buttons with Emergency Stop&lt;/li&gt;\r\n\t&lt;li&gt;Bi-directional mechanical interlock buttons and indelible laser engraved symbols&lt;/li&gt;\r\n\t&lt;li&gt;Rated insulation voltage: 690V &amp;amp; Rated thermal current: 16A&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "3100.00",
+        "created_at": "2022-02-23 11:29:03",
+        "updated_at": "2022-02-23 11:29:03"
+    },
+    {
+        "_proforma_details_id": "49",
+        "proforma_id": "33",
+        "proforma_product_id": "39",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 2.0 ton&lt;/li&gt;\r\n\t&lt;li&gt;Height of lift: 5&amp;nbsp;mtrs.&lt;/li&gt;\r\n\t&lt;li&gt;No. of falls (load chain): 2&lt;/li&gt;\r\n\t&lt;li&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "22043",
+        "created_at": "2022-03-05 06:38:21",
+        "updated_at": "2022-03-05 06:38:21"
+    },
+    {
+        "_proforma_details_id": "50",
+        "proforma_id": "34",
+        "proforma_product_id": "672",
+        "proforma_product_spec": "<p>&nbsp;</p>\r\n\r\n<p>Part name- DSL Bus bar jointer,</p>\r\n",
+        "proforma_product_qty": "100",
+        "proforma_product_price": "200.00",
+        "created_at": "2022-03-08 07:32:15",
+        "updated_at": "2022-03-08 07:32:15"
+    },
+    {
+        "_proforma_details_id": "51",
+        "proforma_id": "35",
+        "proforma_product_id": "23",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 10 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "15064.00",
+        "created_at": "2022-03-08 09:04:52",
+        "updated_at": "2022-03-08 09:04:52"
+    },
+    {
+        "_proforma_details_id": "52",
+        "proforma_id": "36",
+        "proforma_product_id": "105",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of beam: 3 mtrs.</li>\r\n\t<li>Flange range: 88-203mm</li>\r\n\t<li>Anti-corrosive power coat finish</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "11550.00",
+        "created_at": "2022-03-09 07:52:33",
+        "updated_at": "2022-03-09 07:52:33"
+    },
+    {
+        "_proforma_details_id": "53",
+        "proforma_id": "37",
+        "proforma_product_id": "447",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 1.5 ton&amp;nbsp;&lt;/li&gt;\r\n\t&lt;li&gt;Fork Length: 900 mm&lt;/li&gt;\r\n\t&lt;li&gt;fork width: 340-750 mm&amp;nbsp;(adjustible)&lt;/li&gt;\r\n\t&lt;li&gt;Lifting height: 1600mm&lt;/li&gt;\r\n\t&lt;li&gt;Freight charge :- Rs-1800/-&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "56800.00",
+        "created_at": "2022-03-10 07:23:29",
+        "updated_at": "2022-03-10 07:23:29"
+    },
+    {
+        "_proforma_details_id": "54",
+        "proforma_id": "38",
+        "proforma_product_id": "23",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 8&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "15150.00",
+        "created_at": "2022-03-12 06:51:22",
+        "updated_at": "2022-03-12 06:51:22"
+    },
+    {
+        "_proforma_details_id": "55",
+        "proforma_id": "39",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton&nbsp;</li>\r\n\t<li>Fork Length: 1220 mm</li>\r\n\t<li>fork width: 685mm</li>\r\n\t<li>Lifting height: 200mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17000.00",
+        "created_at": "2022-03-17 10:59:34",
+        "updated_at": "2022-03-17 10:59:34"
+    },
+    {
+        "_proforma_details_id": "56",
+        "proforma_id": "40",
+        "proforma_product_id": "106",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 2.0 ton&lt;/li&gt;\r\n\t&lt;li&gt;Height of beam: 6&amp;nbsp;mtrs.&lt;/li&gt;\r\n\t&lt;li&gt;Flange range: 88-203mm&lt;/li&gt;\r\n\t&lt;li&gt;Anti-corrosive power coat finish&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "12990.00",
+        "created_at": "2022-03-25 06:41:29",
+        "updated_at": "2022-03-25 06:41:29"
+    },
+    {
+        "_proforma_details_id": "57",
+        "proforma_id": "41",
+        "proforma_product_id": "53",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 0.5 ton</li>\r\n\t<li>Height of lift: 3&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "8820.00",
+        "created_at": "2022-03-26 10:06:58",
+        "updated_at": "2022-03-26 10:06:58"
+    },
+    {
+        "_proforma_details_id": "58",
+        "proforma_id": "42",
+        "proforma_product_id": "153",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>Single hoisting speed: 4 mpm</li>\r\n\t<li>with Electric Trolley (Range 1)</li>\r\n\t<li>Supply: 3 Phase/400V</li>\r\n\t<li>Motor: 0.90 kW</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "126000.00",
+        "created_at": "2022-03-31 09:57:09",
+        "updated_at": "2022-03-31 09:57:09"
+    },
+    {
+        "_proforma_details_id": "59",
+        "proforma_id": "43",
+        "proforma_product_id": "42",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 5.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "37835.00",
+        "created_at": "2022-04-02 07:18:56",
+        "updated_at": "2022-04-02 07:18:56"
+    },
+    {
+        "_proforma_details_id": "60",
+        "proforma_id": "43",
+        "proforma_product_id": "92",
+        "proforma_product_spec": "<ul>\r\n\t<li>Lift Capacity: 5000 Kgs.</li>\r\n\t<li>Pull Capacity: 8000 Kgs.</li>\r\n\t<li>Rope dia. : 20mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "37100.00",
+        "created_at": "2022-04-02 07:18:56",
+        "updated_at": "2022-04-02 07:18:56"
+    },
+    {
+        "_proforma_details_id": "61",
+        "proforma_id": "44",
+        "proforma_product_id": "289",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 6 mtrs</li>\r\n\t<li>Class 2 duty, 2 Fall</li>\r\n\t<li>With Electric trolley</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "200000.00",
+        "created_at": "2022-04-04 07:52:31",
+        "updated_at": "2022-04-04 07:52:31"
+    },
+    {
+        "_proforma_details_id": "62",
+        "proforma_id": "45",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton&nbsp;</li>\r\n\t<li>Fork Length: 1220 mm</li>\r\n\t<li>fork width: 685mm</li>\r\n\t<li>Lifting height: 200mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17800.00",
+        "created_at": "2022-04-05 01:51:15",
+        "updated_at": "2022-04-05 01:51:15"
+    },
+    {
+        "_proforma_details_id": "63",
+        "proforma_id": "46",
+        "proforma_product_id": "23",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 1.0 ton&lt;/li&gt;\r\n\t&lt;li&gt;Height of lift: 6&amp;nbsp;mtrs.&lt;/li&gt;\r\n\t&lt;li&gt;No. of falls (load chain): 1&lt;/li&gt;\r\n\t&lt;li&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "14100.00",
+        "created_at": "2022-04-07 06:31:50",
+        "updated_at": "2022-04-07 06:31:50"
+    },
+    {
+        "_proforma_details_id": "64",
+        "proforma_id": "47",
+        "proforma_product_id": "449",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton&nbsp;</li>\r\n\t<li>Fork Length: 900 mm</li>\r\n\t<li>fork width: 360-750 (adjustible)</li>\r\n\t<li>Lifting height: 3000mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "72000.00",
+        "created_at": "2022-04-26 08:17:17",
+        "updated_at": "2022-04-26 08:17:17"
+    },
+    {
+        "_proforma_details_id": "65",
+        "proforma_id": "48",
+        "proforma_product_id": "25",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17762.00",
+        "created_at": "2022-04-26 10:31:05",
+        "updated_at": "2022-04-26 10:31:05"
+    },
+    {
+        "_proforma_details_id": "66",
+        "proforma_id": "49",
+        "proforma_product_id": "106",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of beam: 12&nbsp;mtrs.</li>\r\n\t<li>Flange range: 88-203mm</li>\r\n\t<li>Anti-corrosive power coat finish</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "13710.00",
+        "created_at": "2022-04-27 12:09:27",
+        "updated_at": "2022-04-27 12:09:27"
+    },
+    {
+        "_proforma_details_id": "67",
+        "proforma_id": "50",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "16125.00",
+        "created_at": "2022-04-28 09:18:21",
+        "updated_at": "2022-04-28 09:18:21"
+    },
+    {
+        "_proforma_details_id": "68",
+        "proforma_id": "51",
+        "proforma_product_id": "25",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 5&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17625.00",
+        "created_at": "2022-05-05 07:24:10",
+        "updated_at": "2022-05-05 07:24:10"
+    },
+    {
+        "_proforma_details_id": "69",
+        "proforma_id": "51",
+        "proforma_product_id": "106",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of beam: 5&nbsp;mtrs.</li>\r\n\t<li>Flange range: 88-203mm</li>\r\n\t<li>Anti-corrosive power coat finish</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "12030.00",
+        "created_at": "2022-05-05 07:24:10",
+        "updated_at": "2022-05-05 07:24:10"
+    },
+    {
+        "_proforma_details_id": "70",
+        "proforma_id": "52",
+        "proforma_product_id": "135",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 15 mtrs.</li>\r\n\t<li>Single hoisting speed: 4 mpm</li>\r\n\t<li>Motor: 1.84 kW (3 Phase)</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "185000.00",
+        "created_at": "2022-05-09 09:16:24",
+        "updated_at": "2022-05-09 09:16:24"
+    },
+    {
+        "_proforma_details_id": "71",
+        "proforma_id": "52",
+        "proforma_product_id": "106",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of beam: 15 mtrs.</li>\r\n\t<li>Flange range: 88-203mm</li>\r\n\t<li>Anti-corrosive power coat finish</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "15000.00",
+        "created_at": "2022-05-09 09:16:24",
+        "updated_at": "2022-05-09 09:16:24"
+    },
+    {
+        "_proforma_details_id": "72",
+        "proforma_id": "53",
+        "proforma_product_id": "672",
+        "proforma_product_spec": "<p>PL004002</p>\r\n",
+        "proforma_product_qty": "8",
+        "proforma_product_price": "145.00",
+        "created_at": "2022-05-10 13:40:26",
+        "updated_at": "2022-05-10 13:40:26"
+    },
+    {
+        "_proforma_details_id": "73",
+        "proforma_id": "53",
+        "proforma_product_id": "675",
+        "proforma_product_spec": "<p>Giovenzana</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "490.00",
+        "created_at": "2022-05-10 13:40:26",
+        "updated_at": "2022-05-10 13:40:26"
+    },
+    {
+        "_proforma_details_id": "74",
+        "proforma_id": "53",
+        "proforma_product_id": "706",
+        "proforma_product_spec": "&lt;p&gt;Delivery Charges&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "1000.00",
+        "created_at": "2022-05-10 13:40:26",
+        "updated_at": "2022-05-10 13:40:26"
+    },
+    {
+        "_proforma_details_id": "75",
+        "proforma_id": "54",
+        "proforma_product_id": "39",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "21357.00",
+        "created_at": "2022-05-16 07:11:16",
+        "updated_at": "2022-05-16 07:11:16"
+    },
+    {
+        "_proforma_details_id": "76",
+        "proforma_id": "54",
+        "proforma_product_id": "41",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 10&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "32942.00",
+        "created_at": "2022-05-16 07:11:16",
+        "updated_at": "2022-05-16 07:11:16"
+    },
+    {
+        "_proforma_details_id": "77",
+        "proforma_id": "55",
+        "proforma_product_id": "25",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 10&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "21000.00",
+        "created_at": "2022-05-17 09:46:11",
+        "updated_at": "2022-05-17 09:46:11"
+    },
+    {
+        "_proforma_details_id": "78",
+        "proforma_id": "56",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.5 ton&nbsp;</li>\r\n\t<li>Fork Length: 1150 mm</li>\r\n\t<li>fork width: 550mm</li>\r\n\t<li>Lifting height: 200mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "16500.00",
+        "created_at": "2022-05-20 06:58:59",
+        "updated_at": "2022-05-20 06:58:59"
+    },
+    {
+        "_proforma_details_id": "79",
+        "proforma_id": "57",
+        "proforma_product_id": "79",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1500 Kgs.</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>Lever force: 29 Kgs.</li>\r\n\t<li>Fitted with selector lever to change direction</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "14625.00",
+        "created_at": "2022-05-21 07:12:52",
+        "updated_at": "2022-05-21 07:12:52"
+    },
+    {
+        "_proforma_details_id": "80",
+        "proforma_id": "58",
+        "proforma_product_id": "289",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 6 mtrs</li>\r\n\t<li>Class 2 duty, 2 Fall</li>\r\n\t<li>With Electric trolley</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "223465.00",
+        "created_at": "2022-05-27 11:25:40",
+        "updated_at": "2022-05-27 11:25:40"
+    },
+    {
+        "_proforma_details_id": "81",
+        "proforma_id": "59",
+        "proforma_product_id": "25",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 10 mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "19950.00",
+        "created_at": "2022-05-27 12:21:23",
+        "updated_at": "2022-05-27 12:21:23"
+    },
+    {
+        "_proforma_details_id": "82",
+        "proforma_id": "59",
+        "proforma_product_id": "27",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 10&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "26350.00",
+        "created_at": "2022-05-27 12:21:23",
+        "updated_at": "2022-05-27 12:21:23"
+    },
+    {
+        "_proforma_details_id": "83",
+        "proforma_id": "59",
+        "proforma_product_id": "28",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 5.0 ton</li>\r\n\t<li>Height of lift: 20&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "45950.00",
+        "created_at": "2022-05-27 12:21:23",
+        "updated_at": "2022-05-27 12:21:23"
+    },
+    {
+        "_proforma_details_id": "84",
+        "proforma_id": "60",
+        "proforma_product_id": "90",
+        "proforma_product_spec": "<ul>\r\n\t<li>Lift Capacity: 2000 Kgs.</li>\r\n\t<li>Pull Capacity: 3000 Kgs.</li>\r\n\t<li>Rope dia. : 12mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "19600.00",
+        "created_at": "2022-05-28 10:00:38",
+        "updated_at": "2022-05-28 10:00:38"
+    },
+    {
+        "_proforma_details_id": "85",
+        "proforma_id": "61",
+        "proforma_product_id": "91",
+        "proforma_product_spec": "<ul>\r\n\t<li>Lift Capacity: 3200 Kgs.</li>\r\n\t<li>Pull Capacity: 5200 Kgs.</li>\r\n\t<li>Rope dia. : 16mm</li>\r\n\t<li>Wire rope : 15 Mtrs</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "40550.00",
+        "created_at": "2022-06-03 06:38:33",
+        "updated_at": "2022-06-03 06:38:33"
+    },
+    {
+        "_proforma_details_id": "86",
+        "proforma_id": "62",
+        "proforma_product_id": "36",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "14980.00",
+        "created_at": "2022-06-04 06:43:37",
+        "updated_at": "2022-06-04 06:43:37"
+    },
+    {
+        "_proforma_details_id": "87",
+        "proforma_id": "63",
+        "proforma_product_id": "43",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 5.0 ton</li>\r\n\t<li>Height of lift: 15&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "53482.00",
+        "created_at": "2022-06-14 14:34:18",
+        "updated_at": "2022-06-14 14:34:18"
+    },
+    {
+        "_proforma_details_id": "88",
+        "proforma_id": "63",
+        "proforma_product_id": "47",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 10.0 ton</li>\r\n\t<li>Height of lift: 5&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 4</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "70522.00",
+        "created_at": "2022-06-14 14:34:18",
+        "updated_at": "2022-06-14 14:34:18"
+    },
+    {
+        "_proforma_details_id": "89",
+        "proforma_id": "64",
+        "proforma_product_id": "706",
+        "proforma_product_spec": "",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "400.00",
+        "created_at": "2022-06-18 06:19:03",
+        "updated_at": "2022-06-18 06:19:03"
+    },
+    {
+        "_proforma_details_id": "90",
+        "proforma_id": "64",
+        "proforma_product_id": "7",
+        "proforma_product_spec": "<ul>\r\n\t<li>1 NC - 1 NO</li>\r\n\t<li>Class 2, IP 65 protection</li>\r\n\t<li>Rated thermal current: 10A</li>\r\n\t<li>Rated Insulation voltage: 690V</li>\r\n\t<li>Material: Thermoplastic</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "4",
+        "proforma_product_price": "650.00",
+        "created_at": "2022-06-18 06:19:03",
+        "updated_at": "2022-06-18 06:19:03"
+    },
+    {
+        "_proforma_details_id": "91",
+        "proforma_id": "65",
+        "proforma_product_id": "128",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2/3 ton</li>\r\n\t<li>Height from beam: 3 mtrs.</li>\r\n\t<li>Flange range: 160-220mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "45750.00",
+        "created_at": "2022-07-01 06:38:42",
+        "updated_at": "2022-07-01 06:38:42"
+    },
+    {
+        "_proforma_details_id": "92",
+        "proforma_id": "66",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "12675.00",
+        "created_at": "2022-07-08 06:39:32",
+        "updated_at": "2022-07-08 06:39:32"
+    },
+    {
+        "_proforma_details_id": "93",
+        "proforma_id": "66",
+        "proforma_product_id": "103",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of beam: 3 mtrs.</li>\r\n\t<li>Flange range: 64-203mm</li>\r\n\t<li>Anti-corrosive power coat finish</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "8085.00",
+        "created_at": "2022-07-08 06:39:32",
+        "updated_at": "2022-07-08 06:39:32"
+    },
+    {
+        "_proforma_details_id": "94",
+        "proforma_id": "67",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "11323.00",
+        "created_at": "2022-07-08 06:59:36",
+        "updated_at": "2022-07-08 06:59:36"
+    },
+    {
+        "_proforma_details_id": "95",
+        "proforma_id": "67",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "14405.00",
+        "created_at": "2022-07-08 06:59:36",
+        "updated_at": "2022-07-08 06:59:36"
+    },
+    {
+        "_proforma_details_id": "96",
+        "proforma_id": "67",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "20542.00",
+        "created_at": "2022-07-08 06:59:36",
+        "updated_at": "2022-07-08 06:59:36"
+    },
+    {
+        "_proforma_details_id": "97",
+        "proforma_id": "67",
+        "proforma_product_id": "28",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 5.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "27269.00",
+        "created_at": "2022-07-08 06:59:36",
+        "updated_at": "2022-07-08 06:59:36"
+    },
+    {
+        "_proforma_details_id": "98",
+        "proforma_id": "68",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "14405.00",
+        "created_at": "2022-07-08 07:10:57",
+        "updated_at": "2022-07-08 07:10:57"
+    },
+    {
+        "_proforma_details_id": "99",
+        "proforma_id": "68",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "3",
+        "proforma_product_price": "20542.00",
+        "created_at": "2022-07-08 07:10:57",
+        "updated_at": "2022-07-08 07:10:57"
+    },
+    {
+        "_proforma_details_id": "100",
+        "proforma_id": "69",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 2.0 ton&lt;/li&gt;\r\n\t&lt;li&gt;Height of lift: 3 mtrs.&lt;/li&gt;\r\n\t&lt;li&gt;No. of falls (load chain): 2&lt;/li&gt;\r\n\t&lt;li&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "14405.00",
+        "created_at": "2022-07-12 08:08:16",
+        "updated_at": "2022-07-12 08:08:16"
+    },
+    {
+        "_proforma_details_id": "101",
+        "proforma_id": "69",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 3.0 ton&lt;/li&gt;\r\n\t&lt;li&gt;Height of lift: 3 mtrs.&lt;/li&gt;\r\n\t&lt;li&gt;No. of falls (load chain): 1&lt;/li&gt;\r\n\t&lt;li&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "20542.00",
+        "created_at": "2022-07-12 08:08:16",
+        "updated_at": "2022-07-12 08:08:16"
+    },
+    {
+        "_proforma_details_id": "102",
+        "proforma_id": "70",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "4",
+        "proforma_product_price": "11323.00",
+        "created_at": "2022-07-15 06:57:19",
+        "updated_at": "2022-07-15 06:57:19"
+    },
+    {
+        "_proforma_details_id": "103",
+        "proforma_id": "71",
+        "proforma_product_id": "41",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 9&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "32102.00",
+        "created_at": "2022-07-16 08:18:44",
+        "updated_at": "2022-07-16 08:18:44"
+    },
+    {
+        "_proforma_details_id": "104",
+        "proforma_id": "72",
+        "proforma_product_id": "713",
+        "proforma_product_spec": "<ul>\r\n\t<li>Includes Mechanical fittments and Electrical connections</li>\r\n\t<li>Test Run to be done on site, load to be provided by customer</li>\r\n\t<li>Erection tools &amp; tackles to be provided by customer</li>\r\n\t<li>Hoisting arrangement to be provided by customer</li>\r\n\t<li>Applicable for a total of 2 man days.</li>\r\n\t<li>No extra accessories of fittment included other than standard supply</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "3500.00",
+        "created_at": "2022-07-27 08:38:12",
+        "updated_at": "2022-07-27 08:38:12"
+    },
+    {
+        "_proforma_details_id": "105",
+        "proforma_id": "72",
+        "proforma_product_id": "133",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton / Fixed Type Suspension</li>\r\n\t<li>Height of lift: 10 mtrs.</li>\r\n\t<li><strong>hoisting speed: 4 mpm</strong></li>\r\n\t<li>Motor: 0.90 kW (3 Phase)</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "105900.00",
+        "created_at": "2022-07-27 08:38:12",
+        "updated_at": "2022-07-27 08:38:12"
+    },
+    {
+        "_proforma_details_id": "106",
+        "proforma_id": "72",
+        "proforma_product_id": "480",
+        "proforma_product_spec": "<p>2 directional buttons for Hoisting/ Lowering with EM Stop</p>\r\n",
+        "proforma_product_qty": "3",
+        "proforma_product_price": "1250.00",
+        "created_at": "2022-07-27 08:38:12",
+        "updated_at": "2022-07-27 08:38:12"
+    },
+    {
+        "_proforma_details_id": "107",
+        "proforma_id": "73",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift:5 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Load Chai Dia - 6.3</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "18800.00",
+        "created_at": "2022-07-28 10:49:54",
+        "updated_at": "2022-07-28 10:49:54"
+    },
+    {
+        "_proforma_details_id": "108",
+        "proforma_id": "74",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.5 ton&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;Fork Length: 1150 mm&lt;/p&gt;\r\n\r\n&lt;p&gt;fork width: 550mm&lt;/p&gt;\r\n\r\n&lt;p&gt;Lifting height: 195mm&lt;/p&gt;\r\n\r\n&lt;p&gt;Wheet type : PU Type&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17550.00",
+        "created_at": "2022-08-03 07:41:53",
+        "updated_at": "2022-08-03 07:41:53"
+    },
+    {
+        "_proforma_details_id": "109",
+        "proforma_id": "75",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<p>Capacity: 2.5 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1150 mm</p>\r\n\r\n<p>fork width: 550mm</p>\r\n\r\n<p>Lifting height: 195mm</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "16500.00",
+        "created_at": "2022-08-05 06:42:22",
+        "updated_at": "2022-08-05 06:42:22"
+    },
+    {
+        "_proforma_details_id": "110",
+        "proforma_id": "75",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "",
+        "proforma_product_qty": "0",
+        "proforma_product_price": "0",
+        "created_at": "2022-08-05 06:42:22",
+        "updated_at": "2022-08-05 06:42:22"
+    },
+    {
+        "_proforma_details_id": "111",
+        "proforma_id": "76",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 6 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "12083.00",
+        "created_at": "2022-08-17 12:24:46",
+        "updated_at": "2022-08-17 12:24:46"
+    },
+    {
+        "_proforma_details_id": "112",
+        "proforma_id": "76",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 10 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "24103.00",
+        "created_at": "2022-08-17 12:24:46",
+        "updated_at": "2022-08-17 12:24:46"
+    },
+    {
+        "_proforma_details_id": "113",
+        "proforma_id": "76",
+        "proforma_product_id": "27",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 20&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "30502.20",
+        "created_at": "2022-08-17 12:24:46",
+        "updated_at": "2022-08-17 12:24:46"
+    },
+    {
+        "_proforma_details_id": "114",
+        "proforma_id": "77",
+        "proforma_product_id": "55",
+        "proforma_product_spec": "<p>Capacity : 0.5 ton</p>\r\n\r\n<p>Height of lift: 10 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 1</p>\r\n\r\n<p>Weight of chain : 15kgs only</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "14857.50",
+        "created_at": "2022-08-17 12:32:09",
+        "updated_at": "2022-08-17 12:32:09"
+    },
+    {
+        "_proforma_details_id": "115",
+        "proforma_id": "78",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "12675.00",
+        "created_at": "2022-08-19 10:51:40",
+        "updated_at": "2022-08-19 10:51:40"
+    },
+    {
+        "_proforma_details_id": "116",
+        "proforma_id": "78",
+        "proforma_product_id": "94",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Flange range: 88-203mm</li>\r\n\t<li>Flange width can be adjusted as per beam size</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "7090.00",
+        "created_at": "2022-08-19 10:51:40",
+        "updated_at": "2022-08-19 10:51:40"
+    },
+    {
+        "_proforma_details_id": "117",
+        "proforma_id": "79",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "15050.00",
+        "created_at": "2022-08-19 12:38:19",
+        "updated_at": "2022-08-19 12:38:19"
+    },
+    {
+        "_proforma_details_id": "118",
+        "proforma_id": "80",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.5 ton&nbsp;</li>\r\n\t<li>Fork Length: 1150 mm</li>\r\n\t<li>fork width: 550mm</li>\r\n\t<li>Lifting height: 195mm</li>\r\n\t<li>Nylon Wheels</li>\r\n\t<li>Fork Width : 550 mm</li>\r\n\t<li>Fork Length : 1150 mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "5",
+        "proforma_product_price": "16500.00",
+        "created_at": "2022-08-24 07:46:52",
+        "updated_at": "2022-08-24 07:46:52"
+    },
+    {
+        "_proforma_details_id": "119",
+        "proforma_id": "81",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 3.0 ton&amp;nbsp;&lt;/li&gt;\r\n\t&lt;li&gt;Fork Length: 1220 mm&lt;/li&gt;\r\n\t&lt;li&gt;fork width: 685mm&lt;/li&gt;\r\n\t&lt;li&gt;Lifting height: 200mm&lt;/li&gt;\r\n\t&lt;li&gt;Wheels type - PU&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "18000.00",
+        "created_at": "2022-09-12 07:20:54",
+        "updated_at": "2022-09-12 07:20:54"
+    },
+    {
+        "_proforma_details_id": "120",
+        "proforma_id": "82",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<p>Capacity: 2.5 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1150 mm</p>\r\n\r\n<p>fork width: 550mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "16950.00",
+        "created_at": "2022-09-14 08:09:44",
+        "updated_at": "2022-09-14 08:09:44"
+    },
+    {
+        "_proforma_details_id": "121",
+        "proforma_id": "83",
+        "proforma_product_id": "36",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 10&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "19882.50",
+        "created_at": "2022-09-19 08:35:39",
+        "updated_at": "2022-09-19 08:35:39"
+    },
+    {
+        "_proforma_details_id": "122",
+        "proforma_id": "83",
+        "proforma_product_id": "38",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 15 mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "30442.50",
+        "created_at": "2022-09-19 08:35:39",
+        "updated_at": "2022-09-19 08:35:39"
+    },
+    {
+        "_proforma_details_id": "123",
+        "proforma_id": "84",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.5 ton&nbsp;</li>\r\n\t<li>Fork Length: 1150 mm</li>\r\n\t<li>fork width: 550mm</li>\r\n\t<li>Lifting height: 200mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "16950.00",
+        "created_at": "2022-09-19 10:49:10",
+        "updated_at": "2022-09-19 10:49:10"
+    },
+    {
+        "_proforma_details_id": "124",
+        "proforma_id": "85",
+        "proforma_product_id": "28",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 5.0 ton</li>\r\n\t<li>Height of lift: 10&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "32124.00",
+        "created_at": "2022-09-19 11:02:31",
+        "updated_at": "2022-09-19 11:02:31"
+    },
+    {
+        "_proforma_details_id": "125",
+        "proforma_id": "85",
+        "proforma_product_id": "32",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 10.0 ton</li>\r\n\t<li>Height of lift: 10&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 4</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "4",
+        "proforma_product_price": "61394.00",
+        "created_at": "2022-09-19 11:02:31",
+        "updated_at": "2022-09-19 11:02:31"
+    },
+    {
+        "_proforma_details_id": "126",
+        "proforma_id": "86",
+        "proforma_product_id": "44",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 7.5 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 3</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "51748.00",
+        "created_at": "2022-10-06 10:05:49",
+        "updated_at": "2022-10-06 10:05:49"
+    },
+    {
+        "_proforma_details_id": "127",
+        "proforma_id": "87",
+        "proforma_product_id": "80",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3000 Kgs.</li>\r\n\t<li>Height of lift: 1.5 mtrs.</li>\r\n\t<li>Lever force: 33 Kgs.</li>\r\n\t<li>Fitted with selector lever to change direction</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "20244.00",
+        "created_at": "2022-10-10 09:06:54",
+        "updated_at": "2022-10-10 09:06:54"
+    },
+    {
+        "_proforma_details_id": "128",
+        "proforma_id": "88",
+        "proforma_product_id": "38",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 5&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "19691.30",
+        "created_at": "2022-11-04 13:07:26",
+        "updated_at": "2022-11-04 13:07:26"
+    },
+    {
+        "_proforma_details_id": "129",
+        "proforma_id": "88",
+        "proforma_product_id": "39",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 16&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "27945.70",
+        "created_at": "2022-11-04 13:07:26",
+        "updated_at": "2022-11-04 13:07:26"
+    },
+    {
+        "_proforma_details_id": "130",
+        "proforma_id": "88",
+        "proforma_product_id": "42",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 5.0 ton</li>\r\n\t<li>Height of lift: 5&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "38960.50",
+        "created_at": "2022-11-04 13:07:26",
+        "updated_at": "2022-11-04 13:07:26"
+    },
+    {
+        "_proforma_details_id": "131",
+        "proforma_id": "89",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "11830.00",
+        "created_at": "2022-11-09 12:33:39",
+        "updated_at": "2022-11-09 12:33:39"
+    },
+    {
+        "_proforma_details_id": "132",
+        "proforma_id": "90",
+        "proforma_product_id": "642",
+        "proforma_product_spec": "<ul>\r\n\t<li>Model : iR-20-41</li>\r\n\t<li>Capacity: 2 ton</li>\r\n\t<li>Height of lift: 21&nbsp;mtrs</li>\r\n\t<li>Class 2 duty, 4 Fall</li>\r\n\t<li>Foot Mounted</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "289176.00",
+        "created_at": "2022-11-14 07:41:53",
+        "updated_at": "2022-11-14 07:41:53"
+    },
+    {
+        "_proforma_details_id": "133",
+        "proforma_id": "91",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "13013.00",
+        "created_at": "2022-11-17 09:08:12",
+        "updated_at": "2022-11-17 09:08:12"
+    },
+    {
+        "_proforma_details_id": "134",
+        "proforma_id": "92",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "16170.00",
+        "created_at": "2022-11-18 09:14:31",
+        "updated_at": "2022-11-18 09:14:31"
+    },
+    {
+        "_proforma_details_id": "135",
+        "proforma_id": "93",
+        "proforma_product_id": "679",
+        "proforma_product_spec": "<ul>\r\n\t<li>Make - Indef</li>\r\n\t<li>Electro magnetic Brake Disc</li>\r\n\t<li>415 V, 3 Phase</li>\r\n\t<li>Torque - 8.5 kg</li>\r\n\t<li>Insulation Class - F</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "13500.00",
+        "created_at": "2022-11-21 13:05:57",
+        "updated_at": "2022-11-21 13:05:57"
+    },
+    {
+        "_proforma_details_id": "136",
+        "proforma_id": "94",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "18375.00",
+        "created_at": "2022-11-22 08:58:02",
+        "updated_at": "2022-11-22 08:58:02"
+    },
+    {
+        "_proforma_details_id": "137",
+        "proforma_id": "94",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "<p>Capacity: 3.0 ton</p>\r\n\r\n<p>Height of lift: 6&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 1</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "25200.00",
+        "created_at": "2022-11-22 08:58:02",
+        "updated_at": "2022-11-22 08:58:02"
+    },
+    {
+        "_proforma_details_id": "138",
+        "proforma_id": "95",
+        "proforma_product_id": "28",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 5.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "45110.00",
+        "created_at": "2022-11-22 09:01:33",
+        "updated_at": "2022-11-22 09:01:33"
+    },
+    {
+        "_proforma_details_id": "139",
+        "proforma_id": "96",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "16392.00",
+        "created_at": "2022-11-22 11:15:00",
+        "updated_at": "2022-11-22 11:15:00"
+    },
+    {
+        "_proforma_details_id": "140",
+        "proforma_id": "96",
+        "proforma_product_id": "28",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 5.0 ton</li>\r\n\t<li>Height of lift: 10&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "34108.00",
+        "created_at": "2022-11-22 11:15:00",
+        "updated_at": "2022-11-22 11:15:00"
+    },
+    {
+        "_proforma_details_id": "141",
+        "proforma_id": "97",
+        "proforma_product_id": "23",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 15 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "18615.00",
+        "created_at": "2022-11-29 11:52:20",
+        "updated_at": "2022-11-29 11:52:20"
+    },
+    {
+        "_proforma_details_id": "142",
+        "proforma_id": "98",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "10",
+        "proforma_product_price": "22216.00",
+        "created_at": "2022-12-07 07:05:44",
+        "updated_at": "2022-12-07 07:05:44"
+    },
+    {
+        "_proforma_details_id": "143",
+        "proforma_id": "98",
+        "proforma_product_id": "28",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 5.0 ton</li>\r\n\t<li>Height of lift: 10&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "6",
+        "proforma_product_price": "33653.00",
+        "created_at": "2022-12-07 07:05:44",
+        "updated_at": "2022-12-07 07:05:44"
+    },
+    {
+        "_proforma_details_id": "144",
+        "proforma_id": "99",
+        "proforma_product_id": "36",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 15&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "22620.00",
+        "created_at": "2022-12-07 07:08:27",
+        "updated_at": "2022-12-07 07:08:27"
+    },
+    {
+        "_proforma_details_id": "145",
+        "proforma_id": "99",
+        "proforma_product_id": "40",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 10&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "34875.00",
+        "created_at": "2022-12-07 07:08:27",
+        "updated_at": "2022-12-07 07:08:27"
+    },
+    {
+        "_proforma_details_id": "146",
+        "proforma_id": "100",
+        "proforma_product_id": "458",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 350 Kgs.</li>\r\n\t<li>Max. lifting: 900mm</li>\r\n\t<li>Lowered height: 300mm</li>\r\n\t<li>Table size: 810X500x50</li>\r\n\t<li>Self weight: 85&nbsp;kgs.</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "37000.00",
+        "created_at": "2022-12-10 06:38:23",
+        "updated_at": "2022-12-10 06:38:23"
+    },
+    {
+        "_proforma_details_id": "147",
+        "proforma_id": "101",
+        "proforma_product_id": "706",
+        "proforma_product_spec": "",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "250.00",
+        "created_at": "2022-12-12 11:59:07",
+        "updated_at": "2022-12-12 11:59:07"
+    },
+    {
+        "_proforma_details_id": "148",
+        "proforma_id": "101",
+        "proforma_product_id": "13",
+        "proforma_product_spec": "<ul>\r\n\t<li>1 NC - 1 NO</li>\r\n\t<li>Class 2, IP 65 protection</li>\r\n\t<li>Rated thermal current: 10A</li>\r\n\t<li>Rated Insulation voltage: 690V</li>\r\n\t<li>Material: Thermoplastic</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "4",
+        "proforma_product_price": "450.00",
+        "created_at": "2022-12-12 11:59:07",
+        "updated_at": "2022-12-12 11:59:07"
+    },
+    {
+        "_proforma_details_id": "149",
+        "proforma_id": "102",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "11154.00",
+        "created_at": "2022-12-17 07:29:04",
+        "updated_at": "2022-12-17 07:29:04"
+    },
+    {
+        "_proforma_details_id": "150",
+        "proforma_id": "102",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "20235.60",
+        "created_at": "2022-12-17 07:29:04",
+        "updated_at": "2022-12-17 07:29:04"
+    },
+    {
+        "_proforma_details_id": "151",
+        "proforma_id": "103",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "12272.00",
+        "created_at": "2022-12-17 07:35:09",
+        "updated_at": "2022-12-17 07:35:09"
+    },
+    {
+        "_proforma_details_id": "152",
+        "proforma_id": "103",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "15925.00",
+        "created_at": "2022-12-17 07:35:09",
+        "updated_at": "2022-12-17 07:35:09"
+    },
+    {
+        "_proforma_details_id": "153",
+        "proforma_id": "103",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 6&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "21879.00",
+        "created_at": "2022-12-17 07:35:09",
+        "updated_at": "2022-12-17 07:35:09"
+    },
+    {
+        "_proforma_details_id": "154",
+        "proforma_id": "104",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "14405.00",
+        "created_at": "2022-12-20 07:31:31",
+        "updated_at": "2022-12-20 07:31:31"
+    },
+    {
+        "_proforma_details_id": "155",
+        "proforma_id": "105",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 8&nbsp;mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "14140.00",
+        "created_at": "2022-12-21 07:48:56",
+        "updated_at": "2022-12-21 07:48:56"
+    },
+    {
+        "_proforma_details_id": "156",
+        "proforma_id": "106",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.5 ton&nbsp;</li>\r\n\t<li>Fork Length: 1150 mm</li>\r\n\t<li>fork width: 550mm</li>\r\n\t<li>Lifting height: 195mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "16950.00",
+        "created_at": "2022-12-22 10:07:45",
+        "updated_at": "2022-12-22 10:07:45"
+    },
+    {
+        "_proforma_details_id": "157",
+        "proforma_id": "107",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "11",
+        "proforma_product_price": "14190.00",
+        "created_at": "2022-12-23 09:03:18",
+        "updated_at": "2022-12-23 09:03:18"
+    },
+    {
+        "_proforma_details_id": "158",
+        "proforma_id": "108",
+        "proforma_product_id": "134",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>Single hoisting speed: 4 mpm</p>\r\n\r\n<p>Motor: 1.84 kW (3 Phase)</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "148000.00",
+        "created_at": "2022-12-27 10:43:07",
+        "updated_at": "2022-12-27 10:43:07"
+    },
+    {
+        "_proforma_details_id": "159",
+        "proforma_id": "109",
+        "proforma_product_id": "36",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "6",
+        "proforma_product_price": "14300.00",
+        "created_at": "2023-01-14 10:43:12",
+        "updated_at": "2023-01-14 10:43:12"
+    },
+    {
+        "_proforma_details_id": "160",
+        "proforma_id": "110",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton&nbsp;</li>\r\n\t<li>Fork Length: 1220 mm</li>\r\n\t<li>fork width: 685mm</li>\r\n\t<li>Lifting height: 200mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "18700.00",
+        "created_at": "2023-02-22 10:39:46",
+        "updated_at": "2023-02-22 10:39:46"
+    },
+    {
+        "_proforma_details_id": "161",
+        "proforma_id": "111",
+        "proforma_product_id": "676",
+        "proforma_product_spec": "<ul>\r\n\t<li>Model- SincoE</li>\r\n\t<li>Auto run command with PLC Relay</li>\r\n\t<li>Push button stations for 3 floors (G,1,2,Em Stop)</li>\r\n\t<li>Italian make Limit floor switch</li>\r\n\t<li>Emergency Manual operation control station</li>\r\n\t<li>Feild Wiring &amp; Cables</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "57000.00",
+        "created_at": "2023-03-01 13:03:54",
+        "updated_at": "2023-03-01 13:03:54"
+    },
+    {
+        "_proforma_details_id": "162",
+        "proforma_id": "111",
+        "proforma_product_id": "137",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton / FIXED SUSPENSION</li>\r\n\t<li>Height of lift: 11 mtrs.</li>\r\n\t<li>Single hoisting speed: 4 mpm</li>\r\n\t<li>Motor: 3.5 kW (3 Phase)</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "275000.00",
+        "created_at": "2023-03-01 13:03:54",
+        "updated_at": "2023-03-01 13:03:54"
+    },
+    {
+        "_proforma_details_id": "163",
+        "proforma_id": "111",
+        "proforma_product_id": "139",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 5.0 ton / FIXED SUSPENSION</li>\r\n\t<li>Height of lift: 11 mtrs.</li>\r\n\t<li>Single hoisting speed: 4 mpm</li>\r\n\t<li>Motor: 4.5 kW (3 Phase)</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "311000.00",
+        "created_at": "2023-03-01 13:03:54",
+        "updated_at": "2023-03-01 13:03:54"
+    },
+    {
+        "_proforma_details_id": "164",
+        "proforma_id": "112",
+        "proforma_product_id": "208",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 5.4 mtrs</li>\r\n\t<li>Class 2 duty, 3 Fall</li>\r\n\t<li>with 0.5 HP Electric trolley</li>\r\n\t<li>Motor: 3 HP (3 Phase)</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "270000.00",
+        "created_at": "2023-03-20 12:39:32",
+        "updated_at": "2023-03-20 12:39:32"
+    },
+    {
+        "_proforma_details_id": "165",
+        "proforma_id": "112",
+        "proforma_product_id": "759",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton / Span(CT): 12.20 Mtrs</li>\r\n\t<li>LT Wheel: Suitable for 40x40 MS Rail</li>\r\n\t<li>Speed LT: 20 mpm</li>\r\n\t<li>Motor LT: 1.1X2 kW</li>\r\n\t<li>Control panel with 6-way push button pendant provided with safety Limit switches</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "182000.00",
+        "created_at": "2023-03-20 12:39:32",
+        "updated_at": "2023-03-20 12:39:32"
+    },
+    {
+        "_proforma_details_id": "166",
+        "proforma_id": "112",
+        "proforma_product_id": "669",
+        "proforma_product_spec": "<ul>\r\n\t<li>Total DSL Lenght: 12.5 Mtrs</li>\r\n\t<li>100A GI conductor line</li>\r\n\t<li>Std DSL lenght: 4.5 Mtrs</li>\r\n\t<li>Max Voltage: 500V AC</li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "28000.00",
+        "created_at": "2023-03-20 12:39:32",
+        "updated_at": "2023-03-20 12:39:32"
+    },
+    {
+        "_proforma_details_id": "167",
+        "proforma_id": "113",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<p>Capacity: 2.5 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1150 mm</p>\r\n\r\n<p>fork width: 550mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "16950.00",
+        "created_at": "2023-03-30 12:42:48",
+        "updated_at": "2023-03-30 12:42:48"
+    },
+    {
+        "_proforma_details_id": "168",
+        "proforma_id": "114",
+        "proforma_product_id": "492",
+        "proforma_product_spec": "<p>Double row with 4 buttons + Emergency stop + Start</p>\r\n\r\n<p>Bi-directional mechanical interlock buttons and indelible laser engraved symbols</p>\r\n\r\n<p>CE marked products with IEC/EN60947complaint</p>\r\n\r\n<p>Operable temperature: -30? to 70?</p>\r\n\r\n<p>Rated insulation voltage: 690V &amp; Rated thermal current: 16A</p>\r\n\r\n<p>M3.5 Screw type terminal</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "2580.00",
+        "created_at": "2023-04-04 20:49:52",
+        "updated_at": "2023-04-04 20:49:52"
+    },
+    {
+        "_proforma_details_id": "169",
+        "proforma_id": "115",
+        "proforma_product_id": "449",
+        "proforma_product_spec": "<p>Capacity: 1.0 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 900 mm</p>\r\n\r\n<p>fork width: 300-750 (adjustible)</p>\r\n\r\n<p>Lifting height: 3000mm</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "78000.00",
+        "created_at": "2023-04-18 09:52:30",
+        "updated_at": "2023-04-18 09:52:30"
+    },
+    {
+        "_proforma_details_id": "170",
+        "proforma_id": "116",
+        "proforma_product_id": "447",
+        "proforma_product_spec": "<p>Capacity: 1.5 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 900 mm</p>\r\n\r\n<p>fork width: 200-580 (adjustible)</p>\r\n\r\n<p>Lifting height: 1600mm</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "51000.00",
+        "created_at": "2023-05-03 13:03:16",
+        "updated_at": "2023-05-03 13:03:16"
+    },
+    {
+        "_proforma_details_id": "171",
+        "proforma_id": "117",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<p>Capacity: 2.5 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1150 mm</p>\r\n\r\n<p>fork width: 550mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n",
+        "proforma_product_qty": "6",
+        "proforma_product_price": "16000.00",
+        "created_at": "2023-05-03 13:13:36",
+        "updated_at": "2023-05-03 13:13:36"
+    },
+    {
+        "_proforma_details_id": "172",
+        "proforma_id": "118",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<p>Capacity: 2.5 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1150 mm</p>\r\n\r\n<p>fork width: 550mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "17800.00",
+        "created_at": "2023-11-22 10:32:51",
+        "updated_at": "2023-11-22 10:32:51"
+    },
+    {
+        "_proforma_details_id": "173",
+        "proforma_id": "119",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<p>Capacity: 2.5 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1150 mm</p>\r\n\r\n<p>fork width: 550mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n",
+        "proforma_product_qty": "6",
+        "proforma_product_price": "16500.00",
+        "created_at": "2023-12-19 11:11:56",
+        "updated_at": "2023-12-19 11:11:56"
+    },
+    {
+        "_proforma_details_id": "174",
+        "proforma_id": "120",
+        "proforma_product_id": "449",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton&nbsp;</li>\r\n\t<li>Fork Length: 900 mm</li>\r\n\t<li>fork width: 300-750 (adjustible)</li>\r\n\t<li>Lifting height: 3000mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "74000",
+        "created_at": "2023-12-27 15:51:05",
+        "updated_at": "2023-12-27 15:51:05"
+    },
+    {
+        "_proforma_details_id": "175",
+        "proforma_id": "121",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "<p>Capacity: 3.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 1</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "22228.50",
+        "created_at": "2023-12-29 12:14:13",
+        "updated_at": "2023-12-29 12:14:13"
+    },
+    {
+        "_proforma_details_id": "176",
+        "proforma_id": "122",
+        "proforma_product_id": "29",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 5.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 6&amp;nbsp;mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 2&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "31577.00",
+        "created_at": "2023-12-29 12:53:57",
+        "updated_at": "2023-12-29 12:53:57"
+    },
+    {
+        "_proforma_details_id": "177",
+        "proforma_id": "123",
+        "proforma_product_id": "173",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 1.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 4 mtrs (2 Fall)&lt;/p&gt;\r\n\r\n&lt;p&gt;Hoisting speed: 4.8 mpm&lt;/p&gt;\r\n\r\n&lt;p&gt;With Geared Trolley (Range 1)&lt;/p&gt;\r\n\r\n&lt;p&gt;Supply: 3 Phase/400V&lt;/p&gt;\r\n\r\n&lt;p&gt;Motor: 1.5 HP&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "95267.00",
+        "created_at": "2023-12-30 09:07:28",
+        "updated_at": "2023-12-30 09:07:28"
+    },
+    {
+        "_proforma_details_id": "178",
+        "proforma_id": "124",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 1.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 3 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 1&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "12675.00",
+        "created_at": "2024-01-02 14:09:03",
+        "updated_at": "2024-01-02 14:09:03"
+    },
+    {
+        "_proforma_details_id": "179",
+        "proforma_id": "124",
+        "proforma_product_id": "109",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 5.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of beam: 3 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;Flange range: 114-305mm&lt;/p&gt;\r\n\r\n&lt;p&gt;Anti-corrosive power coat finish&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "22560.00",
+        "created_at": "2024-01-02 14:09:03",
+        "updated_at": "2024-01-02 14:09:03"
+    },
+    {
+        "_proforma_details_id": "180",
+        "proforma_id": "125",
+        "proforma_product_id": "672",
+        "proforma_product_spec": "",
+        "proforma_product_qty": "3",
+        "proforma_product_price": "3900.00",
+        "created_at": "2024-01-03 08:01:41",
+        "updated_at": "2024-01-03 08:01:41"
+    },
+    {
+        "_proforma_details_id": "181",
+        "proforma_id": "126",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.5 ton&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;Fork Length: 1150 mm&lt;/p&gt;\r\n\r\n&lt;p&gt;fork width: 550mm&lt;/p&gt;\r\n\r\n&lt;p&gt;Lifting height: 200mm&lt;/p&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "17000.00",
+        "created_at": "2024-01-06 06:58:58",
+        "updated_at": "2024-01-06 06:58:58"
+    },
+    {
+        "_proforma_details_id": "182",
+        "proforma_id": "127",
+        "proforma_product_id": "667",
+        "proforma_product_spec": "",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "1850.00",
+        "created_at": "2024-01-08 10:02:30",
+        "updated_at": "2024-01-08 10:02:30"
+    },
+    {
+        "_proforma_details_id": "183",
+        "proforma_id": "127",
+        "proforma_product_id": "685",
+        "proforma_product_spec": "<p>For WRH-N (2Ton) S/n-4416</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "14500.00",
+        "created_at": "2024-01-08 10:02:30",
+        "updated_at": "2024-01-08 10:02:30"
+    },
+    {
+        "_proforma_details_id": "184",
+        "proforma_id": "127",
+        "proforma_product_id": "683",
+        "proforma_product_spec": "<p>Hoist Gearbox Lubricant</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "1550.00",
+        "created_at": "2024-01-08 10:02:30",
+        "updated_at": "2024-01-08 10:02:30"
+    },
+    {
+        "_proforma_details_id": "185",
+        "proforma_id": "128",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 3 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 2&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "15050.00",
+        "created_at": "2024-01-12 12:36:14",
+        "updated_at": "2024-01-12 12:36:14"
+    },
+    {
+        "_proforma_details_id": "186",
+        "proforma_id": "128",
+        "proforma_product_id": "105",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of beam: 3 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;Flange range: 88-203mm&lt;/p&gt;\r\n\r\n&lt;p&gt;Anti-corrosive power coat finish&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "10780.00",
+        "created_at": "2024-01-12 12:36:14",
+        "updated_at": "2024-01-12 12:36:14"
+    },
+    {
+        "_proforma_details_id": "187",
+        "proforma_id": "129",
+        "proforma_product_id": "25",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 8&amp;nbsp;mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 2&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "19875.00",
+        "created_at": "2024-01-16 11:03:56",
+        "updated_at": "2024-01-16 11:03:56"
+    },
+    {
+        "_proforma_details_id": "188",
+        "proforma_id": "129",
+        "proforma_product_id": "706",
+        "proforma_product_spec": "&lt;p&gt;Delivery Charges upto Jalan Complex Gate No.3&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "500.00",
+        "created_at": "2024-01-16 11:03:56",
+        "updated_at": "2024-01-16 11:03:56"
+    },
+    {
+        "_proforma_details_id": "189",
+        "proforma_id": "130",
+        "proforma_product_id": "108",
+        "proforma_product_spec": "<p>Capacity: 3.0 ton</p>\r\n\r\n<p>Height of beam: 6&nbsp;mtrs.</p>\r\n\r\n<p>Flange range: 100-203mm</p>\r\n\r\n<p>Anti-corrosive power coat finish</p>\r\n",
+        "proforma_product_qty": "3",
+        "proforma_product_price": "11779.33",
+        "created_at": "2024-01-20 10:35:26",
+        "updated_at": "2024-01-20 10:35:26"
+    },
+    {
+        "_proforma_details_id": "190",
+        "proforma_id": "131",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "15050.00",
+        "created_at": "2024-01-20 12:08:47",
+        "updated_at": "2024-01-20 12:08:47"
+    },
+    {
+        "_proforma_details_id": "191",
+        "proforma_id": "132",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "<p>Capacity: 3.0 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1220 mm</p>\r\n\r\n<p>fork width: 685mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "18000.00",
+        "created_at": "2024-01-31 10:41:26",
+        "updated_at": "2024-01-31 10:41:26"
+    },
+    {
+        "_proforma_details_id": "192",
+        "proforma_id": "133",
+        "proforma_product_id": "607",
+        "proforma_product_spec": "<p>Complete with C Rail Bar</p>\r\n\r\n<p>Track supporting bracket</p>\r\n\r\n<p>Joint cover</p>\r\n\r\n<p>Fixed trolley</p>\r\n\r\n<p>Steel trolley</p>\r\n\r\n<p>End Stop</p>\r\n",
+        "proforma_product_qty": "60",
+        "proforma_product_price": "700.00",
+        "created_at": "2024-02-01 13:59:07",
+        "updated_at": "2024-02-01 13:59:07"
+    },
+    {
+        "_proforma_details_id": "193",
+        "proforma_id": "134",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "<p>Capacity: 3.0 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1220 mm</p>\r\n\r\n<p>fork width: 685mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17000.00",
+        "created_at": "2024-02-19 11:06:52",
+        "updated_at": "2024-02-19 11:06:52"
+    },
+    {
+        "_proforma_details_id": "194",
+        "proforma_id": "135",
+        "proforma_product_id": "25",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 7&amp;nbsp;mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 2&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "19125.00",
+        "created_at": "2024-02-21 07:15:11",
+        "updated_at": "2024-02-21 07:15:11"
+    },
+    {
+        "_proforma_details_id": "195",
+        "proforma_id": "136",
+        "proforma_product_id": "481",
+        "proforma_product_spec": "<p>4 directional buttons with Emergency Stop</p>\r\n\r\n<p>Bi-directional mechanical interlock buttons and indelible laser engraved symbols</p>\r\n\r\n<p>CE marked products with IEC/EN60947complaint</p>\r\n\r\n<p>Operable temperature: -30? to 70?</p>\r\n\r\n<p>Rated insulation voltage: 690V &amp; Rated thermal current: 16A</p>\r\n\r\n<p>M3.5 Screw type terminal</p>\r\n",
+        "proforma_product_qty": "4",
+        "proforma_product_price": "2520.00",
+        "created_at": "2024-02-24 08:12:29",
+        "updated_at": "2024-02-24 08:12:29"
+    },
+    {
+        "_proforma_details_id": "196",
+        "proforma_id": "137",
+        "proforma_product_id": "29",
+        "proforma_product_spec": "<p>Capacity: 5.0 ton</p>\r\n\r\n<p>Height of lift: 7.00&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "33770.50",
+        "created_at": "2024-02-27 08:50:48",
+        "updated_at": "2024-02-27 08:50:48"
+    },
+    {
+        "_proforma_details_id": "197",
+        "proforma_id": "138",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "<p>Capacity: 3.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 1</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "4",
+        "proforma_product_price": "22228.50",
+        "created_at": "2024-02-28 08:35:48",
+        "updated_at": "2024-02-28 08:35:48"
+    },
+    {
+        "_proforma_details_id": "198",
+        "proforma_id": "139",
+        "proforma_product_id": "29",
+        "proforma_product_spec": "<p>Capacity: 5.0 ton</p>\r\n\r\n<p>Height of lift: 7&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "46580.00",
+        "created_at": "2024-03-01 10:45:59",
+        "updated_at": "2024-03-01 10:45:59"
+    },
+    {
+        "_proforma_details_id": "199",
+        "proforma_id": "140",
+        "proforma_product_id": "581",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 10 ton&lt;/li&gt;\r\n\t&lt;li&gt;Height of lift: 5 mtrs.&lt;/li&gt;\r\n\t&lt;li&gt;Class 2 duty, 4 Fall&lt;/li&gt;\r\n\t&lt;li&gt;With fixed suspension&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "298000",
+        "created_at": "2024-03-05 12:59:50",
+        "updated_at": "2024-03-05 12:59:50"
+    },
+    {
+        "_proforma_details_id": "200",
+        "proforma_id": "141",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<p>Capacity: 1.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 1</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "16900.00",
+        "created_at": "2024-03-07 08:10:42",
+        "updated_at": "2024-03-07 08:10:42"
+    },
+    {
+        "_proforma_details_id": "201",
+        "proforma_id": "141",
+        "proforma_product_id": "25",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 8&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "26500.00",
+        "created_at": "2024-03-07 08:10:42",
+        "updated_at": "2024-03-07 08:10:42"
+    },
+    {
+        "_proforma_details_id": "202",
+        "proforma_id": "142",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.5 ton&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;Fork Length: 1150 mm&lt;/p&gt;\r\n\r\n&lt;p&gt;fork width: 550mm&lt;/p&gt;\r\n\r\n&lt;p&gt;Lifting height: 200mm&lt;/p&gt;\r\n\r\n&lt;p&gt;With Nylon wheels&lt;/p&gt;",
+        "proforma_product_qty": "3",
+        "proforma_product_price": "17000.00",
+        "created_at": "2024-03-07 13:48:15",
+        "updated_at": "2024-03-07 13:48:15"
+    },
+    {
+        "_proforma_details_id": "203",
+        "proforma_id": "143",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "<p>Capacity: 3.0 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1220 mm</p>\r\n\r\n<p>fork width: 685mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n",
+        "proforma_product_qty": "3",
+        "proforma_product_price": "17000.00",
+        "created_at": "2024-03-07 14:06:33",
+        "updated_at": "2024-03-07 14:06:33"
+    },
+    {
+        "_proforma_details_id": "204",
+        "proforma_id": "144",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 3 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 2&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "14405.00",
+        "created_at": "2024-03-11 11:41:00",
+        "updated_at": "2024-03-11 11:41:00"
+    },
+    {
+        "_proforma_details_id": "205",
+        "proforma_id": "145",
+        "proforma_product_id": "27",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 3.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 8&amp;nbsp;mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 1&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "4",
+        "proforma_product_price": "23892.00",
+        "created_at": "2024-03-15 10:55:11",
+        "updated_at": "2024-03-15 10:55:11"
+    },
+    {
+        "_proforma_details_id": "206",
+        "proforma_id": "145",
+        "proforma_product_id": "29",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 5.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 12&amp;nbsp;mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 2&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "4",
+        "proforma_product_price": "36133.00",
+        "created_at": "2024-03-15 10:55:11",
+        "updated_at": "2024-03-15 10:55:11"
+    },
+    {
+        "_proforma_details_id": "207",
+        "proforma_id": "145",
+        "proforma_product_id": "33",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 10.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 12 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 4&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "68775.00",
+        "created_at": "2024-03-15 10:55:11",
+        "updated_at": "2024-03-15 10:55:11"
+    },
+    {
+        "_proforma_details_id": "208",
+        "proforma_id": "146",
+        "proforma_product_id": "709",
+        "proforma_product_spec": "<p>Model -HOPT 3 Ton</p>\r\n\r\n<p>Service Kit and Hydraulic Oil</p>\r\n\r\n<p>&nbsp;</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "6300.00",
+        "created_at": "2024-03-18 08:43:21",
+        "updated_at": "2024-03-18 08:43:21"
+    },
+    {
+        "_proforma_details_id": "209",
+        "proforma_id": "146",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<p>Capacity: 2.5 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1150 mm</p>\r\n\r\n<p>fork width: 550mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "17000.00",
+        "created_at": "2024-03-18 08:43:21",
+        "updated_at": "2024-03-18 08:43:21"
+    },
+    {
+        "_proforma_details_id": "210",
+        "proforma_id": "147",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 5&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17037.00",
+        "created_at": "2024-03-18 12:48:02",
+        "updated_at": "2024-03-18 12:48:02"
+    },
+    {
+        "_proforma_details_id": "211",
+        "proforma_id": "147",
+        "proforma_product_id": "38",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 4&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "20496.00",
+        "created_at": "2024-03-18 12:48:02",
+        "updated_at": "2024-03-18 12:48:02"
+    },
+    {
+        "_proforma_details_id": "212",
+        "proforma_id": "148",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<p>Capacity: 2.5 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1220 mm</p>\r\n\r\n<p>fork width: 685mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17500.00",
+        "created_at": "2024-03-20 07:36:55",
+        "updated_at": "2024-03-20 07:36:55"
+    },
+    {
+        "_proforma_details_id": "213",
+        "proforma_id": "149",
+        "proforma_product_id": "25",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 8&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "26500.00",
+        "created_at": "2024-03-21 12:37:23",
+        "updated_at": "2024-03-21 12:37:23"
+    },
+    {
+        "_proforma_details_id": "214",
+        "proforma_id": "149",
+        "proforma_product_id": "29",
+        "proforma_product_spec": "<p>Capacity: 5.0 ton</p>\r\n\r\n<p>Height of lift: 6&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "45110.00",
+        "created_at": "2024-03-21 12:37:23",
+        "updated_at": "2024-03-21 12:37:23"
+    },
+    {
+        "_proforma_details_id": "215",
+        "proforma_id": "149",
+        "proforma_product_id": "33",
+        "proforma_product_spec": "<p>Capacity: 10.0 ton</p>\r\n\r\n<p>Height of lift: 6&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 4</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "87050.00",
+        "created_at": "2024-03-21 12:37:23",
+        "updated_at": "2024-03-21 12:37:23"
+    },
+    {
+        "_proforma_details_id": "216",
+        "proforma_id": "150",
+        "proforma_product_id": "28",
+        "proforma_product_spec": "<p>Capacity: 5.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "28490.00",
+        "created_at": "2024-03-22 12:50:58",
+        "updated_at": "2024-03-22 12:50:58"
+    },
+    {
+        "_proforma_details_id": "217",
+        "proforma_id": "151",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<p>Capacity: 2.5 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1150 mm</p>\r\n\r\n<p>fork width: 550mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n",
+        "proforma_product_qty": "6",
+        "proforma_product_price": "16750.00",
+        "created_at": "2024-04-02 10:07:47",
+        "updated_at": "2024-04-02 10:07:47"
+    },
+    {
+        "_proforma_details_id": "218",
+        "proforma_id": "152",
+        "proforma_product_id": "27",
+        "proforma_product_spec": "<p>Capacity: 3.0 ton</p>\r\n\r\n<p>Height of lift: 5&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 1</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "32660.00",
+        "created_at": "2024-04-05 11:53:53",
+        "updated_at": "2024-04-05 11:53:53"
+    },
+    {
+        "_proforma_details_id": "219",
+        "proforma_id": "152",
+        "proforma_product_id": "29",
+        "proforma_product_spec": "<p>Capacity: 5.0 ton</p>\r\n\r\n<p>Height of lift: 5&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "43640.00",
+        "created_at": "2024-04-05 11:53:53",
+        "updated_at": "2024-04-05 11:53:53"
+    },
+    {
+        "_proforma_details_id": "220",
+        "proforma_id": "153",
+        "proforma_product_id": "23",
+        "proforma_product_spec": "<p>Capacity: 1.0 ton</p>\r\n\r\n<p>Height of lift: 10&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 1</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "21520.00",
+        "created_at": "2024-04-05 12:28:30",
+        "updated_at": "2024-04-05 12:28:30"
+    },
+    {
+        "_proforma_details_id": "221",
+        "proforma_id": "154",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 3.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 3 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 1&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "21462.00",
+        "created_at": "2024-04-12 10:23:53",
+        "updated_at": "2024-04-12 10:23:53"
+    },
+    {
+        "_proforma_details_id": "222",
+        "proforma_id": "155",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<p>Capacity: 2.5 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1150 mm</p>\r\n\r\n<p>fork width: 550mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n\r\n<p>with Nylon wheels</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "16000.00",
+        "created_at": "2024-04-16 10:28:10",
+        "updated_at": "2024-04-16 10:28:10"
+    },
+    {
+        "_proforma_details_id": "223",
+        "proforma_id": "156",
+        "proforma_product_id": "29",
+        "proforma_product_spec": "<p>Capacity: 5.0 ton</p>\r\n\r\n<p>Height of lift: 15&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "58340.00",
+        "created_at": "2024-04-16 14:35:44",
+        "updated_at": "2024-04-16 14:35:44"
+    },
+    {
+        "_proforma_details_id": "224",
+        "proforma_id": "156",
+        "proforma_product_id": "33",
+        "proforma_product_spec": "<p>Capacity: 10.0 ton</p>\r\n\r\n<p>Height of lift: 15&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 4</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "110450.00",
+        "created_at": "2024-04-16 14:35:44",
+        "updated_at": "2024-04-16 14:35:44"
+    },
+    {
+        "_proforma_details_id": "225",
+        "proforma_id": "157",
+        "proforma_product_id": "391",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 10 mtrs</li>\r\n\t<li>Class 2 duty, 4 Fall, with Electric trolley</li>\r\n\t<li>Wire Rope dia = 10 mm, &nbsp;Hoisting speed= 4.1 mtr/minute &amp; CT speed = 17 mtr/minute, Hoist Motor =5.5 kw &amp; CT Motor =.55 kw</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "4",
+        "proforma_product_price": "355000.00",
+        "created_at": "2024-04-18 09:39:30",
+        "updated_at": "2024-04-18 09:39:30"
+    },
+    {
+        "_proforma_details_id": "226",
+        "proforma_id": "158",
+        "proforma_product_id": "27",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 5 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "34062.00",
+        "created_at": "2024-04-19 10:11:05",
+        "updated_at": "2024-04-19 10:11:05"
+    },
+    {
+        "_proforma_details_id": "227",
+        "proforma_id": "159",
+        "proforma_product_id": "448",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton&nbsp;</li>\r\n\t<li>Fork Length: 900 mm</li>\r\n\t<li>fork width: 320-740 (adjustible)</li>\r\n\t<li>Lifting height: 1600mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "47800.00",
+        "created_at": "2024-04-19 10:17:08",
+        "updated_at": "2024-04-19 10:17:08"
+    },
+    {
+        "_proforma_details_id": "228",
+        "proforma_id": "160",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.5 ton&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;Fork Length: 1150 mm&lt;/p&gt;\r\n\r\n&lt;p&gt;fork width: 550mm&lt;/p&gt;\r\n\r\n&lt;p&gt;Lifting height: 200mm&lt;/p&gt;\r\n\r\n&lt;p&gt;With PU coated caste iron&amp;nbsp;&amp;nbsp;wheels&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "18600.00",
+        "created_at": "2024-04-20 08:44:31",
+        "updated_at": "2024-04-20 08:44:31"
+    },
+    {
+        "_proforma_details_id": "229",
+        "proforma_id": "161",
+        "proforma_product_id": "692",
+        "proforma_product_spec": "<ul>\r\n\t<li>Rope Dia - 20mm</li>\r\n\t<li>Length - 2 Metre (Eye to Eye)</li>\r\n\t<li>Capacity- 3 ton each Leg</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "2400.00",
+        "created_at": "2024-04-29 13:35:39",
+        "updated_at": "2024-04-29 13:35:39"
+    },
+    {
+        "_proforma_details_id": "230",
+        "proforma_id": "161",
+        "proforma_product_id": "27",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton</li>\r\n\t<li>Height of lift: 5 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "22200.00",
+        "created_at": "2024-04-29 13:35:39",
+        "updated_at": "2024-04-29 13:35:39"
+    },
+    {
+        "_proforma_details_id": "231",
+        "proforma_id": "162",
+        "proforma_product_id": "23",
+        "proforma_product_spec": "<p>Capacity: 1.0 ton</p>\r\n\r\n<p>Height of lift: 5&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 1</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "13300.00",
+        "created_at": "2024-05-07 10:31:09",
+        "updated_at": "2024-05-07 10:31:09"
+    },
+    {
+        "_proforma_details_id": "232",
+        "proforma_id": "163",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 2.5 ton&amp;nbsp;&lt;/li&gt;\r\n\t&lt;li&gt;Fork Length: 1150 mm&lt;/li&gt;\r\n\t&lt;li&gt;fork width: 685mm&lt;/li&gt;\r\n\t&lt;li&gt;Lifting height: 200mm&lt;/li&gt;\r\n\t&lt;li&gt;with nylon wheels&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "18250",
+        "created_at": "2024-05-23 10:46:11",
+        "updated_at": "2024-05-23 10:46:11"
+    },
+    {
+        "_proforma_details_id": "233",
+        "proforma_id": "164",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 3 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 2&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "20200.00",
+        "created_at": "2024-06-03 10:28:38",
+        "updated_at": "2024-06-03 10:28:38"
+    },
+    {
+        "_proforma_details_id": "234",
+        "proforma_id": "164",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 3.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 3 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 1&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "28040.00",
+        "created_at": "2024-06-03 10:28:38",
+        "updated_at": "2024-06-03 10:28:38"
+    },
+    {
+        "_proforma_details_id": "235",
+        "proforma_id": "164",
+        "proforma_product_id": "28",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 5.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 3 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 2&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "37230.00",
+        "created_at": "2024-06-03 10:28:38",
+        "updated_at": "2024-06-03 10:28:38"
+    },
+    {
+        "_proforma_details_id": "236",
+        "proforma_id": "165",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "20200.00",
+        "created_at": "2024-06-03 11:20:47",
+        "updated_at": "2024-06-03 11:20:47"
+    },
+    {
+        "_proforma_details_id": "237",
+        "proforma_id": "165",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "<p>Capacity: 3.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 1</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "28040.00",
+        "created_at": "2024-06-03 11:20:47",
+        "updated_at": "2024-06-03 11:20:47"
+    },
+    {
+        "_proforma_details_id": "238",
+        "proforma_id": "165",
+        "proforma_product_id": "28",
+        "proforma_product_spec": "<p>Capacity: 5.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "37230.00",
+        "created_at": "2024-06-03 11:20:47",
+        "updated_at": "2024-06-03 11:20:47"
+    },
+    {
+        "_proforma_details_id": "239",
+        "proforma_id": "166",
+        "proforma_product_id": "25",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 6&nbsp;mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17500.00",
+        "created_at": "2024-06-04 09:04:48",
+        "updated_at": "2024-06-04 09:04:48"
+    },
+    {
+        "_proforma_details_id": "240",
+        "proforma_id": "167",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "20200.00",
+        "created_at": "2024-06-07 12:06:38",
+        "updated_at": "2024-06-07 12:06:38"
+    },
+    {
+        "_proforma_details_id": "241",
+        "proforma_id": "168",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "<p>Capacity: 3.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 1</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "21155.00",
+        "created_at": "2024-06-19 14:02:48",
+        "updated_at": "2024-06-19 14:02:48"
+    },
+    {
+        "_proforma_details_id": "242",
+        "proforma_id": "168",
+        "proforma_product_id": "28",
+        "proforma_product_spec": "<p>Capacity: 5.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "28083.00",
+        "created_at": "2024-06-19 14:02:48",
+        "updated_at": "2024-06-19 14:02:48"
+    },
+    {
+        "_proforma_details_id": "243",
+        "proforma_id": "169",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 3 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 2&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "13975.00",
+        "created_at": "2024-06-20 09:02:18",
+        "updated_at": "2024-06-20 09:02:18"
+    },
+    {
+        "_proforma_details_id": "244",
+        "proforma_id": "170",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.5 ton&nbsp;</li>\r\n\t<li>Fork Length: 1150 mm</li>\r\n\t<li>fork width: 550mm</li>\r\n\t<li>Lifting height: 200mm</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "3",
+        "proforma_product_price": "17600.00",
+        "created_at": "2024-06-24 10:54:48",
+        "updated_at": "2024-06-24 10:54:48"
+    },
+    {
+        "_proforma_details_id": "245",
+        "proforma_id": "171",
+        "proforma_product_id": "672",
+        "proforma_product_spec": "&lt;p&gt;Part name-&amp;nbsp;SS cable trolley&amp;nbsp;as per sample&lt;/p&gt;",
+        "proforma_product_qty": "150",
+        "proforma_product_price": "2100.00",
+        "created_at": "2024-06-24 11:48:35",
+        "updated_at": "2024-06-24 11:48:35"
+    },
+    {
+        "_proforma_details_id": "246",
+        "proforma_id": "172",
+        "proforma_product_id": "38",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 3 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 2&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "18191.00",
+        "created_at": "2024-06-26 09:21:17",
+        "updated_at": "2024-06-26 09:21:17"
+    },
+    {
+        "_proforma_details_id": "247",
+        "proforma_id": "173",
+        "proforma_product_id": "22",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 1.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 1</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "12058.00",
+        "created_at": "2024-07-04 13:37:04",
+        "updated_at": "2024-07-04 13:37:04"
+    },
+    {
+        "_proforma_details_id": "248",
+        "proforma_id": "173",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 2.0 ton</li>\r\n\t<li>Height of lift: 3 mtrs.</li>\r\n\t<li>No. of falls (load chain): 2</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "15756.00",
+        "created_at": "2024-07-04 13:37:04",
+        "updated_at": "2024-07-04 13:37:04"
+    },
+    {
+        "_proforma_details_id": "249",
+        "proforma_id": "173",
+        "proforma_product_id": "33",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 10.0 ton</li>\r\n\t<li>Height of lift: 20 mtrs.</li>\r\n\t<li>No. of falls (load chain): 4</li>\r\n\t<li>Grade 80 load chain for strenght &amp; wear resistance</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "88062.00",
+        "created_at": "2024-07-04 13:37:04",
+        "updated_at": "2024-07-04 13:37:04"
+    },
+    {
+        "_proforma_details_id": "250",
+        "proforma_id": "174",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 3.0 ton&amp;nbsp;&lt;/li&gt;\r\n\t&lt;li&gt;Fork Length: 1150 mm&lt;/li&gt;\r\n\t&lt;li&gt;fork width: 550mm&lt;/li&gt;\r\n\t&lt;li&gt;Lifting height: 200mm&lt;br /&gt;\r\n\t&lt;br /&gt;\r\n\t&lt;strong&gt;CUMI HEAVY DUTY Model: 3.0 / 550mm&lt;/strong&gt;&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17050.00",
+        "created_at": "2024-07-29 10:24:01",
+        "updated_at": "2024-07-29 10:24:01"
+    },
+    {
+        "_proforma_details_id": "251",
+        "proforma_id": "175",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "<p>Capacity: 3.0 ton&nbsp;</p>\r\n\r\n<p>Fork Length: 1220 mm</p>\r\n\r\n<p>fork width: 685mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17500.00",
+        "created_at": "2024-07-30 10:28:44",
+        "updated_at": "2024-07-30 10:28:44"
+    },
+    {
+        "_proforma_details_id": "252",
+        "proforma_id": "176",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 2.5 ton&amp;nbsp;&lt;/li&gt;\r\n\t&lt;li&gt;Fork Length: 1150 mm&lt;/li&gt;\r\n\t&lt;li&gt;fork width: 550mm&lt;/li&gt;\r\n\t&lt;li&gt;Lifting height: 200mm&lt;/li&gt;\r\n\t&lt;li&gt;with nylon wheels&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "18000.00",
+        "created_at": "2024-08-03 11:13:36",
+        "updated_at": "2024-08-03 11:13:36"
+    },
+    {
+        "_proforma_details_id": "253",
+        "proforma_id": "177",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton.</li>\r\n\t<li>Fork Length: 1220&nbsp;mm</li>\r\n\t<li>fork width: 685mm</li>\r\n\t<li>Lifting height: 200mm</li>\r\n\t<li>Fitted with Heavy duty Cast Iron PU coated wheels (Red)</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17900.00",
+        "created_at": "2024-08-22 11:39:58",
+        "updated_at": "2024-08-22 11:39:58"
+    },
+    {
+        "_proforma_details_id": "254",
+        "proforma_id": "178",
+        "proforma_product_id": "443",
+        "proforma_product_spec": "&lt;ul&gt;\r\n\t&lt;li&gt;Capacity: 3.0 ton.&lt;/li&gt;\r\n\t&lt;li&gt;Fork Length: 1220 mm&lt;/li&gt;\r\n\t&lt;li&gt;fork width: 685mm&lt;/li&gt;\r\n\t&lt;li&gt;Lifting height: 200mm&lt;/li&gt;\r\n\t&lt;li&gt;Fitted with Heavy duty Cast Iron PU coated wheels&lt;/li&gt;\r\n&lt;/ul&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17900.00",
+        "created_at": "2024-08-30 11:46:52",
+        "updated_at": "2024-08-30 11:46:52"
+    },
+    {
+        "_proforma_details_id": "255",
+        "proforma_id": "179",
+        "proforma_product_id": "651",
+        "proforma_product_spec": "<p>End connector: 1 Set</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "1000.00",
+        "created_at": "2024-09-02 10:12:33",
+        "updated_at": "2024-09-02 10:12:33"
+    },
+    {
+        "_proforma_details_id": "256",
+        "proforma_id": "179",
+        "proforma_product_id": "647",
+        "proforma_product_spec": "<p>Inner height 45mm and outer height 68mm<br />\r\nInner width 150 mm and outer width 172 mm</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "14750.00",
+        "created_at": "2024-09-02 10:12:33",
+        "updated_at": "2024-09-02 10:12:33"
+    },
+    {
+        "_proforma_details_id": "257",
+        "proforma_id": "180",
+        "proforma_product_id": "459",
+        "proforma_product_spec": "<p>Capacity: 800 Kgs.</p>\r\n\r\n<p>Max. lifting: 1000mm</p>\r\n\r\n<p>Lowered height: 300mm</p>\r\n\r\n<p>Table size: 810X500</p>\r\n\r\n<p>Self weight: 85 kgs.</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "36000.00",
+        "created_at": "2024-09-06 14:17:12",
+        "updated_at": "2024-09-06 14:17:12"
+    },
+    {
+        "_proforma_details_id": "258",
+        "proforma_id": "181",
+        "proforma_product_id": "727",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n\r\n<p>Runnig Pull on Hand Chain: 28 Kgs.</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "11800.00",
+        "created_at": "2024-09-09 09:51:41",
+        "updated_at": "2024-09-09 09:51:41"
+    },
+    {
+        "_proforma_details_id": "259",
+        "proforma_id": "182",
+        "proforma_product_id": "25",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 2.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 3&amp;nbsp;mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 2&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "14620.00",
+        "created_at": "2024-09-10 11:23:51",
+        "updated_at": "2024-09-10 11:23:51"
+    },
+    {
+        "_proforma_details_id": "260",
+        "proforma_id": "182",
+        "proforma_product_id": "26",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 3.0 ton&lt;/p&gt;\r\n\r\n&lt;p&gt;Height of lift: 3 mtrs.&lt;/p&gt;\r\n\r\n&lt;p&gt;No. of falls (load chain): 1&lt;/p&gt;\r\n\r\n&lt;p&gt;Grade 80 load chain for strenght &amp;amp; wear resistance&lt;/p&gt;",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "20849.00",
+        "created_at": "2024-09-10 11:23:51",
+        "updated_at": "2024-09-10 11:23:51"
+    },
+    {
+        "_proforma_details_id": "261",
+        "proforma_id": "183",
+        "proforma_product_id": "25",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 5 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "17000.00",
+        "created_at": "2024-09-19 08:16:42",
+        "updated_at": "2024-09-19 08:16:42"
+    },
+    {
+        "_proforma_details_id": "262",
+        "proforma_id": "184",
+        "proforma_product_id": "449",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 1.0 ton.&lt;/p&gt;\r\n\r\n&lt;p&gt;Fork Length: 900 mm&lt;/p&gt;\r\n\r\n&lt;p&gt;fork width: 300-750 (adjustible)&lt;/p&gt;\r\n\r\n&lt;p&gt;Lifting height: 3000mm&lt;/p&gt;\r\n\r\n&lt;p&gt;Fitted with Heavy duty Cast Iron PU coated wheels&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "75000.00",
+        "created_at": "2024-10-17 07:50:27",
+        "updated_at": "2024-10-17 07:50:27"
+    },
+    {
+        "_proforma_details_id": "263",
+        "proforma_id": "185",
+        "proforma_product_id": "447",
+        "proforma_product_spec": "&lt;p&gt;Capacity: 1&amp;nbsp;ton.&lt;/p&gt;\r\n\r\n&lt;p&gt;Fork Length: 900 mm&lt;/p&gt;\r\n\r\n&lt;p&gt;fork width: 200-580 (adjustible)&lt;/p&gt;\r\n\r\n&lt;p&gt;Lifting height: 1600mm&lt;/p&gt;\r\n\r\n&lt;p&gt;Fitted with Heavy duty Cast Iron PU coated wheels&lt;/p&gt;",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "45500.00",
+        "created_at": "2024-10-17 08:09:07",
+        "updated_at": "2024-10-17 08:09:07"
+    },
+    {
+        "_proforma_details_id": "264",
+        "proforma_id": "186",
+        "proforma_product_id": "727",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "14000.00",
+        "created_at": "2024-10-22 08:11:02",
+        "updated_at": "2024-10-22 08:11:02"
+    },
+    {
+        "_proforma_details_id": "265",
+        "proforma_id": "187",
+        "proforma_product_id": "90",
+        "proforma_product_spec": "<p>Lift Capacity: 2000 Kgs.</p>\r\n\r\n<p>Pull Capacity: 3000 Kgs.</p>\r\n\r\n<p>Rope dia. : 12mm</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "25000.00",
+        "created_at": "2024-11-14 10:25:39",
+        "updated_at": "2024-11-14 10:25:39"
+    },
+    {
+        "_proforma_details_id": "266",
+        "proforma_id": "188",
+        "proforma_product_id": "24",
+        "proforma_product_spec": "<p>Capacity: 2.0 ton</p>\r\n\r\n<p>Height of lift: 3 mtrs.</p>\r\n\r\n<p>No. of falls (load chain): 2</p>\r\n\r\n<p>Grade 80 load chain for strenght &amp; wear resistance</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "15700.00",
+        "created_at": "2024-12-03 10:20:11",
+        "updated_at": "2024-12-03 10:20:11"
+    },
+    {
+        "_proforma_details_id": "267",
+        "proforma_id": "189",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<ul>\r\n\t<li>Capacity: 3.0 ton.</li>\r\n\t<li>Fork Length: 1150 mm</li>\r\n\t<li>fork width: 550mm</li>\r\n\t<li>Lifting height: 200mm</li>\r\n\t<li>Comes fitted with Heavy duty NYLON WHEELS</li>\r\n</ul>\r\n",
+        "proforma_product_qty": "2",
+        "proforma_product_price": "16500.00",
+        "created_at": "2024-12-03 10:45:24",
+        "updated_at": "2024-12-03 10:45:24"
+    },
+    {
+        "_proforma_details_id": "268",
+        "proforma_id": "190",
+        "proforma_product_id": "442",
+        "proforma_product_spec": "<p>Capacity: 3.0 ton.</p>\r\n\r\n<p>Fork Length: 1150 mm</p>\r\n\r\n<p>fork width: 550mm</p>\r\n\r\n<p>Lifting height: 200mm</p>\r\n\r\n<p>Fitted with Heavy duty Nylon Wheels</p>\r\n",
+        "proforma_product_qty": "1",
+        "proforma_product_price": "17600.00",
+        "created_at": "2024-12-06 07:14:21",
+        "updated_at": "2024-12-06 07:14:21"
+    }
+]

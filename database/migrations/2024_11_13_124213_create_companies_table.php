@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('city_id')->constrained('cities')->cascadeOnDelete();
+            $table->foreignId('city_id')->constrained('cities')->default(0)->cascadeOnDelete();
             $table->string('company_name');
             $table->string('website')->nullable();
             $table->string('phone')->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('gst')->nullable();
             $table->string('pan')->nullable();
             $table->string('logo')->nullable();
-            $table->longText('address');
+            $table->longText('address')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

@@ -29,7 +29,7 @@
                                     <option value="{{$product->id}}"
                                     @foreach($lead_details as $lead_product)
                                     @if($product->id == $lead_product->product_id) {{'selected'}} @endif 
-                                    @endforeach >{{$product->product_name}}</option>
+                                    @endforeach >{{$product->product_name}} ({{ $product->product_code }})</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -39,21 +39,27 @@
                             <table class="table" id="myTable">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Product Details</th>
                                         <th>Qty</th>
                                         <th>Rate</th>
                                         <th>Amount</th>
                                     </tr>
                                 </thead>
-                                <tbody>  
-                                @foreach($lead_details as $lead_product)
+                                <tbody id="load_quot_table">  
+                                    @php
+                                        $total = 0.00;
+                                    @endphp
+                                @foreach($lead_details as $k => $lead_product)
                                     @php
                                         $amount = $lead_product->lead_product_price * $lead_product->lead_product_qty;
+                                        $total += $amount;
                                     @endphp
                                     <tr>
+                                        <td class="prod_head product_q_sl_no">{{$k + 1}}</td>
                                         <td>
-                                            <p>{{$lead_product->lead_product_name}} ({{$lead_product->lead_product_code}})</p>
-                                            <textarea class="product_tech_spec mt-3" readonly>{{$lead_product->lead_product_tech_spec}}</textarea>
+                                            <p class="prod_head">{{$lead_product->lead_product_name}} ({{$lead_product->lead_product_code}})</p>
+                                            <textarea class="mt-3 product_tech_spec_textarea" readonly>{!! $lead_product->lead_product_tech_spec !!}</textarea>
 
                                             <input type="hidden" name="product_name[]" value="{{$lead_product->lead_product_name}}">
                                             <input type="hidden" name="product_code[]" value="{{$lead_product->lead_product_code}}">
@@ -63,10 +69,37 @@
                                         </td>
                                         <td><input type="number" name="qty[]" class="qty mt-5" value="{{$lead_product->lead_product_qty}}" ></td>
                                         <td><input type="number" name="rate[]" class="rate mt-5" value="{{$lead_product->lead_product_price}}" ></td>
-                                        <td><input type="text" name="amount[]" class="amount mt-5" value="{{$amount}}" readonly></td>
+                                        <td>
+                                            <p class="text-right amount_p  mt-5">
+                                                <i class="fas fa-rupee-sign"></i>
+                                                <span class="pro_price_span amount">
+                                                    <?= sprintf('%.2f', $amount) ?>
+                                                </span>
+                                            </p>                                          
+                                            {{-- <input type="text" name="amount[]" class="amount mt-5 input-orange-elequip" value="{{$amount}}" readonly> --}}
+                                        </td>
                                     </tr>
-                                @endforeach
+                                    <tr>
+                                        <td class="border-0"></td>
+                                        <td class="border-0 pt-0" colspan="4">
+                                            <textarea class="mt-3 product_tech_spec_textarea" readonly>{!! $lead_product->lead_product_m_spec !!}</textarea>
+                                        </td>
+                                    </tr>
+                                @endforeach                                
                                 </tbody>
+
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" class="text-right" style="vertical-align: middle;">
+                                           <b>Basic Total = </b> 
+                                        </td>
+                                        <td  style="vertical-align: middle;">
+                                            <p class="text-right amount_p" id="basic_total" >
+                                                <i class="fas fa-rupee-sign"></i> <b id="total_amount">{{$total}}</b>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
 

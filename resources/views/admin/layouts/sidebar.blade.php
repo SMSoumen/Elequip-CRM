@@ -13,20 +13,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('admin.dashboard') }}" class="brand-link">
-        <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-
-        @role('Super-Admin')
-            <span class="brand-text font-weight-light">SP Admin Dashboard</span>
-        @endrole
-
-        @role('admin')
-            <span class="brand-text font-weight-light">Admin Dashboard - {{ auth()->user()->name }}</span>
-        @endrole
-
-        @role('writer')
-            <span class="brand-text font-weight-light">Writer Dashboard - {{ auth()->user()->name }}</span>
-        @endrole
-
+        <img src="{{ asset(asset_path('assets/admin/img/elequip-logo.jpg')) }}" alt="Elequip Logo" class="brand-image elevation-3" style="float:none;max-height: 55px;">
     </a>
 
     <!-- Sidebar -->
@@ -69,6 +56,7 @@
                     </a>
                 </li>
 
+                @can(['Admin access'])
                 <li class="nav-item @if (Request::is('admin/roles*') || Request::is('admin/permissions*') || Request::is('admin/users*')) menu-open @endif ">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
@@ -103,7 +91,7 @@
                             </li>
                         @endcan
 
-                        @can('User access')
+                        @can('Admin access')
                             <li class="nav-item">
                                 <a href="{{ route('admin.users.index') }}"
                                     class="nav-link @if (Request::is('admin/users*')) active @endif">
@@ -116,6 +104,7 @@
                         @endcan
                     </ul>
                 </li>
+                @endcan
 
                 {{-- <li class="nav-item">
                     <a href="{{ route('admin.dashboard') }}" class="nav-link">
@@ -126,69 +115,8 @@
                     </a>
                 </li> --}}
 
-                @can(['Category access', 'Category create', 'SubCategory access', 'SubCategory create'])
-                    <li class="nav-item menu-open d-none">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-cubes"></i>
-                            <p>
-                                Product Management
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            @can('Category access')
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.categories.index') }}"
-                                        class="nav-link @if (Request::is('admin/categories')) active @endif">
-                                        <i class="nav-icon fas fa-sitemap"></i>
-                                        <p>
-                                            Category
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
 
-                            @can('Category create')
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.categories.create') }}"
-                                        class="nav-link @if (Request::is('admin/categories/create')) active @endif">
-                                        <i class="nav-icon fas fa-sitemap"></i>
-                                        <p>
-                                            Add Category
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-
-                            @can('SubCategory access')
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.subcategories.index') }}"
-                                        class="nav-link @if (Request::is('admin/subcategories')) active @endif">
-                                        <i class="nav-icon fas fa-sitemap"></i>
-                                        <p>
-                                            SubCategory
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-
-                            @can('SubCategory create')
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.subcategories.create') }}"
-                                        class="nav-link @if (Request::is('admin/subcategories/create')) active @endif">
-                                        <i class="nav-icon fas fa-sitemap"></i>
-                                        <p>
-                                            Add SubCategory
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-
-                        </ul>
-                    </li>
-                @endcan
-
-
+                @if (Auth::user()->can('Lead Category access') || Auth::user()->can('Lead Stage access') || Auth::user()->can('LeadSource create') || Auth::user()->can('MeasuringUnit create') || Auth::user()->can('Brand create') || Auth::user()->can('SmsFormat create'))
                 <li class="nav-item @if (Request::is('admin/lead-category*') ||
                         Request::is('admin/lead-stage*') ||
                         Request::is('admin/lead-sources*') ||
@@ -209,7 +137,7 @@
                                     class="nav-link @if (Request::is('admin/lead-category')) active @endif">
                                     <i class="nav-icon fas fa-sitemap"></i>
                                     <p>
-                                        Lead Category
+                                        Lead Categories
                                     </p>
                                 </a>
                             </li>
@@ -221,7 +149,7 @@
                                     class="nav-link @if (Request::is('admin/lead-stage')) active @endif">
                                     <i class="nav-icon fas fa-sitemap"></i>
                                     <p>
-                                        Lead Stage
+                                        Lead Stages
                                     </p>
                                 </a>
                             </li>
@@ -233,7 +161,7 @@
                                     class="nav-link @if (Request::is('admin/lead-sources')) active @endif">
                                     <i class="nav-icon fas fa-sitemap"></i>
                                     <p>
-                                        Lead Source
+                                        Lead Sources
                                     </p>
                                 </a>
                             </li>
@@ -245,7 +173,7 @@
                                     class="nav-link @if (Request::is('admin/measuring-unit')) active @endif">
                                     <i class="nav-icon fas fa-sitemap"></i>
                                     <p>
-                                        Measuring Unit
+                                        Measuring Units
                                     </p>
                                 </a>
                             </li>
@@ -256,7 +184,7 @@
                                     class="nav-link @if (Request::is('admin/brand')) active @endif">
                                     <i class="nav-icon fas fa-sitemap"></i>
                                     <p>
-                                        Brand
+                                        Brands
                                     </p>
                                 </a>
                             </li>
@@ -267,16 +195,18 @@
                                     class="nav-link @if (Request::is('admin/sms-format')) active @endif">
                                     <i class="nav-icon fas fa-sitemap"></i>
                                     <p>
-                                        SMS Format
+                                        SMS Formats
                                     </p>
                                 </a>
                             </li>
                         @endcan
 
                     </ul>
-                </li>
+                </li>                
+                @endif
 
-                @can(['Company access', 'Customer access', 'Customer create'])
+
+                @if (Auth::user()->can('Company access') || Auth::user()->can('Customer access') || Auth::user()->can('Customer create'))
                     <li class="nav-item @if (Request::is('admin/companies*') || Request::is('admin/customers*') || Request::is('admin/upload/contact*')) menu-open @endif">
                         <a href="#" class="nav-link">
                             <i class="nav-icon far fa-address-card"></i>
@@ -325,10 +255,11 @@
 
                         </ul>
                     </li>
-                @endcan                
+                @endif
 
 
-                @can(['Company access', 'SubCategory access', 'Customer create'])
+
+                @if (Auth::user()->can('ProductCategory access') || Auth::user()->can('ProductSubCategory access') || Auth::user()->can('Product access'))
                     <li class="nav-item @if (Request::is('admin/product-categories*') ||
                             Request::is('admin/products*') ||
                             Request::is('admin/product/subcategories*')) menu-open @endif">
@@ -341,7 +272,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            @can('Product access')
+                            @can('ProductCategory access')
                                 <li class="nav-item">
                                     <a href="{{ route('admin.product-categories.index') }}"
                                         class="nav-link @if (Request::is('admin/product-categories')) active @endif">
@@ -365,7 +296,8 @@
                             @endcan
                         </ul>
                     </li>
-                @endcan
+                @endif
+                
 
 
                 @can(['Lead access'])
@@ -421,14 +353,14 @@
                     </li>
                 @endcan
 
-                
+                @can(['Report access'])
                 <li class="nav-item">
-                    <a href="{{route('admin.reports')}}" class="nav-link">
+                    <a href="{{route('admin.reports')}}" class="nav-link @if (Request::is('admin/reports')) active @endif">
                         <i class="nav-icon fas fa-columns"></i>
                         <p>Reports</p>
                     </a>
                 </li>
-
+                @endcan
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

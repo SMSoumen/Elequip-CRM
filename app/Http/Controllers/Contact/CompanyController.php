@@ -20,7 +20,7 @@ class CompanyController extends Controller implements HasMiddleware
     {
         return [
             new Middleware('role_or_permission:Company access|Company create|Company edit|Company delete', only: ['index', 'treeView']),
-            new Middleware('role_or_permission:Company create', only: ['create', 'store']),
+            new Middleware('role_or_permission:Company create', only: ['create', 'store', 'uploadcontact', 'uploadcontactsubmit']),
             new Middleware('role_or_permission:Company edit', only: ['edit', 'update']),
             new Middleware('role_or_permission:Company delete', only: ['destroy']),
         ];
@@ -30,21 +30,26 @@ class CompanyController extends Controller implements HasMiddleware
     {
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(Company::query()->orderBy('id','desc'))->addColumn('status', function ($data) {
-                    return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+                return DataTables::eloquent(Company::query()->with('customers')->orderBy('id', 'desc'))->addColumn('status', function ($data) {
+                    // return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+                    $table = 'companies';
+                    return view('admin.layouts.partials.listing_status_switch', compact(['data', 'table']))->render();
+                })->addColumn('customer_count', function ($data) {
+                    return $data->customers()->count();
                 })->addColumn('created_date', function ($data) {
-                    return $data->created_date = date('d-m-Y',strtotime($data->created_at));
+                    return $data->created_date = date('d-m-Y', strtotime($data->created_at));
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.companies.edit', $data->id);
-                    $deleteRoute = route('admin.companies.destroy', $data->id);
+                    // $deleteRoute = route('admin.companies.destroy', $data->id);
+                    $deleteRoute = null;
                     $edit_type = "modal";
                     $permission = 'Company';
 
-                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission','edit_type']))->render();
-                })->addIndexColumn()->rawColumns(['action','status','created_date'])->make(true);
+                    return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute', 'permission', 'edit_type']))->render();
+                })->addIndexColumn()->rawColumns(['action', 'status', 'created_date'])->make(true);
             }
-            $cities = City::orderBy('city_name','asc')->get();
-            return view('admin.contacts.company.index',compact(['cities']));
+            $cities = City::orderBy('city_name', 'asc')->get();
+            return view('admin.contacts.company.index', compact(['cities']));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->route('admin.dashboard')->with('error', $e->getMessage());
@@ -63,9 +68,9 @@ class CompanyController extends Controller implements HasMiddleware
             'gst'         => 'string|nullable',
         ]);
         $source = Company::create($validated);
-        if($source){
+        if ($source) {
             return redirect()->back()->withSuccess('Company added successfully.');
-        }else{
+        } else {
             return redirect()->back()->withErrors('Error!! While adding company!!!');
         }
     }
@@ -87,9 +92,9 @@ class CompanyController extends Controller implements HasMiddleware
             'gst'         => 'string|nullable',
         ]);
 
-        if($Company->update($validated)){
+        if ($Company->update($validated)) {
             return redirect()->back()->withSuccess('Company updated successfully.');
-        }else{
+        } else {
             return redirect()->back()->withErrors('Error!! while updating company!!!');
         }
     }
@@ -107,7 +112,7 @@ class CompanyController extends Controller implements HasMiddleware
 
     public function uploadcontactsubmit(Request $request)
     {
-        $validated =  $request->validate([                        
+        $validated =  $request->validate([
             'contact_import_file' => 'file|mimes:xlsx,csv|max:102400',
         ]);
 
@@ -116,28 +121,20 @@ class CompanyController extends Controller implements HasMiddleware
                 Excel::import(new CompanyImport, $request->file('contact_import_file')->store('temp'));
                 return redirect()->back()->withSuccess('Contact import file uploaded successfully !!!');
             }
-        }else{
-            
+        } else {
+
             return redirect()->back()->withErrors('Invalid contact import file !!!');
         }
     }
 
-    public function checkCompany(Request $request){
-        $result = Company::where('company_name',$request->company_name)->get();
+    public function checkCompany(Request $request)
+    {
+        $result = Company::where('company_name', $request->company_name)->get();
         return $result;
     }
 
-    public function create()
-    {
-        
-    }
-
-    
-    public function edit(string $id)
-    {
-        
-    }
+    public function create() {}
 
 
-
+    public function edit(string $id) {}
 }

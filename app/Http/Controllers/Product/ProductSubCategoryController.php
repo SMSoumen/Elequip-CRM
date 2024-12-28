@@ -16,7 +16,7 @@ class ProductSubCategoryController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('role_or_permission:ProductSubCategory access|ProductSubCategory create|ProductSubCategory edit|ProductSubCategory delete', only: ['index', 'treeView']),
+            new Middleware('role_or_permission:ProductSubCategory access|ProductSubCategory create|ProductSubCategory edit|ProductSubCategory delete', only: ['index', 'allSubCategory']),
             new Middleware('role_or_permission:ProductSubCategory create', only: ['create', 'store']),
             new Middleware('role_or_permission:ProductSubCategory edit', only: ['edit', 'update']),
             new Middleware('role_or_permission:ProductSubCategory delete', only: ['destroy']),
@@ -35,7 +35,8 @@ class ProductSubCategoryController extends Controller implements HasMiddleware
                     return $data->no_of_subcategory = ProductSubCategory::where('product_category_id',$data->id)->count();
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.product-subcategories.edit', $data->id);
-                    $deleteRoute = route('admin.product-subcategories.destroy', $data->id);
+                    // $deleteRoute = route('admin.product-subcategories.destroy', $data->id);
+                    $deleteRoute = null;
                     $edit_type = "modal";
                     $permission = 'ProductSubCategory';
 
@@ -69,7 +70,7 @@ class ProductSubCategoryController extends Controller implements HasMiddleware
     public function store(Request $request)
     {
         $validated =  $request->validate([
-            'product_subcat_name' => 'required|string|unique:product_sub_categories,product_subcat_name',
+            'product_subcat_name' => 'required|string',
             'product_category_id' => 'required|integer',
         ]);
 
@@ -102,7 +103,7 @@ class ProductSubCategoryController extends Controller implements HasMiddleware
     public function update(Request $request,$id)
     {
         $validated =  $request->validate([
-            'product_subcat_name' => "required|string|unique:product_sub_categories,product_subcat_name,$id",
+            'product_subcat_name' => "required|string",
             'product_category_id' => 'required|integer',
         ]);
 

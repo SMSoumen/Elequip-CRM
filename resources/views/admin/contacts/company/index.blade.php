@@ -10,7 +10,7 @@
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title">Companies</h3>
                                 @can('Company create')
-                                    <button type="button" class="btn btn-primary add_company">Add Company</button>                              
+                                    <button type="button" class="btn btn-primary add_company">Add Company</button>
                                 @endcan
                             </div>
                         </div>
@@ -37,6 +37,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
+                                        <th>Contact</th>
                                         <th>Created Date</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -58,10 +59,8 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-@endsection
 
     <!--==================> Add Company Modal ============================-->
-
     <div class="modal fade" id="add_company" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -72,22 +71,25 @@
             </div>
         </div>
     </div>
+@endsection
+
 
 @push('scripts')
-
     <script>
-
-        function checkCompanyName(){
-            $("#company_name").keyup(function(){
+        function checkCompanyName() {
+            $("#company_name").keyup(function() {
                 let company_name = $("#company_name").val();
                 $.ajax({
-                    type:'post',
-                    url:"{{route('admin.checkcompany')}}",
-                    data:{"company_name":company_name},
-                    success:function(res){
-                        if(res.length != 0){
-                            $(".error_company").html("'"+company_name+"' Company Name allready exists.")
-                        }else{
+                    type: 'post',
+                    url: "{{ route('admin.checkcompany') }}",
+                    data: {
+                        "company_name": company_name
+                    },
+                    success: function(res) {
+                        if (res.length != 0) {
+                            $(".error_company").html("'" + company_name +
+                                "' Company Name allready exists.")
+                        } else {
                             $(".error_company").html("");
                         }
                     }
@@ -95,9 +97,9 @@
             })
         };
 
-        $(".add_company").click(function(){
+        $(".add_company").click(function() {
             $(".modal-title").html('Add Company');
-            let html =`<form action="{{route('admin.companies.store')}}" method="POST" id="form_data">@csrf
+            let html = `<form action="{{ route('admin.companies.store') }}" method="POST" id="form_data">@csrf
                     <div class="modal-body">
                         <div class="col-12">
                             <label for="company_name">Company Name <span class="text-danger">*</span></label>
@@ -124,8 +126,8 @@
                             <label for="city_id">City<span class="text-danger">*</span></label>
                             <select name="city_id" id="city_id" class="form-control" required>
                                 <option value="">Select City</option>
-                                @foreach($cities as $city)
-                                 <option value="{{$city->id}}">{{$city->city_name}}</option>
+                                @foreach ($cities as $city)
+                                 <option value="{{ $city->id }}">{{ $city->city_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -150,17 +152,17 @@
             checkCompanyName();
         });
 
-        $(document).on('click','.edit_data',function(){
+        $(document).on('click', '.edit_data', function() {
             let company_id = $(this).data("modelid");
-            let url = `{{ route('admin.companies.show', ':id') }}`; 
-            url = url.replace(':id', company_id);  
+            let url = `{{ route('admin.companies.show', ':id') }}`;
+            url = url.replace(':id', company_id);
 
             $.ajax({
-                method:"GET",
+                method: "GET",
                 url: url,
-                success:function(res){
+                success: function(res) {
                     $(".modal-title").html('Edit Company');
-                    let html =`<form action="{{route('admin.companies.update',':res')}}" method="post" id="form_data">@csrf
+                    let html = `<form action="{{ route('admin.companies.update', ':res') }}" method="post" id="form_data">@csrf
                     @method('PUT')
                     <div class="modal-body">
                         <div class="col-12">
@@ -187,8 +189,8 @@
                             <label for="city_id">City<span class="text-danger">*</span></label>
                             <select name="city_id" id="city_id" class="form-control" required>
                                 <option value="">Select City</option>
-                                @foreach($cities as $city)
-                                 <option value="{{$city->id}}">{{$city->city_name}}</option>
+                                @foreach ($cities as $city)
+                                 <option value="{{ $city->id }}">{{ $city->city_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -209,20 +211,20 @@
                     </div>
                 </form>`;
 
-                        $(".load_html").html(html);
-                        console.log(res);
-                        
-                        let update_url = `{{ route('admin.companies.update', ':id') }}`;
-                        update_url = update_url.replace(':id', res.id);
-                        $("#form_data").attr('action',update_url);
-                        $("#company_name").val(res.company_name);
-                        $("#website").val(res.website);
-                        $("#phone").val(res.phone);
-                        $("#city_id").val(res.city_id);
-                        $("#email").val(res.email);
-                        $("#gst").val(res.gst);
-                        $("#address").val(res.address);
-                        $("#add_company").modal('show');
+                    $(".load_html").html(html);
+                    console.log(res);
+
+                    let update_url = `{{ route('admin.companies.update', ':id') }}`;
+                    update_url = update_url.replace(':id', res.id);
+                    $("#form_data").attr('action', update_url);
+                    $("#company_name").val(res.company_name);
+                    $("#website").val(res.website);
+                    $("#phone").val(res.phone);
+                    $("#city_id").val(res.city_id);
+                    $("#email").val(res.email);
+                    $("#gst").val(res.gst);
+                    $("#address").val(res.address);
+                    $("#add_company").modal('show');
                 }
             })
         });
@@ -290,6 +292,10 @@
                         name: 'phone'
                     },
                     {
+                        data: 'customer_count',
+                        name: 'customer_count'
+                    },
+                    {
                         data: 'created_date',
                         name: 'created_date'
                     },
@@ -308,7 +314,7 @@
                     $('.statusChange').bootstrapSwitch();
                 }
 
-            });            
+            });
 
         });
     </script>

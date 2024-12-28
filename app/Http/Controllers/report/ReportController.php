@@ -14,17 +14,26 @@ use App\Models\City;
 use App\Models\Lead;
 use App\Models\Product;
 use App\Models\QuotationDetail;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class ReportController extends Controller
+class ReportController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('role_or_permission:Report access', only: ['index', 'areaWiseReport', 'categoryWiseReport', 'userWiseBusinessReport', 'userWiseConversionReport', 'clientBusinessReportAjax', 'categoryWiseReportAjax', 'valueBasedReportAjax', 'areaWiseReportAjax']),
+        ];
+    }
+
     public function index(Request $request){
         $companies = Company::orderBy('company_name','asc')->get(['company_name','id']);
         $product_categories = ProductCategory::orderBy('product_category_name','asc')->get();
         $users = Admin::orderBy('name','asc')->get();
         $cities = City::orderBy('city_name','asc')->get(['id','city_name']);
 
-        $from_date = ($request->from_date) ? $request->from_date : date('Y-m-d');
-        $to_date = ($request->to_date) ? $request->to_date : date('Y-m-d',strtotime(' + 30 day'));
+        $from_date = ($request->from_date) ? $request->from_date : date('Y-m-d',strtotime(' - 30 day'));
+        $to_date = ($request->to_date) ? $request->to_date : date('Y-m-d');
   
         $client_business_reports = PurchaseOrder::join('quotations','purchase_orders.quotation_id','quotations.id')
                                     ->join('leads','purchase_orders.lead_id','leads.id')

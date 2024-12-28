@@ -134,7 +134,10 @@
                                                                 class="form-control">
                                                                 <option value="">Select Lead Stage</option>
                                                                 @php
-                                                                    $manual_stages = $stages->where('stage_is_automated', '0');
+                                                                    $manual_stages = $stages->where(
+                                                                        'stage_is_automated',
+                                                                        '0',
+                                                                    );
                                                                 @endphp
                                                                 @foreach ($manual_stages as $stage)
                                                                     <option value="{{ $stage->id }}"
@@ -179,7 +182,8 @@
                                                                 <label for="gst_no">Company GST No <span
                                                                         class="text-danger"> *</span></label>
                                                                 <input type="text" name="gst_no" id="gst_no"
-                                                                    class="form-control" minlength="15" maxlength="15" required>
+                                                                    class="form-control" minlength="15" maxlength="15"
+                                                                    required>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -238,69 +242,115 @@
                 allowClear: true
             });
 
-            $('#product_id2').on('select2:select', function (e) {
-                    const selectedData = e.params.data;
-                    var product_id = selectedData.id;
+            $('#product_id2').on('select2:select', function(e) {
+                const selectedData = e.params.data;
+                var product_id = selectedData.id;
                 $.ajax({
                     type: 'post',
                     url: "{{ route('admin.product-details') }}",
                     data: {
-                        "product_id": product_id
+                        "product_id": product_id,
+                        "quot": 1,
                     },
                     success: function(res) {
                         var i = 0;
                         var tr = '';
-                        for (i = 0; i < res.length; i++) {
-                            var tr = tr + `<tr>
-                                                <td>
-                                                   <p> ` + res[i].product_name + `(` + res[i].product_code + `)</p>
-                                                    <textarea class="product_tech_spec mt-3" readonly>`+res[i].product_tech_spec+`</textarea>
 
-                                                    <input type="hidden" name="product_name[]" value="` + res[i]
-                                .product_name + `">
-                                                    <input type="hidden" name="product_code[]" value="` + res[i]
-                                .product_code + `">
-                                                    <input type="hidden" name="product_unit[]" value="` + res[i]
-                                .unit_type + `">
-                                                    <input type="hidden" name="product_tech_spec[]" value="` + res[i]
-                                .product_tech_spec + `">
-                                                    <input type="hidden" name="product_m_spec[]" value="` + res[i]
-                                .product_marketing_spec + `">
-                                                </td>
-                                                <td><input type="number" name="qty[]" class="qty mt-5" value="1"></td>
-                                                <td><input type="number" name="rate[]" class="rate mt-5" value="` + res[i]
-                                .product_price + `"></td>
+                        if (res.status == 'success') {
+                            tr = res.data
+                            $("#load_quot_table").append(tr);
+                            $('.product_tech_spec_textarea').summernote({
+                                tabsize: 2,
+                                minheight: 50,
+                                toolbar: [
+                                    ['style', ['bold', 'italic', 'underline',
+                                        'clear'
+                                    ]],
+                                    ['para', ['ul', 'ol', 'paragraph', 'style']],
+                                    ['height', ['height']],
+                                    // ['font', ['strikethrough', 'superscript', 'subscript']],
+                                ],
+                                styleTags: [
+                                    'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+                                ]
 
-                                                <td>
-                                                    <input type="hidden" class="single_amount" value="` + res[i]
-                                .product_price + `">
-                                                    <input type="text" name="amount[]" class="amount mt-5" value="` + res[i]
-                                .product_price + `" readonly>
-                                                </td>
-                                            </tr>`;
+                            });
+
+
+                            $('.product_q_sl_no').each(function(index) {
+                                $(this).text(index + 1);
+                            });
+                            updateTotal();
+                        } else {
+                            conole.log(res.message);
                         }
 
-                        $("tbody").append(tr);
-                        $('.product_tech_spec').summernote({tabsize: 2, minheight: 100,  toolbar: []});
-                        changeAmount();
+
+                        // for (i = 0; i < res.length; i++) {
+                        // var tr = tr + `<tr>
+                    //                     <td>
+                    //                        <p> ` + res[i].product_name + `(` + res[i].product_code + `)</p>
+                    //                         <textarea class="product_tech_spec mt-3" readonly>` + res[i]
+                        //     .product_tech_spec + `</textarea>
+
+                    //                         <input type="hidden" name="product_name[]" value="` + res[i]
+                        //     .product_name + `">
+                    //                         <input type="hidden" name="product_code[]" value="` + res[i]
+                        //     .product_code + `">
+                    //                         <input type="hidden" name="product_unit[]" value="` + res[i]
+                        //     .unit_type + `">
+                    //                         <input type="hidden" name="product_tech_spec[]" value="` + res[i]
+                        //     .product_tech_spec + `">
+                    //                         <input type="hidden" name="product_m_spec[]" value="` + res[i]
+                        //     .product_marketing_spec + `">
+                    //                     </td>
+                    //                     <td><input type="number" name="qty[]" class="qty mt-5" value="1"></td>
+                    //                     <td><input type="number" name="rate[]" class="rate mt-5" value="` +
+                        //     res[i]
+                        //     .product_price + `"></td>
+
+                    //                     <td>
+                    //                         <input type="hidden" class="single_amount" value="` + res[i]
+                        //     .product_price + `">
+                    //                         <input type="text" name="amount[]" class="amount mt-5" value="` +
+                        //     res[i]
+                        //     .product_price + `" readonly>
+                    //                     </td>
+                    //                 </tr>`;
+                        // }
+
+                        // $("tbody").append(tr);
+                        // $('.product_tech_spec').summernote({tabsize: 2, minheight: 100,  toolbar: []});
+                        // changeAmount();
                     }
                 })
             });
 
-            function changeAmount() {
-                $(".qty").keyup(function() {
-                    var quantity = $(this).val();
-                    var amount = $(this).closest('tr').find(
-                        '.single_amount').val();
-                    var total_amount = quantity * amount;
-                    if (isNaN(total_amount)) {
-                        $(this).closest('tr').find('.amount').val(0);
-                    } else {
-                        $(this).closest('tr').find('.amount').val(
-                            total_amount);
-                    }
+            $('#product_id2').on('select2:unselect', function(e) {
+                var data = e.params.data; // Get the unselected data
+                // Remove the corresponding content from the div
+                $(`#load_quot_table .item-row-${data.id}`).remove();
+                $('.product_sl_no').each(function(index) {
+                    $(this).text(index + 1);
                 });
-            }
+                updateTotal();
+            });
+
+            // function changeAmount() {
+            //     console.log('changeAmount-1');
+            //     $(".qty").keyup(function() {
+            //         var quantity = $(this).val();
+            //         var amount = $(this).closest('tr').find(
+            //             '.single_amount').val();
+            //         var total_amount = quantity * amount;
+            //         if (isNaN(total_amount)) {
+            //             $(this).closest('tr').find('.amount').val(0);
+            //         } else {
+            //             $(this).closest('tr').find('.amount').val(
+            //                 total_amount);
+            //         }
+            //     });
+            // }
             // for quotation_stage
 
             // for po stage
@@ -338,31 +388,78 @@
             // for po stage
 
             // for proforma
-            $('.product_tech_spec').summernote({tabsize: 2, minheight: 50,  toolbar: []});
+            // $('.product_tech_spec').summernote({tabsize: 2, minheight: 50,  toolbar: []});
+            $('.product_tech_spec_textarea').summernote({
+                tabsize: 2,
+                minheight: 50,
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['para', ['ul', 'ol', 'paragraph', 'style']],
+                    ['height', ['height']],
+                    // ['font', ['strikethrough', 'superscript', 'subscript']],
+                ],
+                styleTags: [
+                    'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+                ]
+
+            });
 
             changeAmount();
 
             function changeAmount() {
-                $(".qty").keyup(function() {
+                console.log('changeAmount-2');
+                $(document).on("change keyup keydown blur", ".qty",function() {
                     var quantity = $(this).val();
                     var amount = $(this).closest('tr').find('.rate').val();
                     var total_amount = quantity * amount;
+
+                    // console.log("test");
+                    // console.log($(this).closest('tr').find('.amount'));
+
+                    // if (isNaN(total_amount)) {
+                    //     $(this).closest('tr').find('.amount').val(0);
+                    // } else {
+                    //     $(this).closest('tr').find('.amount').val(
+                    //         total_amount.toFixed(2));
+                    // }
                     if (isNaN(total_amount)) {
-                        $(this).closest('tr').find('.amount').val(0);
+                        $(this).closest('tr').find('.amount').text(0);
                     } else {
-                        $(this).closest('tr').find('.amount').val(
+                        $(this).closest('tr').find('.amount').text(
                             total_amount.toFixed(2));
                     }
                     updateTotal();
                 });
             }
 
+            $(document).on("change keyup keydown blur", ".rate", function() {
+                console.log('rate change');
+
+                let rate = $(this).val();
+                let quantity = $(this).closest('tr').find('.qty').val();
+                let total_amount = quantity * rate;
+                if (isNaN(total_amount)) {
+                    $(this).closest('tr').find('.amount').text(0);
+                } else {
+                    $(this).closest('tr').find('.amount').text(total_amount.toFixed(2));
+                }
+                updateTotal();
+            });
+
             function updateTotal() {
+                console.log('updateTotal');
+
                 let total = 0;
                 $('.amount').each(function() {
-                    const value = parseFloat($(this).val()) || 0;
+                    console.log('amount');
+                    // console.log($(this).val());
+                    // const value = parseFloat($(this).val()) || 0;
+                    const value = parseFloat($(this).text()) || 0;
+                    // console.log(value);
+
                     total += value;
                 });
+                $('#total_amount').text(total);
                 $('#basic_amount').val('Rs. ' + total);
             }
             // for proforma
@@ -370,11 +467,11 @@
 
 
             //For Time line //
-            $(".send_sms").click(function(){
+            $(".send_sms").click(function() {
                 $("#send_sms").modal('show');
             });
 
-            $(".add_remark").click(function(){
+            $(".add_remark").click(function() {
                 $("#add_remark").modal('show');
             });
 

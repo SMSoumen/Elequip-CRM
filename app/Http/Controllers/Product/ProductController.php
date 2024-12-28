@@ -22,8 +22,8 @@ class ProductController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('role_or_permission:Product access|Product create|Product edit|Product delete', only: ['index', 'treeView']),
-            new Middleware('role_or_permission:Product create', only: ['create', 'store']),
+            new Middleware('role_or_permission:Product access|Product create|Product edit|Product delete', only: ['index', 'subCategoryList']),
+            new Middleware('role_or_permission:Product create', only: ['create', 'store', 'uploadProduct']),
             new Middleware('role_or_permission:Product edit', only: ['edit', 'update']),
             new Middleware('role_or_permission:Product delete', only: ['destroy']),
         ];
@@ -33,10 +33,19 @@ class ProductController extends Controller implements HasMiddleware
     {
         try {
             if ($request->ajax()) {
-                return DataTables::eloquent(Product::query()->join('product_categories','products.product_category_id','product_categories.id')
-                ->join('product_sub_categories','products.product_sub_category_id','product_sub_categories.id')
-                ->select('products.*','product_categories.product_category_name','product_sub_categories.product_subcat_name')->orderBy('products.id','desc'))
-                ->addColumn('status', function ($data) {
+
+                $query = Product::query()->with('category','sub_category','brand','unit');
+
+                // Product::query()->join('product_categories','products.product_category_id','product_categories.id')
+                // ->join('product_sub_categories','products.product_sub_category_id','product_sub_categories.id')
+                // ->select('products.*','product_categories.product_category_name','product_sub_categories.product_subcat_name')->orderBy('products.id','desc')
+
+
+                return DataTables::eloquent($query)->addColumn('product_category_name', function ($data) {
+                    return $data->category->product_category_name;
+                })->addColumn('product_subcat_name', function ($data) {
+                    return $data->sub_category?->product_subcat_name;
+                })->addColumn('status', function ($data) {
                     //return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
 
                     $table = 'products';
@@ -46,12 +55,13 @@ class ProductController extends Controller implements HasMiddleware
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.products.edit', $data->id);
-                    $deleteRoute = route('admin.products.destroy', $data->id);
+                    // $deleteRoute = route('admin.products.destroy', $data->id);
+                    $deleteRoute = null;
                     $edit_type = "page";
                     $permission = 'Product';
 
                     return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'editRoute', 'deleteRoute','permission','edit_type']))->render();
-                })->addIndexColumn()->rawColumns(['action','status','created_date','no_of_subcategory'])->make(true);
+                })->addIndexColumn()->rawColumns(['action','status','created_date','no_of_subcategory', 'product_category_name', 'product_subcat_name'])->make(true);
             }
             return view('admin.products.product.index');
         } catch (\Exception $e) {
@@ -81,12 +91,15 @@ class ProductController extends Controller implements HasMiddleware
             'product_code'  => 'required|string|unique:products,product_code',
             'product_price' => 'required|integer',
             'product_category_id'     => 'required|integer',
-            'product_sub_category_id' => 'required|integer',
-            'brand_id'          => 'required|integer',
+            'product_sub_category_id' => 'integer|nullable',
+            'brand_id'          => 'integer|nullable',
             'measuring_unit_id' => 'required|integer',
             'product_tech_spec' => 'required|string',
-            'product_marketing_spec' => 'string',
+            'product_marketing_spec' => 'string|nullable',
         ]);
+
+        $validated['product_code'] = strtoupper($validated['product_code']);
+
         $product = Product::create($validated);
         if($product){
             return redirect()->route('admin.products.index')->withSuccess('Product added successfully.');
@@ -120,12 +133,13 @@ class ProductController extends Controller implements HasMiddleware
             'product_code'  => "required|string|unique:products,product_code,$product->id",
             'product_price' => 'required|decimal:2',
             'product_category_id'     => 'required|integer',
-            'product_sub_category_id' => 'required|integer',
-            'brand_id'          => 'required|integer',
+            'product_sub_category_id' => 'integer|nullable',
+            'brand_id'          => 'integer|nullable',
             'measuring_unit_id' => 'required|integer',
             'product_tech_spec' => 'required|string',
-            'product_marketing_spec' => 'string',
+            'product_marketing_spec' => 'string|nullable',
         ]);
+        $validated['product_code'] = strtoupper($validated['product_code']);
         $product = $product->update($validated);
         if($product){
             return redirect()->route('admin.products.index')->withSuccess('Product updated successfully.');

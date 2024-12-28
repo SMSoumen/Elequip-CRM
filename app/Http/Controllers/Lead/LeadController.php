@@ -39,11 +39,24 @@ class LeadController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('role_or_permission:Lead access|Lead create|Lead edit|Lead delete', only: ['index', 'treeView']),
-            new Middleware('role_or_permission:Lead create', only: ['create', 'store']),
-            new Middleware('role_or_permission:Lead edit', only: ['edit', 'update']),
+            new Middleware('role_or_permission:Lead access|Lead create|Lead edit|Lead delete', only: ['index', 'productDetails', 'companyCustomers', 'leadProductDetails', 'quotationPdf']),
+            new Middleware('role_or_permission:Lead create', only: ['create', 'store', 'quotationGenerate', 'addQuotation']),
+            new Middleware('role_or_permission:Lead edit', only: ['edit', 'update', 'editQuotation', 'updateQuotation']),
             new Middleware('role_or_permission:Lead delete', only: ['destroy']),
+            new Middleware('role_or_permission:Lead Assign', only: ['leadAssignUser']),
+            new Middleware('role_or_permission:Proforma', only: ['companyGstUpdate', 'createProforma', 'proformaEdit', 'updateProforma', 'generateProformaPdf']),
+            new Middleware('role_or_permission:Lead Remarks', only: ['addRemarks']),
         ];
+    }
+
+
+    public function lead_permission_check($lead)
+    {
+        $user = auth("admin")->user();
+        $isSuperAdmin = $user->hasRole('Super-Admin');
+
+        $permission = ($isSuperAdmin || $lead?->admin_id == $user->id || $lead?->lead_assigned_to == $user->id) ? true : false;
+        return $permission;
     }
 
     public function index(Request $request)
@@ -95,7 +108,10 @@ class LeadController extends Controller implements HasMiddleware
                         $permission = 'Lead';
                         $type = "lead";
 
-                        return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'viewRoute', 'deleteRoute', 'permission', 'edit_type', 'type']))->render();
+                        $assignbtn = (isSuperAdmin()) && ($data->status == 1) ? true : false;
+                        $deactbtn = ($data->status == 1) && ($data->lead_stage_id < 5) && ($this->lead_permission_check($data)) ? true : false;
+
+                        return view('admin.layouts.partials.edit_delete_btn', compact(['data', 'viewRoute', 'deleteRoute', 'permission', 'edit_type', 'type', 'deactbtn', 'assignbtn']))->render();
                     })->addIndexColumn()->rawColumns(['customer', 'next_followup_date', 'assign_to', 'action', 'stage', 'created_date'])->make(true);
             }
             $lead_stages = LeadStage::where('status', '1')->orderBy('id', 'asc')->get();
@@ -190,7 +206,7 @@ class LeadController extends Controller implements HasMiddleware
      */
     public function show(Request $request, Lead $lead)
     {
-        $lead_customer = Customer::where('id',$lead->customer_id)->first(['customer_name','mobile']);
+        $lead_customer = Customer::where('id', $lead->customer_id)->first(['customer_name', 'mobile']);
         $templates = SmsFormat::whereNotNull('template_id')->where('status', 1)->orderBy('id', 'desc')->get(['id', 'template_name']);
         $followups = LeadFollowup::with('admin')->where('lead_id', $lead->id)->latest()->get();
         $followup_date = LeadFollowup::where(['lead_id' => $lead->id, 'followup_type' => "followup"])->latest()->value('followup_next_date');
@@ -233,7 +249,7 @@ class LeadController extends Controller implements HasMiddleware
             }
         }
 
-        return view('admin.lead.view', compact(['companies', 'customers', 'categories', 'sources', 'products', 'stages', 'lead', 'followup_date', 'lead_details', 'quotations', 'letest_quotation', 'po_details', 'orders', 'followups', 'lead_company', 'letest_quotation_details', 'proforma', 'quot_terms','templates','lead_customer']));
+        return view('admin.lead.view', compact(['companies', 'customers', 'categories', 'sources', 'products', 'stages', 'lead', 'followup_date', 'lead_details', 'quotations', 'letest_quotation', 'po_details', 'orders', 'followups', 'lead_company', 'letest_quotation_details', 'proforma', 'quot_terms', 'templates', 'lead_customer']));
     }
 
     /**
@@ -299,8 +315,21 @@ class LeadController extends Controller implements HasMiddleware
 
     public function productDetails(Request $request)
     {
-        $product = Product::join('measuring_units', 'products.measuring_unit_id', 'measuring_units.id')->select('products.*', 'measuring_units.unit_type')->where('products.id', $request->product_id)->get();
-        return $product;
+        $product = Product::join('measuring_units', 'products.measuring_unit_id', 'measuring_units.id')->select('products.*', 'measuring_units.unit_type')->where('products.id', $request->product_id)->first();
+
+        if($request->quot == 1) {
+            $html = view('admin.layouts.partials.dynamic_product_quot_data', compact('product'))->render();
+        }else{
+            $html = view('admin.layouts.partials.dynamic_product_data', compact('product'))->render();
+        }
+
+        if ($product) {
+            return response()->json(['status' => 'success', 'data' => $html]);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Error!! while fetching product details!!!']);
+        }
+
+        // return $product;
     }
 
     public function leadAssignUser(Request $request)
@@ -313,6 +342,36 @@ class LeadController extends Controller implements HasMiddleware
             return redirect()->back()->withSuccess('Lead assign successfully.');
         } else {
             return redirect()->back()->withErrors('Error!! while lead assign to user!!!');
+        }
+    }
+
+    // lead deactive
+    public function leadDeactive(Request $request)
+    {
+        $request->validate([
+            'lead_id' => 'required|integer|exists:leads,id',
+        ]);
+
+        $lead = Lead::where('id', $request->lead_id)->first();
+
+        if ($this->lead_permission_check($lead)) {
+
+            if ($lead->status == 1 && $lead->lead_stage_id < 5) {
+
+                if ($lead->update(['status' => 0])) {
+                    return redirect()->back()->withErrors('Lead Inactivated Successfully');
+                } else {
+                    return redirect()->back()->withErrors('Something Went Wrong. Please Try Again Later...');
+                }
+            } else {
+                if ($lead->status != 1) {
+                    return redirect()->back()->withErrors('This lead is already inactive');
+                } else {
+                    return redirect()->back()->withErrors('Lead cannot be inactive once order generated');
+                }
+            }
+        } else {
+            return redirect()->back()->withErrors('You are not authorised to access this!');
         }
     }
 
@@ -347,7 +406,10 @@ class LeadController extends Controller implements HasMiddleware
             'product_m_spec' => $request->product_m_spec,
             'qty'        => $request->qty,
             'rate'       => $request->rate,
-            'amount'     => $request->amount,
+            // 'amount'     => $request->amount,
+            'amount' => array_map(function ($qty, $rate) {
+                return $qty * $rate;
+            }, $request->qty, $request->rate),
             'discount'   => $request->discount,
             'tax'        => $request->tax,
             'basis'      => $request->basis,
@@ -698,18 +760,19 @@ class LeadController extends Controller implements HasMiddleware
         return $pdf->download('Lead Proforma-' . $file_name . '.pdf');
     }
 
-    public function addRemarks(Request $request){
+    public function addRemarks(Request $request)
+    {
         $request->validate([
             'lead_id' => 'required|integer',
             'remark'  => 'required|string',
         ]);
 
-        if(LeadFollowup::create([
+        if (LeadFollowup::create([
             'lead_id'            => $request->lead_id,
             'followup_remarks'   => $request->remark,
-            'followup_type'      =>'remarks',
+            'followup_type'      => 'remarks',
             'admin_id'           => auth("admin")->user()->id,
-        ])){
+        ])) {
             return redirect()->back()->withSuccess('Remarks added successfully.');
         } else {
             return redirect()->back()->withErrors('Error!! while adding remarks!!!');

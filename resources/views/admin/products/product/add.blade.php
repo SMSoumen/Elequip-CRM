@@ -37,7 +37,7 @@
                                     <div class="col-6 mt-2">
                                         <label for="product_category_id">Product Category <span class="text-danger"> *</span></label>
                                         <select name="product_category_id" id="product_category_id" class="form-control" required>
-                                            <option value="">Select Category</option>
+                                            <option class="d-none" value="">Select Category</option>
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}">{{$category->product_category_name}}</option>
                                             @endforeach
@@ -45,16 +45,16 @@
                                     </div>
 
                                     <div class="col-6 mt-2 load_subcat">
-                                        <label for="product_sub_category_id">Product Sub-Category <span class="text-danger"> *</span></label>
-                                        <select name="product_sub_category_id" id="product_sub_category_id" class="form-control" required>
-                                            <option value="">Select Sub-Category</option>
+                                        <label for="product_sub_category_id">Product Sub-Category</label>
+                                        <select name="product_sub_category_id" id="product_sub_category_id" class="form-control">
+                                            <option value="" class="d-none">Select Sub-Category</option>
                                         </select>
                                     </div>
 
                                     <div class="col-6 mt-2">
-                                        <label for="brand_id">Product Brand <span class="text-danger"> *</span></label>
-                                        <select name="brand_id" id="brand_id" class="form-control" required>
-                                            <option value="">Select Brand</option>
+                                        <label for="brand_id">Product Brand</label>
+                                        <select name="brand_id" id="brand_id" class="form-control">
+                                            <option class="d-none" value="">Select Brand</option>
                                             @foreach($brands as $brand)
                                                 <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
                                             @endforeach
@@ -64,12 +64,11 @@
                                     <div class="col-6 mt-2">
                                         <label>Product Price/Unit<span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control decimal" name="product_price" maxlength="12" value="{{old('product_price')}}">
+                                            <input type="number" class="form-control decimal" name="product_price" maxlength="12" value="{{old('product_price')}}">
                                             <div class="input-group-append">
                                                 <select class="form-control" name="measuring_unit_id">
-                                                            <option value="" hidden>/Unit</option>
                                                             @foreach($units as $unit)
-                                                            <option value="{{$unit->id}}">{{$unit->unit_type}}</option>   
+                                                            <option @if($unit->unit_type === "Unit") selected @endif value="{{$unit->id}}">/{{$unit->unit_type}}</option>   
                                                             @endforeach                        
                                                 </select>
                                             </div>
@@ -133,9 +132,9 @@
             data:{'cat_id':cat_id},
             success:function(res){
                 let i;
-                let html = `<label for="product_sub_category_id">Product Sub-Category <span class="text-danger"> *</span></label>
-                                <select name="product_sub_category_id" id="product_sub_category_id" class="form-control" required>
-                                    <option value="">Select Sub-Category</option>`;
+                let html = `<label for="product_sub_category_id">Product Sub-Category</label>
+                                <select name="product_sub_category_id" id="product_sub_category_id" class="form-control">
+                                    <option class="d-none" value="">Select Sub-Category</option>`;
                 for(i=0; i < res.length; i++){                   
                     html =  html + `<option value="`+res[i].id+`">`+res[i].product_subcat_name+`</option>`;
                 }

@@ -24,7 +24,8 @@
                                         </div>
 
                                         <div class="col-4">
-                                            <button type="submit" name="search" class="btn btn-warning mt-4">Search</button>
+                                            <label class="d-block" for=""><span>&nbsp;</span></label>
+                                            <button type="submit" name="search" class="btn btn-warning">Search</button>
                                         </div>
                                 </div>
                            </form>

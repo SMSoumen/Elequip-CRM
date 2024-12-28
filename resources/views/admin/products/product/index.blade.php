@@ -10,15 +10,19 @@
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title">Products</h3>
                                 @can('Products create')
-                                    <a href="{{route('admin.products.create')}}"><button type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Add Product</button></a>                              
+                                    <a href="{{ route('admin.products.create') }}"><button type="button"
+                                            class="btn btn-primary"><i class="fas fa-plus"></i> Add Product</button></a>
                                 @endcan
                             </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="mb-4">
-                               <a href="{{asset(asset_path('assets/admin/sample/products-sample.csv'))}}" download=""><button type="button" class="btn btn-warning" title="download"><i class="fas fa-download"></i> Sample File</button></a>                             
-                                <button type="button" class="btn btn-dark uploadProduct"><i class="fas fa-upload"></i> Upload Products</button>                             
+                                <a href="{{ asset(asset_path('assets/admin/sample/products-sample.csv')) }}"
+                                    download=""><button type="button" class="btn btn-warning" title="download"><i
+                                            class="fas fa-download"></i> Sample File</button></a>
+                                <button type="button" class="btn btn-dark uploadProduct"><i class="fas fa-upload"></i>
+                                    Upload Products</button>
                             </div>
 
                             @if (session('success'))
@@ -55,39 +59,39 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+
+    <div class="modal fade" id="uploadProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Upload Product</h5>
+                </div>
+                <form action="{{ route('admin.products.upload') }}" method="POST" enctype="multipart/form-data">@csrf
+                    <div class="modal-body">
+                        <div class="col-12">
+                            <label for="excel">Upload File</label>
+                            <input type="file" name="excel" id="excel" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 <!--===============================> Modal <==================================-->
 
-<div class="modal fade" id="uploadProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Upload Product</h5>
-      </div>
-    <form action="{{route('admin.products.upload')}}" method="POST" enctype="multipart/form-data">@csrf
-      <div class="modal-body">
-        <div class="col-12">
-            <label for="excel">Upload File</label>
-            <input type="file" name="excel" id="excel" class="form-control">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </form>
-    </div>
-  </div>
-</div>
+
 
 @push('scripts')
-
     <script>
-
-        $(".uploadProduct").click(function(){
+        $(".uploadProduct").click(function() {
             $("#uploadProduct").modal('show');
         });
-        
+
 
         $(document).ready(function() {
             var currentdate = new Date();
@@ -99,7 +103,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            
+
             var table = $('.listtable').DataTable({
                 dom: "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
                     "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
@@ -125,7 +129,7 @@
                 "responsive": true,
                 "lengthChange": true,
 
-                ajax: "{{ route('admin.products.index')}}",
+                ajax: "{{ route('admin.products.index') }}",
                 lengthMenu: [
                     [10, 25, 50, 200, 500, 1000, -1],
                     [10, 25, 50, 200, 500, 1000, "All"]
@@ -139,7 +143,8 @@
                     },
                     {
                         data: 'product_name',
-                        name: 'product_name'
+                        name: 'product_name',
+                        orderable: true,
                     },
                     {
                         data: 'product_code',
@@ -168,11 +173,12 @@
                         orderable: false,
                     }
                 ],
+                order: [[3, 'asc'], [1, 'asc']],
                 "fnDrawCallback": function() {
                     $('.statusChange').bootstrapSwitch();
                 }
 
-            });            
+            });
 
         });
     </script>

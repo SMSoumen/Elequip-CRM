@@ -38,7 +38,8 @@ class CustomerController extends Controller implements HasMiddleware
                     return $data->name_designation = $data->customer_name.' - ('.$data->designation.')';
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.customers.edit', $data->id);
-                    $deleteRoute = route('admin.customers.destroy', $data->id);
+                    // $deleteRoute = route('admin.customers.destroy', $data->id);
+                    $deleteRoute = null;
                     $edit_type = "page";
                     $permission = 'Customer';
 

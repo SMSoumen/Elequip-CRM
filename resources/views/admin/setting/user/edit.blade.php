@@ -30,12 +30,17 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="name">User Name</label>
+                                <label for="name">User Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="{{ old('name', $user->name) }}">
                             </div>
                             <div class="form-group">
-                                <label for="email">Email</label>
+                                <label for="email">Email <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" value="{{ old('email', $user->email) }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">User Mobile <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                    placeholder="Enter phone" value="{{ old('phone', $user->phone) }}">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
@@ -45,9 +50,10 @@
                                 <label for="password_confirmation">Confirm Password</label>
                                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Re-enter password">
                             </div>
+                            
 
                             <div class="form-group">
-                                <label>Role</label>
+                                <label>Role <span class="text-danger">*</span></label>
                                 <div class="select2-purple">
                                     <select class="select2" multiple="multiple" data-placeholder="Select roles" data-dropdown-css-class="select2-purple" style="width: 100%;" id="roles" name="roles[]">
                                         @forelse($roles as $role)

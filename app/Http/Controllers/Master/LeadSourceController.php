@@ -28,12 +28,15 @@ class LeadSourceController extends Controller implements HasMiddleware
         try {
             if ($request->ajax()) {
                 return DataTables::eloquent(LeadSource::query()->orderBy('id','desc'))->addColumn('status', function ($data) {
-                    return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+                    // return $data->status == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+                    $table = 'lead_sources';
+                    return view('admin.layouts.partials.listing_status_switch', compact(['data', 'table']))->render();
                 })->addColumn('created_date', function ($data) {
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.lead-sources.edit', $data->id);
-                    $deleteRoute = route('admin.lead-sources.destroy', $data->id);
+                    // $deleteRoute = route('admin.lead-sources.destroy', $data->id);
+                    $deleteRoute = null;
                     $permission = 'LeadSource';
                     $edit_type = "modal";
 

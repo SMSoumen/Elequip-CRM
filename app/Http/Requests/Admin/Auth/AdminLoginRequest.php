@@ -49,6 +49,21 @@ class AdminLoginRequest extends FormRequest
             ]);
         }
 
+        // Get the authenticated user
+        $user = Auth::guard('admin')->user();
+
+        // Check if the user has `status = 1`
+        if ($user->status !== 1) {
+            // Logout the user and clear the session
+            Auth::guard('admin')->logout();
+
+            RateLimiter::hit($this->throttleKey());
+
+            throw ValidationException::withMessages([
+                'email' => 'Your account is not active.',
+            ]);
+        }
+
         RateLimiter::clear($this->throttleKey());
     }
 

@@ -25,7 +25,7 @@ class OrderController extends Controller implements HasMiddleware
         return [
             new Middleware('role_or_permission:Order access|Order create|Order edit|Order delete', only: ['index', 'treeView']),
             new Middleware('role_or_permission:Order create', only: ['create', 'store']),
-            new Middleware('role_or_permission:Order edit', only: ['edit', 'update']),
+            new Middleware('role_or_permission:Order edit', only: ['edit', 'update', 'addAdvanceAmount', 'addRemainingAmount', 'updateLeadStageModal', 'updateLeadStage', 'orderSendSms']),
             new Middleware('role_or_permission:Order delete', only: ['destroy']),
         ];
     }
@@ -241,18 +241,20 @@ class OrderController extends Controller implements HasMiddleware
     public function orderSendSms(Request $request)
     {
         $request->validate([
-            'mobile_no' => 'required|integer',
+            'mobile_no' => 'required|integer|size:10',
             'lead_id'   => 'required|integer',
             'sms_title' => 'required|integer',
         ]);
 
         $sms_template = SmsFormat::where('id', $request->sms_title)->first(['id', 'template_format', 'template_id']);
-        $mobile_no = 918777269326;
+        $mobile_no = "918777269326";
         if ($sms_template->id == 14) {
             $quotation = Quotation::where('lead_id', $request->lead_id)->latest()->first(['quot_ref_no']);
-            $msg = str_replace('{ORDER_ID}', $quotation->quot_ref_no, $sms_template->template_format);
+            $ref_no = $quotation ? $quotation->quot_ref_no : NULL;
+            $msg = str_replace('{ORDER_ID}', $ref_no, $sms_template->template_format);
         } else {
             $po = PurchaseOrder::where('lead_id', $request->lead_id)->first(['po_refer_no']);
+            $ref_no = $po ? $po->po_refer_no : NULL;
             $msg = str_replace('{ORDER_ID}', $po->po_refer_no, $sms_template->template_format);
         }
 

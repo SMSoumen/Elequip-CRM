@@ -1,126 +1,163 @@
 @extends('admin.layouts.master')
-
 @section('main_content')
-
-<x-breadcrumb />
-
-<!-- Main content -->
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                            <h3 class="card-title">DataTable with Users</h3>
-                            @can('User create')
-                            <a href="{{route('admin.users.create')}}" class="btn btn-sm btn-success">Add User</a>
-                            @endcan
-                        </div>
-                    </div>
-
-
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>User Name</th>
-                                    <th>User Email</th>
-                                    <th>User Avatar</th>
-                                    <th>User Role</th>
-                                    {{-- <th>User Status</th> --}}
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @can('User access')
-                                @forelse($users as $user)
-                                <tr>
-                                    <td>{{$user->name}}</td>
-
-                                    <td>{{$user->email}}</td>
-                                    <td>
-                                        @if($user->avatar)
-                                        <span><img src="{{asset($user->avatar)}}" alt="" class="user-profile-img"></span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @forelse($user->roles as $role)
-                                        <span class="badge badge-pill badge-custom badge-info">{{$role->name}}</span>
-                                        @empty
-                                        <span class="badge badge-pill badge-custom badge-secondary">Sorry there is no role</span>
-                                        @endforelse
-                                    </td>
-                                    {{-- <td>
-                                        <input type="checkbox" class="userStatusChange" name="user-checkbox" data-user="{{$user->id}}" data-url="{{route('admin.user.change.status')}}" @if($user->status == 1) checked @endif data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                                    </td> --}}
-
-                                    <td class="d-flex">
-                                        @can('User edit')
-                                        <a href="{{route('admin.users.edit',$user->id)}}" class="btn btn-sm btn-warning mr-2">Edit</a>
-                                        @endcan
-
-                                        @can('User delete')
-                                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="inline deleteConfirm">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-sm btn-danger">Delete</button>
-                                        </form>
-                                        @endcan
-
-                                    </td>
-                                </tr>
-                                @empty
-                                @endforelse
+    <x-breadcrumb />
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="card-title">Admin</h3>
+                                @can('Admin create')
+                                    <a href="{{ route('admin.users.create') }}" type="button"
+                                        class="btn btn-primary add_brand">Add Admin</a>
                                 @endcan
-                            </tbody>
-                        </table>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (\Session::has('error'))
+                                <div class="text-danger pt-3 ">
+                                    <ul>
+                                        <li>{!! \Session::get('error') !!}</li>
+                                    </ul>
+                                </div>
+                            @endif
+                            <table class="listtable table table-bordered data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Sl No</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Code</th>
+                                        <th>Role</th>
+                                        <th>Created Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card-body -->
+                    <!-- /.card -->
                 </div>
-                <!-- /.card -->
+                <!-- /.col -->
             </div>
-            <!-- /.col -->
+            <!-- /.row -->
         </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-</section>
-<!-- /.content -->
-
-
-
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
 @endsection
 
-@push('scripts')
 
-<script>
-    $(".userStatusChange").on('switchChange.bootstrapSwitch', function(e) {
-        // console.log($(this).data('user'));
-        let userId = $(this).data('user');
-        let url = $(this).data('url');
-        $.ajax({
-            url: url,
-            method: 'POST',
-            data: {
-                'user_stat': e.target.checked,
-                'user_id': userId,
-                '_token': "{{csrf_token()}}",
-            },
-            dataType: "json",
-            success: function(response) {
-                console.log(response.error);
-                if (!response.error) {
-                    toastr.success(response.msg);
-                } else {
-                    toastr.error(response.msg);
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            var currentdate = new Date();
+            var datetime = currentdate.getDate() + "-" + (currentdate.getMonth() + 1) + "-" + currentdate
+                .getFullYear() + "-" + currentdate.getHours() + "-" + currentdate.getMinutes() + "-" + currentdate
+                .getSeconds();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            }
+            });
+
+            var table = $('.listtable').DataTable({
+                dom: "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
+                    "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                buttons: [{
+                        extend: 'excel',
+                        title: datetime + '-Data export',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        title: datetime + '-Data export',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5]
+                        }
+                    }
+                ],
+                paging: true,
+                searching: true,
+                "processing": true,
+                "serverSide": true,
+                "responsive": true,
+                "lengthChange": true,
+
+                ajax: "{{ route('admin.users.index') }}",
+                lengthMenu: [
+                    [10, 25, 50, 200, 500, 1000, -1],
+                    [10, 25, 50, 200, 500, 1000, "All"]
+                ],
+
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'code',
+                        name: 'code'
+                    },
+                    {
+                        data: 'role',
+                        name: 'role'
+                    },
+                    {
+                        data: 'created_date',
+                        name: 'created_date'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        searchable: false,
+                        orderable: false,
+                    }
+                ],
+                "fnDrawCallback": function() {
+                    $('.statusChange').bootstrapSwitch();
+                }
+
+            });
 
         });
-    });
-</script>
-
+    </script>
 @endpush

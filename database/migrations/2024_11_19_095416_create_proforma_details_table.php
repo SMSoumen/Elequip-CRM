@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('proforma_product_code')->nullable();
             $table->longText('proforma_product_spec');
             $table->decimal('proforma_product_qty', 15, 2)->default(0.00);
-            $table->string('proforma_product_unit');
+            $table->string('proforma_product_unit')->nullable();
             $table->decimal('proforma_product_price', 15, 2);
             $table->timestamps();
         });

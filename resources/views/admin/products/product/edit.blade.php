@@ -38,7 +38,7 @@
                                     <div class="col-6 mt-2">
                                         <label for="product_category_id">Product Category <span class="text-danger"> *</span></label>
                                         <select name="product_category_id" id="product_category_id" class="form-control" required>
-                                            <option value="">Select Category</option>
+                                            <option class="d-none" value="">Select Category</option>
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}" @if($category->id == $product->product_category_id) {{'selected'}} @endif>{{$category->product_category_name}}</option>
                                             @endforeach
@@ -46,9 +46,9 @@
                                     </div>
 
                                     <div class="col-6 mt-2 load_subcat">
-                                        <label for="product_sub_category_id">Product Sub-Category <span class="text-danger"> *</span></label>
-                                        <select name="product_sub_category_id" id="product_sub_category_id" class="form-control" required>
-                                            <option value="">Select Sub-Category</option>
+                                        <label for="product_sub_category_id">Product Sub-Category</label>
+                                        <select name="product_sub_category_id" id="product_sub_category_id" class="form-control">
+                                            <option class="d-none" value="">Select Sub-Category</option>
                                             @foreach($subcategories as $subcategory)
                                              <option value="{{$subcategory->id}}" @if($subcategory->id == $product->product_sub_category_id) {{'selected'}} @endif>{{$subcategory->product_subcat_name}}</option>
                                             @endforeach
@@ -56,8 +56,8 @@
                                     </div>
 
                                     <div class="col-6 mt-2">
-                                        <label for="brand_id">Product Brand <span class="text-danger"> *</span></label>
-                                        <select name="brand_id" id="brand_id" class="form-control" required>
+                                        <label for="brand_id">Product Brand</label>
+                                        <select name="brand_id" id="brand_id" class="form-control">
                                             <option value="">Select Brand</option>
                                             @foreach($brands as $brand)
                                                 <option value="{{$brand->id}}" @if($brand->id == $product->brand_id) {{'selected'}} @endif>{{$brand->brand_name}}</option>
@@ -70,8 +70,7 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control decimal" name="product_price" maxlength="12" value="{{$product->product_price}}">
                                             <div class="input-group-append">
-                                                <select class="form-control" name="measuring_unit_id">
-                                                            <option value="" hidden>/Unit</option>
+                                                <select class="form-control" name="measuring_unit_id">                                                     
                                                             @foreach($units as $unit)
                                                             <option value="{{$unit->id}}" @if($unit->id == $product->measuring_unit_id) {{'selected'}} @endif>{{$unit->unit_type}}</option>   
                                                             @endforeach                        

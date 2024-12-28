@@ -32,7 +32,8 @@ class BrandController extends Controller implements HasMiddleware
                     return $data->created_date = date('d-m-Y',strtotime($data->created_at));
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.brand.edit', $data->id);
-                    $deleteRoute = route('admin.brand.destroy', $data->id);
+                    // $deleteRoute = route('admin.brand.destroy', $data->id);
+                    $deleteRoute = null;
                     $edit_type = "modal";
                     $permission = 'Brand';
 

@@ -39,8 +39,9 @@ class ProductCategoryController extends Controller implements HasMiddleware
                     return $data->no_of_subcategory = ProductSubCategory::where('product_category_id',$data->id)->count();
                 })->addColumn('action', function ($data) {
                     $editRoute = route('admin.product-categories.edit', $data->id);
-                    $deleteRoute = route('admin.product-categories.destroy', $data->id);
+                    // $deleteRoute = route('admin.product-categories.destroy', $data->id);
                     $subcategoryRoute = route('admin.product-subcategories.all', $data->id);
+                    $deleteRoute = null;
                     $edit_type = "modal";
                     $type="subcategory_list";
                     $permission = 'ProductCategory';
