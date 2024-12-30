@@ -21530,33 +21530,5 @@
         "customer_created": "2024-12-17 13:04:28",
         "customer_modified": null,
         "customer_status": "1"
-    },
-    {
-        "_customer_id": "1540",
-        "customer_name": "Tarun Dhiman",
-        "customer_designation": "Sr. Manager-Maintenance",
-        "customer_phone": "9138802061",
-        "customer_phone2": "",
-        "customer_email": "tarun.dhiman@inkofix.com",
-        "customer_email2": "",
-        "customer_company": "1233",
-        "customer_address": "(UNIT)\r\nKila No. 14, 17, Village Bhigan, Tehsil Ganaur, Distt.- Sonipat (Haryana) 131039",
-        "customer_created": "2024-12-20 13:31:27",
-        "customer_modified": null,
-        "customer_status": "1"
-    },
-    {
-        "_customer_id": "1541",
-        "customer_name": "Toran Ratre",
-        "customer_designation": "Purchase",
-        "customer_phone": "9165640971",
-        "customer_phone2": "",
-        "customer_email": "purchase@shivalikengineering.com",
-        "customer_email2": "ed@shivalikengineering.com",
-        "customer_company": "1234",
-        "customer_address": "Unit 1- Plot No. 8, Heavy Industrial Area, Village: Hathkhoj, Bhilai, Distt-Durg, Pin-490026,\r\nChhattisgarh, India",
-        "customer_created": "2024-12-20 13:42:30",
-        "customer_modified": "2024-12-20 13:43:52",
-        "customer_status": "1"
     }
 ]
