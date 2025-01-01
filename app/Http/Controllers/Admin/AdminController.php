@@ -183,7 +183,11 @@ class AdminController extends Controller implements HasMiddleware
             'name' => 'required',
             'email' => 'required|email|unique:admins,email,' . $user->id,
             'phone' => 'required|digits:10|unique:admins,phone,' . $user->id,
-            'roles' => ['required', 'array', Rule::notIn([1])],
+            'roles' => [
+                Rule::requiredIf($user->id != 1), // Use Rule::requiredIf for conditional required
+                'array',
+                Rule::notIn([1]),
+            ],
         ]);
 
         if ($request->password != null) {
@@ -196,7 +200,11 @@ class AdminController extends Controller implements HasMiddleware
         // dd($request->all());
         $user->update($validated);
 
-        $user->syncRoles($request->roles);
+        if($user->id !== 1){
+           $user->syncRoles($request->roles); 
+        }
+        
+
         return redirect()->back()->withSuccess('Admin updated !!!');
     }
 

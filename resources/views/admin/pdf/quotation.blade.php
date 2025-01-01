@@ -88,6 +88,12 @@
             margin-bottom: 0;
             text-decoration: underline;
         }
+
+        .p_spec p {
+            margin-bottom: 0 !important;
+            margin-top: 2px !important;
+            line-height: 20px
+        }
     </style>
 </head>
 
@@ -184,15 +190,15 @@
                                 {{ $product->quot_product_name }}
                                 {{ $product->quot_product_code ? '(' . $product->quot_product_code . ')' : '' }}
                             </p>
-                            <div class="p_font" style="">
+                            <div class="p_font p_spec" style="">
                                 @if ($product->quot_product_m_spec)
-                                    {{ strip_tags(htmlspecialchars_decode($product->quot_product_m_spec)) }}
+                                    {!! htmlspecialchars_decode($product->quot_product_m_spec) !!}
                                 @endif
                             </div>
 
-                            <div class="p_font">
+                            <div class="p_font p_spec">
                                 @if ($product->quot_product_tech_spec)
-                                    {{ strip_tags(htmlspecialchars_decode($product->quot_product_tech_spec)) }}
+                                    {!! htmlspecialchars_decode($product->quot_product_tech_spec) !!}
                                 @endif
                             </div>
 
@@ -217,7 +223,7 @@
 
                 <tr style="">
                     <td style=""></td>
-                    <td style="" class="text-right p_font"><b>BASIC TOTAL</b> </td>
+                    <td style="" align="right" class="text-right p_font"><b>BASIC TOTAL</b> </td>
                     <td style=""></td>
                     <td style=""></td>
                     <td style=""></td>

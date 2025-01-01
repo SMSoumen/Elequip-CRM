@@ -7,7 +7,7 @@
     <title>Elequip ADMIN | Dashboard</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon"
-        href="{{ asset(asset_path('assets/frontend/images/favicon/cropped-favicon-192x192.png')) }}">
+        href="{{ asset(asset_path('assets/admin/img/logo.png')) }}">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -255,8 +255,9 @@
             padding: 10px 5px;
             color: #e86338;
             height: 40px;
-            margin-top: 15px;
+            /* margin-top: 15px; */
             line-height: 18px;
+            border-radius: .25rem;
         }
         .input-orange-elequip{
             border: 2px solid #e0bd90;

@@ -36,7 +36,7 @@ class OrderController extends Controller implements HasMiddleware
             if ($request->ajax()) {
                 $query = PurchaseOrder::query()->join('leads', 'purchase_orders.lead_id', 'leads.id')
                 ->join('lead_stages', 'leads.lead_stage_id', 'lead_stages.id')
-                ->join('customers', 'leads.company_id', 'customers.id')->join('companies', 'leads.customer_id', 'companies.id')
+                ->join('customers', 'leads.company_id', 'customers.id')->leftJoin('companies', 'leads.customer_id', 'companies.id')
                 ->select('purchase_orders.id', 'purchase_orders.po_net_amount', 'purchase_orders.po_refer_no', 'purchase_orders.po_advance', 'purchase_orders.po_remaining', 'purchase_orders.created_at', 'purchase_orders.lead_id', 'customers.customer_name', 'customers.mobile', 'customers.designation', 'customers.email', 'companies.company_name', 'lead_stages.stage_name', 'leads.lead_stage_id')
                 ->orderBy('purchase_orders.id', 'desc');
 
@@ -55,9 +55,11 @@ class OrderController extends Controller implements HasMiddleware
 
                 return DataTables::eloquent($query)
                     ->addColumn('orderby', function ($data) {
-                        return $data->orderby = $data->customer_name . '(' . $data->designation . ')<br>' . $data->company_name . '<br>Email : ' . $data->email . '<br> Phone : ' . $data->mobile;
+                        return $data->orderby = $data->customer_name . '(' . $data->designation . ')<br>' . $data->company_name . '<br><b>Email :</b> ' . $data->email . '<br><b> Phone : </b>' . $data->mobile;
                     })
-                    ->addColumn('balance_amount', function ($data) {
+                    ->addColumn('po_net_amount', function ($data) {
+                        return number_format($data->po_net_amount, 2);
+                    })->addColumn('balance_amount', function ($data) {
                         return $data->balance_amount = number_format($data->po_remaining, 2);
                     })
                     ->addColumn('stage', function ($data) {

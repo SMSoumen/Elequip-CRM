@@ -1,19 +1,19 @@
-:root{
+:root {
     --main-color: #ea5e20;
 }
 
-.table-img{
+.table-img {
     max-width: 70px;
     max-height: 70px;
     object-fit: contain;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    margin: 0; 
+    margin: 0;
 }
 
 option:disabled {
@@ -31,7 +31,7 @@ option:disabled {
     text-rendering: auto;
     line-height: inherit;
     -webkit-font-smoothing: antialiased;
-    content: '\21E7';
+    content: "\21E7";
     color: #212529;
     font-size: 1.25rem;
 }
@@ -42,12 +42,73 @@ option:disabled {
     border-radius: 7px;
 }
 
-.text-custom{
+.text-custom {
     color: var(--main-color) !important;
 }
 
-.alert-custom{
+.alert-custom {
     color: var(--main-color) !important;
     background-color: rgba(255, 188, 52, 0.2);
     border-color: var(--main-color) !important;
+}
+
+.fs-08 {
+    font-size: 0.8rem;
+}
+
+.listtable td {
+    font-size: 0.9rem;
+}
+
+.btn-group-sm > .btn,
+.btn-sm {
+    padding: 0.15rem 0.25rem;
+    /* font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem; */
+}
+
+.nav-link {
+    display: block;
+    /* padding: .25rem 0.5rem; */
+    font-size: 14px;
+}
+
+[class*="sidebar-dark-"] .nav-sidebar > .nav-item > .nav-treeview {
+    background-color: #101010;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: var(--main-color);
+    color: #fff;
+}
+
+[class*=sidebar-dark-] .nav-sidebar>.nav-item.menu-open>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item:hover>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link:focus {
+    background-color: var(--main-color);
+    color: #fff;
+}
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
+    background-color: rgba(255, 255, 255, .9);
+    color: var(--main-color);
+}
+
+.sidebar .nav-link p{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* [class*=sidebar-dark-] .nav-sidebar>.nav-item:hover>.nav-link{
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+} */
+/* 
+
+.nav-item .menu-open>.nav-link {
+    background-color: var(--main-color);
+    color: #fff;
+} */
+
+.nav-sidebar .nav-item>.nav-link {
+    margin-bottom: 0rem;
 }

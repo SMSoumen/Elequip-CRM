@@ -91,7 +91,12 @@
         .p_font{
             font-size: 15px;
             /* line-height: 24px !important; */
-        }        
+        }     
+        .p_spec p {
+            margin-bottom: 0 !important;
+            margin-top: 2px !important;
+            line-height: 20px
+        }   
     </style>
 </head>
 
@@ -184,9 +189,9 @@
                                 {{ $product->proforma_product_name }}
                                 {{ $product->proforma_product_code ? '(' . $product->proforma_product_code . ')' : '' }}
                             </p>
-                            <div class="p_font" style="">
+                            <div class="p_font p_spec" style="">
                                 @if ($product->proforma_product_spec)
-                                    {{ strip_tags(htmlspecialchars_decode($product->proforma_product_spec)) }}
+                                    {!! htmlspecialchars_decode($product->proforma_product_spec) !!}
                                 @endif
                             </div>
                         </td>

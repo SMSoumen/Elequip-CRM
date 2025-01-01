@@ -1,15 +1,3 @@
-<style>
-    .nav-link {
-        display: block;
-        padding: .25rem 0.5rem;
-        font-size: 14px;
-    }
-
-    [class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-treeview {
-        background-color: #101010;
-    }
-</style>
-
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('admin.dashboard') }}" class="brand-link">
@@ -49,7 +37,8 @@
                 <li class="nav-item">
                     <a href=" {{ route('admin.dashboard') }}"
                         class="nav-link  @if (Request::is('admin/dashboard')) active @endif">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        {{-- <i class="nav-icon fas fa-tachometer-alt"></i> --}}
+                        <img class="menu-icon nav-icon" src="{{ asset(asset_path('assets/admin/img/menu_icons/Icon/7.png')) }}" alt="menu icon">
                         <p>
                             Dashboard
                         </p>
@@ -59,7 +48,8 @@
                 @can(['Admin access'])
                 <li class="nav-item @if (Request::is('admin/roles*') || Request::is('admin/permissions*') || Request::is('admin/users*')) menu-open @endif ">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
+                        {{-- <i class="nav-icon fas fa-user"></i> --}}
+                        <img class="menu-icon nav-icon" src="{{ asset(asset_path('assets/admin/img/menu_icons/Icon/15.png')) }}" alt="menu icon">
                         <p>
                             User Management
                             <i class="fas fa-angle-left right"></i>
@@ -124,7 +114,8 @@
                         Request::is('admin/brand*') ||
                         Request::is('admin/sms-format*')) menu-open @endif">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-cubes"></i>
+                        {{-- <i class="nav-icon fas fa-cubes"></i> --}}
+                        <img class="menu-icon nav-icon" src="{{ asset(asset_path('assets/admin/img/menu_icons/Icon/5.png')) }}" alt="menu icon">
                         <p>
                             Master Management
                             <i class="fas fa-angle-left right"></i>
@@ -209,8 +200,9 @@
                 @if (Auth::user()->can('Company access') || Auth::user()->can('Customer access') || Auth::user()->can('Customer create'))
                     <li class="nav-item @if (Request::is('admin/companies*') || Request::is('admin/customers*') || Request::is('admin/upload/contact*')) menu-open @endif">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-address-card"></i>
+                            {{-- <i class="nav-icon far fa-address-card"></i> --}}
                             {{-- <i class="fas fa-cubes"></i> --}}
+                            <img class="menu-icon nav-icon" src="{{ asset(asset_path('assets/admin/img/menu_icons/Icon/3.png')) }}" alt="menu icon">
                             <p>
                                 Contact Management
                                 <i class="fas fa-angle-left right"></i>
@@ -264,8 +256,9 @@
                             Request::is('admin/products*') ||
                             Request::is('admin/product/subcategories*')) menu-open @endif">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-address-card"></i>
+                            {{-- <i class="nav-icon far fa-address-card"></i> --}}
                             {{-- <i class="fas fa-cubes"></i> --}}
+                            <img class="menu-icon nav-icon" src="{{ asset(asset_path('assets/admin/img/menu_icons/Icon/1.png')) }}" alt="menu icon">
                             <p>
                                 Product Management
                                 <i class="fas fa-angle-left right"></i>
@@ -303,7 +296,8 @@
                 @can(['Lead access'])
                     <li class="nav-item @if (Request::is('admin/leads*')) menu-open @endif">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-address-card"></i>
+                            <img class="menu-icon nav-icon" src="{{ asset(asset_path('assets/admin/img/menu_icons/Icon/9.png')) }}" alt="menu icon">
+                            {{-- <i class="nav-icon far fa-address-card"></i> --}}
                             {{-- <i class="fas fa-cubes"></i> --}}
                             <p>
                                 Lead Management
@@ -330,7 +324,8 @@
                 @can(['Order access'])
                     <li class="nav-item @if (Request::is('admin/orders*')) menu-open @endif">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-boxes"></i>
+                            {{-- <i class="nav-icon fas fa-boxes"></i> --}}
+                            <img class="menu-icon nav-icon" src="{{ asset(asset_path('assets/admin/img/menu_icons/Icon/14.png')) }}" alt="menu icon">
                             <p>
                                 Order Management
                                 <i class="fas fa-angle-left right"></i>
@@ -356,7 +351,8 @@
                 @can(['Report access'])
                 <li class="nav-item">
                     <a href="{{route('admin.reports')}}" class="nav-link @if (Request::is('admin/reports')) active @endif">
-                        <i class="nav-icon fas fa-columns"></i>
+                        {{-- <i class="nav-icon fas fa-columns"></i> --}}
+                        <img class="menu-icon nav-icon" src="{{ asset(asset_path('assets/admin/img/menu_icons/Icon/11.png')) }}" alt="menu icon">
                         <p>Reports</p>
                     </a>
                 </li>

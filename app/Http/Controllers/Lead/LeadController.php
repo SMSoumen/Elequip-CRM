@@ -239,7 +239,7 @@ class LeadController extends Controller implements HasMiddleware
         //     $quot_terms = QuotationTerm::where('quotation_id', $letest_quotation->id)->first();
         // }
 
-        $lead_company = Company::where('id', $lead->company_id)->first(['id', 'gst']);
+        $lead_company = Company::where('id', $lead->company_id)->first(['id', 'gst', 'company_name']);
         $proforma = ProformaInvoice::with('proforma_details')->where('lead_id', $lead->id)->first();
 
         if ($letest_quotation) {
@@ -317,9 +317,9 @@ class LeadController extends Controller implements HasMiddleware
     {
         $product = Product::join('measuring_units', 'products.measuring_unit_id', 'measuring_units.id')->select('products.*', 'measuring_units.unit_type')->where('products.id', $request->product_id)->first();
 
-        if($request->quot == 1) {
+        if ($request->quot == 1) {
             $html = view('admin.layouts.partials.dynamic_product_quot_data', compact('product'))->render();
-        }else{
+        } else {
             $html = view('admin.layouts.partials.dynamic_product_data', compact('product'))->render();
         }
 
@@ -502,6 +502,7 @@ class LeadController extends Controller implements HasMiddleware
 
     public function updateQuotation(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'quotation_id'      => 'required|integer',
             'lead_id'           => 'required|integer',
@@ -577,9 +578,10 @@ class LeadController extends Controller implements HasMiddleware
         $data['head_img'] = public_path('assets/admin/img/quotation-header.jpg');
         $data['lead'] = Lead::with('company', 'customer')->where('id', $data['quotation']->lead_id)->first();
         $pdf = Pdf::loadView('admin.pdf.quotation', $data)->setOption('fontDir', public_path('assets/admin/fonts'))->setPaper('A4', 'portrait');
-        // $file_name = date('d-M-Y').'-'.$data['quotation']->id.'-'.$data['quotation']->quot_version.'-';
-        $file_name = mt_rand(11111111, 999999999);
 
+        // $file_name_rnd = time() . '-' . mt_rand(11111111, 999999999);
+        $file_name_rnd = time();
+        $file_name = $data['quotation']->lead_id .'-'. $data['quotation']->quot_version.'-'. $file_name_rnd;
         return $pdf->download('Lead Quotation-' . $file_name . '.pdf');
     }
 
@@ -662,6 +664,8 @@ class LeadController extends Controller implements HasMiddleware
                     'proforma_product_name'  => $request->product_name[$key],
                     'proforma_product_code'  => $request->product_code[$key],
                     'proforma_product_unit'  => $request->product_unit[$key],
+                    'created_at'             => date('Y-m-d H:i:s'),
+                    'updated_at'             => date('Y-m-d H:i:s'),
                 ]);
             }
             DB::table('proforma_details')->insert($details);
@@ -669,6 +673,7 @@ class LeadController extends Controller implements HasMiddleware
             return redirect()->back()->withSuccess('Proforma added successfully.');
         } catch (Exception $e) {
             DB::rollBack();
+            dd($e->getMessage());
             return redirect()->back()->withErrors('Error!! while adding proforma!!!');
         }
     }
@@ -740,6 +745,7 @@ class LeadController extends Controller implements HasMiddleware
             return redirect()->route('admin.leads.show', $request->lead_id)->withSuccess('Proforma updated successfully.');
         } catch (Exception $e) {
             DB::rollBack();
+            
             return redirect()->back()->withErrors('Error!! while updating proforma!!!');
         }
     }

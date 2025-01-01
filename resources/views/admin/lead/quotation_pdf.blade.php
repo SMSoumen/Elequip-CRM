@@ -61,13 +61,18 @@
         margin-bottom: 0;
         text-decoration: underline;
     }
+
+    .p_font p {
+        line-height: 24px !important;
+        margin-bottom: 0;
+    }
 </style>
 
-@if($lead->lead_stage_id < 4)
-<div class="row float-right">
-    <a href="{{ route('admin.lead.quotation.edit', $lead->id) }}"><button type="button" class="btn btn-primary"><i
-                class="fas fa-edit"></i></button></a>
-</div>
+@if ($lead->lead_stage_id < 4)
+    <div class="row float-right">
+        <a href="{{ route('admin.lead.quotation.edit', $lead->id) }}"><button type="button" class="btn btn-primary"><i
+                    class="fas fa-edit"></i></button></a>
+    </div>
 @endif
 
 
@@ -150,7 +155,7 @@
 
             @forelse ($letest_quotation_details as $i => $product)
                 <tr class="prod_row">
-                    <td>{{$i + 1}}</td>
+                    <td>{{ $i + 1 }}</td>
 
                     <td>
                         <p class="prod_head p_font">
@@ -159,13 +164,13 @@
                         </p>
                         <div class="p_font" style="">
                             @if ($product->quot_product_m_spec)
-                                {{ strip_tags(htmlspecialchars_decode($product->quot_product_m_spec)) }}
+                                {!! htmlspecialchars_decode($product->quot_product_m_spec) !!}
                             @endif
                         </div>
 
                         <div class="p_font">
                             @if ($product->quot_product_tech_spec)
-                                {{ strip_tags(htmlspecialchars_decode($product->quot_product_tech_spec)) }}
+                                {!! htmlspecialchars_decode($product->quot_product_tech_spec) !!}
                             @endif
                         </div>
 

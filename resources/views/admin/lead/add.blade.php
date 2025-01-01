@@ -97,8 +97,8 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Product Details</th>
-                                                    <th>Qty</th>
-                                                    <th>Amount</th>
+                                                    <th style="width:18%">Qty</th>
+                                                    <th style="width:18%">Amount</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="load_table">
@@ -188,18 +188,18 @@
                 },
                 success: function(res) {
                     // console.log(res);
-                    var i = 0;
+                    // var i = 0;
                     var tr = ``;
                     // for(i=0;i<res.length;i++){
                     // var tr = tr + `<tr>
-                //             <td><input type="hidden" name="product_ids[]" value="`+res[i].id+`">`+res[i].product_name+`
-                //                 <div class="product_tech_spec mt-3" readonly>`+res[i].product_tech_spec+`</div></td>
-                //             <td><input type="number" name="qty[]" class="qty" value="1"> <span class="badge bg-secondary ml-1" style="font-size:18px">`+res[i].unit_type+`</span></td>
-                //             <td>
-                //                 <input type="hidden" class="single_amount" value="`+res[i].product_price+`">
-                //                 <input type="number" name="amount[]" class="amount" value="`+res[i].product_price+`" readonly>
-                //             </td>
-                //         </tr>`;
+                        //             <td><input type="hidden" name="product_ids[]" value="`+res[i].id+`">`+res[i].product_name+`
+                        //                 <div class="product_tech_spec mt-3" readonly>`+res[i].product_tech_spec+`</div></td>
+                        //             <td><input type="number" name="qty[]" class="qty" value="1"> <span class="badge bg-secondary ml-1" style="font-size:18px">`+res[i].unit_type+`</span></td>
+                        //             <td>
+                        //                 <input type="hidden" class="single_amount" value="`+res[i].product_price+`">
+                        //                 <input type="number" name="amount[]" class="amount" value="`+res[i].product_price+`" readonly>
+                        //             </td>
+                        //         </tr>`;
                     // }
                     if (res.status == 'success') {
                         tr = res.data
@@ -219,6 +219,8 @@
         });
 
         $('#product_id').on('select2:unselect', function(e) {
+            console.log("unselect");
+            
             var data = e.params.data; // Get the unselected data            
             // Remove the corresponding content from the div
             $(`#load_table .item-row-${data.id}`).remove();

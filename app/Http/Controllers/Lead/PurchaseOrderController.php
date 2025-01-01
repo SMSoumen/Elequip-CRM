@@ -49,7 +49,8 @@ class PurchaseOrderController extends Controller
 
         if ($request->hasFile('po_document')) {
             $file = $request->file('po_document');
-            $str_image = uniqid() . '.' . $file->getClientOriginalExtension();
+            $name = $file->hashName();
+            $str_image = $name . '-' . time() . '.' .$file->extension();
             $location = public_path('/upload/po/');
             $request->file('po_document')->move($location, $str_image);
             $data['po_document'] = $str_image;
@@ -130,7 +131,8 @@ class PurchaseOrderController extends Controller
 
         if ($request->hasFile('po_document')) {
             $file = $request->file('po_document');
-            $str_image = uniqid() . '.' . $file->getClientOriginalExtension();
+            $name = $file->hashName();
+            $str_image = $name . '-' . time() . '.' .$file->extension();
             $location = public_path('/upload/po/');
             $request->file('po_document')->move($location, $str_image);
             $data['po_document'] = $str_image;

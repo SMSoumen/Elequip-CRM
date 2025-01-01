@@ -60,7 +60,7 @@
                                         <th>Balance Amount</th>
                                         <th>Created On</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th style="width: 15%;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -109,11 +109,11 @@
 
     <!--==================> Add Remaining Amount ============================-->
 
-    <div class="modal fade" id="add_remaining_amount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="add_remaining_amount" tabindex="-1" aria-labelledby="exampleModalLabelRemAmt" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Remaining Amount</h5>
+                    <h5 class="modal-title" id="exampleModalLabelRemAmt">Add Remaining Amount</h5>
                 </div>
                 <form method="POST" id="add_remaining_amount_form">@csrf
                     <div class="modal-body">
@@ -136,25 +136,18 @@
 
     <!--==================> update lead stage Modal ============================-->
 
-    <div class="modal fade" id="lead_stage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="update_lead_stage" tabindex="-1" aria-labelledby="exampleModalLabelUpdateStage" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Stage</h5>
+                    <h5 class="modal-title" id="exampleModalLabelUpdateStage">Update Stage</h5>
                 </div>
                 <form method="POST" id="lead_stage_form">@csrf
                     <div class="modal-body">
                         <p id="response-message_stage"></p>
                         <input type="hidden" name="lead_id" id="lead_id">
                         <div class="col-12" id="dynamic_lead_stages">
-                            <label for="stage_id">Select Stage<span class="text-danger">*</span></label>
-                            <select name="stage_id" id="stage_id" class="form-control" required>
-                                @foreach ($lead_stages as $stage)
-                                    <option value="{{ $stage->id }}"
-                                        @if ($stage->id == 9) {{ 'disabled' }} @endif>
-                                        {{ $stage->stage_name }}</option>
-                                @endforeach
-                            </select>
+                            
 
                         </div>
                     </div>
@@ -168,11 +161,11 @@
 
     <!--==================> Send SMS Modal ============================-->
 
-    <div class="modal fade" id="send_sms" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="send_sms" tabindex="-1" aria-labelledby="exampleModalLabelSendSms" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Send SMS</h5>
+                    <h5 class="modal-title" id="exampleModalLabelSendSms">Send SMS</h5>
                 </div>
                 <form method="POST" action="{{ route('admin.order.send_sms') }}">@csrf
                     <div class="modal-body">
@@ -231,6 +224,8 @@
                 },
                 datatype: 'json',
                 success: function(response) {
+                    console.log(response);
+                    
                     $("#dynamic_lead_stages").html(response)
                 },
                 error: function(xhr) {
@@ -243,7 +238,7 @@
                 }
             })
 
-            $("#lead_stage").modal('show');
+            $("#update_lead_stage").modal('show');
         });
 
         $(document).on('click', '.add_remaining_amount', function() {

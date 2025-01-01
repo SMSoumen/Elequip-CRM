@@ -41,8 +41,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Product Details</th>
-                                        <th>Qty</th>
-                                        <th>Rate</th>
+                                        <th style="width:15%">Qty</th>
+                                        <th style="width:20%">Rate</th>
                                         <th>Amount</th>
                                     </tr>
                                 </thead>
@@ -59,18 +59,30 @@
                                         <td class="prod_head product_q_sl_no">{{$k + 1}}</td>
                                         <td>
                                             <p class="prod_head">{{$lead_product->lead_product_name}} ({{$lead_product->lead_product_code}})</p>
-                                            <textarea class="mt-3 product_tech_spec_textarea" readonly>{!! $lead_product->lead_product_tech_spec !!}</textarea>
+                                            <textarea name="product_tech_spec[]" class="mt-3 product_tech_spec_textarea" readonly>{!! $lead_product->lead_product_tech_spec !!}</textarea>
 
                                             <input type="hidden" name="product_name[]" value="{{$lead_product->lead_product_name}}">
                                             <input type="hidden" name="product_code[]" value="{{$lead_product->lead_product_code}}">
                                             <input type="hidden" name="product_unit[]" value="{{$lead_product->lead_product_unit}}">
-                                            <input type="hidden" name="product_tech_spec[]" value="{{$lead_product->lead_product_tech_spec}}">
-                                            <input type="hidden" name="product_m_spec[]" value="{{$lead_product->lead_product_m_spec}}">
+                                            {{-- <input type="hidden"  value="{{$lead_product->lead_product_tech_spec}}"> --}}
+                                            {{-- <input type="hidden"  value="{{$lead_product->lead_product_m_spec}}"> --}}
                                         </td>
-                                        <td><input type="number" name="qty[]" class="qty mt-5" value="{{$lead_product->lead_product_qty}}" ></td>
-                                        <td><input type="number" name="rate[]" class="rate mt-5" value="{{$lead_product->lead_product_price}}" ></td>
                                         <td>
-                                            <p class="text-right amount_p  mt-5">
+                                            <div class="input-group mb-3">
+                                                <input type="number" name="qty[]"
+                                                    class="qty form-control"
+                                                    value="{{ $lead_product->lead_product_qty }}"
+                                                    placeholder="Quantity">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"
+                                                        id="basic-addon2">{{ $lead_product->lead_product_unit }}</span>
+                                                </div>
+                                            </div>
+                                            {{-- <input type="number" name="qty[]" class="qty mt-5" value="{{$lead_product->lead_product_qty}}" > --}}
+                                        </td>
+                                        <td><input type="number" name="rate[]" class="rate form-control" value="{{$lead_product->lead_product_price}}" ></td>
+                                        <td>
+                                            <p class="text-right amount_p ">
                                                 <i class="fas fa-rupee-sign"></i>
                                                 <span class="pro_price_span amount">
                                                     <?= sprintf('%.2f', $amount) ?>
@@ -82,7 +94,7 @@
                                     <tr>
                                         <td class="border-0"></td>
                                         <td class="border-0 pt-0" colspan="4">
-                                            <textarea class="mt-3 product_tech_spec_textarea" readonly>{!! $lead_product->lead_product_m_spec !!}</textarea>
+                                            <textarea class="mt-3 product_tech_spec_textarea" name="product_m_spec[]">{!! $lead_product->lead_product_m_spec !!}</textarea>
                                         </td>
                                     </tr>
                                 @endforeach                                

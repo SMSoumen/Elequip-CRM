@@ -60,6 +60,10 @@
         margin-bottom: 0;
         text-decoration: underline;
     }
+    .p_font p {
+        line-height: 24px !important;
+        margin-bottom: 0;
+    }
 </style>
 
 @php
@@ -162,15 +166,16 @@
                             {{ $quotation['product_name'][$i] }}
                             {{ $quotation['product_code'][$i] ? '(' . $quotation['product_code'][$i] . ')' : '' }}
                         </p>
+                        
                         <div class="p_font" style="">
                             @if ($quotation['product_m_spec'][$i])
-                                {{ strip_tags(htmlspecialchars_decode($quotation['product_m_spec'][$i])) }}
+                                {!! htmlspecialchars_decode($quotation['product_m_spec'][$i]) !!}
                             @endif
                         </div>
 
                         <div class="p_font">
                             @if ($quotation['product_tech_spec'][$i])
-                                {{ strip_tags(htmlspecialchars_decode($quotation['product_tech_spec'][$i])) }}
+                                {!! htmlspecialchars_decode($quotation['product_tech_spec'][$i]) !!}
                             @endif
                         </div>
 

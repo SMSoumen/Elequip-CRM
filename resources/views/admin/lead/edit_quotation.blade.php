@@ -52,13 +52,14 @@
                                                 <div class="form-group">
                                                     <label for="product_id">Select Products <span class="text-danger">
                                                             *</span></label>
+                                                    <br>
                                                     <select name="product_id[]" id="product_id"
                                                         class="form-control product_select_quot" multiple required>
                                                         @foreach ($products as $product)
                                                             <option value="{{ $product->id }}"
                                                                 @foreach ($quotation_details as $quotation)
                                                             @if ($product->id == $quotation->product_id) {{ 'selected' }} @endif @endforeach>
-                                                                {{ $product->product_name }}
+                                                                {{ $product->product_name }} ({{ $product->product_code }})
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -69,52 +70,98 @@
                                                 <table class="table" id="myTable">
                                                     <thead>
                                                         <tr>
+                                                            <th>#</th>
                                                             <th>Product Details</th>
-                                                            <th>Qty</th>
-                                                            <th>Rate</th>
+                                                            <th style="width:15%">Qty</th>
+                                                            <th style="width:20%">Rate</th>
                                                             <th>Amount</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        @foreach ($quotation_details as $quotation)
+                                                    <tbody id="load_table">
+                                                        @php
+                                                            $total = 0.0;
+                                                        @endphp
+                                                        @foreach ($quotation_details as $k => $quotation)
                                                             @php
                                                                 $amount =
                                                                     $quotation->quot_product_unit_price *
                                                                     $quotation->quot_product_qty;
+
+                                                                $total += $amount;
                                                             @endphp
-                                                            <tr>
+                                                            <tr class="item-row-{{ $quotation->product_id }}">
+                                                                <td class="prod_head product_q_sl_no">{{ $k + 1 }}
+                                                                </td>
                                                                 <td>
-                                                                    {{ $quotation->quot_product_name }}
-                                                                    ({{ $quotation->quot_product_code }})
+                                                                    <p class="prod_head">
+                                                                        {{ $quotation->quot_product_name }}
+                                                                        ({{ $quotation->quot_product_code }})
+                                                                    </p>
+
+                                                                    <textarea class="mt-3 product_tech_spec_textarea"  name="product_tech_spec[]">{!! $quotation->quot_product_tech_spec !!}</textarea>
                                                                     <input type="hidden" name="product_name[]"
                                                                         value="{{ $quotation->quot_product_name }}">
                                                                     <input type="hidden" name="product_code[]"
                                                                         value="{{ $quotation->quot_product_code }}">
                                                                     <input type="hidden" name="product_unit[]"
                                                                         value="{{ $quotation->quot_product_unit }}">
-                                                                    <input type="hidden" name="product_tech_spec[]"
+                                                                    {{-- <input type="hidden"
                                                                         value="{{ $quotation->quot_product_tech_spec }}">
-                                                                    <input type="hidden" name="product_m_spec[]"
-                                                                        value="{{ $quotation->quot_product_m_spec }}">
+                                                                    <input type="hidden"
+                                                                        value="{{ $quotation->quot_product_m_spec }}"> --}}
                                                                 </td>
                                                                 <td>
                                                                     <div class="input-group mb-3">
-                                                                        <input type="number" name="qty[]" class="qty form-control"
-                                                                        value="{{ $quotation->quot_product_qty }}"  placeholder="Quantity">
+                                                                        <input type="number" name="qty[]"
+                                                                            class="qty form-control"
+                                                                            value="{{ $quotation->quot_product_qty }}"
+                                                                            placeholder="Quantity">
                                                                         <div class="input-group-append">
                                                                             <span class="input-group-text"
-                                                                                id="basic-addon2">{{$quotation->quot_product_unit}}</span>
+                                                                                id="basic-addon2">{{ $quotation->quot_product_unit }}</span>
                                                                         </div>
-                                                                    </div>                                                                    
+                                                                    </div>
                                                                 </td>
-                                                                <td><input type="number" name="rate[]" class="rate form-control"
+                                                                <td><input type="number" name="rate[]"
+                                                                        class="rate form-control"
                                                                         value="{{ $quotation->quot_product_unit_price }}">
                                                                 </td>
-                                                                <td><input type="text" name="amount[]" class="amount form-control"
-                                                                        value="{{ $amount }}" readonly></td>
+                                                                <td>
+                                                                    <p class="text-right amount_p ">
+                                                                        <i class="fas fa-rupee-sign"></i>
+                                                                        <span class="pro_price_span amount">
+                                                                            <?= sprintf('%.2f', $amount) ?>
+                                                                        </span>
+                                                                    </p>
+                                                                    <input type="hidden" name="amount[]"
+                                                                        class="amount_input form-control"
+                                                                        value="{{ $amount }}">
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="item-row-{{ $quotation->product_id }}">
+                                                                <td class="border-0"></td>
+                                                                <td class="border-0 pt-0" colspan="4">
+                                                                    <textarea class="mt-3 product_tech_spec_textarea"  name="product_m_spec[]">{!! $quotation->quot_product_m_spec !!}</textarea>
+                                                                </td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>
+
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="4" class="text-right"
+                                                                style="vertical-align: middle;">
+                                                                <b>Basic Total = </b>
+                                                            </td>
+                                                            <td style="vertical-align: middle;">
+                                                                <p class="text-right amount_p mt-3" id="basic_total">
+                                                                    <i class="fas fa-rupee-sign"></i> <b
+                                                                        id="total_amount">{{ $total }}</b>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+
                                                 </table>
                                             </div>
 
@@ -247,13 +294,28 @@
                 placeholder: "Select Product",
                 allowClear: true,
             });
-            changeAmount();
+
 
 
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
+            });
+
+            $('.product_tech_spec_textarea').summernote({
+                tabsize: 2,
+                minheight: 50,
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['para', ['ul', 'ol', 'paragraph', 'style']],
+                    ['height', ['height']],
+                    // ['font', ['strikethrough', 'superscript', 'subscript']],
+                ],
+                styleTags: [
+                    'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+                ]
+
             });
 
 
@@ -265,54 +327,123 @@
                     type: 'post',
                     url: "{{ route('admin.product-details') }}",
                     data: {
-                        "product_id": last_product_id
+                        "product_id": last_product_id,
+                        "quot": 1
                     },
                     success: function(res) {
                         console.log(res);
-                        var i = 0;
+                        // var i = 0;
                         var tr = '';
-                        for (i = 0; i < res.length; i++) {
-                            var tr = tr + `<tr>
-                                            <td>
-                                                ` + res[i].product_name + `(` + res[i].product_code + `)
-                                                <input type="hidden" name="product_name[]" value="` + res[i]
-                                .product_name + `">
-                                                <input type="hidden" name="product_code[]" value="` + res[i]
-                                .product_code + `">
-                                                <input type="hidden" name="product_unit[]" value="` + res[i]
-                                .unit_type + `">
-                                                <input type="hidden" name="product_tech_spec[]" value="` + res[i]
-                                .product_tech_spec + `">
-                                                <input type="hidden" name="product_m_spec[]" value="` + res[i]
-                                .product_marketing_spec + `">
-                                            </td>
-                                            <td><input type="number" name="qty[]" class="qty" value="1"></td>
-                                            <td><input type="number" name="rate[]" class="rate" value="` + res[i]
-                                .product_price + `"></td>
+                        // for (i = 0; i < res.length; i++) {
+                        //     var tr = tr + `<tr>
+                    //                     <td>
+                    //                         ` + res[i].product_name + `(` + res[i].product_code + `)
+                    //                         <input type="hidden" name="product_name[]" value="` + res[i]
+                        //         .product_name + `">
+                    //                         <input type="hidden" name="product_code[]" value="` + res[i]
+                        //         .product_code + `">
+                    //                         <input type="hidden" name="product_unit[]" value="` + res[i]
+                        //         .unit_type + `">
+                    //                         <input type="hidden" name="product_tech_spec[]" value="` + res[i]
+                        //         .product_tech_spec + `">
+                    //                         <input type="hidden" name="product_m_spec[]" value="` + res[i]
+                        //         .product_marketing_spec + `">
+                    //                     </td>
+                    //                     <td><input type="number" name="qty[]" class="qty" value="1"></td>
+                    //                     <td><input type="number" name="rate[]" class="rate" value="` + res[i]
+                        //         .product_price + `"></td>
 
-                                            <td>
-                                                <input type="text" name="amount[]" class="amount" value="` + res[i]
-                                .product_price + `" readonly>
-                                            </td>
-                                        </tr>`;
+                    //                     <td>
+                    //                         <input type="text" name="amount[]" class="amount" value="` + res[i]
+                        //         .product_price + `" readonly>
+                    //                     </td>
+                    //                 </tr>`;
+                        // }
+                        // $("tbody").append(tr);
+                        // changeAmount();
+
+                        if (res.status == 'success') {
+                            tr = res.data
+                            $("#load_table").append(tr);
+                            // changeAmount();
+
+                            $('.product_tech_spec_textarea').summernote({
+                                tabsize: 2,
+                                minheight: 50,
+                                toolbar: [
+                                    ['style', ['bold', 'italic', 'underline',
+                                        'clear'
+                                    ]],
+                                    ['para', ['ul', 'ol', 'paragraph', 'style']],
+                                    ['height', ['height']],
+                                    // ['font', ['strikethrough', 'superscript', 'subscript']],
+                                ],
+                                styleTags: [
+                                    'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+                                ]
+
+                            });
+
+                            $('.product_q_sl_no').each(function(index) {
+                                $(this).text(index + 1);
+                            });
+                            updateTotal();
+
+                        } else {
+                            conole.log(res.message);
                         }
-                        $("tbody").append(tr);
-                        changeAmount();
                     }
                 })
+
             });
 
+            $('#product_id').on('select2:unselect', function(e) {
+                console.log("unselect");
+
+                var data = e.params.data; // Get the unselected data            
+                // Remove the corresponding content from the div
+                $(`#load_table .item-row-${data.id}`).remove();
+
+                $('.product_q_sl_no').each(function(index) {
+                    $(this).text(index + 1);
+                });
+
+                updateTotal();
+            });
+
+            changeAmount();
+
             function changeAmount() {
-                $(".qty").keyup(function() {
+                console.log('changeAmount-2');
+                $(document).on("change keyup keydown blur", ".qty",function() {
                     var quantity = $(this).val();
                     var amount = $(this).closest('tr').find('.rate').val();
-                    var total_amount = quantity * amount;
+                    var total_amount = quantity * amount;                  
                     if (isNaN(total_amount)) {
-                        $(this).closest('tr').find('.amount').val(0);
+                        $(this).closest('tr').find('.amount').text(0);
+                        $(this).closest('tr').find('.amount_input').val(0);
+
                     } else {
-                        $(this).closest('tr').find('.amount').val(total_amount);
+                        $(this).closest('tr').find('.amount').text(total_amount.toFixed(2));
+                        $(this).closest('tr').find('.amount_input').val(total_amount.toFixed(2));
                     }
+                    updateTotal();
                 });
+            }
+
+            function updateTotal() {
+                console.log('updateTotal');
+
+                let total = 0;
+                $('.amount').each(function() {
+                    console.log('amount');
+                    // console.log($(this).val());
+                    // const value = parseFloat($(this).val()) || 0;
+                    const value = parseFloat($(this).text()) || 0;
+                    total += value;
+                });
+                $('#total_amount').text(total);
+                $('#basic_amount').val('Rs. ' + total);
             }
 
             $(document).on("change keyup keydown blur", ".rate", function() {
@@ -323,8 +454,10 @@
                 let total_amount = quantity * rate;
                 if (isNaN(total_amount)) {
                     $(this).closest('tr').find('.amount').text(0);
+                    $(this).closest('tr').find('.amount_input').val(0);
                 } else {
                     $(this).closest('tr').find('.amount').text(total_amount.toFixed(2));
+                    $(this).closest('tr').find('.amount_input').val(total_amount.toFixed(2));
                 }
                 updateTotal();
             });

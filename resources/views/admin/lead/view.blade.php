@@ -179,11 +179,18 @@
                                                             <input type="hidden" name="company_id"
                                                                 value="{{ $lead_company->id }}">
                                                             <div class="col-12">
+                                                                <p class="alert alert-danger">To create proforma invoice you
+                                                                    have to fill company GST no.</p>
+                                                                <p><b>{{ $lead_company->company_name }}</b></p>
+                                                            </div>
+                                                            <div class="col-12">
                                                                 <label for="gst_no">Company GST No <span
                                                                         class="text-danger"> *</span></label>
                                                                 <input type="text" name="gst_no" id="gst_no"
-                                                                    class="form-control" minlength="15" maxlength="15"
-                                                                    required>
+                                                                    class="form-control"
+                                                                    pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z0-9]{1}Z[A-Z0-9]{1}$"
+                                                                    title="Enter a valid GST number (15 alphanumeric characters, e.g., 22AAAAA0000A1Z5)"
+                                                                    minlength="15" maxlength="15" required>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -408,7 +415,7 @@
 
             function changeAmount() {
                 console.log('changeAmount-2');
-                $(document).on("change keyup keydown blur", ".qty",function() {
+                $(document).on("change keyup keydown blur", ".qty", function() {
                     var quantity = $(this).val();
                     var amount = $(this).closest('tr').find('.rate').val();
                     var total_amount = quantity * amount;
@@ -488,7 +495,7 @@
                         const target = document.getElementById(tab.dataset.target);
                         target.classList.add('active');
 
-                        console.log(tab.dataset.target);
+                        // console.log(tab.dataset.target);
 
                         if (tab.dataset.target === "lead_details") {
 

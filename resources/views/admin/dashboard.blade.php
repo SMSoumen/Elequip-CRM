@@ -13,6 +13,7 @@
             background: #f3f5f6;
             border-radius: 50%;
             line-height: 20px;
+            aspect-ratio: 1;
         }
 
         .custom-small-box .icon>i.ion {

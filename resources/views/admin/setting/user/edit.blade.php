@@ -52,6 +52,7 @@
                             </div>
                             
 
+                            @if($user->id != 1)
                             <div class="form-group">
                                 <label>Role <span class="text-danger">*</span></label>
                                 <div class="select2-purple">
@@ -64,7 +65,7 @@
                                     </select>
                                 </div>
                             </div>
-
+                            @endif
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

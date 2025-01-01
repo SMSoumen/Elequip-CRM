@@ -78,7 +78,7 @@
                                 {{$order->order_product_name}} ({{$order->order_product_code}})
                                 <input type="hidden" name="order_id[]" value="{{$order->id}}">
                             </td>
-                            <td><input type="date" name="estimate_delivery_date[]" value="@if($order->order_product_delivery_date){{$order->order_product_delivery_date}}@else{{date('Y-m-d')}}@endif" required></td>
+                            <td><input class="form-control" type="date" name="estimate_delivery_date[]" value="@if($order->order_product_delivery_date){{$order->order_product_delivery_date}}@else{{date('Y-m-d')}}@endif" required></td>
                             <td>
                                 @if($order->status == 0)
 							        <span class="badge badge-warning text-center">Pending</span>
