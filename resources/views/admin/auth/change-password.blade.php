@@ -11,7 +11,7 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
             <div class="card-header">
-                <h3 class="card-title">Change Password Form</h3>
+                <h3 class="card-title">Profile Update Form</h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -30,13 +30,18 @@
                             @csrf
                             @method('post')
                             <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" value="{{ auth('admin')->user()->name }}">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="name">Email</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{ auth()->user()->email }}" readonly>
+                                <input type="text" class="form-control" id="email" name="email" value="{{ auth('admin')->user()->email }}" readonly>
                             </div>
 
                             <div class="form-group">
                                 <label for="phone">Phone No</label>
-                                <input type="text" class="form-control" id="phone" name="phone" value="{{auth()->user()->phone }}" required>
+                                <input type="text" class="form-control" id="phone" name="phone" value="{{auth('admin')->user()->phone }}" required>
                             </div>
 
                             <div class="form-group">

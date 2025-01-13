@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\CheckLeadAssociation;
+use App\Http\Middleware\CheckLeadAssociationByQuot;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -19,6 +21,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'guest' => RedirectIfAuthenticated::class,
             'auth' => Authenticate::class,
             'role_or_permission' => RoleOrPermissionMiddleware::class,
+            'check.lead' => CheckLeadAssociation::class,
+            'check.lead.quot' => CheckLeadAssociationByQuot::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

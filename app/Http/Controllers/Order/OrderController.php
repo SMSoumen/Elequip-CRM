@@ -40,6 +40,15 @@ class OrderController extends Controller implements HasMiddleware
                 ->select('purchase_orders.id', 'purchase_orders.po_net_amount', 'purchase_orders.po_refer_no', 'purchase_orders.po_advance', 'purchase_orders.po_remaining', 'purchase_orders.created_at', 'purchase_orders.lead_id', 'customers.customer_name', 'customers.mobile', 'customers.designation', 'customers.email', 'companies.company_name', 'lead_stages.stage_name', 'leads.lead_stage_id')
                 ->orderBy('purchase_orders.id', 'desc');
 
+                if (!auth('admin')->user()->hasRole('Super-Admin')) {
+                    if (auth('admin')->user()->hasRole('Sales')) {
+                        $query->where('leads.admin_id', auth('admin')->user()->id)->orWhere('leads.lead_assigned_to', auth('admin')->user()->id);
+                    } 
+                    // else {
+                    //     $query->where('leads.lead_stage_id', '>=', 5);
+                    // }
+                }
+
                 if ($request->lead_stage) {
                     // Log::info($request->lead_stage);
                     $query->where('leads.lead_stage_id', '=', $request->lead_stage);

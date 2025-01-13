@@ -73,6 +73,14 @@ class LeadController extends Controller implements HasMiddleware
                     ->select('leads.*', 'customers.customer_name', 'customers.mobile', 'customers.designation', 'companies.company_name', 'lead_stages.stage_name')
                     ->orderBy('leads.id', 'desc');
 
+                if (!auth('admin')->user()->hasRole('Super-Admin')) {
+                    if (auth('admin')->user()->hasRole('Sales')) {
+                        $query->where('leads.admin_id', auth('admin')->user()->id)->orWhere('leads.lead_assigned_to', auth('admin')->user()->id);
+                    } else {
+                        $query->where('leads.lead_stage_id', '>=', 5);
+                    }
+                }
+
                 if ($request->lead_stage) {
                     // Log::info($request->lead_stage);
                     $query->where('leads.lead_stage_id', '=', $request->lead_stage);
@@ -162,6 +170,7 @@ class LeadController extends Controller implements HasMiddleware
                 'lead_remarks' => $request->lead_remarks,
                 'admin_id'     => auth("admin")->user()->id,
                 'lead_total_amount' => array_sum($amounts),
+                'lead_assigned_to' => auth("admin")->user()->hasRole('Sales') ? auth("admin")->user()->id : 1,
             ]);
 
             $lead_id = $lead->id;
@@ -335,8 +344,8 @@ class LeadController extends Controller implements HasMiddleware
     public function leadAssignUser(Request $request)
     {
         $request->validate([
-            'lead_assigned_to' => 'required|integer',
-            'lead_id'          => 'required|integer',
+            'lead_assigned_to' => 'required|integer|exists:admins,id',
+            'lead_id'          => 'required|integer|exists:leads,id',
         ]);
         if (Lead::where('id', $request->lead_id)->update(['lead_assigned_to' => $request->lead_assigned_to])) {
             return redirect()->back()->withSuccess('Lead assign successfully.');
@@ -570,18 +579,18 @@ class LeadController extends Controller implements HasMiddleware
     }
 
 
-    public function quotationPdf($quotaion_id)
+    public function quotationPdf($quotation_id)
     {
-        $data['quotation'] = Quotation::where('id', $quotaion_id)->first();
-        $data['quotaion_details'] = QuotationDetail::where('quotation_id', $quotaion_id)->get();
-        $data['quot_terms'] = QuotationTerm::where('quotation_id', $quotaion_id)->first();
+        $data['quotation'] = Quotation::where('id', $quotation_id)->first();
+        $data['quotaion_details'] = QuotationDetail::where('quotation_id', $quotation_id)->get();
+        $data['quot_terms'] = QuotationTerm::where('quotation_id', $quotation_id)->first();
         $data['head_img'] = public_path('assets/admin/img/quotation-header.jpg');
         $data['lead'] = Lead::with('company', 'customer')->where('id', $data['quotation']->lead_id)->first();
         $pdf = Pdf::loadView('admin.pdf.quotation', $data)->setOption('fontDir', public_path('assets/admin/fonts'))->setPaper('A4', 'portrait');
 
         // $file_name_rnd = time() . '-' . mt_rand(11111111, 999999999);
         $file_name_rnd = time();
-        $file_name = $data['quotation']->lead_id .'-'. $data['quotation']->quot_version.'-'. $file_name_rnd;
+        $file_name = $data['quotation']->lead_id . '-' . $data['quotation']->quot_version . '-' . $file_name_rnd;
         return $pdf->download('Lead Quotation-' . $file_name . '.pdf');
     }
 
@@ -745,7 +754,7 @@ class LeadController extends Controller implements HasMiddleware
             return redirect()->route('admin.leads.show', $request->lead_id)->withSuccess('Proforma updated successfully.');
         } catch (Exception $e) {
             DB::rollBack();
-            
+
             return redirect()->back()->withErrors('Error!! while updating proforma!!!');
         }
     }
@@ -753,9 +762,9 @@ class LeadController extends Controller implements HasMiddleware
     public function generateProformaPdf($lead_id)
     {
 
-        // $data['quotation'] = Quotation::where('id',$quotaion_id)->first();
-        // $data['quotaion_details'] = QuotationDetail::where('quotation_id',$quotaion_id)->get();
-        // $data['quot_terms'] = QuotationTerm::where('quotation_id',$quotaion_id)->first();
+        // $data['quotation'] = Quotation::where('id',$quotation_id)->first();
+        // $data['quotaion_details'] = QuotationDetail::where('quotation_id',$quotation_id)->get();
+        // $data['quot_terms'] = QuotationTerm::where('quotation_id',$quotation_id)->first();
         $data['head_img'] = public_path('assets/admin/img/quotation-header.jpg');
         $data['lead'] = Lead::with('company', 'customer')->where('id', $lead_id)->first();
         $data['proforma'] = ProformaInvoice::with('proforma_details')->where('lead_id', $lead_id)->first();

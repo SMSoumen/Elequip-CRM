@@ -56,7 +56,7 @@ Route::prefix('admin')->name('admin.')->middleware('guest:admin')->group(functio
 });
 
 Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
-    Route::get('/change-password', [ChangePasswordController::class, 'index'])->name('change_password');
+    Route::get('/update-profile', [ChangePasswordController::class, 'index'])->name('change_password');
     Route::post('/change-password', [ChangePasswordController::class, 'update'])->name('change_password.update');
     // Route::get('verify-email', EmailVerificationPromptController::class)
     //             ->name('verification.notice');
@@ -104,7 +104,14 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::post('subcategories/list', [ProductController::class, 'subCategoryList'])->name('subcategory.list');
     Route::post('products/upload', [ProductController::class, 'uploadProduct'])->name('products.upload');
     Route::post('check/company', [CompanyController::class, 'checkCompany'])->name('checkcompany');
-    Route::resource('leads', LeadController::class);
+
+    Route::resource('leads', LeadController::class)->only(['create', 'store', 'index']);
+
+    Route::middleware(['check.lead'])->group(function () {
+        Route::resource('leads', LeadController::class)->only(['show', 'edit', 'update', 'destroy']);
+        Route::get('leads/quotation/edit/{lead_id}', [LeadController::class, 'editQuotation'])->name('lead.quotation.edit');
+    });
+
 
     // to load dynamic product on #product_id,product_id2
     Route::post('product/details', [LeadController::class, 'productDetails'])->name('product-details');
@@ -119,9 +126,13 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
 
     Route::post('lead/product-details', [LeadController::class, 'leadProductDetails'])->name('lead.product_details');
     Route::post('leads/quotation/create', [LeadController::class, 'addQuotation'])->name('lead.quotation.create');
-    Route::get('leads/quotation/edit/{lead_id}', [LeadController::class, 'editQuotation'])->name('lead.quotation.edit');
+
+
+
     Route::post('leads/quotation/update', [LeadController::class, 'updateQuotation'])->name('lead.quotation.update');
-    Route::get('leads/quotation/pdf/{quotaion_id}', [LeadController::class, 'quotationPdf'])->name('quotaion.pdf');
+
+
+
     Route::post('lead-stage/update', [LeadController::class, 'leadStageUpdate'])->name('lead_stage.update');
     Route::post('company/gst-update', [LeadController::class, 'companyGstUpdate'])->name('update.company_gst');
     Route::post('lead/proforma/create', [LeadController::class, 'createProforma'])->name('lead.add_proforma');
@@ -147,4 +158,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::post('reports/area-wise-report', [ReportController::class, 'areaWiseReportAjax'])->name('area_wise_report.list');
 
     Route::post('leads/add-remark', [LeadController::class, 'addRemarks'])->name('lead.add_remark');
+
+
+    Route::middleware(['check.lead.quot'])->group(function () {
+        Route::get('leads/quotation/pdf/{quotation_id}', [LeadController::class, 'quotationPdf'])->name('quotaion.pdf');
+    });
 });

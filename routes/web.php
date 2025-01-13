@@ -62,8 +62,8 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
 
     Route::post('/common-status-change', [AjaxController::class, 'statusChange']);
 
-    Route::resource('categories', 'CategoryController');
-    Route::resource('subcategories', 'SubCategoryController');
+    // Route::resource('categories', 'CategoryController');
+    // Route::resource('subcategories', 'SubCategoryController');
 
     Route::get('/upload/contact', [CompanyController::class, 'uploadcontact'])->name('upload.contact');
     Route::post('/upload/contact', [CompanyController::class, 'uploadcontactsubmit'])->name('upload.contactsubmit');
